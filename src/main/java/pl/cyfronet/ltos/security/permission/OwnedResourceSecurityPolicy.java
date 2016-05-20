@@ -1,25 +1,24 @@
 package pl.cyfronet.ltos.security.permission;
 
-import lombok.NonNull;
-
 import org.springframework.security.core.Authentication;
 
-import pl.cyfronet.ltos.beansecurity.OwnedResource;
+public class OwnedResourceSecurityPolicy extends DefaultSecurityPolicy<OwnedResource> {
 
-public class OwnedResourceSecurityPolicy extends PermissionEvaluator<OwnedResource> {
-
+	public OwnedResourceSecurityPolicy(Authentication identity, Activity activity) {
+		this(identity, null, activity);
+	}
+	
+	public OwnedResourceSecurityPolicy(Authentication identity, OwnedResource targetObject, Activity activity) {
+		super(identity, targetObject, activity);
+	}
+	
 	@Override
-	public boolean hasPermission(Authentication identity, @NonNull OwnedResource targetObject, Activity activity) {
-		if (hasRole(identity, Role.ADMIN)) {
-			return true;
-		} 
-		if (hasRole(identity, Role.USER)) {			
-			Activity[] allowed = { Activity.VIEW_USER, Activity.SAVE_USER };
-			if (allowedActivity(activity, allowed) && targetObject.getOwnerName().equals(identity.getName())) {
-				return true;
-			}
-		}
-		return false;
+	boolean extensionPoint() {
+		return hasOwnership(identity, targetObject);
+	}
+	
+	boolean hasOwnership(Authentication identity, OwnedResource targetObject) {
+		return identity.getName().equals(targetObject.getOwnerId());
 	}
 	
 }
