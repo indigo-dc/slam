@@ -11,7 +11,6 @@ import org.springframework.security.access.expression.method.MethodSecurityExpre
 import pl.cyfronet.ltos.security.Activities;
 import pl.cyfronet.ltos.security.LtosSecurityExpressionHandler;
 import pl.cyfronet.ltos.security.RoleBasedSecurityPolicy;
-import pl.cyfronet.ltos.security.permission.Activity;
 
 @ComponentScan("pl.cyfronet")
 @SpringBootApplication
@@ -36,7 +35,7 @@ public class Application {
 		return handler;
 	}
 
-	@Bean(name={"authActs"})
+	@Bean(name={"activities"})
 	static Activities getAuthorizedActivities() {
 		return new Activities();
 	}

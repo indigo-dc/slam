@@ -5,7 +5,7 @@ public enum Activity {
 	// Generic activities
 	LIST,
 
-	// User activities
+	// Activities on user resource
 	LIST_USERS, SAVE_USER, VIEW_USER,
 
 }

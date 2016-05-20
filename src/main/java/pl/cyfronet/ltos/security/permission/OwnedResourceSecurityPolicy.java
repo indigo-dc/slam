@@ -15,7 +15,7 @@ public class OwnedResourceSecurityPolicy extends PermissionEvaluator<OwnedResour
 		} 
 		if (hasRole(identity, Role.USER)) {			
 			Activity[] allowed = { Activity.VIEW_USER, Activity.SAVE_USER };
-			if ( allowedActivity(activity, allowed) && targetObject.getOwnerName().equals(identity.getName())) {
+			if (allowedActivity(activity, allowed) && targetObject.getOwnerName().equals(identity.getName())) {
 				return true;
 			}
 		}

@@ -11,7 +11,7 @@ import pl.cyfronet.ltos.bean.Affiliation;
 public interface AffiliationRepository extends CrudRepository<Affiliation, Long> {
 	
 	@Override
-	@PreAuthorize("isAllowed(@authActs.activity('LIST'))")
+	@PreAuthorize("checkPolicy(@activities.get('LIST'))")
 	public Iterable<Affiliation> findAll();
 	
 }

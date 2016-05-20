@@ -4,14 +4,17 @@ import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
 import org.springframework.security.core.Authentication;
 
-public class MethodSecurityExpressionRoot extends SecurityExpressionRoot implements MethodSecurityExpressionOperations {
-
+/*
+ * Copy of org.springframework.security.access.expression.method.MethodSecurityExpressionRoot
+ */
+class MethodSecurityExpressionRoot extends SecurityExpressionRoot implements
+		MethodSecurityExpressionOperations {
 	private Object filterObject;
 	private Object returnObject;
 	private Object target;
 
-    public MethodSecurityExpressionRoot(Authentication authentication) {
-		super(authentication);
+	MethodSecurityExpressionRoot(Authentication a) {
+		super(a);
 	}
 
 	public void setFilterObject(Object filterObject) {
@@ -44,5 +47,4 @@ public class MethodSecurityExpressionRoot extends SecurityExpressionRoot impleme
 	public Object getThis() {
 		return target;
 	}
-
 }

@@ -7,11 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import pl.cyfronet.ltos.beansecurity.OwnedResource;
 import lombok.Data;
 
 @Data
 @Entity
-public class Affiliation {
+public class Affiliation  {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
