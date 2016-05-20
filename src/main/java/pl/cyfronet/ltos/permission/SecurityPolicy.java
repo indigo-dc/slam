@@ -1,4 +1,4 @@
-package pl.cyfronet.ltos.security.permission;
+package pl.cyfronet.ltos.permission;
 
 public interface SecurityPolicy {
 	

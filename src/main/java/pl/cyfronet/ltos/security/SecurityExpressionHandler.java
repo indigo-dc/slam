@@ -1,5 +1,7 @@
 package pl.cyfronet.ltos.security;
 
+import lombok.Setter;
+
 import org.springframework.expression.EvaluationContext;
 import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
@@ -7,10 +9,15 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
 
+import pl.cyfronet.ltos.permission.Permissions;
+
 public class SecurityExpressionHandler extends
 		DefaultMethodSecurityExpressionHandler {
 
 	private final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
+	
+	@Setter
+	private Permissions factory;
 
 	@Override
 	public void setReturnObject(Object returnObject, EvaluationContext ctx) {
@@ -23,7 +30,7 @@ public class SecurityExpressionHandler extends
 			Authentication authentication,
 			org.aopalliance.intercept.MethodInvocation invocation) {
 		final MethodSecurityExpressionRoot root = new SecurityExpressionRoot(
-				authentication);
+				authentication, factory);
 		root.setThis(invocation.getThis());
 		root.setPermissionEvaluator(getPermissionEvaluator());
 		root.setTrustResolver(this.trustResolver);

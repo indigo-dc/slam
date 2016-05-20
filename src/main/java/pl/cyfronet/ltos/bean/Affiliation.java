@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Data
 @Entity
 public class Affiliation  {
@@ -28,7 +30,6 @@ public class Affiliation  {
     private String status;
     private Date lastUpdateDate;
     private String userEmail;
-    
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User owner;
