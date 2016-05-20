@@ -1,10 +1,10 @@
-package pl.cyfronet.ltos.beansecurity;
+package pl.cyfronet.ltos.security.bean;
 
 import pl.cyfronet.ltos.bean.Affiliation;
 import pl.cyfronet.ltos.security.permission.OwnedResource;
 
 public class AffiliationWrapper implements OwnedResource {
-	
+
 	private Affiliation affiliation;
 
 	public AffiliationWrapper(Affiliation affiliation) {
@@ -13,10 +13,6 @@ public class AffiliationWrapper implements OwnedResource {
 	
 	@Override
 	public String getOwnerId() {
-		// fix this - user should be taken from database by id  
-		if (affiliation.getOwner() == null) {
-			return null;
-		}
 		return affiliation.getOwner().getLogin();
 	}
 

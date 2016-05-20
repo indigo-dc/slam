@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import pl.cyfronet.ltos.security.permission.OwnedResource;
 import lombok.Data;
 
 @Data
@@ -30,7 +29,7 @@ public class Affiliation  {
     private Date lastUpdateDate;
     private String userEmail;
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User owner;
 

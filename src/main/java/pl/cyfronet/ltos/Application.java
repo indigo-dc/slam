@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.access.PermissionEvaluator;
+import org.springframework.security.access.expression.DenyAllPermissionEvaluator;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 
 import pl.cyfronet.ltos.security.Activities;
-import pl.cyfronet.ltos.security.LtosSecurityExpressionHandler;
-import pl.cyfronet.ltos.security.RoleBasedSecurityPolicy;
+import pl.cyfronet.ltos.security.SecurityExpressionHandler;
 
 @ComponentScan("pl.cyfronet")
 @SpringBootApplication
@@ -22,7 +22,7 @@ public class Application {
 
 	@Bean
 	static PermissionEvaluator getPermissionEvaluator() {
-		return new RoleBasedSecurityPolicy();
+		return new DenyAllPermissionEvaluator();
 	}
 
 	@Bean
@@ -30,7 +30,7 @@ public class Application {
 	static MethodSecurityExpressionHandler getExpressionHandler(
 			PermissionEvaluator evaluator) {
 		//DefaultMethodSecurityExpressionHandler handler = new DefaultMethodSecurityExpressionHandler();
-		LtosSecurityExpressionHandler handler = new LtosSecurityExpressionHandler();
+		SecurityExpressionHandler handler = new SecurityExpressionHandler();
 		handler.setPermissionEvaluator(evaluator);
 		return handler;
 	}

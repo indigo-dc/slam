@@ -5,7 +5,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class DefaultSecurityPolicy<T> implements SecurityPolicy {
 	
-	private Activity[] userPermissions = { Activity.VIEW_USER, Activity.SAVE_USER };
+	private Activity[] userPermissions = { Activity.VIEW_USER,
+			Activity.SAVE_USER, 
+			Activity.VIEW_AFFILIATION,
+			Activity.SAVE_AFFILIATION,
+			Activity.LIST_AFFILIATIONS };
 	
 	protected Authentication identity;
 	protected T targetObject;
@@ -29,6 +33,8 @@ public class DefaultSecurityPolicy<T> implements SecurityPolicy {
 		if (hasRole(identity, Role.USER)) {			
 			if (hasAccessToActivity(activity, userPermissions)) {
 				if(targetObject == null) {
+					return true;
+				} else {
 					return extensionPoint();
 				}
 			}

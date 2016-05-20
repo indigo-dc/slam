@@ -7,7 +7,7 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
 
-public class LtosSecurityExpressionHandler extends
+public class SecurityExpressionHandler extends
 		DefaultMethodSecurityExpressionHandler {
 
 	private final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
@@ -22,7 +22,7 @@ public class LtosSecurityExpressionHandler extends
 	protected MethodSecurityExpressionOperations createSecurityExpressionRoot(
 			Authentication authentication,
 			org.aopalliance.intercept.MethodInvocation invocation) {
-		final MethodSecurityExpressionRoot root = new LtosSecurityExpressionRoot(
+		final MethodSecurityExpressionRoot root = new SecurityExpressionRoot(
 				authentication);
 		root.setThis(invocation.getThis());
 		root.setPermissionEvaluator(getPermissionEvaluator());

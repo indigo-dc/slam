@@ -12,16 +12,16 @@ import pl.cyfronet.ltos.bean.User;
 public interface UserRepository extends CrudRepository<User, Long> {
 	
 	@Override
-	@PreAuthorize("hasPermission(null, @activities.get('LIST_USERS'))")
+	@PreAuthorize("checkPolicy(@activities.get('LIST_USERS'))")
 	public Iterable<User> findAll();
 	
 	@Override
-	@PreAuthorize("checkPolicy(#user, @activities.get('SAVE_USER'))")
+	@PreAuthorize("checkPolicyUser(#user, @activities.get('SAVE_USER'))")
 	public <S extends User> S save(S user);
 	
 	@Override
 	@PreAuthorize("permitAll")
-	@PostAuthorize("checkPolicy(returnObject, @activities.get('VIEW_USER'))")
+	@PostAuthorize("checkPolicyUser(returnObject, @activities.get('VIEW_USER'))")
 	public User findOne(Long id);
 	
 }

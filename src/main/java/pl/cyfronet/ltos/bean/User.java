@@ -4,11 +4,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -20,6 +18,7 @@ public class User {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique = true)
     private String login;
 	private String name;
 	private String surname;
@@ -31,7 +30,7 @@ public class User {
     private Boolean confirmedRegistration;
     private String unityPersistentIdentity;
     private boolean hasActiveSla;
-    @OneToMany(mappedBy="affiliation")
+    @OneToMany(mappedBy="owner")
     private List<Affiliation> affiliations;
 
 }
