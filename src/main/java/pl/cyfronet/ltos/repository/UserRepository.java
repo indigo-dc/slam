@@ -1,4 +1,4 @@
-package pl.cyfronet.ltos.controller;
+package pl.cyfronet.ltos.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

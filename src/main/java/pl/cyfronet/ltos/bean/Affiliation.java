@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Data
 @Entity
 public class Affiliation  {

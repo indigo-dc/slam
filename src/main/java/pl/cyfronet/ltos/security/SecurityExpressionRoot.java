@@ -34,7 +34,6 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 		} else {
 			return permissions.securityPolicy(authentication, new UserSecurity(targetObject), activity).evaluate();
 		}
-
 	}
 	
 	public boolean checkPolicyAffiliation(Affiliation targetObject, Activity activity) {
