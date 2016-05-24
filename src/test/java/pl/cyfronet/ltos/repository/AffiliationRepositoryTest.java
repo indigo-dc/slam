@@ -11,7 +11,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 public class AffiliationRepositoryTest extends RepositoryTest {
     
     @Test
-    @WithMockUser(username = "anonymous", roles={})
+    @WithMockUser(roles={})
     public void getAffiliationsAnonymous() throws Exception {		
         this.mockMvc.perform(get("/affiliations")
         	.accept(MediaType.APPLICATION_JSON))
