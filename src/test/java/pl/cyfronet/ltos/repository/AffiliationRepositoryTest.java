@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 
-public class AffiliationRepositoryTest extends RepositoryTest {
+public class AffiliationRepositoryTest extends RestfulRepositoryTest {
     
     @Test
     @WithMockUser(roles={})

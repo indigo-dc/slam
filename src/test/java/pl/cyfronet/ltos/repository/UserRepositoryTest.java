@@ -4,36 +4,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultHandler;
-import org.springframework.test.web.servlet.ResultMatcher;
 
 import pl.cyfronet.ltos.bean.User;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+public class UserRepositoryTest extends RestfulRepositoryTest<User> {
 
-public class UserRepositoryTest extends RepositoryTest {
+	private static final Logger logger = LoggerFactory.getLogger(UserRepositoryTest.class); 
 
-	private static Logger logger = LoggerFactory.getLogger(UserRepositoryTest.class); 
-
-    @Autowired
+	@Autowired
     private UserRepository repo;
-	
+    
     @Test
     @WithMockUser(roles={})
     public void getUsersAnonymous() throws Exception {    	
@@ -48,62 +34,38 @@ public class UserRepositoryTest extends RepositoryTest {
         this.mockMvc.perform(get("/users")
         	.accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json")).andDo(new ResultHandler() {
-				
-				@Override
-				public void handle(MvcResult result) throws Exception {
-					MockHttpServletResponse response = result.getResponse();
-					ObjectMapper objectMapper = new ObjectMapper();
-					Resource<User> customer = objectMapper.readValue(response.getContentAsString(), new TypeReference<Resource<User>>() {});
-				
-					logger.info("User: " + customer.getContent());
-				}
-			});
+            .andExpect(content().contentType("application/json"));
     }
 	
 	@Test
-    @WithMockUser(username="login1", roles={"USER"})
-    public void getYourself() throws Exception {
+	@WithMockUser(username="login1", roles={"USER"})
+    public void getHimself() throws Exception {
 		User user = User.builder().login("login1").name("marian").surname("testowy").build();
 		repo.save(user);
-        this.mockMvc.perform(get("/users/1")
+		User user2 = User.builder().login("login2").name("lucjan").surname("testowy").build();
+		repo.save(user2);
+		// TODO refactor using example:
+		// blog: http://blog.techdev.de/testing-a-secured-spring-data-rest-service-with-java-8-and-mockmvc/
+		// code: https://github.com/techdev-solutions/spring-test-example
+        this.mockMvc.perform(get("/users/" + user.getId())
         	.accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json")).andExpect(new ResultMatcher() {
-				@Override
-				public void match(MvcResult result) throws Exception {
-					User returnedUser = parseResponse(result);
-					returnedUser.setId(user.getId()); //  not serialized by hateos
-					Assert.assertEquals(user, returnedUser);
-				}
-			});
+            .andExpect(content().contentType("application/json"))
+            .andExpect(resultEq(user));
 	}
 	
 	@Test
-    @WithMockUser(username="login1", roles={"ADMIN"})
+    @WithMockUser(username="login2", roles={"USER"})
     public void getOtherUser() throws Exception {
-		User user = User.builder().login("login2").name("lucjan").surname("testowy").build();
+		User user = User.builder().login("login1").name("marian").surname("testowy").build();
 		repo.save(user);
+		User user2 = User.builder().login("login2").name("lucjan").surname("testowy").build();
+		repo.save(user2);
         this.mockMvc.perform(get("/users/1")
-        	.accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType("application/json")).andExpect(new ResultMatcher() {
-				@Override
-				public void match(MvcResult result) throws Exception {
-					User returnedUser = parseResponse(result);
-					returnedUser.setId(user.getId()); //  not serialized by hateos
-					Assert.assertEquals(user, returnedUser);
-				}
-			});
+            	.accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(status().isForbidden());	
 	}
 	
-	private User parseResponse(MvcResult result) throws IOException,
-			JsonParseException, JsonMappingException,
-			UnsupportedEncodingException {
-		MockHttpServletResponse response = result.getResponse();
-		ObjectMapper objectMapper = new ObjectMapper();
-		Resource<User> customer = objectMapper.readValue(response.getContentAsString(),	new TypeReference<Resource<User>>() {});
-		return customer.getContent();
-	}
-    
 }

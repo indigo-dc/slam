@@ -8,13 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Data
@@ -26,7 +26,8 @@ public class User {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotEmpty
+    @NotNull
+    @Size(min=1)
     @Column(unique = true)
     private String login;
 	private String name;

@@ -47,11 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	static PermissionEvaluator getPermissionEvaluator() {
 		return new DenyAllPermissionEvaluator();
 	}
-//
-//	@Bean
-//	static Permissions getPermissions() {
-//		return new Permissions();
-//	}
 	
 	@Bean
 	@Autowired
