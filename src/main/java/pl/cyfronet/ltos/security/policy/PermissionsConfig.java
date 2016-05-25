@@ -1,4 +1,4 @@
-package pl.cyfronet.ltos.permission;
+package pl.cyfronet.ltos.security.policy;
 
 import java.util.Arrays;
 import java.util.List;

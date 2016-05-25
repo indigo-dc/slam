@@ -1,7 +1,6 @@
 package pl.cyfronet.ltos.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import pl.cyfronet.ltos.bean.Affiliation;
 
 @Repository
-@PreAuthorize("denyAll")
 public interface AffiliationRepository extends CrudRepository<Affiliation, Long> {
 	
 	@Override

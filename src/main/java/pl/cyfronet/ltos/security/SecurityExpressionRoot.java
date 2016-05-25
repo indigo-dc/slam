@@ -6,24 +6,26 @@ import org.springframework.security.core.Authentication;
 
 import pl.cyfronet.ltos.bean.Affiliation;
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.permission.Activity;
-import pl.cyfronet.ltos.permission.Permissions;
 import pl.cyfronet.ltos.security.bean.AffiliationSecurity;
 import pl.cyfronet.ltos.security.bean.UserSecurity;
+import pl.cyfronet.ltos.security.policy.Activity;
+import pl.cyfronet.ltos.security.policy.Permissions;
 
 public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 
 	private static Logger logger = LoggerFactory.getLogger(SecurityExpressionRoot.class);
 	private Permissions permissions;
+	private LtosUser user; 
 	
 	public SecurityExpressionRoot(Authentication authentication, Permissions f) {
 		super(authentication);
+		this.user = (LtosUser)authentication.getPrincipal();
 		this.permissions = f;
 	}
 
 	public boolean checkPolicy(Activity activity) {
 		logger.debug("authorize collection access: " + activity);
-		return permissions.securityPolicy(authentication, null, activity).evaluate();
+		return permissions.securityPolicy(user, null, activity).evaluate();
     }
 	
 	public boolean checkPolicyUser(User targetObject, Activity activity) {
@@ -32,7 +34,7 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 			// allow spring to return 404 instead of 403
 			return true;
 		} else {
-			return permissions.securityPolicy(authentication, new UserSecurity(targetObject), activity).evaluate();
+			return permissions.securityPolicy(user, new UserSecurity(targetObject), activity).evaluate();
 		}
 	}
 	
@@ -42,7 +44,7 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 			// allow spring to return 404 instead of 403
 			return true;
 		} else {
-			return permissions.securityPolicy(authentication, new AffiliationSecurity(targetObject), activity).evaluate();
+			return permissions.securityPolicy(user, new AffiliationSecurity(targetObject), activity).evaluate();
 		}
 	}
 	

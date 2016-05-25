@@ -9,7 +9,7 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
 
-import pl.cyfronet.ltos.permission.Permissions;
+import pl.cyfronet.ltos.security.policy.Permissions;
 
 public class SecurityExpressionHandler extends
 		DefaultMethodSecurityExpressionHandler {

@@ -1,5 +1,7 @@
 package pl.cyfronet.ltos.security;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,25 +12,28 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import pl.cyfronet.ltos.permission.Permissions;
-import pl.cyfronet.ltos.permission.Role;
+import pl.cyfronet.ltos.security.policy.Permissions;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("user")
-				.password("user")
-				.roles(Role.USER.toString())
-			.and()
-			.withUser("admin")
-				.password("admin")
-				.roles(Role.USER.toString(), Role.ADMIN.toString());
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(username -> {
+			switch (username) {
+			case "admin":
+				return new LtosUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")), "admin", "admin", 0L);
+			case "user":
+				return new LtosUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")), "user", "user", 1L);
+			default:
+				throw new UsernameNotFoundException("Username " + username
+						+ " not found.");
+			}
+		});
 	}
 
 	@Override

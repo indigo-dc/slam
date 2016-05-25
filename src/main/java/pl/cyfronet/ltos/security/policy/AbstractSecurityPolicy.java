@@ -1,13 +1,11 @@
-package pl.cyfronet.ltos.permission;
+package pl.cyfronet.ltos.security.policy;
 
 import lombok.Setter;
-
-import org.springframework.security.core.Authentication;
 
 public abstract class AbstractSecurityPolicy<T> implements SecurityPolicy {
 	
 	@Setter
-	protected Authentication authentication;
+	protected Identity identity;
 	@Setter
 	protected T targetObject;
 	@Setter

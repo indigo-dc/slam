@@ -1,4 +1,4 @@
-package pl.cyfronet.ltos.permission;
+package pl.cyfronet.ltos.security.policy;
 
 import java.util.Collection;
 
@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class RoleBasedSecurityPolicy<T> extends AbstractSecurityPolicy<T> {
@@ -20,15 +19,17 @@ public class RoleBasedSecurityPolicy<T> extends AbstractSecurityPolicy<T> {
 	public boolean evaluate() {
 		logger.debug("evaluate: " 
 				+ (targetObject != null ? targetObject.toString() : null)
-				+ ", activity: " + activity + ", user: " + authentication);
-		if (hasRole(authentication, Role.ADMIN)) {
+				+ ", activity: " + activity + ", user: " + identity);
+		if (hasRole(identity, Role.ADMIN)) {
 			return true;
 		} 
-		if (hasRole(authentication, Role.USER)) {			
+		if (hasRole(identity, Role.USER)) {			
 			if (hasAccessToActivity(activity, userPermissions)) {
 				if (targetObject == null) {
+					// TODO it should be chain of evaluate method instead 
 					return isAuthorizedOnCollection();
 				} else {
+					// TODO it should be chain of evaluate method instead 
 					return isAuthorizedOnTargetObject();	
 				}
 			}
@@ -53,9 +54,9 @@ public class RoleBasedSecurityPolicy<T> extends AbstractSecurityPolicy<T> {
 		return false;
 	}
 
-	static boolean hasRole(Authentication authentication, Role role) {
+	static boolean hasRole(Identity identity, Role role) {
 		SimpleGrantedAuthority testAuth = new SimpleGrantedAuthority("ROLE_" + role.toString());
-		boolean contains = authentication.getAuthorities().contains(testAuth);
+		boolean contains = identity.getAuthorities().contains(testAuth);
 		return contains;
 	}
 

@@ -1,6 +1,6 @@
 package pl.cyfronet.ltos.security;
 
-import pl.cyfronet.ltos.permission.Activity;
+import pl.cyfronet.ltos.security.policy.Activity;
 
 public class Activities {
 	
