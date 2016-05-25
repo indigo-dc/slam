@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import pl.cyfronet.ltos.bean.Affiliation;
 
 @Repository
+@PreAuthorize("hasRole('ADMIN')")
 public interface AffiliationRepository extends CrudRepository<Affiliation, Long> {
 	
 	@Override

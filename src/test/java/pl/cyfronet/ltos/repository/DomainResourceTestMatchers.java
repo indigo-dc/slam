@@ -7,11 +7,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.springframework.test.web.servlet.ResultActions;
 
-/**
- * Matchers to be used in {@link de.techdev.springtest.AbstractResourceTest}.
- *
- * @author Moritz Schulze
- */
 public class DomainResourceTestMatchers {
 
     private DomainResourceTestMatchers() {
