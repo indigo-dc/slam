@@ -11,6 +11,10 @@ import pl.cyfronet.ltos.security.bean.UserSecurity;
 import pl.cyfronet.ltos.security.policy.Activity;
 import pl.cyfronet.ltos.security.policy.Permissions;
 
+/**
+ * @author bwilk
+ *
+ */
 public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 
 	private static Logger logger = LoggerFactory.getLogger(SecurityExpressionRoot.class);

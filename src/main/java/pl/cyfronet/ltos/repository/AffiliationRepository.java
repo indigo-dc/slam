@@ -8,6 +8,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import pl.cyfronet.ltos.bean.Affiliation;
 
+/**
+ * @author bwilk
+ *
+ */
 @RepositoryRestResource
 @PreAuthorize("hasRole('ADMIN')")
 public interface AffiliationRepository extends

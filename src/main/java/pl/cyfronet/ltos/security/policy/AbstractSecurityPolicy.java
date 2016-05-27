@@ -6,6 +6,10 @@ import lombok.Setter;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+/**
+ * @author bwilk
+ *
+ */
 public abstract class AbstractSecurityPolicy<T> implements SecurityPolicy {
 	
 	@Setter

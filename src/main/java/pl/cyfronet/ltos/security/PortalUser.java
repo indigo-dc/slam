@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.User;
 
 import pl.cyfronet.ltos.security.policy.Identity;
 
+/**
+ * @author bwilk
+ *
+ */
 public class PortalUser extends User implements Identity {
 
 	private static final long serialVersionUID = 1L;

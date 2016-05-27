@@ -18,6 +18,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pl.cyfronet.ltos.security.policy.Activity;
 import pl.cyfronet.ltos.security.policy.Permissions;
 
+/**
+ * @author bwilk
+ *
+ */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

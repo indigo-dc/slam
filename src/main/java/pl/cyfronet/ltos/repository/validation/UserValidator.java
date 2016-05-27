@@ -6,6 +6,10 @@ import org.springframework.validation.Validator;
 
 import pl.cyfronet.ltos.bean.User;
 
+/**
+ * @author bwilk
+ *
+ */
 public class UserValidator implements Validator  {
 
 	@Override

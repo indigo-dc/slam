@@ -4,6 +4,10 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * @author bwilk
+ *
+ */
 public interface Identity {
 
 	/*

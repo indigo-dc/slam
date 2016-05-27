@@ -11,6 +11,10 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * @author bwilk
+ *
+ */
 @Entity
 @Data
 @ToString(exclude="affiliations")

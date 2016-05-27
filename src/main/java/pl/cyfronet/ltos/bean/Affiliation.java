@@ -14,6 +14,10 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * @author bwilk
+ *
+ */
 @Entity
 @Data
 @ToString

@@ -5,6 +5,10 @@ import lombok.ToString;
 import pl.cyfronet.ltos.bean.Affiliation;
 import pl.cyfronet.ltos.security.policy.OwnedResource;
 
+/**
+ * @author bwilk
+ *
+ */
 @AllArgsConstructor
 @ToString
 public class AffiliationSecurity implements OwnedResource {

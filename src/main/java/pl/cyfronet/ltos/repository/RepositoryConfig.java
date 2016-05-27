@@ -8,6 +8,10 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
 
 import pl.cyfronet.ltos.repository.validation.UserValidator;
 
+/**
+ * @author bwilk
+ *
+ */
 @Configuration
 public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
 

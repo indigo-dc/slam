@@ -11,6 +11,10 @@ import org.springframework.security.core.Authentication;
 
 import pl.cyfronet.ltos.security.policy.Permissions;
 
+/**
+ * @author bwilk
+ *
+ */
 public class SecurityExpressionHandler extends
 		DefaultMethodSecurityExpressionHandler {
 

@@ -3,6 +3,10 @@ package pl.cyfronet.ltos.security.policy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @author bwilk
+ *
+ */
 public class OwnerBasedSecurityPolicy extends AbstractSecurityPolicy<OwnedResource> implements SecurityPolicy {
 	
 	static Logger logger = LoggerFactory.getLogger(OwnerBasedSecurityPolicy.class);

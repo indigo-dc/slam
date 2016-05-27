@@ -9,6 +9,14 @@ import org.springframework.stereotype.Component;
 
 import pl.cyfronet.ltos.bean.User;
 
+/**
+ * @author bwilk
+ * 
+ */
+/*
+ * It should be checked but it seems that these handlers work only in http
+ * request context
+ */
 @Component
 @RepositoryEventHandler(User.class)
 public class UserEventHandler {
@@ -19,7 +27,7 @@ public class UserEventHandler {
 	public void handleUserSave(User p) {
 		logger.info("USER being saved: " + p);
 	}
-	
+
 	@HandleBeforeCreate
 	public void handleUserCreate(User p) {
 		logger.info("USER being created: " + p);

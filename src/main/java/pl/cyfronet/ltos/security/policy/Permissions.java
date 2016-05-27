@@ -6,6 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author bwilk
+ *
+ */
 @Component
 public class Permissions {
 
