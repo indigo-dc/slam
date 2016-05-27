@@ -26,18 +26,18 @@ public class AffiliationResourceTest extends AbstractResourceTest<Affiliation> {
 	
 	@Test
 	public void rootWithAdmin() throws Exception {
-		assertThat(rootWith(admin()), isAccessible());
+		assertThat(collectionWith(admin()), isAccessible());
 	}
 	
 	@Test
 	public void rootWithUser() throws Exception {
-		assertThat(rootWith(user()), isAccessible());
+		assertThat(collectionWith(user()), isAccessible());
 	}
 	
 	@Test
 	public void rootWithUserCheckFilter() throws Exception {
 		// TODO: fix this - check if they are filtered right
-		assertThat(rootWith(user()), lalala(new LinkedList<Affiliation>()));
+		assertThat(collectionWith(user()), lalala(new LinkedList<Affiliation>()));
 	}
 	
 	@Test

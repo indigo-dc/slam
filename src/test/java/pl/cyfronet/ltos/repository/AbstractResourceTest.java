@@ -60,7 +60,7 @@ public abstract class AbstractResourceTest<T> extends MockMvcSecurityTest {
 	 * @return The result actions to perform further tests on.
 	 * @throws Exception
 	 */
-	protected ResultActions rootWith(MockHttpSession session) throws Exception {
+	protected ResultActions collectionWith(MockHttpSession session) throws Exception {
 		return mockMvc.perform(get("/" + getResourceName()).session(session));
 	}
 

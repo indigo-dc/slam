@@ -26,12 +26,12 @@ public class UserResourceTest extends AbstractResourceTest<User> {
 
 	@Test
 	public void rootWithAdmin() throws Exception {
-		assertThat(rootWith(admin()), isAccessible());
+		assertThat(collectionWith(admin()), isAccessible());
 	}
 
 	@Test
 	public void rootWithEmployee() throws Exception {
-		assertThat(rootWith(user()), isForbidden());
+		assertThat(collectionWith(user()), isForbidden());
 	}
 
 	@Test

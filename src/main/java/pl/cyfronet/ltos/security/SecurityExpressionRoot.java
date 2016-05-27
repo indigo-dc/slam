@@ -15,6 +15,10 @@ import pl.cyfronet.ltos.security.policy.Permissions;
  * @author bwilk
  *
  */
+/*
+ * Consider going back to standard hasPermission calls with instance type checks
+ * instead of implementing custom checkPolicy methods
+ */
 public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 
 	private static Logger logger = LoggerFactory.getLogger(SecurityExpressionRoot.class);

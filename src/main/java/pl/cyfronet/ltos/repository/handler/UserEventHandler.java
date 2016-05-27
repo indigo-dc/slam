@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
-import org.springframework.stereotype.Component;
 
 import pl.cyfronet.ltos.bean.User;
 
@@ -14,10 +13,9 @@ import pl.cyfronet.ltos.bean.User;
  * 
  */
 /*
- * It should be checked but it seems that these handlers work only in http
+ * It should be checked but it seems that these handlers work only in httpw
  * request context
  */
-@Component
 @RepositoryEventHandler(User.class)
 public class UserEventHandler {
 
