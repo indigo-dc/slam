@@ -2,9 +2,9 @@ package pl.cyfronet.ltos.security.policy;
 
 import java.util.Collection;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import lombok.Setter;
+
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public abstract class AbstractSecurityPolicy<T> implements SecurityPolicy {
 	

@@ -9,33 +9,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Affiliation  {
+@ToString
+public class Affiliation {
 
-    @Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;   
-    private String country;
-    private String institution;
-    private String department;
-    private String webPage;
-    private String supervisorName;
-    private String supervisorEmail;
-    private String status;
-    private Date lastUpdateDate;
-    private String userEmail;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private User owner;
+	private Long id;
+	private String country;
+	private String institution;
+	private String department;
+	private String webPage;
+	private String supervisorName;
+	private String supervisorEmail;
+	private String status;
+	private Date lastUpdateDate;
+	private String userEmail;
+	
+	/*
+	 * TODO: 
+	 * EAGER causes N+1 query problem but spring-data-rest does not cope with this automatically
+	 * left as it is until we investigate performance
+	*/	
+	@NotNull
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User owner;
 
-}	
+}

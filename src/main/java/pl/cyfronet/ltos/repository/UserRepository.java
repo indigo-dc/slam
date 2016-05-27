@@ -22,6 +22,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Override
 	@PreAuthorize("permitAll")
 	@PostAuthorize("checkPolicyUser(returnObject, @activities.get('VIEW_USER'))")
-	public User findOne(Long id);
+	public User findOne(Long id);	
 	
+	
+	 
 }

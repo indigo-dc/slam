@@ -2,13 +2,28 @@ package pl.cyfronet.ltos.repository;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.hateoas.Resource;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultMatcher;
+
+import pl.cyfronet.ltos.bean.User;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class DomainResourceTestMatchers {
 
+	static final Logger logger = LoggerFactory.getLogger(DomainResourceTestMatchers.class);
+	
     private DomainResourceTestMatchers() {
     }
 
@@ -104,4 +119,29 @@ public class DomainResourceTestMatchers {
                     .andExpect(status().isMethodNotAllowed());
         });
     }
+    
+    
+    public static <T> Matcher<? super ResultActions> lalala(T object) {
+        return new ResultActionsMatcher("method not allowed", resultActions -> {
+            resultActions.andExpect(resultEq(object));
+        });
+    }
+    
+    protected static <T> ResultMatcher resultEq(T object) {
+    	return new ResultMatcher() {
+			@Override
+			public void match(MvcResult result) throws Exception {
+				T responseObject = deserialize(result.getResponse().getContentAsString());
+				logger.info(responseObject.toString());
+			}
+		};
+    }
+    
+	protected final static <T> T deserialize(String string) throws IOException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		TypeReference<Resource<User>> valueTypeRef = new TypeReference<Resource<User>>(){};
+		Resource<T> object = objectMapper.readValue(string, valueTypeRef);
+		return object.getContent();
+	}
+    
 }

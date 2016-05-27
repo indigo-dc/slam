@@ -10,6 +10,7 @@ import org.apache.commons.collections.IteratorUtils;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public abstract class AbstractDataOnDemand<S> {
@@ -41,9 +42,10 @@ public abstract class AbstractDataOnDemand<S> {
         S obj = data.get(rnd.nextInt(data.size()));
         Long id = getId(obj);
         //This might need admin rights
+        Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
         SecurityContextHolder.getContext().setAuthentication(AuthenticationMocks.adminAuthentication(0L));
         S one = repository.findOne(id);
-        SecurityContextHolder.getContext().setAuthentication(null);
+        SecurityContextHolder.getContext().setAuthentication(oldAuth);
         return one;
     }
 
@@ -66,6 +68,7 @@ public abstract class AbstractDataOnDemand<S> {
 
     public void init() {
         //Some repositories might have security annotations so we temporary acquire admin rights.
+    	Authentication oldAuth = SecurityContextHolder.getContext().getAuthentication();
         SecurityContextHolder.getContext().setAuthentication(AuthenticationMocks.adminAuthentication(0L));
         data = IteratorUtils.toList(repository.findAll().iterator());
         if (data == null) {
@@ -74,10 +77,10 @@ public abstract class AbstractDataOnDemand<S> {
         if (data.size() > getExpectedElements()) {
             return;
         }
-
         data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             S obj = getNewTransientObject(i);
+            
             try {
                 repository.save(obj);
             } catch (final ConstraintViolationException e) {
@@ -85,6 +88,7 @@ public abstract class AbstractDataOnDemand<S> {
             }
             data.add(obj);
         }
+        SecurityContextHolder.getContext().setAuthentication(oldAuth);
     }
 
     public abstract S getNewTransientObject(int i);

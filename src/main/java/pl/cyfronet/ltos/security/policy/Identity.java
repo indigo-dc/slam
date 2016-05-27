@@ -6,7 +6,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 public interface Identity {
 
-	// may be changed for something spring agnostic
+	/*
+	 * TODO may be changed for something spring agnostic - e.g. getRoles may suffice
+	 */
 	public Collection<GrantedAuthority> getAuthorities();
 
 	public Long getId();
