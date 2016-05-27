@@ -13,7 +13,7 @@ public class AffiliationSecurity implements OwnedResource {
 	
 	@Override
 	public Long getOwnerId() {
-		// fix this - user should be taken from database by id  
+		// TODO - CAUTION: object must be attached to JPA session   
 		return affiliation.getOwner().getId();
 	}
 

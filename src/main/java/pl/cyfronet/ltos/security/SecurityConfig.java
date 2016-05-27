@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import pl.cyfronet.ltos.security.policy.Activity;
 import pl.cyfronet.ltos.security.policy.Permissions;
 
 @Configuration
@@ -26,9 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(username -> {
 			switch (username) {
 			case "admin":
-				return new LtosUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")), "admin", "admin", 0L);
+				return new PortalUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")), "admin", "admin", 0L);
 			case "user":
-				return new LtosUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")), "user", "user", 1L);
+				return new PortalUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")), "user", "user", 1L);
 			default:
 				throw new UsernameNotFoundException("Username " + username
 						+ " not found.");
@@ -66,6 +67,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean(name = "activities")
 	static Activities getActivities() {
 		return new Activities();
+	}
+
+	static class Activities {
+		public Activity get(String name) {
+			return Activity.valueOf(name);
+		}
 	}
 
 }

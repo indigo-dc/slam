@@ -15,11 +15,11 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 
 	private static Logger logger = LoggerFactory.getLogger(SecurityExpressionRoot.class);
 	private Permissions permissions;
-	private LtosUser user; 
+	private PortalUser user; 
 	
 	public SecurityExpressionRoot(Authentication authentication, Permissions f) {
 		super(authentication);
-		this.user = (LtosUser)authentication.getPrincipal();
+		this.user = (PortalUser)authentication.getPrincipal();
 		this.permissions = f;
 	}
 

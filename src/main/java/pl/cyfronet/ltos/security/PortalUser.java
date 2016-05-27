@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.User;
 
 import pl.cyfronet.ltos.security.policy.Identity;
 
-public class LtosUser extends User implements Identity {
+public class PortalUser extends User implements Identity {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long userBeanId;
 
-	public LtosUser(List<GrantedAuthority> authorities, String username,
+	public PortalUser(List<GrantedAuthority> authorities, String username,
 			String password, Long userBeanId) {
 		super(username, password, authorities);
 		this.userBeanId = userBeanId;

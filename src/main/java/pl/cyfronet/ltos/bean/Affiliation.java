@@ -31,12 +31,10 @@ public class Affiliation {
 	private String status;
 	private Date lastUpdateDate;
 	private String userEmail;
-	
 	/*
-	 * TODO: 
-	 * EAGER causes N+1 query problem but spring-data-rest does not cope with this automatically
-	 * left as it is until we investigate performance
-	*/	
+	 * TODO: EAGER causes N+1 query problem but spring-data-rest does not cope
+	 * with this automatically left as it is until we investigate performance
+	 */
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
