@@ -13,7 +13,7 @@ public interface Identity {
 	/*
 	 * TODO may be changed for something spring agnostic - e.g. getRoles may suffice
 	 */
-	public Collection<GrantedAuthority> getAuthorities();
+	public Collection<? extends GrantedAuthority> getAuthorities();
 
 	public Long getId();
 

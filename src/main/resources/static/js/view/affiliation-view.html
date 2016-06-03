@@ -1,0 +1,63 @@
+<ul class="breadcrumb">
+    <li>You are here:</li>
+    <li><a href="#/account">Profile and affiliations</a></li>
+    <li>&#8594;</li>
+    <li>{{affiliation.institution}}</li>
+</ul>
+<div class="box grid-1">
+    <h2><i class="fa fa-briefcase"></i>{{affiliation.institution}}</h2>
+    <div class="grid-2-3 fleft">
+        <ul class="userprof">
+            <li>
+                <span>Country:</span>
+                <strong>{{affiliation.country}}</strong>
+            </li>
+            <li>
+                <span>Institution:</span>
+                <strong>{{affiliation.institution}}</strong>
+            </li>
+            <li>
+                <span>Department:</span>
+                <strong>{{affiliation.department}}</strong>
+            </li>
+            <li>
+                <span>Webpage of the institution <br />with list of Staff:</span>
+                <strong>{{affiliation.webPage}}</strong>
+            </li>
+            <li>
+                <span>Supervisor name::</span>
+                <strong>{{affiliation.supervisorName}}</strong>
+            </li>
+            <li>
+                <span>Supervisor e-mail:</span>
+                <strong>{{affiliation.supervisorEmail}}</strong>
+            </li>
+        </ul>
+        <br />
+        <p>
+            <a href="#/account"><i class="fa fa-chevron-left"></i><span>Back to profile and affiliations</span> </a>
+        </p>
+    </div>
+    <div class="grid-1-3 fright">
+        <ul class="status">
+            <li>
+                <figure>
+                    <i class="fa fa-flag fa-2x "></i>
+                </figure>
+                <p>
+                    <span>Status:</span><strong> {{affiliation.status}}</strong>
+                </p>
+            </li>
+            <li>
+                <figure>
+                    <i class="fa fa-clock-o fa-2x "></i>
+                </figure>
+                <p>
+                    <span>Updated:</span><strong> {{affiliation.lastUpdateDate | date:'MM/dd/yyyy'}}</strong>
+                </p>
+            </li>
+        </ul>
+
+    </div>
+</div>
+

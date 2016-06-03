@@ -8,7 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -18,6 +21,9 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString(exclude="affiliations")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     
     @Id

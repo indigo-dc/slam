@@ -1,0 +1,82 @@
+<h2>
+    <i class="fa fa-user"></i>Profile
+    <a href="" ng-click="editOperation()" ng-show="!editProfile" class="btn btn-sm" href="#">
+        <i class="fa fa-edit"></i>Edit
+    </a>
+</h2>
+
+
+<!--
+Tutaj profil
+ -->
+<ul ng-show="!editProfile" class="userprof">
+    <li>
+        <span>Full name:</span>
+        <strong>{{user.name}}</strong>
+    </li>
+
+    <li>
+        <span>Country:</span>
+        <strong>{{user.country}}</strong>
+    </li>
+
+    <li>
+        <span>E-mail</span>
+        <strong>{{user.email}}</strong>
+    </li>
+    <li ng-show="user.linkedln">
+        <span>Linkedln profile</span>
+        <strong>{{user.linkedln}}</strong>
+    </li>
+    <li ng-show="user.researchGate">
+        <span>ResearchGate profile:</span>
+        <strong>{{user.researchGate}}</strong>
+    </li>
+</ul>
+
+
+
+
+
+
+
+
+<!--
+edycja profilu
+ -->
+ <div ng-show="editProfile">
+    <form ng-submit="submit()" class="horizontal" name="form">
+        <ul class="userprof">
+            <li>
+                <span>Full name:</span>
+                <strong>{{user.name}}</strong>
+            </li>
+            <li>
+                <label>Country:</label>
+                <select  name="country"  ng-model="userEdit.country" ng-options="country as country for country in countryList" ></select>
+            </li>
+            <li>
+                <span>E-mail:</span>
+                <strong>{{user.email}}</strong>
+            </li>
+            <li>
+                <label>Linkedln profile</label>
+                <input type="text" name="linkedln" class="form-control" ng-model="userEdit.linkedln"/>
+            </li>
+            <li>
+                <label class="doubleline">ResearchGate profile:</label>
+                <input type="text" class="form-control" ng-model="userEdit.researchGate" name="researchGate"/>
+            </li>
+            <li>
+                <label>&nbsp;</label>
+                <button type="submit" class="btn btn-success">
+                    <i class="fa fa-floppy-o"></i> Save
+                </button>
+                <button type="button" class="btn btn-cancel" ng-click="cancelOperation()">
+                    <i class="fa fa-close"></i> Cancel
+                </button>
+            </li>
+        </ul>
+    </form>
+ </div>
+

@@ -1,0 +1,38 @@
+<div class="registration">
+    <h2>Sign up</h2>
+    <form ng-submit="submit()" name="form">
+        <ul>
+            <li>
+                <label> Full name</label>
+                <input type="text" class="disabled" ng-model="name" name="name" placeholder="Name"/>
+                <!--<input type="text" class="disabled" ng-model="surname" name="surname" placeholder="Surname"/>-->
+            </li>
+            <li>
+                <label>Country</label>
+                <select name="country" class="form-control" ng-model="country" ng-options="o as o for o in countryList"></select>
+            </li>
+            <li>
+                <label>E-mail</label>
+                <input type="text" class="disabled" ng-model="email" name="email" value="john.smith@gmail.com"  />
+            </li>
+            <li>
+                <label>Linkedln profile<span>(optional)</span></label>
+                <input type="text" ng-model="linkedln" name="linkedln"/>
+            </li>
+            <li>
+                <label>ResearchGate profile<span>(optional)</span></label>
+                <input type="text" ng-model="researchGate" name="researchGate"/>
+            </li>
+            <li>
+                <label>
+                    <input class="pointer" type="checkbox" ng-model="agreement" required/>  I accept General Usage Policy
+                </label>
+            </li>
+            <li>
+                <button type="submit" class="btn" ng-disabled="form.$invalid">
+                    <span class="fa fa-paper-plane"></span> Register
+                </button>
+            </li>
+        </ul>
+    </form>
+</div>

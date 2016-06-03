@@ -1,0 +1,65 @@
+<ul class="breadcrumb">
+    <li>You are here:</li>
+    <li><a href="#/account">Profile and affiliations</a></li>
+    <li>&#8594;</li>
+    <li>Add new affiliation</li>
+</ul>
+<div class="box grid-1">
+    <h2><i class="fa fa-briefcase"></i>Add new affiliation</h2>
+    <form ng-submit="addAffiliationSubmit()" class="horizontal"name="form">
+        <ul>
+            <li>
+                <label>Country / NGI</label>
+                <select  name="country" ng-model="country" ng-options="country as country for country in countryList" required ng-change=updateListInstitution(country)>
+                    <option value="">-- Select --</option>
+                </select>
+            </li>
+            <li>
+                <label>Institution </label>
+                <!--<input type="text" name="institution" ng-model="institution" required/>-->
+                <input type="text" keyboard-poster post-function="searchInstitution" ng-model="institution" name="institution" list="updatedList" required ng-change="updateListDepartment(institution)">
+                <datalist id="updatedList">
+                    <select>
+                        <option ng-repeat="institution in updatedList" value="{{institution}}"></option>
+                    </select>
+                    <!--<select style="display: none;" id="_select" name="_select" ng-model='selectedCountry' ng-options='k as v for (k,v) in countries'></select>-->
+                </datalist>
+            </li>
+            <li>
+                <label>Department</label>
+                <input type="text" keyboard-poster post-function="searchDepartment" ng-model="department" name="department" list="updatedDepartmentList" required>
+                <datalist id="updatedDepartmentList">
+                    <select>
+                        <option ng-repeat="department in updatedDepartmentList track by $index" value="{{department}}"></option>
+                    </select>
+                    <!--<select  ng-model="department" ng-options="department as department for department in departmentList"></select>-->
+                </datalist>
+
+                <!--<datalist id="departmentList">-->
+                    <!--<select  ng-model="department" ng-options="department as department for department in departmentList"></select>-->
+                <!--</datalist>-->
+            </li>
+            <li>
+                <label class="doubleline">Departmental webpage <span>(optional)</span></label>
+                <input type="text" name="webPage" ng-model="webPage"/>
+            </li>
+            <li>
+                <label>Supervisor name <span>(optional)</span></label>
+                <input type="text"name="supervisorName" ng-model="supervisorName"/>
+            </li>
+            <li>
+                <label>Supervisor e-mail <span>(optional)</span></label>
+                <input type="text" name="supervisorEmail" ng-model="supervisorEmail" placeholder="e.g. john.smith@email.com"/>
+            </li>
+            <li>
+                <label>&nbsp;</label>
+                <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">
+                    <i class="fa fa-send"></i>Send affiliation
+                </button>
+                <a type="button" class="btn btn-cancel" href="#/account">
+                    <i class="fa fa-close"></i> Cancel
+                </a>
+            </li>
+        </ul>
+    </form>
+</div>

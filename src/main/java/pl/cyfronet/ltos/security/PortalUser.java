@@ -1,39 +1,44 @@
 package pl.cyfronet.ltos.security;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import javax.transaction.Transactional;
+
+import lombok.Setter;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import pl.cyfronet.ltos.bean.UserAuth;
 import pl.cyfronet.ltos.security.policy.Identity;
 
-/**
- * @author bwilk
- *
- */
 public class PortalUser extends User implements Identity {
-
+	
 	private static final long serialVersionUID = 1L;
 
-	private Long userBeanId;
+	@Setter
+	private UserAuth userAuth;
 
-	public PortalUser(List<GrantedAuthority> authorities, String username,
-			String password, Long userBeanId) {
-		super(username, password, authorities);
-		this.userBeanId = userBeanId;
+	public PortalUser(UserAuth details) {
+		super(details.getLogin(), details.getPassword(), getAuthorities(details));
+		this.userAuth = details;
 	}
 	
+	public static Collection<GrantedAuthority> getAuthorities(UserAuth details) {
+		LinkedList<GrantedAuthority> list = new LinkedList<GrantedAuthority>();
+		list.add(new SimpleGrantedAuthority("ROLE_USER"));
+		if (details.isAdmin()) {
+			list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		} 
+		return list;
+	}
+
 	@Override
+	@Transactional
 	public Long getId() {
-		return userBeanId;
+		return userAuth.getUser().getId();
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString()).append("; ");
-		sb.append("UserBeanId: ").append(this.userBeanId);
-		return sb.toString();
-	}
-	
+
 }

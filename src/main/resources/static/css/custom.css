@@ -1,0 +1,112 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,400italic,300italic,700,700italic,900,900italic&subset=latin,latin-ext);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+body {
+    font-family: Lato, Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+.header {
+    margin-bottom: 15px;
+}
+
+.nav li {padding-top: 10px;}
+
+.nav a:hover {border-color: #fff !important;}
+
+.logo a{
+    background: url("../images/egi-logo.png") no-repeat;
+    height: 53px;
+    width: 94px;
+    text-indent: -9999px;
+    margin-bottom: 8px;
+    margin-top: -10px;
+    outline: none;
+}
+.fa {margin-right: 6px;}
+h1 {margin-bottom: 20px;font-weight: 300;}
+h1 span {display:block; font-size: 14px;font-weight: 600;color:#8f8f8f;}
+h2, h3 {font-weight: bold;}
+h3 {font-size: 16px;margin: 10px 0;}
+
+ul {clear:both;}
+
+.nav li:last-child {float:right;}
+
+.breadcrumb {padding: 0; font-size: 12px;}
+
+.registration form {
+    margin: 15 auto;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 15px;
+}
+
+form {border: 1px solid #ddd; padding: 10px;}
+
+
+
+.dashboard h4 {
+    margin: 20px 0 20px 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 800;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.steps {overflow: auto;margin: 10px 0;padding: 0;margin-bottom: 15px;}
+
+.steps li {
+    float:left;
+    padding: 0;
+    margin: 0 5px;
+    list-style: none;
+    text-align:center;
+    width: 30%;
+    font-size: 13px;
+}
+
+.steps li span{
+    width: 80px;
+    height: 75px;
+    display:block;
+    border: 1px dashed #bbbaba;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    padding-top: 18px;
+    color: #0167B1;
+}
+
+.box {
+    padding: 8px;
+    border-radius: 5px;
+    background: #ddd;
+}
+
+
+.picture {
+    overflow: hidden;
+    height: 120px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+.floatspan li {overflow:hidden;}
+.floatspan li span{display:block;float:left;}
+.floatspan li span:first-child {width: 36%;margin-right: 10px;}
+
+.affiliationsList td{text-align: center;}
+.affiliationsList td:first-child{text-align: left;}
+
+
+.footer, .footer a {
+    font-size: 12px;
+    color: #bbbaba;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 20px;
+    clear: both;
+}
+

@@ -9,6 +9,7 @@ import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.security.bean.AffiliationSecurity;
 import pl.cyfronet.ltos.security.bean.UserSecurity;
 import pl.cyfronet.ltos.security.policy.Activity;
+import pl.cyfronet.ltos.security.policy.Identity;
 import pl.cyfronet.ltos.security.policy.Permissions;
 
 /**
@@ -23,11 +24,11 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
 
 	private static Logger logger = LoggerFactory.getLogger(SecurityExpressionRoot.class);
 	private Permissions permissions;
-	private PortalUser user; 
+	private Identity user; 
 	
 	public SecurityExpressionRoot(Authentication authentication, Permissions f) {
 		super(authentication);
-		this.user = (PortalUser)authentication.getPrincipal();
+		this.user = (Identity)authentication.getPrincipal();
 		this.permissions = f;
 	}
 

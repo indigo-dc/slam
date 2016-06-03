@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:fragment="page" ng-app="testApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/bootstrap-3.3.1-dist/css/bootstrap.css}" />
+
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/css/dashboard.css}" />
+
+    <link rel="stylesheet" type="text/css" media="all"
+          th:href="@{/css/custom.css}" />
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script th:src="@{/bootstrap-3.3.1-dist/js/bootstrap.min.js}"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <title>Helpdesk PL-Grid</title>
+</head>
+
+<body ng-app='testApp'>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view="">
+            <div th:include="this :: content" />
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

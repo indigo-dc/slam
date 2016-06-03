@@ -1,0 +1,13 @@
+      <!-- The justified navigation menu is meant for single line per list item.
+           Multiple lines will require custom code not provided by Bootstrap. -->
+      <div th:fragment="header" class="header">
+        <nav>
+          <a href="#/" class="logo">EGI LOGO</a>
+          <ul>
+            <li><a href="#/dashboard">Dashboard</a></li>
+            <li><a href="#/account">Profile and affiliations</a></li>
+            <li><span th:text="${identity != null} ? ${identity.name} : 'Unlogged'">Unlogged</span></li>
+            <li th:if="${identity != null}"><a href="/auth/logout"><span class="fa fa-power-off"></span> Logout</a></li>
+          </ul>
+        </nav>
+      </div>

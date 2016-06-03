@@ -1,0 +1,33 @@
+<h2>
+    <i class="fa fa-briefcase"></i>Affiliations
+    <a class="btn btn-sm" href="#/add-affiliation" ng-show="affiliationsList"><i class="fa fa-plus"></i>Add affiliation</a>
+</h2>
+
+
+<!-- Napis -->
+<div ng-show="!affiliationsList" class="alert alert-info">
+        To apply for a personal allocation you need to have confirmed affiliation
+        <a href="#/add-affiliation">Add your first affiliation</a>
+</div>
+
+<!-- Lista -->
+<div ng-show="affiliationsList" class="affiliationsList">
+    <table class="table">
+            <tr>
+               <th>Name</th>
+               <th>Status</th>
+               <th>Date</th>
+            </tr>
+        <tbody ng-repeat="affiliation in affiliationsList">
+            <tr>
+               <td>
+                   <a href="#/affiliation-view" ng-click="setAffiliation(affiliation)">
+                       {{affiliation.department+" / "+affiliation.institution}}
+                       <!--{{affiliation.department+" / "+affiliation.institution +" / "+affiliation.country}}-->
+                   </a>
+               </td>
+               <td>{{affiliation.status}}</td>
+               <td>{{affiliation.lastUpdateDate | date:'MM.dd.yyyy'}}</td>
+            </tr>
+        </tbody>
+    </table>
