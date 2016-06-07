@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.FilterChainProxy;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -22,6 +23,7 @@ import pl.cyfronet.ltos.ApplicationTest;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @Transactional
+@ActiveProfiles({"development"})
 @SpringApplicationConfiguration(classes = ApplicationTest.class)
 public abstract class MockMvcSecurityTest {
 

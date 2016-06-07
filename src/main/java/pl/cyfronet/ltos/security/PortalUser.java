@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.User;
 import pl.cyfronet.ltos.bean.UserAuth;
 import pl.cyfronet.ltos.security.policy.Identity;
 
-public class PortalUser extends User implements Identity {
-	
+	public class PortalUser extends User implements Identity {
+		
 	private static final long serialVersionUID = 1L;
 
 	@Setter

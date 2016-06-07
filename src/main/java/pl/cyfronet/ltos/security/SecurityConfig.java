@@ -24,12 +24,12 @@ import pl.cyfronet.ltos.security.policy.Permissions;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	//@Autowired
-	//protected PortalUserDetailsService detailsService;
+	@Autowired
+	protected PortalUserDetailsService detailsService;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {		
-		//auth.userDetailsService(detailsService);
+		auth.userDetailsService(detailsService);
 	}
 	
 	@Override
@@ -46,11 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf()
 					.disable();
 	}
-//
-//	@Bean
-//	static PortalUserDetailsService getDetailsService() {
-//		return new PortalUserDetailsService();
-//	}
+
+	@Bean
+	static PortalUserDetailsService getDetailsService() {
+		return new PortalUserDetailsService();
+	}
 	
 	@Bean
 	static PermissionEvaluator getPermissionEvaluator() {

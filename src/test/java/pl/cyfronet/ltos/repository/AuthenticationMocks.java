@@ -19,13 +19,13 @@ public class AuthenticationMocks {
 	public static Authentication userAuthentication(Long id) {
 		User user = User.builder().id(id).build();
 		UserAuth auth = UserAuth.builder().login("user1").password("userpass").admin(false).user(user).build();		
-		return new TestingAuthenticationToken(new SimpleUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")), "admin", "adminpass", id), null, "ROLE_USER");
+		return new TestingAuthenticationToken(new PortalUser(auth), null, "ROLE_USER");
 	}
 
 	public static Authentication adminAuthentication(Long id) {
-		//User user = User.builder().id(id).build();
-		//UserAuth auth = UserAuth.builder().login("admin").password("adminpass").admin(true).user(user).build();
-		return new TestingAuthenticationToken(new SimpleUser(Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")), "admin", "adminpass", id), null,  "ROLE_USER", "ROLE_ADMIN");
+		User user = User.builder().id(id).build();
+		UserAuth auth = UserAuth.builder().login("admin").password("adminpass").admin(true).user(user).build();
+		return new TestingAuthenticationToken(new PortalUser(auth), null,  "ROLE_USER", "ROLE_ADMIN");
 	}
 	
 }
