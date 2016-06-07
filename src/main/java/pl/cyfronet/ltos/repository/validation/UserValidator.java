@@ -10,21 +10,21 @@ import pl.cyfronet.ltos.bean.User;
  * @author bwilk
  *
  */
-public class UserValidator implements Validator  {
+public class UserValidator implements Validator {
 
-	@Override
-	public boolean supports(Class<?> clazz) {
-		return User.class.isAssignableFrom(clazz);
-	}
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return User.class.isAssignableFrom(clazz);
+    }
 
-	@Override
-	public void validate(Object target, Errors errors) {
-		/*
-		 * Third parameter refers to messages.properties entry
-		 */
-		ValidationUtils.rejectIfEmpty(errors, "name", "user.noname");
-		ValidationUtils.rejectIfEmpty(errors, "surname", "user.nosurname");
-		ValidationUtils.rejectIfEmpty(errors, "email", "user.noemail");
-	}
+    @Override
+    public void validate(Object target, Errors errors) {
+        /*
+         * Third parameter refers to messages.properties entry
+         */
+        ValidationUtils.rejectIfEmpty(errors, "name", "user.noname");
+        ValidationUtils.rejectIfEmpty(errors, "surname", "user.nosurname");
+        ValidationUtils.rejectIfEmpty(errors, "email", "user.noemail");
+    }
 
 }

@@ -23,59 +23,55 @@ import pl.cyfronet.ltos.security.policy.Permissions;
 @Profile("production")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	protected PortalUserDetailsService detailsService;
-	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {		
-		auth.userDetailsService(detailsService);
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/", "/bootstrap-3.3.1-dist/**", "/static/**","/resources/**", "/bootstrap/**",
-                        "/css/**", "/images/**", "/js/**", "/javascript/**", "/fonts/**")
-                .permitAll()
-			.anyRequest()
-				.authenticated()
-				.and()
-				.formLogin()
-				.and()		
-				.csrf()
-					.disable();
-	}
 
-	@Bean
-	static PortalUserDetailsService getDetailsService() {
-		return new PortalUserDetailsService();
-	}
-	
-	@Bean
-	static PermissionEvaluator getPermissionEvaluator() {
-		return new DenyAllPermissionEvaluator();
-	}
-	
-	@Bean
-	@Autowired
-	static MethodSecurityExpressionHandler getExpressionHandler(
-			PermissionEvaluator evaluator, Permissions permissions) {
-		SecurityExpressionHandler handler = new SecurityExpressionHandler();
-		handler.setPermissionEvaluator(evaluator);
-		handler.setFactory(permissions);
-		return handler;
-	}
+    @Autowired
+    protected PortalDetailsService detailsService;
 
-	@Bean(name = "activities")
-	static Activities getActivities() {
-		return new Activities();
-	}
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth.userDetailsService(detailsService);
+    }
 
-	static class Activities {
-		public Activity get(String name) {
-			return Activity.valueOf(name);
-		}
-	}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/", "/bootstrap-3.3.1-dist/**", "/static/**",
+                        "/resources/**", "/bootstrap/**", "/css/**",
+                        "/images/**", "/js/**", "/javascript/**", "/fonts/**")
+                .permitAll().anyRequest().authenticated().and().formLogin()
+                .and().csrf().disable();
+    }
+
+    @Bean
+    static PortalDetailsService getDetailsService() {
+        return new PortalDetailsService();
+    }
+
+    @Bean
+    static PermissionEvaluator getPermissionEvaluator() {
+        return new DenyAllPermissionEvaluator();
+    }
+
+    @Bean
+    @Autowired
+    static MethodSecurityExpressionHandler getExpressionHandler(
+            PermissionEvaluator evaluator, Permissions permissions) {
+        SecurityExpressionHandler handler = new SecurityExpressionHandler();
+        handler.setPermissionEvaluator(evaluator);
+        handler.setFactory(permissions);
+        return handler;
+    }
+
+    @Bean(name = "activities")
+    static Activities getActivities() {
+        return new Activities();
+    }
+
+    static class Activities {
+        public Activity get(String name) {
+            return Activity.valueOf(name);
+        }
+    }
 
 }

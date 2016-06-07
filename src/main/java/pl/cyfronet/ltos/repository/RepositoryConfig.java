@@ -15,19 +15,19 @@ import pl.cyfronet.ltos.repository.validation.UserValidator;
 @Configuration
 public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
 
-	@Autowired 
-	UserValidator userValidator;
-	
-	@Bean
-	public UserValidator userValidator() {
-		return new UserValidator();
-	}
+    @Autowired
+    UserValidator userValidator;
 
-	@Override
-	public void configureValidatingRepositoryEventListener(
-			ValidatingRepositoryEventListener validatingListener) {
-		validatingListener.addValidator("beforeCreate", userValidator);
-		validatingListener.addValidator("beforeSave", userValidator);
-	}
+    @Bean
+    public UserValidator userValidator() {
+        return new UserValidator();
+    }
+
+    @Override
+    public void configureValidatingRepositoryEventListener(
+            ValidatingRepositoryEventListener validatingListener) {
+        validatingListener.addValidator("beforeCreate", userValidator);
+        validatingListener.addValidator("beforeSave", userValidator);
+    }
 
 }

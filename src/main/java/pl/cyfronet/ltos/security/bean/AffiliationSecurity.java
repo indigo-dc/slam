@@ -12,13 +12,16 @@ import pl.cyfronet.ltos.security.policy.OwnedResource;
 @AllArgsConstructor
 @ToString
 public class AffiliationSecurity implements OwnedResource {
-	
-	private Affiliation affiliation;
-	
-	@Override
-	public Long getOwnerId() {
-		// TODO - CAUTION: object must be attached to JPA session   
-		return affiliation.getOwner().getId();
-	}
+
+    private Affiliation affiliation;
+
+    @Override
+    public Long getOwnerId() {
+        /*
+         *  TODO - CAUTION: object must be attached to JPA session
+         *  in order to lazy load dependency
+         */
+        return affiliation.getOwner().getId();
+    }
 
 }

@@ -1,15 +1,11 @@
 package pl.cyfronet.ltos.repository;
 
-import java.util.Arrays;
-
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.bean.UserAuth;
 import pl.cyfronet.ltos.security.PortalUser;
-import pl.cyfronet.ltos.security.SimpleUser;
 
 public class AuthenticationMocks {
 

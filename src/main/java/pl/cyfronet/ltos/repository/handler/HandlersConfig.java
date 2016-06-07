@@ -10,10 +10,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HandlersConfig {
 
-	@Bean
-	UserEventHandler getUserEventHandler() {
-		return new UserEventHandler();
-	}
-	
-	
+    @Bean
+    UserEventHandler getUserEventHandler() {
+        return new UserEventHandler();
+    }
+
 }

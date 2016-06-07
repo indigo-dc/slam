@@ -19,16 +19,16 @@ import pl.cyfronet.ltos.bean.User;
 @RepositoryEventHandler(User.class)
 public class UserEventHandler {
 
-	private Logger logger = LoggerFactory.getLogger(UserEventHandler.class);
+    private Logger logger = LoggerFactory.getLogger(UserEventHandler.class);
 
-	@HandleBeforeSave
-	public void handleUserSave(User p) {
-		logger.info("USER being saved: " + p);
-	}
+    @HandleBeforeSave
+    public void handleUserSave(User p) {
+        logger.info("USER being saved: " + p);
+    }
 
-	@HandleBeforeCreate
-	public void handleUserCreate(User p) {
-		logger.info("USER being created: " + p);
-	}
+    @HandleBeforeCreate
+    public void handleUserCreate(User p) {
+        logger.info("USER being created: " + p);
+    }
 
 }

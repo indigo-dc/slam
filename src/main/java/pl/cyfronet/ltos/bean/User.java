@@ -20,26 +20,26 @@ import lombok.ToString;
  */
 @Entity
 @Data
-@ToString(exclude="affiliations")
+@ToString(exclude = "affiliations")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    
+
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-	private String name;
-	private String surname;
-	private String country;
-	private String email;
-	private String researchGate;
-	private String linkedln;
-	private boolean isPolicyAccepted;
+    private String name;
+    private String surname;
+    private String country;
+    private String email;
+    private String researchGate;
+    private String linkedln;
+    private boolean isPolicyAccepted;
     private Boolean confirmedRegistration;
     private String unityPersistentIdentity;
     private boolean hasActiveSla;
-    @OneToMany(mappedBy="owner")
+    @OneToMany(mappedBy = "owner")
     private List<Affiliation> affiliations;
 
 }

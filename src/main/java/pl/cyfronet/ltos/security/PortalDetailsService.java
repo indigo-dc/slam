@@ -14,20 +14,20 @@ import pl.cyfronet.ltos.bean.UserAuth;
  * @author bwilk
  *
  */
-public class PortalUserDetailsService implements UserDetailsService {
+public class PortalDetailsService implements UserDetailsService {
 
-	@PersistenceContext
-	protected EntityManager em;
+    @PersistenceContext
+    protected EntityManager em;
 
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException {
-		UserAuth login = em.find(UserAuth.class, username);
-		if (login == null) {
-			throw new UsernameNotFoundException("User not found");
-		}
-		return new PortalUser(login);
-	}
-	
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
+        UserAuth login = em.find(UserAuth.class, username);
+        if (login == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new PortalUser(login);
+    }
+
 }

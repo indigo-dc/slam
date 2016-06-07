@@ -10,11 +10,12 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public interface Identity {
 
-	/*
-	 * TODO may be changed for something spring agnostic - e.g. getRoles may suffice
-	 */
-	public Collection<? extends GrantedAuthority> getAuthorities();
+    /*
+     * TODO may be changed for something spring agnostic - e.g. getRoles may
+     * suffice
+     */
+    public Collection<? extends GrantedAuthority> getAuthorities();
 
-	public Long getId();
+    public Long getId();
 
 }

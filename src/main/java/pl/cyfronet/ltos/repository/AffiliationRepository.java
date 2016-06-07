@@ -15,20 +15,20 @@ import pl.cyfronet.ltos.bean.Affiliation;
 @RepositoryRestResource
 @PreAuthorize("hasRole('ADMIN')")
 public interface AffiliationRepository extends
-		CrudRepository<Affiliation, Long> {
+        CrudRepository<Affiliation, Long> {
 
-	@Override
-	@PreAuthorize("checkPolicy(@activities.get('LIST_AFFILIATIONS'))")
-	@PostFilter("checkPolicyAffiliation(filterObject, @activities.get('LIST_AFFILIATIONS'))")
-	public Iterable<Affiliation> findAll();
+    @Override
+    @PreAuthorize("checkPolicy(@activities.get('LIST_AFFILIATIONS'))")
+    @PostFilter("checkPolicyAffiliation(filterObject, @activities.get('LIST_AFFILIATIONS'))")
+    public Iterable<Affiliation> findAll();
 
-	@Override
-	@PreAuthorize("checkPolicyAffiliation(#affiliation, @activities.get('SAVE_AFFILIATION'))")
-	public <S extends Affiliation> S save(S affiliation);
+    @Override
+    @PreAuthorize("checkPolicyAffiliation(#affiliation, @activities.get('SAVE_AFFILIATION'))")
+    public <S extends Affiliation> S save(S affiliation);
 
-	@Override
-	@PreAuthorize("permitAll")
-	@PostAuthorize("checkPolicyAffiliation(returnObject, @activities.get('VIEW_AFFILIATION'))")
-	public Affiliation findOne(Long id);
+    @Override
+    @PreAuthorize("permitAll")
+    @PostAuthorize("checkPolicyAffiliation(returnObject, @activities.get('VIEW_AFFILIATION'))")
+    public Affiliation findOne(Long id);
 
 }

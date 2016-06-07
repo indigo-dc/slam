@@ -16,30 +16,30 @@ import pl.cyfronet.ltos.security.policy.Permissions;
  *
  */
 public class SecurityExpressionHandler extends
-		DefaultMethodSecurityExpressionHandler {
+        DefaultMethodSecurityExpressionHandler {
 
-	private final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
-	
-	@Setter
-	private Permissions factory;
+    private final AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 
-	@Override
-	public void setReturnObject(Object returnObject, EvaluationContext ctx) {
-		((MethodSecurityExpressionRoot) ctx.getRootObject().getValue())
-				.setReturnObject(returnObject);
-	}
+    @Setter
+    private Permissions factory;
 
-	@Override
-	protected MethodSecurityExpressionOperations createSecurityExpressionRoot(
-			Authentication authentication,
-			org.aopalliance.intercept.MethodInvocation invocation) {
-		final MethodSecurityExpressionRoot root = new SecurityExpressionRoot(
-				authentication, factory);
-		root.setThis(invocation.getThis());
-		root.setPermissionEvaluator(getPermissionEvaluator());
-		root.setTrustResolver(this.trustResolver);
-		root.setRoleHierarchy(getRoleHierarchy());
-		return root;
-	}
+    @Override
+    public void setReturnObject(Object returnObject, EvaluationContext ctx) {
+        ((MethodSecurityExpressionRoot) ctx.getRootObject().getValue())
+                .setReturnObject(returnObject);
+    }
+
+    @Override
+    protected MethodSecurityExpressionOperations createSecurityExpressionRoot(
+            Authentication authentication,
+            org.aopalliance.intercept.MethodInvocation invocation) {
+        final MethodSecurityExpressionRoot root = new SecurityExpressionRoot(
+                authentication, factory);
+        root.setThis(invocation.getThis());
+        root.setPermissionEvaluator(getPermissionEvaluator());
+        root.setTrustResolver(this.trustResolver);
+        root.setRoleHierarchy(getRoleHierarchy());
+        return root;
+    }
 
 }

@@ -34,5 +34,4 @@ public class GenericBean<T> {
         this.message = message;
     }
 
-
 }

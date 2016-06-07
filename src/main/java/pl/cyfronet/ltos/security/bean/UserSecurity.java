@@ -13,11 +13,11 @@ import pl.cyfronet.ltos.security.policy.OwnedResource;
 @ToString
 public class UserSecurity implements OwnedResource {
 
-	private User user;
+    private User user;
 
-	@Override
-	public Long getOwnerId() {
-		return user.getId();
-	}
+    @Override
+    public Long getOwnerId() {
+        return user.getId();
+    }
 
 }

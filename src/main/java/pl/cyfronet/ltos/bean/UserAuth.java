@@ -2,6 +2,7 @@ package pl.cyfronet.ltos.bean;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -20,15 +21,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAuth {
-    	
+
     @Id
-    @Column(unique=true)
+    @Column(unique = true)
     private String login;
-	private String password;
-	
-	private boolean admin;	
-	
+    private String password;
+
+    private boolean admin;
+
     @OneToOne
     private User user;
-   
+
 }
