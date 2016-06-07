@@ -53,7 +53,7 @@ edycja profilu
             </li>
             <li>
                 <label>Country:</label>
-                <select  name="country"  ng-model="userEdit.country" ng-options="country as country for country in countryList" ></select>
+                <select  name="country"  ng-model="user.country" ng-options="country as country for country in countryList" ></select>
             </li>
             <li>
                 <span>E-mail:</span>
@@ -61,11 +61,11 @@ edycja profilu
             </li>
             <li>
                 <label>Linkedln profile</label>
-                <input type="text" name="linkedln" class="form-control" ng-model="userEdit.linkedln"/>
+                <input type="text" name="linkedln" class="form-control" ng-model="user.linkedln"/>
             </li>
             <li>
                 <label class="doubleline">ResearchGate profile:</label>
-                <input type="text" class="form-control" ng-model="userEdit.researchGate" name="researchGate"/>
+                <input type="text" class="form-control" ng-model="user.researchGate" name="researchGate"/>
             </li>
             <li>
                 <label>&nbsp;</label>

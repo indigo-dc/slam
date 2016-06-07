@@ -1,7 +1,7 @@
 var app = angular.module('ltosApp');
 
-app.controller('ProfileController', ['$scope', '$http','profileService','countryService', 'identityService', '$route',
-    function ($scope, $http, profileService, countryService, identityService, $route) {
+app.controller('ProfileController', ['$scope', '$http','profileService','countryService', 'identityService', 'SpringDataRestAdapter', '$route',
+    function ($scope, $http, profileService, countryService, identityService, SpringDataRestAdapter, $route) {
         if(!identityService.getIdentityRegistered()){
             window.location = "#/";
         }
@@ -28,71 +28,36 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
         
         // I load the remote data from the server.
         function _doAction() {
-        		profileService.getUser().then(
-                    function (result) {
-                        _afterFetch(result);
-                    }
-                );
-        }
+			
+			var httpPromise = $http.get('/users/1').error(function(response) {
+			      var message = "Sorry, an error occurred.";
+	              alert(message);
+	               window.location = "#";
+                   location.reload();
+			});
 
-        function _afterFetch(result) {
-            if (result['status'] == 'SUCCESS') {
-                $scope.user = result['type'];
-                $scope.userEdit =
-                        {
-                        linkedln:$scope.user.linkedln,
-                        researchGate:$scope.user.researchGate,
-                        country:$scope.user.country
-                        };
-            }else if( result['status'] == 'UNLOGGED'){
-                window.location = "#";
-                location.reload();
-            }else{
-                var message = "Sorry, an error occurred.";
-                if (result['message'] != null) {
-                    message = result['message'];
-                }
-                alert(message);
-                location.reload();
-            }
+			SpringDataRestAdapter.process(httpPromise).then(
+					function(processedResponse) {
+						$scope.user = processedResponse;
+					});
         }
+        
+      
 //================================================
         $scope.submit = function () {
-            var user = 
-            {
-            	name: $scope.user.name,
-            	surname:  $scope.user.name,
-            	country:  $scope.userEdit.country,
-            	email:  $scope.user.email,
-            	researchGate: $scope.userEdit.researchGate,
-            	linkedln: $scope.userEdit.linkedln,
-            	isPolicyAccepted: $scope.user.isPolicyAccepted
-            };
-//            console.log($scope.userEdit);
-            profileService.editUser(user).then(
-                function (result) {
-                    _redirectTo(result);
-                }
-            );
-
-            _redirectTo = function (result) {
-//            	console.log(result);
-                if (result['status'] == 'SUCCESS') {
-                	$scope.editProfile = false;
-                    $scope.user = result['type'];
-                    window.location = "#/account";
-                    _refresh();
-                } else if( result['status'] == 'UNLOGGED'){
-                    window.location = "#";
-                    location.reload();
-                }else{
-                var message = "Sorry, an error occurred.";
-                if (result['message'] != null) {
-                    message = result['message'];
-                }
-                alert(message);
-            }
-            }
+        	
+			var httpPromise = $http.put('/users/1', $scope.user).error(function(response) {
+			      var message = "Sorry, an error occurred.";
+	              alert(message);
+			});
+	
+			SpringDataRestAdapter.process(httpPromise).then(
+					function(processedResponse) {
+						$scope.user = processedResponse;
+						$scope.editProfile = false;
+	                    window.location = "#/account";
+					});
+            	
         }
       //================================================
         _refresh = function () {
