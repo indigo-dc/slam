@@ -15,7 +15,7 @@ app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationSer
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
 						console.log(processedResponse._embeddedItems);
-						 $scope.affiliationsList = processedResponse._embeddedItems;
+						$scope.affiliationsList = processedResponse._embeddedItems;
 					},
 					function(processedResponse) {
 						alert(getError(processedResponse));

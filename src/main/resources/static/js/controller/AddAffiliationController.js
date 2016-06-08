@@ -1,7 +1,7 @@
 var app = angular.module('ltosApp');
 
-app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', '$route','identityService', 'SpringDataRestAdapter', 
-    function ($scope, $http, affiliationService, profileService, institutionService, countryService, $route, identityService, SpringDataRestAdapter) {
+app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', '$route','identityService', 'helperService', 'SpringDataRestAdapter', 
+    function ($scope, $http, affiliationService, profileService, institutionService, countryService, $route, identityService, helperService, SpringDataRestAdapter) {
         if(!identityService.getIdentityRegistered()){
             window.location = "#/";
         }
@@ -35,12 +35,12 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
 					user = processedResponse;
 				},
 				function(processedResponse) {
-					alert(processedResponse);
+					alert(helperService.handleError(processedResponse));
 					window.location = "#";
 					location.reload();
 				});
         
-        $scope.addAffiliationSubmit	 = function () {
+        $scope.addAffiliationSubmit = function () {
         	 var affiliation =
              {
                  country: $scope.country,
@@ -60,7 +60,7 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
 		                    location.reload();
 					}, 
 					function(processedResponse) {
-						alert(processedResponse);
+						alert(helperService.handleError(processedResponse));
 					});
         }
         

@@ -51,7 +51,15 @@ public class DashboardController {
         UserAuth userAuth = pu.getUserAuth();
         User user = userRepo.findOne(userAuth.getUser().getId());
         List<Affiliation> affiliations = user.getAffiliations();
-        userFirstSteps.setHasAffiliation(affiliations.size() > 0);
+        boolean hasAffiliation = false;
+        if (affiliations != null) {
+            hasAffiliation = affiliations.stream().anyMatch(
+                    aff -> {
+                        return aff.getStatus() != null
+                                && aff.getStatus().equalsIgnoreCase("ACTIVE");
+                    });
+        }
+        userFirstSteps.setHasAffiliation(hasAffiliation);
         userFirstSteps.setHasResource(false);
         userFirstSteps.setHasScienceGateway(false);
         result.setType(userFirstSteps);

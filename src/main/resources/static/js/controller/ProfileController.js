@@ -1,7 +1,7 @@
 var app = angular.module('ltosApp');
 
-app.controller('ProfileController', ['$scope', '$http','profileService','countryService', 'identityService', 'SpringDataRestAdapter', '$route',
-    function ($scope, $http, profileService, countryService, identityService, SpringDataRestAdapter, $route) {
+app.controller('ProfileController', ['$scope', '$http','profileService','countryService', 'identityService', 'helperService', 'SpringDataRestAdapter', '$route',
+    function ($scope, $http, profileService, countryService, identityService, helperService, SpringDataRestAdapter, $route) {
         
 		if(!identityService.getIdentityRegistered()){
             window.location = "#/";
@@ -31,7 +31,7 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
 	                    window.location = "#/account";
 					}, 
 					function(processedResponse) {
-						alert(getError(processedResponse));
+						alert(helperService.handleError(processedResponse));
 					});
         }
 
@@ -44,21 +44,11 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
 						$scope.user = processedResponse;
 					},
 					function(processedResponse) {
-						alert(getError(processedResponse));
+						alert(helperService.handleError(processedResponse));
 						window.location = "#";
 						location.reload();
 					});
 		}
     	
-    	function getError(response) {
-    		console.log(response);
-    		if(response.status && response.statusText) {
-    			if (response.data && response.data.errors && response.data.errors.length > 0) {
-    				return response.data.errors[0].message;
-    			} 
-    			return response.status + " " + response.statusText;
-    		}
-    		return "Unexpected error";
-    	}
 
     }]);
