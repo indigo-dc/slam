@@ -6,5 +6,4 @@ app.controller('AffiliationViewController', ['$scope', '$http', 'affiliationServ
             window.location = "#/";
         }
 		$scope.affiliation = affiliationService.getAffiliation();
-
     }]);

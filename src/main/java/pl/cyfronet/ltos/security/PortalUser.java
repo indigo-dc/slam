@@ -3,6 +3,7 @@ package pl.cyfronet.ltos.security;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,7 @@ public class PortalUser extends User implements Identity {
     private static final long serialVersionUID = 1L;
 
     @Setter
+    @Getter
     private UserAuth userAuth;
 
     public PortalUser(UserAuth details) {

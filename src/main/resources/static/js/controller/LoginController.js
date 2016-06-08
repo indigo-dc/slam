@@ -38,6 +38,10 @@ app.controller('LoginController', ['$scope', '$http', '$templateCache','identity
                     identityService.setIdentityEmail(result['type']['email']);
                     _checkUser();
                 }
+                if (result['type']['id'] != null){
+                    identityService.setIdentityId(result['type']['id']);
+                }
+                
             }
             //TODO do przemyslenia jak to powinno dzialac
             //else if( result['status'] == 'UNLOGGED'){

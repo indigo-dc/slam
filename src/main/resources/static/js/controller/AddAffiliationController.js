@@ -1,7 +1,7 @@
 var app = angular.module('ltosApp');
 
-app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', '$route','identityService',
-    function ($scope, $http, affiliationService, profileService, institutionService, countryService, $route, identityService) {
+app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', '$route','identityService', 'SpringDataRestAdapter', 
+    function ($scope, $http, affiliationService, profileService, institutionService, countryService, $route, identityService, SpringDataRestAdapter) {
         if(!identityService.getIdentityRegistered()){
             window.location = "#/";
         }
@@ -26,44 +26,45 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
             }
         );
 
-        $scope.emailIdentity = profileService.getUser();
         $scope.countryList = countryService.getCountryList();
-
-        $scope.addAffiliationSubmit = function () {
-            var affiliation =
-            {
-                country: $scope.country,
-                institution: $scope.institution,
-                department: $scope.department,
-                webPage: $scope.webPage,
-                supervisorName: $scope.supervisorName,
-                supervisorEmail: $scope.supervisorEmail,
-                status: "",
-                lastUpdateDate: new Date(),
-                userEmail: ""
-            };
-            //console.log(affiliation);
-            affiliationService.addAffiliation(affiliation).then(
-                function (result) {
-                    _redirectTo(result);
-                }
-            );
-
-            _redirectTo = function (result) {
-                if (result['status'] == 'SUCCESS') {
-                    window.location = "#/account";
-                } else if (result['status'] == 'UNLOGGED') {
-                    window.location = "#";
-                    location.reload();
-                }else{
-                    var message = "Sorry, an error occurred.";
-                    if (result['message'] != null) {
-                        message = result['message'];
-                    }
-                    alert(message);
-                }
-            }
+        var user = null;
+        
+    	var httpPromise = $http.get("/users/" + identityService.getIdentityId());
+		SpringDataRestAdapter.process(httpPromise).then(
+				function(processedResponse) {
+					user = processedResponse;
+				},
+				function(processedResponse) {
+					alert(processedResponse);
+					window.location = "#";
+					location.reload();
+				});
+        
+        $scope.addAffiliationSubmit	 = function () {
+        	 var affiliation =
+             {
+                 country: $scope.country,
+                 institution: $scope.institution,
+                 department: $scope.department,
+                 webPage: $scope.webPage,
+                 supervisorName: $scope.supervisorName,
+                 supervisorEmail: $scope.supervisorEmail,
+                 lastUpdateDate: new Date(),
+                 owner: user._links.self.href
+             };
+        	
+        	var httpPromise = $http.post('/affiliations/', affiliation);
+			SpringDataRestAdapter.process(httpPromise).then(
+					function(processedResponse) {
+						  window.location = "#";
+		                    location.reload();
+					}, 
+					function(processedResponse) {
+						alert(processedResponse);
+					});
         }
+        
+        
 
         $scope.updateListInstitution = function(country){
             $scope.institutionsListUpdated = [];

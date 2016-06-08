@@ -3,10 +3,13 @@ package pl.cyfronet.ltos.bean;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +42,8 @@ public class User {
     private Boolean confirmedRegistration;
     private String unityPersistentIdentity;
     private boolean hasActiveSla;
-    @OneToMany(mappedBy = "owner")
+    @JsonIgnore
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Affiliation> affiliations;
 
 }

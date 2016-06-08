@@ -4,10 +4,12 @@
 var app = angular.module('ltosApp');
 
 app.service("identityService", function ($http, $q) {
-    var identityEmail="";
+   
+	var identityEmail="";
     var identityName="";
     var identityRegistered = false;
-
+    var identityId = -1;
+    var user;
 
     var setIdentityEmail = function(newIdentityEmail) {
         identityEmail = newIdentityEmail;
@@ -32,6 +34,23 @@ app.service("identityService", function ($http, $q) {
     var getIdentityRegistered = function(){
         return identityRegistered;
     }
+    
+    var setIdentityId = function(newIdentityId) {
+    	identityId = newIdentityId;
+    }
+
+    var getIdentityId = function(){
+        return identityId;
+    }
+    
+    var setUser = function(newUser) {
+    	user = newUser;
+    }
+
+    var getUser = function(){
+        return user;
+    }
+    
     // Return public API.
     return ({
         setIdentityEmail: setIdentityEmail,
@@ -39,6 +58,10 @@ app.service("identityService", function ($http, $q) {
         setIdentityName: setIdentityName,
         getIdentityName:getIdentityName,
         setIdentityRegistered: setIdentityRegistered,
-        getIdentityRegistered:getIdentityRegistered
+        getIdentityRegistered:getIdentityRegistered,
+        setIdentityId:setIdentityId,
+        getIdentityId:getIdentityId,
+        setUser:setUser,
+        getUser:getUser
     });
 });
