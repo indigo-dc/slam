@@ -33,12 +33,7 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
 		SpringDataRestAdapter.process(httpPromise).then(
 				function(processedResponse) {
 					user = processedResponse;
-				},
-				function(processedResponse) {
-					alert(helperService.handleError(processedResponse));
-					window.location = "#";
-					location.reload();
-				});
+				}, helperService.alertError);
         
         $scope.addAffiliationSubmit = function () {
         	 var affiliation =
@@ -58,10 +53,7 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
 					function(processedResponse) {
 						  window.location = "#";
 		                    location.reload();
-					}, 
-					function(processedResponse) {
-						alert(helperService.handleError(processedResponse));
-					});
+					}, helperService.alertError);
         }
         
         

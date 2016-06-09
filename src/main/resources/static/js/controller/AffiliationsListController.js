@@ -1,7 +1,7 @@
 var app = angular.module('ltosApp');
 
-app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationService', '$route','identityService', 'SpringDataRestAdapter',
-    function ($scope, $http, affiliationService, $route, identityService, SpringDataRestAdapter) {
+app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationService', '$route','identityService', 'helperService', 'SpringDataRestAdapter',
+    function ($scope, $http, affiliationService, $route, identityService, helperService, SpringDataRestAdapter) {
         if(!identityService.getIdentityRegistered()){
             window.location = "#/";
         }
@@ -16,26 +16,11 @@ app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationSer
 					function(processedResponse) {
 						console.log(processedResponse._embeddedItems);
 						$scope.affiliationsList = processedResponse._embeddedItems;
-					},
-					function(processedResponse) {
-						alert(getError(processedResponse));
-						window.location = "#";
-						location.reload();
-					});
+					}, helperService.alertError);
 		}
         
         $scope.setAffiliation = function (affiliation){
         	affiliationService.setAffiliation(affiliation);
         }
         
-      	function getError(response) {
-    		console.log(response);
-    		if(response.status && response.statusText) {
-    			if (response.data && response.data.errors && response.data.errors.length > 0) {
-    				return response.data.errors[0].message;
-    			} 
-    			return response.status + " " + response.statusText;
-    		}
-    		return "Unexpected error";
-    	}
     }]);

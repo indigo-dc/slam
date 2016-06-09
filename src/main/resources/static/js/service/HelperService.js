@@ -2,19 +2,38 @@ var app = angular.module('ltosApp');
 
 app.service("helperService", function($http, $q) {
     
-	var handleError = function getError(response) {
+	var handleError = function handleError(response, callback) {
 		console.log(response);
-		if(response.status && response.statusText) {
+		if(response.status) {
 			if (response.data && response.data.errors && response.data.errors.length > 0) {
-				return response.data.errors[0].message;
-			} 
-			return response.status + " " + response.statusText;
+				callback(response.status, response.data.errors[0].message);
+				return; 
+			}
+			callback(response.status, response.statusText);
+			return;
 		}
-		return "Unexpected error";
+		callback(0, "Unexpected error");
+		return;
 	}
+	
+	 var alertError = function(processedResponse) {
+			handleError(processedResponse, function(status, message) {
+				switch (status) {
+					case 401:
+					case 403:
+						alert(message);
+						window.location = "#/";
+			            location.reload();
+			            break;
+			        default:
+			        	alert(message);
+				}
+			});
+		};
 
     return ({
-    	handleError:handleError
+    	handleError:handleError,
+    	alertError:alertError
     });
     
 });

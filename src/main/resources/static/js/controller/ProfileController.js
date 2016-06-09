@@ -23,16 +23,13 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
         }
         
         $scope.submit = function () {
-        	var httpPromise = $http.put($scope.user._links.self.href, $scope.user);
+        	var httpPromise = $http.put("/users/" + identityService.getIdentityId(), $scope.user);
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
 						$scope.user = processedResponse;
 						$scope.editProfile = false;
 	                    window.location = "#/account";
-					}, 
-					function(processedResponse) {
-						alert(helperService.handleError(processedResponse));
-					});
+					}, helperService.alertError);
         }
 
         _doAction();
@@ -42,13 +39,7 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
 						$scope.user = processedResponse;
-					},
-					function(processedResponse) {
-						alert(helperService.handleError(processedResponse));
-						window.location = "#";
-						location.reload();
-					});
+					}, helperService.alertError);
 		}
-    	
 
     }]);

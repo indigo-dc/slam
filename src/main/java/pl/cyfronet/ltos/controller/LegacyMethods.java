@@ -37,7 +37,6 @@ public class LegacyMethods {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.FIELD,
                 JsonAutoDetect.Visibility.ANY);
-
         PortalUser pu = (PortalUser) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
         User user = users.findOne(pu.getId());
