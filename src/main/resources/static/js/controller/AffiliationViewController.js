@@ -5,5 +5,5 @@ app.controller('AffiliationViewController', ['$scope', '$http', 'affiliationServ
         if(!identityService.getIdentityRegistered()){
             window.location = "#/";
         }
-		$scope.affiliation = affiliationService.getAffiliation();
+		$scope.affiliation = affiliationService.getCurrentAffiliation();
     }]);

@@ -11,60 +11,26 @@ app.controller('LoginController', ['$scope', '$http', '$templateCache','identity
 
         function _checkUser() {
             profileService.getUser().then(
-                function (result) {
-                    //console.log(result);
-                    _afterCheckUser(result);
-                }
+            		 function (result) {
+                     	identityService.setIdentityRegistered();
+            	 		window.location = "#/dashboard";
+                     }, function (result) {
+                    	window.location = "#/registration";
+                    }
             );
         }
 
-        function _afterCheckUser(result) {
-
-            if (result['status'] != 'FAILED'){
-                identityService.setIdentityRegistered();
-                window.location = "#/dashboard";
-            }
-            else {
-                window.location = "#/registration";
-            }
-        }
-
         function _afterFetchIdentity(result) {
-            if (result['status'] == 'SUCCESS') {
-                if (result['type']['name'] !=null){
-                    identityService.setIdentityName(result['type']['name']);
-                }
-                if (result['type']['email'] != null){
-                    identityService.setIdentityEmail(result['type']['email']);
-                    _checkUser();
-                }
-                if (result['type']['id'] != null){
-                    identityService.setIdentityId(result['type']['id']);
-                }
-                
+            if (result['name'] !=null){
+                identityService.setIdentityName(result['name']);
             }
-            //TODO do przemyslenia jak to powinno dzialac
-            //else if( result['status'] == 'UNLOGGED'){
-            //    window.location = "#";
-            //    location.reload();
-            //}
+            if (result['email'] != null){
+                identityService.setIdentityEmail(result['email']);
+                _checkUser();
+            }
+            if (result['id'] != null){
+                identityService.setIdentityId(result['id']);
+            }
         }
-//    _loadAffiliationList($scope.identity);
-//    // I load the remote data from the server.
-//    function _loadAffiliationList(email) {
-////    	if()
-//    }
 
-//    function _afterFetch(result) {
-//        if (result['status'] == 'SUCCESS') {
-//            $scope.affiliationsList  = result['type'];
-//        }else if( result['status'] == 'UNLOGGED'){
-//            window.location = "#";
-//            location.reload();
-//        }
-//        
-//    }
-//    _refresh = function () {
-//    	_loadAffiliationList($scope.identity);
-//    }
     }]);

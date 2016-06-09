@@ -10,8 +10,7 @@ app.controller('DashboardController', ['$scope', '$http', 'identityService', 'da
         function _checkUserFirstSteps() {
             dashboardService.getUserFirstSteps().then(
                 function (result) {
-                    //console.log(result['type']);
-                    $scope.userFirstSteps = result['type'];
+                    $scope.userFirstSteps = result;
                 }
             );
         }

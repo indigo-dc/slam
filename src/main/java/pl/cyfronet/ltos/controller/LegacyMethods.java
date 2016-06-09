@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,36 +31,32 @@ public class LegacyMethods {
     @Autowired
     private UserRepository users;
 
-    @ResponseBody
-    @RequestMapping(value = "user/get")
+    @RequestMapping(value = "user/get", method = RequestMethod.GET)
     @Transactional
-    public String getUser() throws IOException {
-        GenericBean<User> result = new GenericBean<User>();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setVisibility(PropertyAccessor.FIELD,
-                JsonAutoDetect.Visibility.ANY);
+    public RedirectView getUser() throws IOException {
         PortalUser pu = (PortalUser) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        User user = users.findOne(pu.getId());
-        result.setType(user);
-        result.setStatus(Status.SUCCESS);
-        return mapper.writeValueAsString(result);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setContextRelative(true);
+        redirectView.setUrl("/users/" + pu.getId());
+        return redirectView;
     }
 
-    @ResponseBody
     @Transactional
-    @RequestMapping(value = "identity/get")
-    public String getIndentity() throws IOException {
-        GenericBean<User> result = new GenericBean<User>();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setVisibility(PropertyAccessor.FIELD,
-                JsonAutoDetect.Visibility.DEFAULT);
+    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
+    public ResponseEntity<User> getIndentity() throws IOException {
         PortalUser pu = (PortalUser) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        User user = users.findOne(pu.getId());
-        result.setType(user);
-        result.setStatus(Status.SUCCESS);
-        return mapper.writeValueAsString(result);
+        /*
+         * Implement identity
+         */
+        User user = null;
+        try {
+             user = pu.getUserAuth().getUser();
+        } catch (Exception e) {
+            return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)
