@@ -26,12 +26,12 @@ public class JpaConfig {
 
         HibernateJpaVendorAdapter hibernateJpa = new HibernateJpaVendorAdapter();
         hibernateJpa.setDatabasePlatform(env.getProperty("hibernate.dialect"));
-        hibernateJpa.setGenerateDdl(Boolean.parseBoolean(env.getProperty("hibernate.generateDdl")));
+        hibernateJpa.setGenerateDdl(env.getProperty("hibernate.generateDdl", Boolean.class));
         hibernateJpa.setShowSql(env.getProperty("hibernate.show_sql", Boolean.class));
 
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
-        emf.setPackagesToScan("pl.cyfronet.ltos.bean");
+        emf.setPackagesToScan(env.getProperty("entityManager.packagesToScan"));
         emf.setJpaVendorAdapter(hibernateJpa);
         emf.setJpaPropertyMap(Collections.singletonMap("javax.persistence.validation.mode", "none"));
         return emf;
