@@ -12,18 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.bean.legacy.GenericBean;
-import pl.cyfronet.ltos.bean.legacy.Status;
 import pl.cyfronet.ltos.repository.UserRepository;
-import pl.cyfronet.ltos.security.PortalUser;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class LegacyMethods {
@@ -33,27 +25,23 @@ public class LegacyMethods {
 
     @RequestMapping(value = "user/get", method = RequestMethod.GET)
     @Transactional
-    public RedirectView getUser() throws IOException {
-        PortalUser pu = (PortalUser) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-        RedirectView redirectView = new RedirectView();
-        redirectView.setContextRelative(true);
-        redirectView.setUrl("/users/" + pu.getId());
-        return redirectView;
+    public ResponseEntity<User> getUser() throws IOException {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        if (user == null) {
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
     @Transactional
     @RequestMapping(value = "identity/get", method = RequestMethod.GET)
     public ResponseEntity<User> getIndentity() throws IOException {
-        PortalUser pu = (PortalUser) SecurityContextHolder.getContext()
+        User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
         /*
-         * Implement identity
+         * TODO change User to UserInfo 
          */
-        User user = null;
-        try {
-             user = pu.getUserAuth().getUser();
-        } catch (Exception e) {
+        if (user == null) {
             return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<User>(user, HttpStatus.OK);

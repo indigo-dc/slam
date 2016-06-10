@@ -24,14 +24,14 @@ import pl.cyfronet.ltos.security.policy.Permissions;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    protected PortalDetailsService detailsService;
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.userDetailsService(detailsService);
-    }
+//    @Autowired
+//    protected PortalDetailsService detailsService;
+//
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//            throws Exception {
+//        auth.userDetailsService(detailsService);
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,10 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    static PortalDetailsService getDetailsService() {
-        return new PortalDetailsService();
+    static CustomAuthenticationProvider getCustomAuthenticationProvider() {
+        return new CustomAuthenticationProvider();
     }
-
+    
     @Bean
     static PermissionEvaluator getPermissionEvaluator() {
         return new DenyAllPermissionEvaluator();
