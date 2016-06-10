@@ -24,12 +24,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.security.OurUser.OurUserBuilder;
+import pl.cyfronet.ltos.security.PortalUser.PortalUserBuilder;
 
-public class CustomAuthenticationProvider implements AuthenticationProvider {
+public class AuthenticationProviderDev implements AuthenticationProvider {
 
     static Logger log = LoggerFactory
-            .getLogger(CustomAuthenticationProvider.class);
+            .getLogger(AuthenticationProviderDev.class);
 
     @Autowired
     UserOperations operations;
@@ -45,7 +45,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                     + authentication.getAuthorities().toString());
             log.debug("LOGGING: details = " + operations);
             log.debug("LOGGING:  creation = " +  operations );
-            OurUserBuilder builder = OurUser.builder();
+            PortalUserBuilder builder = PortalUser.builder();
             builder.credentials(authentication.getCredentials());
             return shouldAuthenticateAgainstThirdPartySystem(name, password, builder);
         } else if (authentication.getClass().isAssignableFrom(TestingAuthenticationToken.class)) {
@@ -54,15 +54,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return null;
     }
 
-    private OurUser shouldAuthenticateAgainstThirdPartySystem(String name,
-            String password, OurUserBuilder builder) {
+    private PortalUser shouldAuthenticateAgainstThirdPartySystem(String name,
+            String password, PortalUserBuilder builder) {
         if (name.equals("admin") && password.equals("admin")) {
             User user = operations.loadUserByUnityIdentity("admin");
             UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
                 info = createAdminInfo();
-                operations.saveUser(info.toUserPrototype().build());
-                user = operations.loadUserByUnityIdentity("admin");
+                user = operations.saveUser(info.toUserPrototype().build());
                 info.setId(user.getId());
             }
             builder.details(user);
@@ -78,14 +77,19 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
                 info = createUserInfo();
-                operations.saveUser(info.toUserPrototype().build());
-                user = operations.loadUserByUnityIdentity("user");
+                user = operations.saveUser(info.toUserPrototype().build());
                 info.setId(user.getId());
             }
             builder.details(user);
             builder.principal(info);
-            builder.authorities(Arrays.asList(new SimpleGrantedAuthority(
-                    "ROLE_USER")));
+            builder.authorities(Arrays.asList(
+                    new SimpleGrantedAuthority("ROLE_USER")));
+            builder.isAuthenticated(true);
+            return builder.build();
+        }
+        if (name.equals("noreg")) {
+            UserInfo info = createNoregInfo();
+            builder.principal(info);
             builder.isAuthenticated(true);
             return builder.build();
         }
@@ -109,6 +113,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             .email("ukasz@userowski.pl").build();
         return info;
     }
+    
+    private UserInfo createNoregInfo() {
+        UserInfo info = UserInfo.builder()
+            .unityPersistentIdentity("user")
+            .confirmedRegistration(true)
+            .name("Norbert Niezarejestr")
+            .email("norbert@niezarejestr.pl").build();
+        return info;
+    }
 
     @Override
     public boolean supports(Class<?> authentication) {
@@ -123,11 +136,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         EntityManager em;
 
         @Transactional
-        public void saveUser(User user) {
+        public User saveUser(User user) {
             em.persist(user);
             em.flush();
+            return user;
         }
 
+        /*
+         * Consider new version of spring data rest - such 
+         * searches are probably implemented by repositories
+         */
         @Transactional
         public User loadUserByUnityIdentity(String username)
                 throws UsernameNotFoundException {

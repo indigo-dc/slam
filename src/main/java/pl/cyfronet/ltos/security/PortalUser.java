@@ -15,7 +15,7 @@ import pl.cyfronet.ltos.security.policy.Identity;
  *
  */
 @Builder
-public class OurUser implements Authentication, Identity {
+public class PortalUser implements Authentication, Identity {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,9 +24,6 @@ public class OurUser implements Authentication, Identity {
     private String name;
     private Object credentials;
     
-    /*
-     * TODO - change implementation - principal should be UserInfo, and details should be User type
-     */
     private UserInfo principal;
     private User details;
     private Collection<? extends GrantedAuthority> authorities;
@@ -44,6 +41,13 @@ public class OurUser implements Authentication, Identity {
     @Override
     public Object getCredentials() {
         return credentials;
+    }
+    
+    public void setDetails(User details) {
+        if (principal != null && details.getId() != null) {
+            principal.setId(details.getId());
+        }
+        this.details = details;
     }
 
     @Override

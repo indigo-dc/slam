@@ -10,7 +10,7 @@ app.controller('RegistrationController', ['$scope', '$http', 'identityService', 
 	        _checkRegistration();
 
 	        function _fillFormFromIdentity() {
-	        	
+
 	            if (identityService.getIdentity().email != null) {
 	                $scope.email = identityService.getIdentity().email;
 	            }

@@ -17,7 +17,7 @@ import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.bean.UserAuth;
 import pl.cyfronet.ltos.bean.legacy.UserFirstSteps;
 import pl.cyfronet.ltos.repository.UserRepository;
-import pl.cyfronet.ltos.security.OurUser;
+import pl.cyfronet.ltos.security.PortalUser;
 
 @Controller
 public class DashboardController {
@@ -36,7 +36,7 @@ public class DashboardController {
     @Transactional
     private UserFirstSteps steps() {
         UserFirstSteps userFirstSteps = new UserFirstSteps();
-        OurUser pu = (OurUser) SecurityContextHolder.getContext().getAuthentication();
+        PortalUser pu = (PortalUser) SecurityContextHolder.getContext().getAuthentication();
         User user = pu.getUserBean();
         List<Affiliation> affiliations = user.getAffiliations();
         boolean hasAffiliation = false;

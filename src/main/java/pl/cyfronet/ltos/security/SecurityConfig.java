@@ -44,8 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    static CustomAuthenticationProvider getCustomAuthenticationProvider() {
-        return new CustomAuthenticationProvider();
+    static AuthenticationProviderDev getCustomAuthenticationProvider() {
+        return new AuthenticationProviderDev();
     }
     
     @Bean

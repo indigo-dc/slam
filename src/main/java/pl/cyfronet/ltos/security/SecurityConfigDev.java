@@ -21,7 +21,7 @@ public class SecurityConfigDev extends SecurityConfig {
     static Logger log = LoggerFactory.getLogger(SecurityConfigDev.class);
     
     @Autowired
-    private CustomAuthenticationProvider provider;
+    private AuthenticationProviderDev provider;
     
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
