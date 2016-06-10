@@ -27,7 +27,7 @@ public class OurUser implements Authentication, Identity {
     /*
      * TODO - change implementation - principal should be UserInfo, and details should be User type
      */
-    private User principal;
+    private UserInfo principal;
     private User details;
     private Collection<? extends GrantedAuthority> authorities;
     

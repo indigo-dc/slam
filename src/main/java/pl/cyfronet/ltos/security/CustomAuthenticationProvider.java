@@ -58,12 +58,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             String password, OurUserBuilder builder) {
         if (name.equals("admin") && password.equals("admin")) {
             User user = operations.loadUserByUnityIdentity("admin");
+            UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
-                operations.createAdmin();
+                info = createAdminInfo();
+                operations.saveUser(info.toUserPrototype().build());
                 user = operations.loadUserByUnityIdentity("admin");
+                info.setId(user.getId());
             }
             builder.details(user);
-            builder.principal(user);
+            builder.principal(info);
             builder.authorities(Arrays.asList(
                     new SimpleGrantedAuthority("ROLE_ADMIN"), 
                     new SimpleGrantedAuthority("ROLE_USER")));
@@ -72,18 +75,39 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
         if (name.equals("user") && password.equals("user")) {
             User user = operations.loadUserByUnityIdentity("user");
+            UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
-                operations.createUser();
+                info = createUserInfo();
+                operations.saveUser(info.toUserPrototype().build());
                 user = operations.loadUserByUnityIdentity("user");
+                info.setId(user.getId());
             }
             builder.details(user);
-            builder.principal(user);
+            builder.principal(info);
             builder.authorities(Arrays.asList(new SimpleGrantedAuthority(
                     "ROLE_USER")));
             builder.isAuthenticated(true);
             return builder.build();
         }
         return null;
+    }
+    
+    private UserInfo createAdminInfo() {
+        UserInfo info = UserInfo.builder()
+            .unityPersistentIdentity("admin")
+            .confirmedRegistration(true)
+            .name("Adam Adminowski")
+            .email("adam@adminowski.pl").build();
+        return info;
+    }
+    
+    private UserInfo createUserInfo() {
+        UserInfo info = UserInfo.builder()
+            .unityPersistentIdentity("user")
+            .confirmedRegistration(true)
+            .name("Ukasz Userowski")
+            .email("ukasz@userowski.pl").build();
+        return info;
     }
 
     @Override
@@ -99,23 +123,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         EntityManager em;
 
         @Transactional
-        public User createAdmin() {
-            User user = User.builder().unityPersistentIdentity("admin")
-                    .name("Adam").surname("Adminowski")
-                    .email("adam@adminowski.pl").build();
+        public void saveUser(User user) {
             em.persist(user);
             em.flush();
-            return user;
-        }
-
-        @Transactional
-        public User createUser() {
-            User user = User.builder().unityPersistentIdentity("user")
-                    .name("Ukasz").surname("Userowski")
-                    .email("ukasz@userowski.pl").build();
-            em.persist(user);
-            em.flush();
-            return user;
         }
 
         @Transactional

@@ -3,8 +3,9 @@ var app = angular.module('ltosApp');
 app.controller('ProfileController', ['$scope', '$http','profileService','countryService', 'identityService', 'helperService', 'SpringDataRestAdapter', '$route',
     function ($scope, $http, profileService, countryService, identityService, helperService, SpringDataRestAdapter, $route) {
         
-		if(!identityService.getIdentityRegistered()){
+		if(!identityService.identityRegistered()){
             window.location = "#/";
+            return;
         }
 		
 		$scope.user = {}
@@ -23,7 +24,7 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
         }
         
         $scope.submit = function () {
-        	var httpPromise = $http.put("/users/" + identityService.getIdentityId(), $scope.user);
+        	var httpPromise = $http.put("/users/" + identityService.getIdentity().id, $scope.user);
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
 						$scope.user = processedResponse;
@@ -35,7 +36,7 @@ app.controller('ProfileController', ['$scope', '$http','profileService','country
         _doAction();
         
     	function _doAction() {
-			var httpPromise = $http.get("/users/" + identityService.getIdentityId());
+			var httpPromise = $http.get("/users/" + identityService.getIdentity().id);
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
 						$scope.user = processedResponse;

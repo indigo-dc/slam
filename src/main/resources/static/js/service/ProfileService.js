@@ -1,34 +1,35 @@
 var app = angular.module('ltosApp');
 
-app.service("profileService", function ($http, $q) {
+app.service("profileService", ['$http', '$q', 'identityService', function ($http, $q, identityService) {
 
     return ({
         getUser: getUser,
-        getIdentity: getIdentity
+        getIdentity: getIdentity, 
+        loadIdentity, loadIdentity
     });
     
     function getUser() {
-
         var request = $http({
             headers: {'Content-Type': 'application/json; charset=UTF-8'},
             method: "get",
             url: "user/get"
         });
         return (request.then(handleSuccess, handleError));
-
+    }
+    
+    function loadIdentity() {
+    	return getIdentity().then(function (response){
+    		identityService.setIdentity(response);
+    	});	
     }
 
-    // I get all of the friends in the remote collection.
     function getIdentity() {
-
         var request = $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             method: "get",
             url: "identity/get"
         });
-
         return (request.then(handleSuccess, handleError));
-
     }
 
     function handleError(response) {
@@ -44,7 +45,6 @@ app.service("profileService", function ($http, $q) {
 
     function handleSuccess(response) {
         return (response.data);
-
     }
 
-});
+}]);

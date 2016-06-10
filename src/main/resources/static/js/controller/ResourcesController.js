@@ -5,8 +5,9 @@ var app = angular.module('ltosApp');
 
 app.controller('ResourcesController', ['$scope', '$http', '$route','identityService', 'affiliationService',
     function ($scope, $http, $route, identityService, affiliationService) {
-        if(!identityService.getIdentityRegistered()){
+        if(!identityService.identityRegistered()){
             window.location = "#/";
+            return;
         }
 
         affiliationService.getUserAffiliations().then(

@@ -23,7 +23,6 @@ public class UserValidator implements Validator {
          * Third parameter refers to messages.properties entry
          */
         ValidationUtils.rejectIfEmpty(errors, "name", "user.noname");
-        ValidationUtils.rejectIfEmpty(errors, "surname", "user.nosurname");
         ValidationUtils.rejectIfEmpty(errors, "email", "user.noemail");
     }
 

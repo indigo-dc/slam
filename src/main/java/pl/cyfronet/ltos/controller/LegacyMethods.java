@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.UserRepository;
+import pl.cyfronet.ltos.security.UserInfo;
 
 @Controller
 public class LegacyMethods {
@@ -35,16 +36,12 @@ public class LegacyMethods {
 
     @Transactional
     @RequestMapping(value = "identity/get", method = RequestMethod.GET)
-    public ResponseEntity<User> getIndentity() throws IOException {
-        User user = (User) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-        /*
-         * TODO change User to UserInfo 
-         */
+    public ResponseEntity<UserInfo> getIndentity() throws IOException {
+        UserInfo user = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null) {
-            return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<UserInfo>(HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<UserInfo>(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)

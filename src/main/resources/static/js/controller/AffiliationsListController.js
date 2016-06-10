@@ -2,12 +2,12 @@ var app = angular.module('ltosApp');
 
 app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationService', '$route','identityService', 'helperService', 'SpringDataRestAdapter',
     function ($scope, $http, affiliationService, $route, identityService, helperService, SpringDataRestAdapter) {
-        if(!identityService.getIdentityRegistered()){
+        if(!identityService.identityRegistered()){
             window.location = "#/";
+            return; 
         }
         
         $scope.affiliationsList = null;
-        
         $scope.setAffiliation = function (affiliation){
         	affiliationService.setCurrentAffiliation(affiliation);
         }
