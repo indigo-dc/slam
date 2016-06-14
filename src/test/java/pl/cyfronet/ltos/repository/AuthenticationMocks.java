@@ -3,7 +3,6 @@ package pl.cyfronet.ltos.repository;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,16 +18,16 @@ public class AuthenticationMocks {
 
 	public static Authentication userAuthentication(Long id) {
 		User user = User.builder().id(id).build();
-		List<GrantedAuthority> auth = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"),new SimpleGrantedAuthority("ROLE_USER"));
-		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).authorities(auth).build();
-		return new TestingAuthenticationToken(pu, null, auth);
+		List<GrantedAuthority> auth = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).authorities(auth).isAuthenticated(true).build();
+		return pu;
 	}
 
 	public static Authentication adminAuthentication(Long id) {
 		User user = User.builder().id(id).build();
-		List<GrantedAuthority> auth = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"),new SimpleGrantedAuthority("ROLE_USER")); 
-		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).authorities(auth).build();
-		return new TestingAuthenticationToken(pu, null, auth);
+		List<GrantedAuthority> auth = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER")); 
+		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).authorities(auth).isAuthenticated(true).build();
+		return pu;
 	}
 	
 }

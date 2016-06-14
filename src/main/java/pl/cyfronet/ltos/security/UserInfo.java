@@ -1,9 +1,14 @@
 package pl.cyfronet.ltos.security;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import pl.cyfronet.ltos.bean.User;
+import pl.cyfronet.ltos.security.policy.Identity;
 
 @Data
 @Builder
@@ -35,4 +40,5 @@ public class UserInfo {
             .confirmedRegistration(user.getConfirmedRegistration())
             .unityPersistentIdentity(user.getUnityPersistentIdentity()).build();
     }
+
 }

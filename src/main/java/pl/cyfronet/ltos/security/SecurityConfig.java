@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.access.expression.DenyAllPermissionEvaluator;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,15 +23,7 @@ import pl.cyfronet.ltos.security.policy.Permissions;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    protected PortalDetailsService detailsService;
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)
-//            throws Exception {
-//        auth.userDetailsService(detailsService);
-//    }
-
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -41,11 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/images/**", "/js/**", "/javascript/**", "/fonts/**")
                 .permitAll().anyRequest().authenticated().and().formLogin()
                 .and().csrf().disable();
-    }
-
-    @Bean
-    static AuthenticationProviderDev getCustomAuthenticationProvider() {
-        return new AuthenticationProviderDev();
     }
     
     @Bean
