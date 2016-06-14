@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.cyfronet.ltos.bean.Affiliation;
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.bean.UserAuth;
 import pl.cyfronet.ltos.bean.legacy.UserFirstSteps;
 import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.security.PortalUser;
