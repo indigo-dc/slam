@@ -25,7 +25,7 @@ public class PortalUser implements Authentication, Identity {
     private Object credentials;
     
     private UserInfo principal;
-    private User details;
+    private User user;
     private Collection<? extends GrantedAuthority> authorities;
     
     @Override
@@ -47,12 +47,12 @@ public class PortalUser implements Authentication, Identity {
         if (principal != null && details.getId() != null) {
             principal.setId(details.getId());
         }
-        this.details = details;
+        this.user = details;
     }
 
     @Override
     public Object getDetails() { 
-        return details;
+        return user;
     }
 
     @Override
@@ -72,12 +72,12 @@ public class PortalUser implements Authentication, Identity {
     }
     
     public User getUserBean() {
-        return details;
+        return user;
     }
 
     @Override
     public Long getId() {
-        return details.getId();
+        return user.getId();
     }
 
 }

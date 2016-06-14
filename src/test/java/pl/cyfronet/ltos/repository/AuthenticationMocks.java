@@ -19,14 +19,14 @@ public class AuthenticationMocks {
 	public static Authentication userAuthentication(Long id) {
 		User user = User.builder().id(id).build();
 		List<GrantedAuthority> auth = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).authorities(auth).isAuthenticated(true).build();
+		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).user(user).authorities(auth).isAuthenticated(true).build();
 		return pu;
 	}
 
 	public static Authentication adminAuthentication(Long id) {
 		User user = User.builder().id(id).build();
 		List<GrantedAuthority> auth = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER")); 
-		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).authorities(auth).isAuthenticated(true).build();
+		PortalUser pu = PortalUser.builder().principal(UserInfo.fromUser(user)).user(user).authorities(auth).isAuthenticated(true).build();
 		return pu;
 	}
 	

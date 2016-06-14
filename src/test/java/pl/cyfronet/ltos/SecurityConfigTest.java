@@ -1,7 +1,5 @@
 package pl.cyfronet.ltos;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -21,7 +19,7 @@ import pl.cyfronet.ltos.security.SecurityConfig;
 @Configuration
 @Profile("test")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfigTest  extends SecurityConfig {
+public class SecurityConfigTest extends SecurityConfig {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

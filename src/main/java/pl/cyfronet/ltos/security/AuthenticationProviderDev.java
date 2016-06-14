@@ -64,7 +64,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                 user = operations.saveUser(info.toUserPrototype().build());
                 info.setId(user.getId());
             }
-            builder.details(user);
+            builder.user(user);
             builder.principal(info);
             builder.authorities(Arrays.asList(
                     new SimpleGrantedAuthority("ROLE_ADMIN"), 
@@ -80,7 +80,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                 user = operations.saveUser(info.toUserPrototype().build());
                 info.setId(user.getId());
             }
-            builder.details(user);
+            builder.user(user);
             builder.principal(info);
             builder.authorities(Arrays.asList(
                     new SimpleGrantedAuthority("ROLE_USER")));
