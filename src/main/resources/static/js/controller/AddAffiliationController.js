@@ -2,7 +2,7 @@ var app = angular.module('ltosApp');
 
 app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', '$route','identityService', 'helperService', 'SpringDataRestAdapter', 
     function ($scope, $http, affiliationService, profileService, institutionService, countryService, $route, identityService, helperService, SpringDataRestAdapter) {
-        if(!identityService.getIdentityRegistered()){
+        if(!identityService.identityRegistered()){
             window.location = "#/";
         }
         $scope.doTheBack = function() {
@@ -29,7 +29,7 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
         $scope.countryList = countryService.getCountryList();
         var user = null;
         
-    	var httpPromise = $http.get("/users/" + identityService.getIdentityId());
+    	var httpPromise = $http.get("/users/" + identityService.getIdentity().id);
 		SpringDataRestAdapter.process(httpPromise).then(
 				function(processedResponse) {
 					user = processedResponse;

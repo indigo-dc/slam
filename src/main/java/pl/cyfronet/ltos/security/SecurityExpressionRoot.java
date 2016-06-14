@@ -25,17 +25,17 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
     private static Logger logger = LoggerFactory
             .getLogger(SecurityExpressionRoot.class);
     private Permissions permissions;
-    private Identity user;
+    private Identity identity;
 
     public SecurityExpressionRoot(Authentication authentication, Permissions f) {
         super(authentication);
-        this.user = (Identity) authentication.getPrincipal();
+        this.identity = (Identity)authentication;
         this.permissions = f;
     }
 
     public boolean checkPolicy(Activity activity) {
         logger.debug("authorize collection access: " + activity);
-        return permissions.securityPolicy(user, null, activity).evaluate();
+        return permissions.securityPolicy(identity, null, activity).evaluate();
     }
 
     public boolean checkPolicyUser(User targetObject, Activity activity) {
@@ -44,7 +44,7 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
             // allow spring to return 404 instead of 403
             return true;
         } else {
-            return permissions.securityPolicy(user,
+            return permissions.securityPolicy(identity,
                     new UserSecurity(targetObject), activity).evaluate();
         }
     }
@@ -56,7 +56,7 @@ public class SecurityExpressionRoot extends MethodSecurityExpressionRoot {
             // allow spring to return 404 instead of 403
             return true;
         } else {
-            return permissions.securityPolicy(user,
+            return permissions.securityPolicy(identity,
                     new AffiliationSecurity(targetObject), activity).evaluate();
         }
     }

@@ -1,43 +1,83 @@
 package pl.cyfronet.ltos.security;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 
-import pl.cyfronet.ltos.bean.UserAuth;
+import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.security.policy.Identity;
 
-public class PortalUser extends User implements Identity {
+/**
+ * @author bwilk
+ *
+ */
+@Builder
+public class PortalUser implements Authentication, Identity {
 
     private static final long serialVersionUID = 1L;
 
-    @Setter
-    @Getter
-    private UserAuth userAuth;
+    private boolean isAuthenticated;
+    
+    private String name;
+    private Object credentials;
+    
+    private UserInfo principal;
+    private User user;
+    private Collection<? extends GrantedAuthority> authorities;
+    
+    @Override
+    public String getName() {
+        return name;
+    }
 
-    public PortalUser(UserAuth details) {
-        super(details.getLogin(), details.getPassword(), getAuthorities(details));
-        this.userAuth = details;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public Object getCredentials() {
+        return credentials;
+    }
+    
+    public void setDetails(User details) {
+        if (principal != null && details.getId() != null) {
+            principal.setId(details.getId());
+        }
+        this.user = details;
+    }
+
+    @Override
+    public Object getDetails() { 
+        return user;
+    }
+
+    @Override
+    public Object getPrincipal() {
+        return principal;
+    }
+
+    @Override
+    public boolean isAuthenticated() {
+        return isAuthenticated;
+    }
+    
+    @Override
+    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {   
+        this.isAuthenticated = isAuthenticated;
+        
+    }
+    
+    public User getUserBean() {
+        return user;
     }
 
     @Override
     public Long getId() {
-        return userAuth.getUser().getId();
-    }
-    
-    static Collection<GrantedAuthority> getAuthorities(UserAuth details) {
-        LinkedList<GrantedAuthority> list = new LinkedList<GrantedAuthority>();
-        list.add(new SimpleGrantedAuthority("ROLE_USER"));
-        if (details.isAdmin()) {
-            list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }
-        return list;
+        return user.getId();
     }
 
 }

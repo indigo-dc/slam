@@ -2,25 +2,20 @@ var app = angular.module('ltosApp');
 
 app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationService', '$route','identityService', 'helperService', 'SpringDataRestAdapter',
     function ($scope, $http, affiliationService, $route, identityService, helperService, SpringDataRestAdapter) {
-        if(!identityService.getIdentityRegistered()){
+        if(!identityService.identityRegistered()){
             window.location = "#/";
+            return; 
         }
         
         $scope.affiliationsList = null;
-        
-        _loadAffiliationList();
-        
-    	function _loadAffiliationList() {
-			var httpPromise = $http.get("/affiliations/");
-			SpringDataRestAdapter.process(httpPromise).then(
-					function(processedResponse) {
-						console.log(processedResponse._embeddedItems);
-						$scope.affiliationsList = processedResponse._embeddedItems;
-					}, helperService.alertError);
-		}
-        
         $scope.setAffiliation = function (affiliation){
-        	affiliationService.setAffiliation(affiliation);
+        	affiliationService.setCurrentAffiliation(affiliation);
         }
+  
+		SpringDataRestAdapter.process($http.get("/affiliations/")).then(_setAffiliations, helperService.alertError);
+	
+		function _setAffiliations(processedResponse) {
+			$scope.affiliationsList = processedResponse._embeddedItems;
+		};
         
     }]);

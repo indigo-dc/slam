@@ -1,17 +1,19 @@
 var app = angular.module('ltosApp');
 
 app.service("affiliationService", function($http, $q) {
-	var affiliation = '';
-	var setAffiliation = function(newAffiliation) {
-		affiliation = newAffiliation;
+	
+	var currentAffiliation;
+	
+	var setCurrentAffiliation = function(newAffiliation) {
+		currentAffiliation = newAffiliation;
 	}
 
-	var getAffiliation = function() {
-		return affiliation;
+	var getCurrentAffiliation = function() {
+		return currentAffiliation;
 	}
 
 	return ({
-		setAffiliation : setAffiliation,
-		getAffiliation : getAffiliation
+		setCurrentAffiliation : setCurrentAffiliation,
+		getCurrentAffiliation : getCurrentAffiliation
 	});
 });

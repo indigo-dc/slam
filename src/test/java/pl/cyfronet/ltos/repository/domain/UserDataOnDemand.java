@@ -14,7 +14,6 @@ public class UserDataOnDemand extends AbstractDataOnDemand<User> {
     public User getNewTransientObject(int i) {
         User user = new User();
         user.setName("name_" + i);
-        user.setSurname("surname_" + i);
         user.setEmail("email_" + i + "@ltos.pl");
         return user;
     }

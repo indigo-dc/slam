@@ -7,7 +7,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 @Configuration
 @ComponentScan
-@ActiveProfiles({"development"})
 @EnableAutoConfiguration
 public class ApplicationTest{
 	

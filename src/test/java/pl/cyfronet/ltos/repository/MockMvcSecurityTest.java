@@ -23,7 +23,7 @@ import pl.cyfronet.ltos.ApplicationTest;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @Transactional
-@ActiveProfiles({"development"})
+@ActiveProfiles("test")
 @SpringApplicationConfiguration(classes = ApplicationTest.class)
 public abstract class MockMvcSecurityTest {
 
