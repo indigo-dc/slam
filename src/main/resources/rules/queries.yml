@@ -1,0 +1,79 @@
+#tutuaj specyfikujemy jakie listy mają się wyświetlić na stronie glownej
+#w pisanie constraintow do kwerend nie mozna uzywac has role, jest tylko has role in related business entity
+#najbezpieczniej robic po jednej kwerendzie
+queries:
+
+  - !com.agreemount.bean.Query
+    label: My negotiations
+    constraint:
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
+                  role: owner
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: negotiation
+
+
+
+#######################
+# poniżej - do zrobienia
+
+  - !com.agreemount.bean.Query
+    label: All leafs
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
+          role: owner
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: cos
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: docType
+          value: change
+
+  - !com.agreemount.bean.Query
+    label: to act somehow
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
+          role: customer
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: cos
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: docType
+          value: change
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: sent
+
+
+  - !com.agreemount.bean.Query
+    label: not owner side
+    constraint:
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: ownerSide
+          value: false
+
+
+#######################33
+# For DEVEL only
+
+  - !com.agreemount.bean.Query
+    label: My negotiations
+    constraint:
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
+                  role: owner
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: change
