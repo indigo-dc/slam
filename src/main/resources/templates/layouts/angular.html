@@ -34,7 +34,19 @@
     <!-- UI-Router -->
     <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
       
+    <!-- Bazaar engine -->
+   
+    <script th:src="@{/app/routes.js}"></script>
+    <script th:src="@{/app/service/services.js}"></script>
+    <script th:src="@{/app/service/QueryService.js}"></script>
+    <script th:src="@{/app/service/DocumentService.js}"></script>
+    <script th:src="@{/app/service/MetricService.js}"></script>
+    <script th:src="@{/app/controller/ApplicationController.js}"></script>
+    <script th:src="@{/app/controller/MainController.js}"></script>
+    <script th:src="@{/app/controller/QueryController.js}"></script>
+    <script th:src="@{/app/controller/DocumentController.js}"></script>
      
+    <!-- Portal app -->
     
     <script th:src="@{/js/router.js}"></script>
     <script th:src="@{/js/controller/MainController.js}"></script>
@@ -57,14 +69,10 @@
     <script th:src="@{/js/service/InstitutionService.js}"></script>
     <script th:src="@{/js/service/DashboardService.js}"></script>
     <script th:src="@{/js/service/HelperService.js}"></script>
-
-
+    
     <script th:src="@{/js/directive/massautocomplete.js}"></script>
 
-
     <script type="text/javascript"> var idx=window.location.toString().indexOf("#_=_"); if (idx>0) { window.location = window.location.toString().substring(0, idx); } </script>
-
-
 
     <base th:href="${baseHost}"/>
   </head>
