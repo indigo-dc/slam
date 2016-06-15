@@ -1,0 +1,158 @@
+<div class="row-fluid">
+    <div class="span2">
+
+    </div>
+
+<div class="span10 sla-edit">
+    <div class="sla-main-window-right card-box">
+        <div class="row-fluid">
+            <div class="span9" style="padding-top: 19px; margin-bottom: 15px;">
+
+
+                <div ng ng-repeat="msg in messages" class="alert alert-{{msg.type}} alertMinimized">
+                    {{msg.body}}
+                </div>
+
+                <h2 style="text-align: center;">
+                    {{document.name}}
+                </h2>
+                <h4 style="margin-top: 5px;">Status info</h4>
+                <div class="row-fluid basic-info-and-sla-states box-white hint" data-placement="top" data-trigger="manual" data-container="body" data-content="Status info of this SLA">
+                    <div class="span6 basic-info">
+                        <div ng-include="'app/view/sla-basic-info.html'"></div>
+                    </div>
+                    <div class="span6 states">
+                        <span class="label label-info" ng-repeat="(state, stateValue) in document.states">
+                            <span class="stateName"> {{state}}</span>
+                            <span class="state-value">{{stateValue}}</span>
+                            <br />
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div id="mainMetricsContainer" class="no-extra-size span12">
+                        <h4 class="resources">Targets and QoS parameters</h4>
+
+                        <div class="box-white" style="margin-top: 10px;">
+                            <div class="sla-description basic-info-and-sla-states">
+                                <h6>Metric category...</h6>
+                                <table class="table table-striped resources">
+                                    <tr ng-repeat="(metricId,requestedValue) in document.requestedResouces">
+                                        <td width="200" >
+                                            <span ng-bind="getMetricParam(metricId,'label')"  />
+                                            <i class="icon-info-sign titleTooltip" data-toggle="tooltip" title={{getMetricParam(metricId,'description')}}></i>
+                                        </td>
+                                        <td></td>
+                                        <td class="old-value"></td>
+                                        <td class="new-value">
+                                            {{requestedValue}}
+                                        </td>
+                                        <td width="15"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="sla-edit-form" class="basic-info-and-sla-states">
+                                <div class="formContainer">
+                                    <form id="requestedResources" class="requestedResources" action="#">
+
+                                        <h6>metric category name
+                                            <span class="metric-category remove-metric-category">
+                                            <i class="icon-remove-circle"></i>
+                                            </span>
+                                        </h6>
+
+                                        <table class="table table-striped resources">
+                                            <tr ng-repeat="metric in metrics" ng-show="isMetricVisible(metric.id)">
+                                                <td width="200" >
+                                                    <span ng-bind="getMetricParam(metric.id,'label')"  />
+                                                    <i class="icon-info-sign titleTooltip" title={{getMetricParam(metric.id,'description')}} />
+                                                </td>
+                                                <td></td>
+                                                <td class="old-value"></td>
+                                                <td class="new-value">
+                                                    <input name="{{metric.id}}" ng-model="metricFormValues[metric.id]"/>
+                                                </td>
+                                                <td width="15">
+                                                    <span class="remove-metric">
+                                                    <i class="icon-remove-circle"></i>
+                                                    </span>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             
+
+        </div>
+
+        <div class="span3 menu-box">
+            <div class="actionList primaryActions hint" data-placement="top" data-trigger="manual" data-container="body" data-content="Available actions">
+
+
+                <button class="editBtn btn btn-primary" ng-repeat="action in visibleActions" ng-click="doAction(action.id)">{{action.label | translate}}</button>
+                <button class="editBtn btn btn-primary" ng-show="isInEditMode" ng-click="cancelEdit()">Cancel</button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<div ng-init="init()">
+</div>
+
+
+
+
+
+<div>
+    <h3>Requested resources</h3>
+    <div ng-repeat="(metricId,requestedValue) in document.requestedResouces">
+
+        <span ng-bind="getMetricParam(metricId,'name')" />
+        :
+        {{requestedValue}}
+    </div>
+</div>
+
+
+<div ng-show="isVisibleContainer('form')">
+    <h3>Metrics</h3>
+    <table>
+        <tbody>
+        <tr ng-repeat="metric in metrics" ng-show="!isMetricVisible(metric.id)">
+            <td><span ng-click="addMetricToForm(metric.id)">{{metric.name}}</span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>metrics form</h3>
+
+    <div ng-repeat="metric in metrics" ng-show="isMetricVisible(metric.id)">
+        {{metric.name}} <input name="{{metric.id}}" ng-model="metricFormValues[metric.id]"/>
+
+        <span ng-click="removeMetric(metric.id)">x</span>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+{
+// states with their values
+  "documentTypeState": "Typ dokumentu", //dawać dwukropek po nazwie stanu?
+  "typeSlaValue": "SLA",
+  "typeOlaValue": "OLA",
+  "typeRecommendationValue": "Recenzja PLGrid",
+  "typeReportValue": "Raport",
+  "typePoolValue": "Pula zasobów",
+  "typePublicationValue": "Publikacja",
+
+  "documentStateState": "Stan dokumentu",
+  "stateDraftValue": "Szkic",
+  "stateInnegotiationValue": "Propozycja", //w trakcie nagocjacji?
+  "stateRejectedValue": "Odrzucony",
+  "stateBindingValue": "Podpisany",
+  "stateInvalidatedValue": "Unieważniony",
+  "statePublishedValue": "Gotowy / opubikowany / sporządzony", // nie mam tu pomysłu na tlumaczenie na razie
+
+  "sideState": "Dokument po stronie",
+  "sideCustomerValue": "Użytkownika PLGrid",
+  "sideBrokerValue": "Operatora PLGrid",
+  "sideProviderValue": "Administratora zasobów PLGrid",
+
+  "grantActivityState": "Grant",
+  "grantBeforeStartValue": "przed rozpoczęciem",
+  "grantActiveValue": "w trakcie trwania",
+  "grantCompletedValue": "zakońćzony",
+  "grantBlockedValue": "zablokowany",
+
+  "grantHasRecommState": "Recenzja dla grantu",
+  "recommNoValue": "brak",
+  "recommSentValue": "wysłano do recenzji",
+  "recommYesValue": "grant posiada recenzję",
+
+  "renegotiationState": "Grant renegocjowany",
+  "renegotiationStateYesValue": "tak",
+
+  "grantReportState": "Grant",
+  "reportNoneValue": "nie posiada raportu",
+  "reportSentValue": "raport został wysłany",
+  "grantReportsSettledValue": "rozliczony",
+
+
+
+  "actionMakeProposal" : "Zaproponuj zmiany",
+  "actionRevoke" : "Odrzuć wniosek grantowy",
+  "actionAcceptChanges": "Zaakceptuj zmiany",
+  "actionChangeToFreehand": "Zmień pulę na freehand",
+
+  "poolStateState": "Stan puli",
+  "poolInactiveValue": "nieaktywna",
+  "poolActiveValue": "aktywna",
+  "poolInvalidatedValue": "anulowana",
+
+  "poolTypeState": "Typ puli",
+  "poolFreehandValue": "freehand",
+  "poolNegotiationValue": "negocjacja",
+  "poolRevokeValue": "right to revoke",
+
+
+
+
+// metrics:
+
+  // categories
+  "mcDocumentation": "Dokumentacja grantu",
+  "mcCollaborationTools": "Narzędzia współpracy",
+  "mcComputing": "Zasoby obliczeniowe",
+  "mcStorage": "Zasoby dyskowe",
+  "mcCloud": "Cloud",
+  "mcRecommendation": "Recenzja",
+
+  "mcDocumentationGrantSettings": "Ustawienia grantu",
+  "mcDocumentationGrantDetails": "Szczegóły grantu",
+  "mcBasicSettings": "Podstawowe ustawienia",
+  "mcMetrics": "Metryki",
+
+  // grant settings
+
+  "grantStartMetric": "Start grantu",
+  "grantEndMetric": "Koniec grantu",
+  "grantContinuationMetric": "Kontynuacja grantu",
+  "affiliationMetric": "Afiliacja",
+  "userTeamsMetric": "ID zespołu",
+  "fieldMetric": "Dziedzina badań nauki",
+
+  // grant details
+  "grantSubjectMetric": "Temat grantu",
+  "grantDescriptionMetric": "Cel badań naukowych",
+  "grantReasonMetric": "Uzasadnienie wykorzystania zasobów",
+  "addPublicationMetric": "Spodziewany rezultat badań ",
+  "grantMiddlewareMetric": "Sposób korzystania z grantu (middleware)",
+
+  // computingBasicSettings
+
+  "CPUGuaranteedComputingTimeMetric": "OG1. Gwarantowany czas obliczeń",
+  "CPUNonGuaranteedComputingTimeMetric": "OG2.Niegwarantowany czas obliczeń",
+  "CPUReservedComputingTimeMetric": "OG4. Rezerwowalny czas obliczeń",
+
+  // computingCPUMetrics
+  "CPUMaxJobWalltimeMetric": "OD1. Maksymalny czas wykonania zadania",
+  "CPUMaxJobParallelismMetric": "OD2. Maksymalna równoległość zadania",
+  "CPUMaxSlotsNoMetric": "OD3. Maksymalna liczba slotów wykorzystywanych równocześnie",
+  "CPUMaxRAMperSlotMetric": "OD4. Maksymalna pamięć RAM per slot",
+  "CPUMaxScratchSpaceMetric": "OD5. Maksymalna przestrzeń typu scratch per slot",
+  "CPUMaxSlotsMetric": "OD6. Maksymalna liczba slotów rezerwacji",
+
+  //computingGPUBasicSettings
+  "GPUGuaranteedComputingTimeMetric": "OG1. Gwarantowany czas obliczeń",
+  "GPUNonGuaranteedComputingTimeMetric": "OG2.Niegwarantowany czas obliczeń",
+  "GPUReservedComputingTimeMetric": "OG4. Rezerwowalny czas obliczeń",
+
+  //mcComputingGPUMetrics
+  "GPUMaxJobWalltimeMetric": "OD1. Maksymalny czas wykonania zadania",
+  "GPUMaxJobParallelismMetric": "OD2. Maksymalna równoległość zadania",
+  "GPUMaxSlotsNoMetric": "OD3. Maksymalna liczba slotów wykorzystywanych równocześnie",
+  "GPUMaxRAMperSlotMetric": "OD4. Maksymalna pamięć RAM per slot",
+  "GPUMaxScratchSpaceMetric": "OD5. Maksymalna przestrzeń typu scratch per slot",
+  "GPUMaxSlotsMetric": "OD6. Maksymalna liczba slotów rezerwacji",
+
+  //storagePOSIXBasicSettings
+  "POSIXGuaranteedStorageMetric": "SG1. Gwarantowana przestrzeń danych",
+  "POSIXNonGuaranteedStorageMetric": "SG2. Niegwarantowana przestrzeń danych",
+
+  // storagePOSIXMetrics
+  "POSIXBackupStorageMetric": "SD1. Backupowana przestrzeń danych",
+  "POSIXInitialStorageMetric": "SD2. Początkowa gwarantowana przestrzeń danych",
+
+  //storageiRODSBasicSettings
+  "iRODSGuaranteedStorageMetric": "SG1. Gwarantowana przestrzeń danych",
+  "iRODSNonGuaranteedStorageMetric": "SG2. Niegwarantowana przestrzeń danych",
+
+  // storageiRODSMetrics
+  "iRODSBackupStorageMetric": "SD1. Backupowana przestrzeń danych",
+  "iRODSInitialStorageMetric": "SD2. Początkowa gwarantowana przestrzeń danych",
+  //storageOneDataBasicSettings
+  "OneDataGuaranteedStorageMetric": "SG1. Gwarantowana przestrzeń danych",
+  "OneDataNonGuaranteedStorageMetric": "SG2. Niegwarantowana przestrzeń danych",
+
+  // storageOneDataMetrics
+  "OneDataBackupStorageMetric": "SD1. Backupowana przestrzeń danych",
+  "OneDataInitialStorageMetric": "SD2. Początkowa gwarantowana przestrzeń danych",
+
+  //storageDPMBasicSettings
+  "DPMGuaranteedStorageMetric": "SG1. Gwarantowana przestrzeń danych",
+  "DPMNonGuaranteedStorageMetric": "SG2. Niegwarantowana przestrzeń danych",
+
+  // storageDPMMetrics
+  "DPMBackupStorageMetric": "SD1. Backupowana przestrzeń danych",
+  "DPMInitialStorageMetric": "SD2. Początkowa gwarantowana przestrzeń danych",
+
+  //cloudBasicSettings
+  "CloudSumMetric": "Sumaryczny czas obliczeń chmurowych",
+  "CloudCoresMetric": "CG2 - Liczba rdzeni",
+  "CloudInstancesMetric": "CG3 - Liczba instancji",
+  "CloudRAMInstanceMetric": "CG5 - Pamięć RAM dla instancji",
+
+  //cloudMetrics
+  "CloudRAMSumMetric": "CG6 - Sumaryczna Pamięć RAM",
+  "CloudStorageSnapshotsMetric": "CG8 - Całkowita przestrzeń dyskowa na obrazy maszyn wirtualnych - snapshoty",
+  "CloudStorageSumMetric": "CG9 - Całkowita chmurowa przestrzeń dyskowa",
+  "CloudIPsNumberMetric": "CG10 - Liczba publicznych adresów IP",
+
+  //Narzędzia współpracy
+//  "NWProjectNameMetric": "CT1. NazwaProjektu",
+//  "NWProjectShortMetric": "CT2. Skrót",
+//  "NWUsersNumberMetric": "CT3. Liczba użytkowników",
+//  "NWDataCapacityMetric": "CT4. Ilość danych przechowywanych w repozytorium (Stash)",
+  "NWConfluenceMetric": "Confluence",
+  "NWJiraMetric": "Jira",
+  "NWStasheMetric": "Stash",
+  "NWAdobeConnectMetric": "Adobe Connect",
+
+  //rekomendacja
+  "recenzjaPyt1Metric": "W jakim stopniu doświadczenie zespołu umożliwia realizację opisanego projektu? (0-2)",
+  "recenzjaPyt1komentarzMetric": "Dodatkowy komentarz do pytania 1",
+  "recenzjaPyt2Metric": "W jakim stopniu opisane badania umożliwiają uzyskanie deklarowanych publikacji? (0-2)",
+  "recenzjaPyt2komentarzMetric": "Dodatkowy komentarz do pytania 2",
+  "recenzjaPyt3Metric": "W jakim stopniu wnioskowane zasoby umożliwiają realizację opisanego projektu? (0-2)",
+  "recenzjaPyt3komentarzMetric": "Dodatkowy komentarz do pytania 3",
+  "recenzjaKomentarzDodMetric": "Dodatkowy komentarz ogólny"
+}
+

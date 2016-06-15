@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="configurationManager">
+
+<head>
+    <link rel="stylesheet" href="style.css"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <!--<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <!--<link href="js/lib/tooltip/style.css" rel="stylesheet">-->
+    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet"/>
+
+
+    <link href="/css/default/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/css/default/layout.css" rel="stylesheet"/>
+    <!--<link href="/js/lib/jgrowl/jquery.jgrowl.min.css" rel="stylesheet">-->
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css' />
+ 
+    <script src="/lib/jquery-2.1.3.min.js"></script>
+    <script src="/lib/angular.min.js"></script>
+    <script src="/lib/angular-route.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-url/2.7.2/angular-translate-loader-url.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.7.2/angular-translate-loader-static-files.js"></script>
+
+    <script src="/app/routes.js"></script>
+    <script src="/app/service/services.js"></script>
+    <script src="/app/service/QueryService.js"></script>
+    <script src="/app/service/DocumentService.js"></script>
+    <script src="/app/service/MetricService.js"></script>
+    <script src="/app/controller/ApplicationController.js"></script>
+    <script src="/app/controller/MainController.js"></script>
+    <script src="/app/controller/QueryController.js"></script>
+    <script src="/app/controller/DocumentController.js"></script>
+
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div ng-view="">
+
+    </div>
+
+</div>
+
+<div id="dialogContainer">
+    <div id="dialogBody">
+    </div>
+</div>
+
+
+<div class="toggleAnnotations toggleAnnotationsTrigger">
+    <a href="#">Help!</a>
+</div>
+<div id="pleaseWaitOverlay" class="annotation-widget-overlay" style="display:none" title="Click to close">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

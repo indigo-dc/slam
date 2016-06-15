@@ -1,0 +1,33 @@
+.elementEditableAppearance:hover{
+    background-color: pink;
+}
+
+.editableFileList li {
+	height: 18px;
+}
+
+.indyindy {
+    background: #DDD url("../../images/admin/ajax-loader.gif") no-repeat scroll 50% 40%;
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.editSlotActionForComponents {
+	display: none;
+	position: absolute;
+	float: right;
+	z-index: 5;
+	background-color: lime;
+}
+
+.elementEditableAppearance:hover .editSlotActionForComponents{
+    display: block;	
+}
+
+.editSlotActionForComponents .handle{
+    cursor:move
+}

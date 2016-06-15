@@ -58,12 +58,10 @@ public class NewDocumentController {
         document.setName(identityProvider.getIdentity().getLogin() + ": " + UUID.randomUUID().toString());
         document.setTeam(identityProvider.getIdentity().getTeamMembers().get(0).getTeam());
 
-
-
         ActionContext actionContext = actionLogic.runAction(document, "documentDraftFromController", "createNewRequest");
 
         document = actionContext.getDocument("newRoot");
 
-        return "redirect:/#/document/" + document.getId();
+        return "redirect:bazaar#/document/" + document.getId();
     }
 }
