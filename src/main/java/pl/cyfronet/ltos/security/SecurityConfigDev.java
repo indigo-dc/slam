@@ -37,9 +37,9 @@ public class SecurityConfigDev extends SecurityConfig {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/bootstrap-3.3.1-dist/**", "/static/**",
-                        "/resources/**", "/bootstrap/**", "/css/**",
-                        "/images/**", "/js/**", "/javascript/**", "/fonts/**")
+                .antMatchers("/bootstrap-3.3.4-dist/**", "/static/**",
+                        "/resources/**", "/css/**",
+                        "/images/**", "/js/**", "/lib/**", "/fonts/**")
                 .permitAll().anyRequest().authenticated().and().formLogin()
                 .and().csrf().disable();
     }
