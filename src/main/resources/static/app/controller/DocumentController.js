@@ -93,7 +93,7 @@ function ($scope, $routeParams, $route, DocumentService, MetricService) {
         }
         else if (result.data.type == 'REDIRECT') {
             if (result.data.redirectToDocument != null)  {
-                window.location = "/#/document/"+result.data.redirectToDocument;
+                window.location = "#/document/"+result.data.redirectToDocument;
             }
         }
         else {

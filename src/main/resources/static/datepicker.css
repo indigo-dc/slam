@@ -1,0 +1,52 @@
+.datepicker {position: relative;}
+
+.datepicker ul {
+    border: 1px solid;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 999;
+    background: #fff;
+    }
+
+.datepicker .btn {
+    background: none;
+    border: none;
+    padding: 5px 2px;}
+
+
+.datepicker th,
+.datepicker th .btn {text-align: center;background: #6A8794; color: #fff !important;}
+
+.datepicker .btn.active {
+    border: 1px solid #39b3d7;
+    border-radius: 3px;
+    }
+
+.datepicker .btn-info {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #39b3d7;
+    color: #fff !important;
+}
+.datepicker .btn:disabled  {
+    font-size: 14px;
+    font-weight: normal;
+    color: gray;
+}
+.datepicker .btn:disabled>.text-muted  {
+    font-size: 14px;
+    font-weight: normal;
+    color: gray;
+}
+.datepicker .text-muted  {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    opacity: 0.3;
+}
+.datepicker .btn:enabled  {
+    font-size: 14px;
+    font-weight: bold;
+    color: #687378;}
+
+.datepicker li+li {display: none;}

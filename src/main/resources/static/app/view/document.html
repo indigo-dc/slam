@@ -91,7 +91,48 @@
                     </div>
                 </div>
 
-             
+                <div class="row-fluid" ng-repeat="queryWrapper in queries">
+                    <div class="span12">
+                        <h3>{{queryWrapper.queryLabel | translate}}</h3>
+
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>States</th>
+                                <th>Creation date</th>
+                            </tr>
+                            </thead>
+                            <tbody ng-show="queryWrapper.documents.length > 0">
+
+
+                            <tr ng-repeat="document in queryWrapper.documents">
+                                <td class="versionColumn">
+                                    <a href="#document/{{document.id}}">{{document.id}}</a>
+                                </td>
+
+                                <td>
+                                    {{document.states}}
+                                </td>
+                                <td>
+                                    {{document.requestedResouces}}
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                            <tbody class="noResults" ng-show="queryWrapper.documents.length == 0">
+                            <tr>
+                                <td colspan="3">
+                                    No items to display
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
 
         </div>
 
@@ -112,7 +153,6 @@
 </div>
 
 </div>
-
 
 
 

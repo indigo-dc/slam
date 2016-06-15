@@ -43,7 +43,6 @@ public class NewDocumentController {
                 .collect(Collectors.toMap(Identity::getLogin, (a) -> a)).get(login);
     }      
     
-    
     @RequestMapping("create-new-request")
     public String createNewRequest() {
         

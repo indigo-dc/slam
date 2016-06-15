@@ -28,6 +28,7 @@ app.config(['$translateProvider', function ($translateProvider) {
     });
     // load 'en' table on startup
     $translateProvider.preferredLanguage('pl');
+    $translateProvider.useSanitizeValueStrategy('escape');
 }]);
 
 
