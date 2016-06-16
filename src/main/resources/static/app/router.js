@@ -23,6 +23,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'CreateRequestController',
             templateUrl: 'app/view/sla/create-request.html'
         })
+        .when('/create-request', {
+            controller: 'CreateRequestController',
+            templateUrl: 'app/view/sla/create-request.html'
+        })
     ;
 }]);
 

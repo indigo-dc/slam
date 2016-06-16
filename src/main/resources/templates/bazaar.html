@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
 
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/bazaar.css"/>
     <link rel="stylesheet" href="css/font-awesome.css"/>
     <link rel="stylesheet" href="css/font-awesome.min.css"/>
 
@@ -52,50 +52,7 @@
 <body>
 
 <!-- Header -->
-<header id="header">
-    <div id="top-nav">
-        <div class="center">
-            <nav>
-                <ul class="switch">
-                    <li><a href="http://www.plgrid.pl/">STRONA
-                        PLGRID</a></li>
-                    <li><a href="http://portal.plgrid.pl" class="active">PORTAL
-                        PLGRID</a></li>
-                </ul>
-            </nav>
-            <div class="notification">
-                <!--<span class="bell"></span>-->
-                <!--<span class="bell-number">3</span>-->
-            </div>
-            <nav class="user-menu">
-                <ul>
-                    <li>
-                        <a href="#" th:text="${login}"> <i class="fa fa-caret-down"></i> </a>
-                        <ul>
-                            <li><a href="https://portal.plgrid.pl/user/profile" class="user-ico">Mój profil</a></li>
-                            <li><a href="https://openid.plgrid.pl/logout" class="logout-ico">Wyloguj</a></li>
-
-                        </ul>
-                    </li>
-
-                </ul>
-            </nav>
-
-        </div>
-    </div>
-
-    <div class="center main-menu">
-        <a href="" id="logo"></a>
-        <nav id="main-nav">
-            <ul>
-                <li><a href="https://portal.plgrid.pl/">Mój PLGRID</a></li>
-                <li><a href="https://accounting.plgrid.pl/">Wykorzystanie grantów</a></li>
-                <li><a href="https://helpdesk.plgrid.pl/">Helpdesk</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
+<header ui-view="header"></header>
 
 <!-- Main -->
 <section id="main">
@@ -125,7 +82,7 @@
     </nav>
 
 </footer>
-<!-- Scripts -->
+<!-- Scripts -->    
 <script src="lib/jquery.min.js"></script>
 <script src="lib/jquery.dropotron.min.js"></script>
 <script src="lib/skel.min.js"></script>

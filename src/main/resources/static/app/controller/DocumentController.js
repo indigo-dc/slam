@@ -256,7 +256,7 @@ app.controller('DocumentController', ['$scope', '$routeParams', '$route', 'Docum
                 //TODO uruchomic walidacje aby od razu byly widoczne informacje o bledach w formie
             }
             else if ('REDIRECT'.localeCompare(actionType) === 0) {
-                window.location = "/#/document/" + result.data.redirectToDocument;
+                window.location = "#/document/" + result.data.redirectToDocument;
                 $route.reload();
             }
             else {

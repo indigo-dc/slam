@@ -36,7 +36,7 @@ app.controller('CreateRequestController', ['$scope', '$routeParams', '$route', '
             $scope.isLoading = true;
             DocumentService.createRequest($scope.grantId, $scope.team, $scope.affiliationId, $scope.branchOfScienceId).then(
                 function (result) {
-                    window.location = "/#/document/" + result.data.redirectToDocument;
+                    window.location = "#/document/" + result.data.redirectToDocument;
                 }, function (error) {
                     $scope.isLoading = false;
                     alert("Wystąpił błąd prz tworzeniu wniosku o grant.");
