@@ -395,6 +395,9 @@ li.active .proj {
     float: right;
     width: 78%;
     margin-top: 30px;}
+.content-section{
+     width: 78%;
+    margin: 0 auto;}
 h1{ font-family: 'roboto_condensedlight';
     font-size: 36px;
     color: #0c6389;
@@ -439,7 +442,11 @@ h4{
     border-top: 1px solid #abd0e0}  
 .right-section a{
     color: #0076a3;}    
-    .right-section a:hover{
+ .right-section a:hover{
+    text-decoration: none;}
+.content-section a{
+    color: #0076a3;}    
+.content-section a:hover{
     text-decoration: none;}
 /*--footer--*/
 
@@ -1721,7 +1728,13 @@ strong{
     margin-top: 8px;
     width: 46%;
     margin-right: 2%;}
+.content-section header p.text-columns{
+    float: left;
+    margin-top: 8px;
+    width: 46%;
+    margin-right: 2%;}
 
+    
 h1 .site-name {
     font-size: 14px;
     padding: 5px;
