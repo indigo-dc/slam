@@ -1,36 +1,44 @@
 var app = angular.module('configurationManager');
 
-app.controller('MainController', ['$scope', '$routeParams','$route', 'QueryService',
-function ($scope, $routeParams, $route, QueryService) {
-    $scope.isLoading = true;
-    $scope.documents;
-    $scope.queries;
+app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryService', 'GetLoggerUser',
+    function ($scope, $routeParams, $route, QueryService, GetLoggerUser) {
+        $scope.isLoading = false;
+        $scope.documents;
+        $scope.queries;
+        $scope.identity;
+        $scope.hasProviderRole;
 
-    $scope.init = function() {
+        $scope.init = function () {
 
-    }
+        }
 
-    setTimeout(function(){
-    }, 100);
         _loadRemoteData();
 
-    // I load the remote data from the server.
-    function _loadRemoteData() {
-        $scope.isLoading = true;
+        // I load the remote data from the server.
+        function _loadRemoteData() {
+            $scope.isLoading = true;
 
-        QueryService.getAvailableQueries().then(
-            function(result) {
-                serveResult(result);
-            }
-        );
-    }
+            QueryService.getAvailableQueries()
+            .then(function(result) {
+                serveResult(result.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+                alert('wystąpil błąd...');
+            })
+            .finally(function() {
+                $scope.isLoading = false;
+            });
+        }
 
-    function serveResult(result) {
-        //if(result['status'] == 'SUCCESS') {
+        function serveResult(result) {
             $scope.queries = result['data'];
-        //} else {
-        //    alert("blad");
-        //}
-    }
+        }
 
-  }]);
+        GetLoggerUser.get().then(function(result) {
+            $scope.identity = result;
+
+           /* $scope.hasProviderRole = $scope.identity['roles'].indexOf("provider") !== -1;*/
+        });
+
+    }]);

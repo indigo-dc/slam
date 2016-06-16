@@ -1,10 +1,10 @@
 var app = angular.module('configurationManager');
 
-app.service("QueryService", function($http, $q) {
+app.service("QueryService", ['$http', '$q', function ($http, $q) {
 
     // Return public API.
     return ({
-        getAvailableQueries : getAvailableQueries,
+        getAvailableQueries: getAvailableQueries,
         getQueryDocuments: getQueryDocuments
     });
 
@@ -15,27 +15,17 @@ app.service("QueryService", function($http, $q) {
     // I get all of the friends in the remote collection.
     function getAvailableQueries() {
 
-        var request = $http({
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-            method : "get",
-            url : "queries",
-            params : {
-                //key : "val"
-            }
-        });
-
-        return (request.then(handleSuccess, handleError));
-
+        return $http.get("queries");
     }
 
     function getQueryDocuments(queryId) {
 
         var request = $http({
-            headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-            method : "get",
-            url : "queries/documents",
-            params : {
-                queryId : queryId
+            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            method: "get",
+            url: "queries/documents",
+            params: {
+                queryId: queryId
             }
         });
 
@@ -62,7 +52,7 @@ app.service("QueryService", function($http, $q) {
         }
 
         // Otherwise, use expected error message.
-        return ($q.reject(response.data.message));
+        return ($q.reject(response.data));
 
     }
 
@@ -74,4 +64,4 @@ app.service("QueryService", function($http, $q) {
 
     }
 
-});
+}]);

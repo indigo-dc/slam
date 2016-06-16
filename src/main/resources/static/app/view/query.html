@@ -1,60 +1,36 @@
-<div class="query card-box">
-    <h4>{{query.label | translate}}
-        <!--<i class="icon-star"></i>-->
-        <!--<span class="query-switch open"><i class="icon-chevron-up"></i></span>-->
-        <!--<span class="query-switch closed"><i class="icon-chevron-down"></i></span>-->
-    </h4>
+<div>
 
-    <div class="query-container"
-         style="<?php echo (isset($this->slaVersions) && !empty($this->slaVersions)) ? null : 'display:none;'; ?>">
-
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th class="versionColumn" ng-click="paginateData()">Version</th>
-                <th>SLA Name</th>
-                <th>States</th>
-                <th>Creation date</th>
-            </tr>
-            </thead>
-            <tbody ng-show="filteredDocuments.length > 0">
-
-
-                <tr ng-repeat="document in filteredDocuments">
-                    <td class="versionColumn">
-                        <a href="#document/{{document.id}}">{{document.id}}</a>
-                    </td>
-                    <td>
-                        <a href="#document/{{document.id}}">{{document.name}}</a>
-                    </td>
-                    <td>
-                        {{document.states}}
-                    </td>
-                    <td>
-                        {{document.requestedResouces}}
-                    </td>
-                </tr>
-
-            </tbody>
-
-            <tbody class="noResults" ng-show="filteredDocuments.length == 0">
-            <tr>
-                <td colspan="4">
-                    No items to display
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            <pagination ng-change="pageChanged(currentPage)"
-                        boundary-links="true"
-                        total-items="totalItems"
-                        items-per-page="itemsPerPage"
-                        ng-model="currentPage"
-                        class="pagination-sm"
-                        previous-text="&lsaquo;" next-text="&rsaquo;"
-                        first-text="&laquo;" last-text="&raquo;"></pagination>
+    <h3 translate="{{ query.label }}"></h3>
+    <div ng-show="filteredDocuments.length > 0">
+        <div class="cert-box" ng-repeat="document in filteredDocuments">
+            <p class="grant-name"><a href="#document/{{document.id}}">{{document.name}}</a>
+                <span class="site-name {{::document.states.documentState}}" ng-show="document.states.documentState" translate="{{::document.states.documentState}}"></span>
+                <span class="site-name {{::document.states.grantActivity}}" ng-show="document.states.grantActivity" translate="{{::document.states.grantActivity}}"></span>
+            </p>
+            <p class="grant-stat" ng-show="document.team"><span>team: {{document.team}}</span></p>
+            <!--<a href="#document/{{document.id}}" translate="details" class="green-button button small-button grant-detail" translate="details"></a>-->
+            <p class="grant-time" ng-show="document.requestedResouces['end']"><i class="fa fa-clock-o"></i>&nbsp; &nbsp;  wygasa: {{document.requestedResouces['end']}}</p>
         </div>
+    </div>
+
+    <div class="loader" ng-show="isLoading" translate="query.loadingMsg"></div>
+
+    <!-- if no items -->
+    <div ng-show="filteredDocuments.length == 0 && !isLoading">
+        <span translate="query.noRecordsMsg"></span>
+    </div>
+
+    <div>
+        <pagination ng-show="filteredDocuments.length > 0"
+                    ng-change="pageChanged(currentPage)"
+                    boundary-links="true"
+                    total-items="totalItems"
+                    items-per-page="itemsPerPage"
+                    ng-model="currentPage"
+                    class="pagination-sm"
+                    rotate="true"
+                    max-size="10"
+                    previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="&laquo;" last-text="&raquo;"></pagination>
     </div>
 </div>

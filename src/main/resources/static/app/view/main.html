@@ -1,19 +1,21 @@
-<div class="row-fluid">
-    <div class="span2">
-    </div>
-    <div class="span10" id="queries-box">
+<div ng-include="'app/view/menu-plgrid.html'"></div>
 
-        <a href="create-new-request" class="btn btn-success new-grant hint" data-placement="left" data-trigger="manual" data-container="body" data-content="Request new allocation">
-            <i class="icon-plus-sign"></i> Request new allocation</a>
 
-        <div style="clear: right;margin-bottom: 10px;"></div>
-
-        <div ng-repeat="query in queries" ng-controller="QueryController" ng-init="init(query)">
-
-                <div ng-include="'app/view/query.html'"></div>
-
+<section class="right-section">
+    <header>
+        <h1>Moje granty</h1>
+        <a href="#/create-request" class="button green-button float-right" translate="dashboard.createGrant"></a>
+        <a href="/#/create-pool" ng-show="::hasProviderRole" class="button green-button float-right margin-right-button"
+                translate="dashboard.createPool"></a>
+    </header>
+    <div style="clear:both;"></div>
+    <div class="loading" ng-show="isLoading"></div>
+    <div class="main-content">
+        <div ng-repeat="query in ::queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">
+            <div ng-include="'app/view/query.html'"></div>
         </div>
-
-
     </div>
-</div>
+</section>
+
+
+<div ng-show="false" ng-include="'app/view/query.html'"></div>

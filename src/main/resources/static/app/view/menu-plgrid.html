@@ -1,0 +1,24 @@
+<section class="left-section" ng-controller="LeftSectionCtrl">
+    <nav id="left-menu">
+        <ul>
+            <li><a href="https://portal.plgrid.pl/affiliation/list" class="afiliacje">Afiliacje</a></li>
+            <li><a href="https://portal.plgrid.pl/service/index/#/service-categories-list" class="services">Usługi</a></li>
+            <li><a href="https://portal.plgrid.pl/team/my-team-index" class="zespoly">Zespoły</a></li>
+            <li><a href="https://portal.plgrid.pl/certificate/view" class="cert">Certyfikaty</a></li>
+            <!--<li><a href="#" class="konta">Konta dostępowe</a></li>-->
+            <li><a href="https://portal.plgrid.pl/space/list" class="proj">Projekty</a></li>
+            <li class="active"><a href="/#/" class="granty">Granty</a>
+                <ul>
+                    <li ng-class="{ active: isActive(['/']) }"><a href="/#/">Moje granty</a></li>
+                    <li ng-class="{ active: isActive(['/test-slas']) }"><a href="/#/test-slas">Granty testowe</a></li>
+                    <!--<li ng-class="{ active: isActive(['/create-request']) }"><a href="/#/create-request">Dodaj nowy grant</a></li>-->
+                    <!--<li ng-class="{ active: isActive(['/create-pool']) }"><a href="/#/create-pool">Dodaj pulę zasobów</a></li>-->
+                </ul>
+            </li>
+            <!--<li><a href="https://portal.plgrid.pl/subordinate/list" class="podopieczni">Podopieczni</a></li>-->
+            <!--<li><a href="https://portal.plgrid.pl" class="profil">Agent</a></li>-->
+            <!--<li><a href="https://portal.plgrid.pl/managed-service/list/#/managed-services-list" class="services">Usługi admina</a></li>-->
+            <li><a href="https://portal.plgrid.pl/user/profile" class="profil">Profil</a></li>
+        </ul>
+    </nav>
+</section>

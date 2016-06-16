@@ -1,19 +1,15 @@
 {
 
-  //states
+  "documentTypeState": "Document type",
   "stateMainDraft": "Draft",
-  "stateMainProposal": "Proposal"
-
-
-
-  //actions
+  "stateMainProposal": "Proposal",
 
 
 
 
-  //metric categories
 
 
-  //metrics
+
+  "cancelActionButton": "Cancel"
 }
 

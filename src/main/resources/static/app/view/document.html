@@ -1,198 +1,196 @@
-<div class="row-fluid">
-    <div class="span2">
+<!--<div ng-include="'app/view/menu-bazaar.html'"></div>-->
+<div ng-include="'app/view/menu-plgrid.html'"></div>
 
+<section class="right-section">
+    <a href="#/" class="back"><i class="fa fa-long-arrow-left"></i> <span translate="nav.goBackToDashboard"></span></a>
+    <header>
+        <h1>
+            <span>{{::document.name}}</span>
+            <span class="site-name" ng-show="document.site">{{::document.site}}</span>
+            <span class="site-name" ng-show="document.states.documentState" translate="{{::document.states.documentState}}"></span>
+            <span class="site-name" ng-show="document.branchOfScienceId">{{branchOfScience}}</span>
+        </h1>
+    </header>
+    <div style="clear:both;"></div>
+    <div class="loading" ng-show="isLoading"></div>
+    <div class="main-content">
+        <!-- actions buttons -->
+        <a href="" class="green-border-button button float-right button-margin" ng-repeat="action in visibleActions" ng-click="doAction(action.id)" translate="{{action.label}}"></a>
+        <!-- in edit mode show cancel button -->
+        <a href="" class="red-border-button button float-right button-margin"  ng-show="isInEditMode" ng-click="cancelEdit()" translate="cancelActionButton"></a>
+        <div style="clear:both;"></div>
     </div>
+    <div class="main-content">
 
-<div class="span10 sla-edit">
-    <div class="sla-main-window-right card-box">
-        <div class="row-fluid">
-            <div class="span9" style="padding-top: 19px; margin-bottom: 15px;">
+        <!--<span class="label label-info" ng-repeat="(state, stateValue) in document.states">-->
+        <!--{{state}}: {{stateValue}} /-->
+        <!--</span>-->
+
+        <!--<hr/>-->
+
+        <ul id="tabs">
+
+            <li ng-repeat="category in metricCategories" ng-if="isMainCategoryVisible(category.id)"
+                class="{{category.id == visibleMetricCategoryId ? 'active' : ''}}">
+                <a href="" name="#tab1" class="grant-tabs" ng-click="showMetricCategory(category.id)" translate="{{category.label}}">
+                </a>
+                <i ng-show="isInEditMode && $index!=0" ng-click="removeMetricCategory(category)" class="fa fa-close"></i>
+            </li>
+            <li  ng-show="isInEditMode" class="blue-plus-button">
+                <a ng-click="showAddMetricsPopup()"
+                   href="" class="blue-plus-button"><i class="fa fa-plus"></i>
+                </a>
+            </li>
+        </ul>
 
 
-                <div ng ng-repeat="msg in messages" class="alert alert-{{msg.type}} alertMinimized">
-                    {{msg.body}}
-                </div>
 
-                <h2 style="text-align: center;">
-                    {{document.name}}
-                </h2>
-                <h4 style="margin-top: 5px;">Status info</h4>
-                <div class="row-fluid basic-info-and-sla-states box-white hint" data-placement="top" data-trigger="manual" data-container="body" data-content="Status info of this SLA">
-                    <div class="span6 basic-info">
-                        <div ng-include="'app/view/sla-basic-info.html'"></div>
-                    </div>
-                    <div class="span6 states">
-                        <span class="label label-info" ng-repeat="(state, stateValue) in document.states">
-                            <span class="stateName"> {{state}}</span>
-                            <span class="state-value">{{stateValue}}</span>
-                            <br />
-                        </span>
-                    </div>
-                </div>
 
-                <div class="row-fluid">
-                    <div id="mainMetricsContainer" class="no-extra-size span12">
-                        <h4 class="resources">Targets and QoS parameters</h4>
 
-                        <div class="box-white" style="margin-top: 10px;">
-                            <div class="sla-description basic-info-and-sla-states">
-                                <h6>Metric category...</h6>
-                                <table class="table table-striped resources">
-                                    <tr ng-repeat="(metricId,requestedValue) in document.requestedResouces">
-                                        <td width="200" >
-                                            <span ng-bind="getMetricParam(metricId,'label')"  />
-                                            <i class="icon-info-sign titleTooltip" data-toggle="tooltip" title={{getMetricParam(metricId,'description')}}></i>
-                                        </td>
-                                        <td></td>
-                                        <td class="old-value"></td>
-                                        <td class="new-value">
-                                            {{requestedValue}}
-                                        </td>
-                                        <td width="15"></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div id="sla-edit-form" class="basic-info-and-sla-states">
-                                <div class="formContainer">
-                                    <form id="requestedResources" class="requestedResources" action="#">
+        <div ng-show="addMetricsPopopIsVisible" class="jquery-modal blocker">
+            <div class="modal current">
+                <h4 translate="addMetricsCategoryPopupHeader"></h4>
+                <ul class="metricCategories">
+                    <li ng-repeat="category in metricCategories" ng-if="$index < 4"
+                        class="{{category.id}} {{addActiveClass(category.id)}}" >
+                        <span ng-click="addMetricCategory(category)"></span>
+                        <h6 translate="{{ category.label }}"></h6>
+                    </li>
+                </ul>
+                <div style="clear:both;"></div>
+                <div class="end-line"></div>
+                <a ng-click="hideAddMetricsPopup()" class="button green-button">Gotowe</a>
 
-                                        <h6>metric category name
-                                            <span class="metric-category remove-metric-category">
-                                            <i class="icon-remove-circle"></i>
-                                            </span>
-                                        </h6>
+            </div>
+        </div>
 
-                                        <table class="table table-striped resources">
-                                            <tr ng-repeat="metric in metrics" ng-show="isMetricVisible(metric.id)">
-                                                <td width="200" >
-                                                    <span ng-bind="getMetricParam(metric.id,'label')"  />
-                                                    <i class="icon-info-sign titleTooltip" title={{getMetricParam(metric.id,'description')}} />
-                                                </td>
-                                                <td></td>
-                                                <td class="old-value"></td>
-                                                <td class="new-value">
-                                                    <input name="{{metric.id}}" ng-model="metricFormValues[metric.id]"/>
-                                                </td>
-                                                <td width="15">
-                                                    <span class="remove-metric">
-                                                    <i class="icon-remove-circle"></i>
-                                                    </span>
 
-                                                </td>
-                                            </tr>
-                                        </table>
 
-                                    </form>
+        <!-- tabs` content -->
+
+
+        <div class="gradient-bg">
+
+
+
+            <div id="tabs-content">
+                <form name="requestedResourcesForm" ng-init="setFormScope(this)">
+                <div ng-repeat="metricCategory in ::metricCategories" ng-show="metricCategory.id == visibleMetricCategoryId"
+                 ng-if="isMainCategoryVisible(metricCategory.id)">
+                    <!-- display metrics from this category-->
+                    <div ng-if="metricCategory.children.length > 0"
+                         ng-repeat="subMetricCategory in ::metricCategory.children">
+                        <h3 translate="{{ subMetricCategory.label }}"></h3>
+                        <div class="form-group form-grant grant-view-details">
+                            <div ng-if="!isInEditMode"
+                                    ng-repeat="metricId in metricCategoryId2MetricId[subMetricCategory.id]" >
+
+                                <div class="form-group form-grant grant-view-details">
+                                    <div class="header-form-grant">
+                                        <i class="fa fa-question-circle" title="{{metrics[metricId]['description'] | translate}}"></i>
+                                        <label translate="{{metrics[metricId]['label']}}" />
+
+                                    </div>
+                                    <p class="grant-details">
+                                        <span>{{metricFormValues[metricId]}}</span>
+                                        <span translate="{{metrics[metricId]['unit']}}"></span>
+                                    </p>
                                 </div>
+                            </div>
+                            <div ng-if="isInEditMode"
+                                    ng-repeat="metricId in ::metricCategoryId2MetricId[subMetricCategory.id]" ng-form
+                                name="metricForm">
+                                <div class="form-group form-grant grant-view-details">
+                                    <div class="header-form-grant">
+                                        <i class="fa fa-question-circle" title="{{metrics[metricId]['description'] | translate}}"></i>
+                                        <label translate="{{metrics[metricId]['label']}}" />
+
+                                    </div>
+
+                                    <p class="grant-details">
+                                            <div ng-show="inputTypeVisible(metricId,'DATE')" ng-controller="DatePickerController" class="datepicker">
+                                                <input type="text"
+                                                       datepicker-popup="yyyy-MM-dd"
+                                                       datepicker-localdate
+                                                       is-open="openedDatePopUp"
+                                                       datepicker-options="dateOptions"
+                                                       ng-click="openPopUp($event)"
+                                                       ng-model="metricFormValues[metricId]"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default"
+                                                                ng-click="openPopUp($event)">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                            </div>
 
 
+                                        <input ng-show="inputTypeVisible(metricId,'TEXT')"
+                                               type="text"
+                                               name="{{metricId}}" placeholder="{{getMetricParam(metricId,'defaultValue')}}"
+                                               metric-value-validator metric="metrics[metricId]" message="message"
+                                               ng-model="metricFormValues[metricId]"/>
+
+                                        <input ng-show="inputTypeVisible(metricId,'NUMBER')"
+                                               type="number" string-to-number
+                                               name="{{metricId}}" placeholder="{{getMetricParam(metricId,'defaultValue')}}"
+                                               metric-value-validator metric="metrics[metricId]" message="message"
+                                               ng-model="metricFormValues[metricId]"/>
+
+
+                                        <textarea ng-show="inputTypeVisible(metricId,'TEXTAREA')"
+                                              name="{{metricId}}"
+                                              metric-value-validator metric="metrics[metricId]" message="message"
+                                              ng-model="metricFormValues[metricId]"/>
+
+
+                                        <input ng-show="inputTypeVisible(metricId,'CHECKBOX')"
+                                               type="checkbox" name="{{metricId}}"
+                                               metric-value-validator metric="metrics[metricId]" message="message"
+                                               ng-model="metricFormValues[metricId]"/>
+
+
+                                        <select ng-show="inputTypeVisible(metricId,'SELECT')"
+                                                name="{{metricId}}"
+                                                metric-value-validator metric="metrics[metricId]" message="message"
+                                                ng-model="metricFormValues[metricId]">
+                                            <option ng-repeat="option in metrics[metricId].options"
+                                                    value="{{option}}">
+                                                {{option}}
+                                            </option>
+                                        </select>
+
+                                        <select ng-show="inputTypeVisible(metricId,'MULTISELECT')"
+                                                multiple="multiple"
+                                                name="{{metricId}}"
+                                                metric-value-validator metric="metrics[metricId]" message="message"
+                                                ng-model="metricFormValues[metricId]">
+                                            <option ng-repeat="option in metrics[metricId].options"
+                                                    value="{{option}}">
+                                                {{option}}
+                                            </option>
+                                        </select>
+                                        <span class="metrics-unit" translate="{{metrics[metricId]['unit']}}"></span>
+
+
+                                    </p>
+                                    <span class="errorForm" ng-show="metricForm.$error.metricValueValidator">{{message}}</span>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row-fluid" ng-repeat="queryWrapper in queries">
-                    <div class="span12">
-                        <h3>{{queryWrapper.queryLabel | translate}}</h3>
-
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th>Version</th>
-                                <th>States</th>
-                                <th>Creation date</th>
-                            </tr>
-                            </thead>
-                            <tbody ng-show="queryWrapper.documents.length > 0">
-
-
-                            <tr ng-repeat="document in queryWrapper.documents">
-                                <td class="versionColumn">
-                                    <a href="#document/{{document.id}}">{{document.id}}</a>
-                                </td>
-
-                                <td>
-                                    {{document.states}}
-                                </td>
-                                <td>
-                                    {{document.requestedResouces}}
-                                </td>
-                            </tr>
-
-                            </tbody>
-
-                            <tbody class="noResults" ng-show="queryWrapper.documents.length == 0">
-                            <tr>
-                                <td colspan="3">
-                                    No items to display
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-
-
-        </div>
-
-        <div class="span3 menu-box">
-            <div class="actionList primaryActions hint" data-placement="top" data-trigger="manual" data-container="body" data-content="Available actions">
-
-
-                <button class="editBtn btn btn-primary" ng-repeat="action in visibleActions" ng-click="doAction(action.id)">{{action.label | translate}}</button>
-                <button class="editBtn btn btn-primary" ng-show="isInEditMode" ng-click="cancelEdit()">Cancel</button>
+            </form>
 
             </div>
-
         </div>
+
+
+
+        <!-- queries with other documents connected do sla -->
+        <div ng-include="'app/view/sla/subqueries.html'"></div>
+
     </div>
-
-
-</div>
-</div>
-
-</div>
-
-
-
-
-
-
-
-<div ng-init="init()">
-</div>
-
-
-
-
-
-<div>
-    <h3>Requested resources</h3>
-    <div ng-repeat="(metricId,requestedValue) in document.requestedResouces">
-
-        <span ng-bind="getMetricParam(metricId,'name')" />
-        :
-        {{requestedValue}}
-    </div>
-</div>
-
-
-<div ng-show="isVisibleContainer('form')">
-    <h3>Metrics</h3>
-    <table>
-        <tbody>
-        <tr ng-repeat="metric in metrics" ng-show="!isMetricVisible(metric.id)">
-            <td><span ng-click="addMetricToForm(metric.id)">{{metric.name}}</span></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <h3>metrics form</h3>
-
-    <div ng-repeat="metric in metrics" ng-show="isMetricVisible(metric.id)">
-        {{metric.name}} <input name="{{metric.id}}" ng-model="metricFormValues[metric.id]"/>
-
-        <span ng-click="removeMetric(metric.id)">x</span>
-    </div>
-</div>
+</section>

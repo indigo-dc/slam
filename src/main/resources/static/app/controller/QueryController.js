@@ -1,64 +1,61 @@
 var app = angular.module('configurationManager');
 
-app.controller('QueryController', ['$scope', '$routeParams','$route','QueryService',
-function ($scope, $routeParams, $route, QueryService) {
-    $scope.isLoading = true;
-    $scope.query;
-    $scope.documents =[];
+app.controller('QueryController', ['$scope', '$routeParams', '$route', 'QueryService',
+    function ($scope, $routeParams, $route, QueryService) {
+        $scope.isLoading = false;
+        $scope.query;
+        $scope.documents = [];
 
-    $scope.init = function(query) {
-        $scope.query = query;
-        _loadRemoteData();
-    }
+        $scope.init = function (query) {
+            $scope.query = query;
+            _loadRemoteData();
+        }
 
-    // I load the remote data from the server.
-    function _loadRemoteData() {
-        $scope.isLoading = true;
+        // I load the remote data from the server.
+        function _loadRemoteData() {
+            $scope.isLoading = true;
 
-        QueryService.getQueryDocuments($scope.query.id).then(
-            function(result) {
-                serveResult(result);
-            }
-        );
-    }
+            QueryService.getQueryDocuments($scope.query.id).then(
+                function (result) {
+                    serveResult(result);
+                    $scope.isLoading = false;
+                }
+            );
+        }
 
-    function serveResult(result) {
-        //if(result['status'] == 'SUCCESS') {
+        function serveResult(result) {
+            //if(result['status'] == 'SUCCESS') {
             $scope.documents = result['data'];
             $scope.totalItems = $scope.documents.length;
             $scope.paginateData();
-        //} else {
-        //    alert("blad");
-        //}
-    }
+            //} else {
+            //    alert("blad");
+            //}
+        }
 
 
-    $scope.paginateData = function() {
-        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
-        var end = begin + $scope.itemsPerPage;
+        $scope.paginateData = function () {
+            var begin = (($scope.currentPage - 1) * $scope.itemsPerPage);
+            var end = begin + $scope.itemsPerPage;
 
-        $scope.filteredDocuments = $scope.documents.slice(begin, end);
-    }
-
-
+            $scope.filteredDocuments = $scope.documents.slice(begin, end);
+        }
 
 
-    $scope.filteredDocuments = [];
+        $scope.filteredDocuments = [];
 
-    $scope.currentPage = 1;
-    $scope.itemsPerPage = 5;
-    $scope.totalItems = 0;
-
-
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = 10;
+        $scope.totalItems = 0;
 
 
-    $scope.pageChanged = function(sth) {
-        //$log.log('Page changed to: ' + $scope.currentPage);
-        $scope.currentPage = sth;
-        $scope.paginateData();
-    };
+        $scope.pageChanged = function (sth) {
+            //$log.log('Page changed to: ' + $scope.currentPage);
+            $scope.currentPage = sth;
+            $scope.paginateData();
+        };
 
-    $scope.maxSize = 5;
+        $scope.maxSize = 5;
 
 
-  }]);
+    }]);

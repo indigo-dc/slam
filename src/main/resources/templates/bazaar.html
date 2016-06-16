@@ -1,109 +1,138 @@
-<!DOCTYPE html>
-<html ng-app="configurationManager">
+<!DOCTYPE HTML>
 
+<html ng-app="configurationManager" ng-strict-di="true">
 <head>
-    <link rel="stylesheet" href="css/style.css"/>
+    <title>PLGrid</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-    <!--<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"/>-->
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
-    
-    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="font-awesome.css"/>
+    <link rel="stylesheet" href="font-awesome.min.css"/>
 
 
-    <link href="/css/default/font-awesome.min.css" rel="stylesheet"/>
-    <link href="/css/default/layout.css" rel="stylesheet"/>
-    <!--<link href="/js/lib/jgrowl/jquery.jgrowl.min.css" rel="stylesheet">-->
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css' />
- 
     <script src="/lib/jquery-2.1.3.min.js"></script>
-    <script src="/lib/angular.min.js"></script>
-    <script src="/lib/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js"></script>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.0/angular-sanitize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-url/2.7.2/angular-translate-loader-url.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.7.2/angular-translate-loader-static-files.js"></script>
 
-    <script src="/app/routes.js"></script>
-    <script src="/app/service/services.js"></script>
+    <script src="/app/router.js"></script>
+    <script src="/app/directive/MetricValueValidator.js"></script>
+    <script src="/app/directive/UniqueGrant.js"></script>
+    <script src="/app/directive/GrantNameValidator.js"></script>
+    <script src="/app/directive/DatepickerLocaldate.js"></script>
     <script src="/app/service/QueryService.js"></script>
     <script src="/app/service/DocumentService.js"></script>
+    <script src="/app/service/SitesService.js"></script>
+    <script src="/app/service/DataForGrantCreationService.js"></script>
     <script src="/app/service/MetricService.js"></script>
-    <script src="/app/controller/ApplicationController.js"></script>
+    <script src="/app/service/GetLoggerUser.js"></script>
+    <script src="/app/controller/LeftSectionCtrl.js"></script>
+
     <script src="/app/controller/MainController.js"></script>
+    <script src="/app/controller/DatePickerController.js"></script>
     <script src="/app/controller/QueryController.js"></script>
     <script src="/app/controller/DocumentController.js"></script>
+    <script src="/app/controller/TestGrantController.js"></script>
+
+    <script src="/app/controller/CreatePoolController.js"></script>
+    <script src="/app/controller/CreateRequestController.js"></script>
+
 
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
 
-</head>
 
+</head>
 <body>
 
-<div class="container-fluid">
+<!-- Header -->
+<header id="header">
+    <div id="top-nav">
+        <div class="center">
+            <nav>
+                <ul class="switch">
+                    <li><a href="http://www.plgrid.pl/">STRONA
+                        PLGRID</a></li>
+                    <li><a href="http://portal.plgrid.pl" class="active">PORTAL
+                        PLGRID</a></li>
+                </ul>
+            </nav>
+            <div class="notification">
+                <!--<span class="bell"></span>-->
+                <!--<span class="bell-number">3</span>-->
+            </div>
+            <nav class="user-menu">
+                <ul>
+                    <li>
+                        <a href="#" th:text="${login}"> <i class="fa fa-caret-down"></i> </a>
+                        <ul>
+                            <li><a href="https://portal.plgrid.pl/user/profile" class="user-ico">Mój profil</a></li>
+                            <li><a href="https://openid.plgrid.pl/logout" class="logout-ico">Wyloguj</a></li>
 
-    <div ng-view="">
+                        </ul>
+                    </li>
 
+                </ul>
+            </nav>
+
+        </div>
     </div>
 
-</div>
-
-<div id="dialogContainer">
-    <div id="dialogBody">
+    <div class="center main-menu">
+        <a href="" id="logo"></a>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="https://portal.plgrid.pl/">Mój PLGRID</a></li>
+                <li><a href="https://accounting.plgrid.pl/">Wykorzystanie grantów</a></li>
+                <li><a href="https://helpdesk.plgrid.pl/">Helpdesk</a></li>
+            </ul>
+        </nav>
     </div>
-</div>
+</header>
 
 
-<div class="toggleAnnotations toggleAnnotationsTrigger">
-    <a href="#">Help!</a>
-</div>
-<div id="pleaseWaitOverlay" class="annotation-widget-overlay" style="display:none" title="Click to close">
-</div>
+<!-- Main -->
+<section id="main">
+    <div class="center">
 
 
+        <!-- tutaj wskakuje content-->
+        <div ng-view=""/>
 
+    </div>
+</section>
 
+<div style="clear: both;"></div>
 
+<!-- Footer -->
+<footer id="footer" class="center">
+    <div>
+        <p>Copyright © 2016, Konsorcjum PL-Grid. Wszelkie prawa zastrzeżone</p>
+    </div>
 
+    <nav>
+        <ul>
+            <li><a href="https://portal.plgrid.pl/">Mój PLGRID</a></li>
+            <li><a href="https://accounting.plgrid.pl/">Wykorzystanie grantów</a></li>
+            <li><a href="https://helpdesk.plgrid.pl/">Helpdesk</a></li>
+        </ul>
+    </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</footer>
+<!-- Scripts -->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.dropotron.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/skel-viewport.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/main.js"></script>
 
 
 </body>
-
 </html>
