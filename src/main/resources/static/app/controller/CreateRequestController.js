@@ -4,7 +4,6 @@ app.controller('CreateRequestController', ['$scope', '$routeParams', '$route', '
     function ($scope, $routeParams, $route, DocumentService, DataForGrantCreationService) {
         $scope.grantId = "";
         $scope.affiliationId = "";
-        $scope.branchOfScienceId = "";
         $scope.team = "";
         $scope.displayErrorComunicate = false;
 
@@ -22,7 +21,6 @@ app.controller('CreateRequestController', ['$scope', '$routeParams', '$route', '
             DataForGrantCreationService.getData().then(
                 function (result) {
                     $scope.userTeams = result['data']['teams'];
-                    $scope.branchesOfScience = result['data']['branchOfSciences'];
                     $scope.userAffiliations = result['data']['affiliations'];
                     $scope.isLoading = false;
                 },

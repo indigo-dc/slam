@@ -42,20 +42,7 @@
                     <option ng-repeat="affiliation in ::userAffiliations" value="{{affiliation.id}}">{{affiliation.name}}</option>
                 </select>
             </div>
-            <div style="clear:both;"
-
-            <div class="form-group form-grant">
-                <div class="header-form-grant">
-                    <label translate="createGrantForm.label.branchOfScience"></label>
-                </div>
-                <select required="required" ng-model="branchOfScienceId">
-                    <option ng-repeat="branch in ::branchesOfScience"
-                            value="{{branch.code}}">
-                        {{branch.name}}
-                    </option>
-                </select>
-            </div>
-
+            <div style="clear:both;">
 
             <p translate="createRequestForm.description"></p>
             <div class="end-line"></div>

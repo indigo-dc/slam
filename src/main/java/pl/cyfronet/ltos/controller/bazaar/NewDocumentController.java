@@ -10,8 +10,11 @@ import com.google.common.base.Preconditions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import pl.cyfronet.ltos.bean.User;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -63,4 +66,5 @@ public class NewDocumentController {
 
         return "redirect:bazaar#/document/" + document.getId();
     }
+    
 }
