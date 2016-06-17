@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -41,8 +42,13 @@ public class User {
     private Boolean confirmedRegistration;
     private String unityPersistentIdentity;
     private boolean hasActiveSla;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Affiliation> affiliations;
+    
+    @JsonIgnore
+    @ManyToMany
+    private List<Team> teams;
 
 }
