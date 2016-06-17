@@ -1,3 +1,10 @@
 Add team
 
 curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/teams/0' http://localhost:8080/users/1/teams
+
+curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/users/153' http://localhost:8080/teams/0/members
+
+
+Add role
+
+ curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/roles/1' http://localhost:8080/users/153/roles

@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String name;
     private String country;
@@ -48,7 +48,11 @@ public class User {
     private List<Affiliation> affiliations;
     
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(mappedBy="members")
     private List<Team> teams;
+    
+    @JsonIgnore
+    @ManyToMany
+    private List<Role> userRoles;
 
 }

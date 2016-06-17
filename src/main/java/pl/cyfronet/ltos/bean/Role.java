@@ -2,7 +2,6 @@ package pl.cyfronet.ltos.bean;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,18 +16,17 @@ import lombok.Data;
  */
 @Entity
 @Data
-public class Team {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    
     private String name;
     
-    @ManyToMany
-    private List<User> members;
+    @ManyToMany(mappedBy="userRoles")
+    private List<User> users;
     
-    @ManyToMany
-    private List<Role> teamRoles;
+    @ManyToMany(mappedBy="teamRoles")
+    private List<Team> teams;
     
 }
