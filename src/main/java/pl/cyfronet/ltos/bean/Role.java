@@ -2,6 +2,7 @@ package pl.cyfronet.ltos.bean;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,8 +20,10 @@ import lombok.Data;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    
+    @Column(unique=true)
     private String name;
     
     @ManyToMany(mappedBy="userRoles")

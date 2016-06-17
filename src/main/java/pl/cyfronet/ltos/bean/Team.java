@@ -20,7 +20,7 @@ import lombok.Data;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
     private String name;

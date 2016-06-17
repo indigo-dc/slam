@@ -24,7 +24,7 @@ import lombok.ToString;
 public class Affiliation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String country;
     private String institution;
