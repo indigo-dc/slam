@@ -29,6 +29,6 @@ public class Team {
     private List<User> members;
     
     @ManyToMany
-    private List<Role> teamRoles;
+    private List<Role> roles;
     
 }

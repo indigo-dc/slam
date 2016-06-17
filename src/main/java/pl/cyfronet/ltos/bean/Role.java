@@ -26,10 +26,10 @@ public class Role {
     @Column(unique=true)
     private String name;
     
-    @ManyToMany(mappedBy="userRoles")
+    @ManyToMany(mappedBy="roles")
     private List<User> users;
     
-    @ManyToMany(mappedBy="teamRoles")
+    @ManyToMany(mappedBy="roles")
     private List<Team> teams;
     
 }

@@ -53,6 +53,6 @@ public class User {
     
     @JsonIgnore
     @ManyToMany
-    private List<Role> userRoles;
+    private List<Role> roles;
 
 }
