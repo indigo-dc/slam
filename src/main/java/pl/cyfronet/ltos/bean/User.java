@@ -2,6 +2,7 @@ package pl.cyfronet.ltos.bean;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -35,6 +36,8 @@ public class User {
     private Long id;
     private String name;
     private String country;
+    
+    @Column(unique=true)
     private String email;
     private String researchGate;
     private String linkedln;
