@@ -80,7 +80,7 @@ actions:
           documentAlias: BASE
           metrics:
             !java.util.ArrayList
-              - content2
+              - content
     secondStepActions:
     - !com.agreemount.slaneg.action.definition.CreateNewLeaf
       id: save

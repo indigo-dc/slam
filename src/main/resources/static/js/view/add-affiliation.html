@@ -8,37 +8,49 @@
     <h2><i class="fa fa-briefcase"></i>Add new affiliation</h2>
     <form ng-submit="addAffiliationSubmit()" class="horizontal"name="form">
         <ul>
+        
+        
+            <li>
+                <label>Institution type</label>
+                <select  name="inst-type" ng-model="institutionType" ng-options="instType as instType for instType in instTypeList" required>
+                    <option value="">-- Select --</option>
+                </select>
+            </li>
+        
+            <li>
+                <label>Name</label>
+                <input type="text" name="name" ng-model="name"/>
+            </li>
+        
+        
+        
+        
+        
             <li>
                 <label>Country / NGI</label>
                 <select  name="country" ng-model="country" ng-options="country as country for country in countryList" required ng-change=updateListInstitution(country)>
                     <option value="">-- Select --</option>
                 </select>
             </li>
-            <li>
-                <label>Institution </label>
-                <!--<input type="text" name="institution" ng-model="institution" required/>-->
-                <input type="text" keyboard-poster post-function="searchInstitution" ng-model="institution" name="institution" list="updatedList" required ng-change="updateListDepartment(institution)">
-                <datalist id="updatedList">
-                    <select>
-                        <option ng-repeat="institution in updatedList" value="{{institution}}"></option>
-                    </select>
-                    <!--<select style="display: none;" id="_select" name="_select" ng-model='selectedCountry' ng-options='k as v for (k,v) in countries'></select>-->
-                </datalist>
-            </li>
-            <li>
-                <label>Department</label>
-                <input type="text" keyboard-poster post-function="searchDepartment" ng-model="department" name="department" list="updatedDepartmentList" required>
-                <datalist id="updatedDepartmentList">
-                    <select>
-                        <option ng-repeat="department in updatedDepartmentList track by $index" value="{{department}}"></option>
-                    </select>
-                    <!--<select  ng-model="department" ng-options="department as department for department in departmentList"></select>-->
-                </datalist>
+        
+        
+<!--         $scope.institutionType;
+        $scope.name;
+        $scope.acronym;
+        $scope.department;
+        $scope.address;
+        $scope.zipCode;
+        $scope.city;
+        
+        // country
+        $scope.phone;
+        $scope.phone2;
+        $scope.website; -->
 
-                <!--<datalist id="departmentList">-->
-                    <!--<select  ng-model="department" ng-options="department as department for department in departmentList"></select>-->
-                <!--</datalist>-->
-            </li>
+       
+        
+        
+        
             <li>
                 <label class="doubleline">Departmental webpage <span>(optional)</span></label>
                 <input type="text" name="webPage" ng-model="webPage"/>

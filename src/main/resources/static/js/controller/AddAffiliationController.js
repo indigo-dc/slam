@@ -1,16 +1,47 @@
 var app = angular.module('ltosApp');
 
-app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', '$route','identityService', 'helperService', 'SpringDataRestAdapter', 
-    function ($scope, $http, affiliationService, profileService, institutionService, countryService, $route, identityService, helperService, SpringDataRestAdapter) {
+app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationService', 'profileService', 'institutionService', 'countryService', 'instTypeService', '$route','identityService', 'helperService', 'SpringDataRestAdapter', 
+    function ($scope, $http, affiliationService, profileService, institutionService, countryService, instTypeService, $route, identityService, helperService, SpringDataRestAdapter) {
         if(!identityService.identityRegistered()){
             window.location = "#/";
         }
         $scope.doTheBack = function() {
             window.history.back();
         };
-        //$scope.result1 = '';
-        //$scope.options1 = null;
-        //$scope.details1 = '';
+
+        $scope.institutionType;
+        $scope.name;
+        $scope.acronym;
+        $scope.department;
+        $scope.address;
+        $scope.zipCode;
+        $scope.city;
+        
+        // country
+        $scope.phone;
+        $scope.phone2;
+        $scope.website;
+
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         $scope.institutionsList = [];
         $scope.institutionsListUpdated = [];
         $scope.departmentList = [];
@@ -26,6 +57,7 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
             }
         );
 
+        $scope.instTypeList = instTypeService.getInstTypeList();
         $scope.countryList = countryService.getCountryList();
         var user = null;
         
@@ -55,7 +87,6 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
 		                    location.reload();
 					}, helperService.alertError);
         }
-        
         
 
         $scope.updateListInstitution = function(country){
