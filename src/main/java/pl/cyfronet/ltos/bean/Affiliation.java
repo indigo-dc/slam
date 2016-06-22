@@ -50,7 +50,6 @@ public class Affiliation {
      */
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User owner;
 

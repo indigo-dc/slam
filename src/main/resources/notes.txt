@@ -1,4 +1,4 @@
-Add team
+Add user to team
 
 curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/teams/0' http://localhost:8080/users/1/teams
 
@@ -10,5 +10,8 @@ Add role
 curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/roles/3' http://localhost:8080/users/153/roles
  
  
+Change affiliation state  
+ 
+curl -i -X PATCH -H "Content-Type:application/json" -H "Cookie:JSESSIONID=$JSESSIONID" -d '{ "status" : "ACTIVE" }' http://localhost:8080/affiliations/8
  
  

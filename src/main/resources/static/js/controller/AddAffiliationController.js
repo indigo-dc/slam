@@ -15,11 +15,15 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
     	var httpPromise = $http.get("/users/" + identityService.getIdentity().id);
 		SpringDataRestAdapter.process(httpPromise).then(
 				function(processedResponse) {
+					console.log(processedResponse._links.self.href); 
+					
 					 $scope.affiliation = { owner: processedResponse._links.self.href };
+					 console.log($scope.affiliation); 
 				}, helperService.alertError);
         
         $scope.addAffiliationSubmit = function () {
         	var affiliation = $scope.affiliation;
+        	console.log($scope.affiliation);
         	var httpPromise = $http.post('/affiliations/', affiliation);
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
