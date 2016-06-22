@@ -65,6 +65,36 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				templateUrl : 'js/view/footer.html'
 			}
 		}
+	}).state('affiliations-management', {
+		url : "/affiliations-management",
+		views : {
+			"header" : {
+				controller : "MainController",
+				templateUrl : 'js/view/header.html'
+			},
+			"viewContent" : {
+				controller : "AffiliationsManagementListController",
+				templateUrl : 'js/view/affiliations-management-list.html'
+			},
+			"footer" : {
+				templateUrl : 'js/view/footer.html'
+			}
+		}
+	}).state('manage-affiliation', {
+		url : "/manage-affiliation",
+		views : {
+			"header" : {
+				controller : "MainController",
+				templateUrl : 'js/view/header.html'
+			},
+			"viewContent" : {
+				controller : "ManageAffiliationController",
+				templateUrl : 'js/view/manage-affiliation.html'
+			},
+			"footer" : {
+				templateUrl : 'js/view/footer.html'
+			}
+		}
 	}).state('affiliation-view', {
 		url : "/affiliation-view",
 		views : {

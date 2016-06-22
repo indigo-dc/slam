@@ -23,6 +23,7 @@ public class DashboardController {
 
     // TODO rewrite all legacy method to make them similar to repository REST controllers
     
+    
     @Autowired
     UserRepository userRepo;
     
@@ -36,7 +37,7 @@ public class DashboardController {
     private UserFirstSteps steps() {
         UserFirstSteps userFirstSteps = new UserFirstSteps();
         PortalUser pu = (PortalUser) SecurityContextHolder.getContext().getAuthentication();
-        User user = pu.getUserBean();
+        User user = pu.getUserBean();                
         List<Affiliation> affiliations = user.getAffiliations();
         boolean hasAffiliation = false;
         if (affiliations != null) {

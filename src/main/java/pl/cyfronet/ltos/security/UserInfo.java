@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
+import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.security.policy.Identity;
 
@@ -20,6 +21,7 @@ public class UserInfo {
     private String name;
     private Boolean confirmedRegistration;
     private String unityPersistentIdentity;
+    private boolean operator;
 
     public User.UserBuilder toUserPrototype() {
         return User.builder()
@@ -33,12 +35,21 @@ public class UserInfo {
         if (user == null) {
             return null;
         }
-        return UserInfo.builder()
+        UserInfoBuilder builder = UserInfo.builder()
             .id(user.getId())
             .email(user.getEmail())
             .name(user.getName())
             .confirmedRegistration(user.getConfirmedRegistration())
-            .unityPersistentIdentity(user.getUnityPersistentIdentity()).build();
+            .unityPersistentIdentity(user.getUnityPersistentIdentity());
+        /*
+         * TODO fix role assignment below
+         */
+        for(Role role: user.getRoles()) {
+            if (role.getName().equals("operator") || role.getName().equals("admin")) {
+                builder.operator(true);
+            }
+        }
+        return builder.build() ;
     }
 
 }

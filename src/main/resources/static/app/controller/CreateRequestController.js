@@ -32,9 +32,7 @@ app.controller('CreateRequestController', ['$scope', '$http','$routeParams', '$r
 	//                }
 	//            );
 	//        }
-	        
-	        
-	        
+	       
 	        
 	        var httpPromise = $http.get("/users/" + identityService.getIdentity().id);
 			SpringDataRestAdapter.process(httpPromise).then(

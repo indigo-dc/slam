@@ -1,14 +1,39 @@
+ROOKSANA: {
+    Najpierw ustaw w bashu zmienną JSESSIONID=2BF934AA5460BFF9C80231283265524D 
+    (wartość pobierz z przeglądarki, Firebug, Ctrl + shift + J, lub zapytaj Tomka, Wojtka, albo Krzyśka)
+} 
+
+W przeglądarce powinno działać:
+
+http://localhost:8080/teams
+http://localhost:8080/users
+http://localhost:8080/affiliations
+http://localhost:8080/roles
+
+Userzy:
+
+login: admin, pass: admin
+login: user, pass: user
+
+Known issue:
+jak nie widać panelu admina to się przeloguj po pierwszym starcie aplikacji
+jak nie widać akceptacji afiliacji - przeloguj się 
+
+Create team
+
+curl -i -X POST -H "Content-Type:application/json" -H "Cookie:JSESSIONID=$JSESSIONID" -d '{ "name" : "ninjas" }' http://localhost:8080/teams
+
+Create role
+
+curl -i -X POST -H "Content-Type:application/json" -H "Cookie:JSESSIONID=$JSESSIONID" -d '{ "name" : "watcher" }' http://localhost:8080/roles
+
 Add user to team
 
-curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/teams/0' http://localhost:8080/users/1/teams
-
-curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/users/153' http://localhost:8080/teams/0/members
-
+curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/users/2' http://localhost:8080/teams/3/members
 
 Add role
 
 curl -i -X POST -H "Content-Type:text/uri-list" -H "Cookie:JSESSIONID=$JSESSIONID" -d 'http://localhost:8080/roles/3' http://localhost:8080/users/153/roles
- 
  
 Change affiliation state  
  

@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.security.PortalUser.PortalUserBuilder;
 
@@ -61,7 +62,8 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
                 info = createAdminInfo();
-                user = operations.saveUser(info.toUserPrototype().build());
+                Role role = operations.loadOrCreateRoleByName("admin");
+                user = operations.saveUser(info.toUserPrototype().country("Poland").roles(Arrays.asList(role)).build());
                 info.setId(user.getId());
             }
             builder.user(user);
@@ -77,7 +79,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
                 info = createUserInfo();
-                user = operations.saveUser(info.toUserPrototype().build());
+                user = operations.saveUser(info.toUserPrototype().country("Poland").build());
                 info.setId(user.getId());
             }
             builder.user(user);
@@ -141,6 +143,13 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             em.flush();
             return user;
         }
+        
+        @Transactional
+        public Role saveRole(Role role) {
+            em.persist(role);
+            em.flush();
+            return role;
+        }
 
         /*
          * Consider new version of spring data rest - such 
@@ -159,6 +168,26 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                 principal = resultList.get(0);
             }
             return principal;
+        }
+        
+        @Transactional
+        public Role loadOrCreateRoleByName(String roleName)
+                throws UsernameNotFoundException {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Role> q = cb.createQuery(Role.class);
+            Root<Role> role = q.from(Role.class);
+            q.select(role).where(cb.equal(role.get("name"), roleName));
+            List<Role> resultList = em.createQuery(q).getResultList();
+            Role theRole = null;
+            if (!resultList.isEmpty()) {
+                theRole = resultList.get(0);
+            } else {
+                theRole = new Role();
+                theRole.setName(roleName);
+                em.persist(theRole);
+                em.flush();
+            }
+            return theRole;
         }
         
     }

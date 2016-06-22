@@ -1,0 +1,26 @@
+<div class="box grid-1" ng-controller="AffiliationsManagementListController">
+	<h2>
+		<i class="fa fa-briefcase"></i>Affiliations management
+	</h2>
+	<!-- Lista -->
+	<div ng-show="affiliationsList" class="affiliationsList">
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Status</th>
+				<th>Date</th>
+			</tr>
+			<tbody ng-repeat="affiliation in affiliationsList">
+				<tr>
+					<td><a href="#/manage-affiliation"
+						ng-click="setAffiliation(affiliation)">
+							{{affiliation.department+" / "+affiliation.name}} </a></td>
+					<td>{{affiliation.status}}</td>
+					<td>{{affiliation.lastUpdateDate | date:'MM.dd.yyyy'}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+
