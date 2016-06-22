@@ -14,5 +14,10 @@ public class HandlersConfig {
     UserEventHandler getUserEventHandler() {
         return new UserEventHandler();
     }
+    
+    @Bean
+    AffiliationEventHandler getAffiliationEventHandler() {
+        return new AffiliationEventHandler();
+    }
 
 }

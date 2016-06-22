@@ -10,7 +10,7 @@
         <ul>
             <li>
                 <label>Institution type</label>
-                <select  name="inst-type" ng-model="institutionType" ng-options="instType as instType for instType in instTypeList" required>
+                <select  name="type" ng-model="affiliation.type" ng-options="instType as instType for instType in instTypeList" required>
                     <option value="">-- Select --</option>
                 </select>
             </li>
@@ -46,11 +46,11 @@
             </li>
             <li>
                 <label>Phone</label>
-                <input type="text" name="phone" ng-model="affiliation.phone"  placeholder="e.g. +48 12 632 33 55"/>
+                <input type="text" name="primaryPhone" ng-model="affiliation.primaryPhone"  placeholder="e.g. +48 12 632 33 55"/>
             </li>
             <li>
-                <label>Phone 2</label>
-                <input type="text" name="phone2" ng-model="affiliation.phone2" />
+                <label>Secondary Phone</label>
+                <input type="text" name="secodnaryPhone" ng-model="affiliation.secondaryPhone" />
             </li>
             <li>
                 <label class="doubleline">Departmental webpage</label>

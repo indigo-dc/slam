@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Data
-@ToString(exclude = "affiliations")
+@ToString(exclude = {"affiliations", "teams", "roles"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

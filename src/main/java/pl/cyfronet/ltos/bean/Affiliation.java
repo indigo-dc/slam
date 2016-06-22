@@ -1,5 +1,7 @@
 package pl.cyfronet.ltos.bean;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,10 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.ToString;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author bwilk
@@ -27,6 +29,7 @@ public class Affiliation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    private String type;
     private String name;
     private String acronym;
     private String department;
@@ -34,9 +37,10 @@ public class Affiliation {
     private String zipCode;
     private String city;
     private String country;
-    private String phone;
-    private String phone2;
+    private String primaryPhone;
+    private String secondaryPhone;
     private String webPage;
+    private Date lastUpdateDate;
     
     private String status;
     

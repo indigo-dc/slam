@@ -19,14 +19,12 @@ app.controller('AddAffiliationController', ['$scope', '$http', 'affiliationServi
 				}, helperService.alertError);
         
         $scope.addAffiliationSubmit = function () {
-        	 var affiliation = $scope.affiliation;
-        	 
-        	
+        	var affiliation = $scope.affiliation;
         	var httpPromise = $http.post('/affiliations/', affiliation);
 			SpringDataRestAdapter.process(httpPromise).then(
 					function(processedResponse) {
 						  window.location = "#";
-		                    location.reload();
+		                  location.reload();
 					}, helperService.alertError);
         }
         
