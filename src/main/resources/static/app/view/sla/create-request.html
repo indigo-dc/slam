@@ -24,24 +24,15 @@
             <span ng-if="displayErrorComunicate" class="errorForm" translate="createPoolOrGrantForm.errors.loadingUserDataProblem"></span>
 
 
-
             <div class="form-group form-grant form-columns">
                 <div class="header-form-grant">
                     <label translate="createGrantForm.label.site"></label>
                 </div>
                 <select required="required" ng-model="team">
-                    <option ng-repeat="team in ::userTeams" value="{{team}}">{{team}}</option>
+                    <option ng-repeat="team in ::userTeams" value="{{team.name}}">{{team.name}}</option>
                 </select>
             </div>
-
-            <div class="form-group form-grant form-columns">
-                <div class="header-form-grant">
-                    <label translate="createGrantForm.label.affiliation"></label>
-                </div>
-                <select required="required" ng-model="affiliationId">
-                    <option ng-repeat="affiliation in ::userAffiliations" value="{{affiliation.id}}">{{affiliation.name}}</option>
-                </select>
-            </div>
+    
             <div style="clear:both;">
 
             <p translate="createRequestForm.description"></p>

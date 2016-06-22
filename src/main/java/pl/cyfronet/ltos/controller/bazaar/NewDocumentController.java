@@ -83,11 +83,7 @@ public class NewDocumentController {
 
         Document document = new Document();
         document.setName(createGrantData.getGrantId());
-
-        /*
-         * TODO - select proper team 
-         */
-        document.setTeam(identityProvider.getIdentity().getTeamMembers().get(0).getTeam());
+        document.setTeam(createGrantData.getTeam());
 
         ActionContext actionContext = actionLogic.runAction(document, "documentDraftFromController", "createNewRequest");
 

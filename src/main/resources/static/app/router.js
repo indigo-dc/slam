@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager', ['ngRoute', 'ngSanitize','ui.bootstrap', 'pascalprecht.translate']);
+var app = angular.module('configurationManager', ['ngRoute', 'ngSanitize', "ngResource",'ui.bootstrap', 'pascalprecht.translate', 'spring-data-rest']);
 
 
 app.config(['$routeProvider', function ($routeProvider) {
