@@ -12,7 +12,7 @@ app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationSer
         	affiliationService.setCurrentAffiliation(affiliation);
         }
   
-		SpringDataRestAdapter.process($http.get("/affiliations/")).then(_setAffiliations, helperService.alertError);
+		SpringDataRestAdapter.process($http.get("/users/" + identityService.getIdentity().id + "/affiliations")).then(_setAffiliations, helperService.alertError);
 	
 		function _setAffiliations(processedResponse) {
 			$scope.affiliationsList = processedResponse._embeddedItems;
