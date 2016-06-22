@@ -8,64 +8,57 @@
     <h2><i class="fa fa-briefcase"></i>Add new affiliation</h2>
     <form ng-submit="addAffiliationSubmit()" class="horizontal"name="form">
         <ul>
-        
-        
             <li>
                 <label>Institution type</label>
                 <select  name="inst-type" ng-model="institutionType" ng-options="instType as instType for instType in instTypeList" required>
                     <option value="">-- Select --</option>
                 </select>
             </li>
-        
             <li>
                 <label>Name</label>
-                <input type="text" name="name" ng-model="name"/>
+                <input type="text" name="name" ng-model="affiliation.name"  placeholder="e.g. Akademia Górniczo Hutnicza"/>
             </li>
-        
-        
-        
-        
-        
+            <li>
+                <label>Acronym</label>
+                <input type="text" name="acronym" ng-model="affiliation.acronym"  placeholder="e.g. AGH"/>
+            </li>
+            <li>
+                <label>Department/Center</label>
+                <input type="text" name="department" ng-model="affiliation.department"  placeholder="e.g. ACK Cyfronet"/>
+            </li>
+            <li>
+                <label>Address</label>
+                <input type="text" name="address" ng-model="affiliation.address" placeholder="e.g. ul. Nawojki 11"/>
+            </li>
+            <li>
+                <label>ZIP code</label>
+                <input type="text" name="zipCode" ng-model="affiliation.zipCode" placeholder="e.g. 30-950"/>
+            </li>
+            <li>
+                <label>City</label>
+                <input type="text" name="city" ng-model="affiliation.city" placeholder="e.g. Kraków"/>
+            </li>
             <li>
                 <label>Country / NGI</label>
-                <select  name="country" ng-model="country" ng-options="country as country for country in countryList" required ng-change=updateListInstitution(country)>
+                <select  name="country" ng-model="affiliation.country" ng-options="country as country for country in countryList" required ng-change=updateListInstitution(country)>
                     <option value="">-- Select --</option>
                 </select>
             </li>
-        
-        
-<!--         $scope.institutionType;
-        $scope.name;
-        $scope.acronym;
-        $scope.department;
-        $scope.address;
-        $scope.zipCode;
-        $scope.city;
-        
-        // country
-        $scope.phone;
-        $scope.phone2;
-        $scope.website; -->
-
-       
-        
-        
-        
             <li>
-                <label class="doubleline">Departmental webpage <span>(optional)</span></label>
-                <input type="text" name="webPage" ng-model="webPage"/>
+                <label>Phone</label>
+                <input type="text" name="phone" ng-model="affiliation.phone"  placeholder="e.g. +48 12 632 33 55"/>
             </li>
             <li>
-                <label>Supervisor name <span>(optional)</span></label>
-                <input type="text"name="supervisorName" ng-model="supervisorName"/>
+                <label>Phone 2</label>
+                <input type="text" name="phone2" ng-model="affiliation.phone2" />
             </li>
             <li>
-                <label>Supervisor e-mail <span>(optional)</span></label>
-                <input type="text" name="supervisorEmail" ng-model="supervisorEmail" placeholder="e.g. john.smith@email.com"/>
+                <label class="doubleline">Departmental webpage</label>
+                <input type="text" name="webPage" ng-model="affiliation.webPage" placeholder="e.g. www.cyfronet.pl"/>
             </li>
             <li>
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-success" ng-disabled="form.$invalid">
+                <button type="submit" class="btn btn-success">
                     <i class="fa fa-send"></i>Send affiliation
                 </button>
                 <a type="button" class="btn btn-cancel" href="#/account">

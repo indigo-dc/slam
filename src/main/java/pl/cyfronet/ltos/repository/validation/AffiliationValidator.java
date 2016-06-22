@@ -22,8 +22,14 @@ public class AffiliationValidator implements Validator {
         /*
          * Third parameter refers to messages.properties entry
          */
-        ValidationUtils.rejectIfEmpty(errors, "institution", "affiliation.noinst");
+        ValidationUtils.rejectIfEmpty(errors, "name", "affiliation.noinstname");
         ValidationUtils.rejectIfEmpty(errors, "department", "affiliation.nodep");
+        ValidationUtils.rejectIfEmpty(errors, "address", "affiliation.noaddr");
+        ValidationUtils.rejectIfEmpty(errors, "zipCode", "affiliation.nozip");
+        ValidationUtils.rejectIfEmpty(errors, "city", "affiliation.nocity");
+        ValidationUtils.rejectIfEmpty(errors, "country", "affiliation.nocountry");
+        
+        
     }
 
 }
