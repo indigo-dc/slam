@@ -39,7 +39,7 @@ app.controller('CreateRequestController', ['$scope', '$routeParams', '$route', '
                     window.location = "#/document/" + result.data.redirectToDocument;
                 }, function (error) {
                     $scope.isLoading = false;
-                    alert("Wystąpił błąd prz tworzeniu wniosku o grant.");
+                    alert("Wystąpił błąd przy tworzeniu wniosku o grant.");
                 }
             );
         }
