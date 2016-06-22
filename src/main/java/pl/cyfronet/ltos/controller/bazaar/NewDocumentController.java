@@ -81,9 +81,16 @@ public class NewDocumentController {
 
         logger.debug("" + identity);
 
+        String grantOwnerTeam = createGrantData.getTeam();
+        checkTeam(user, grantOwnerTeam);
+      
         Document document = new Document();
         document.setName(createGrantData.getGrantId());
-        document.setTeam(createGrantData.getTeam());
+        document.setTeam(grantOwnerTeam);
+        
+        /*
+         * check if user has this team...
+         */
 
         ActionContext actionContext = actionLogic.runAction(document, "documentDraftFromController", "createNewRequest");
 
@@ -97,6 +104,16 @@ public class NewDocumentController {
         response.setData(redirectActionResponse);
 
         return response;
+    }
+
+    private void checkTeam(User user, String grantTeam) {
+        for (Team userTeam: user.getTeams()) {
+           if (userTeam.getName().equals(grantTeam)) {
+               return;
+           }
+        }
+        // TODO throw proper exception to match http response
+        throw new RuntimeException("Not allowed to choose team: " + grantTeam);
     }
 
     @Transactional
