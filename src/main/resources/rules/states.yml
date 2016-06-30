@@ -5,18 +5,21 @@ states:
     label: documentType
     values:
       - !com.agreemount.bean.document.state.StateValue
-        id: documentTypeChange
-        label: change
+        id: offer
+        label: offer
       - !com.agreemount.bean.document.state.StateValue
-        id: documentTypeNegotiation
-        label: negotiation
+        id: request
+        label: request
+      - !com.agreemount.bean.document.state.StateValue
+        id: sla
+        label: SLA
   - !com.agreemount.bean.document.state.State
-    id: statusMain
+    id: mainState
     label: statusMain
     values:
       - !com.agreemount.bean.document.state.StateValue
-        id: open
-        label: open
+        id: draft
+        label: draft
       - !com.agreemount.bean.document.state.StateValue
         id: signed
         label: signed
@@ -26,6 +29,35 @@ states:
       - !com.agreemount.bean.document.state.StateValue
         id: closed
         label: closed
+      - !com.agreemount.bean.document.state.StateValue
+        id: rejected
+        label: rejected
+      - !com.agreemount.bean.document.state.StateValue
+        id: offerPublished
+        label: offerPublished
+      - !com.agreemount.bean.document.state.StateValue
+        id: offerHidden
+        label: offerHidden
+  - !com.agreemount.bean.document.state.State
+    id: OfferType
+    label: offerType
+    values:
+      - !com.agreemount.bean.document.state.StateValue
+        id: publicOffer
+        label: publicOffer
+      - !com.agreemount.bean.document.state.StateValue
+        id: privateOffer
+        label: privateOffer
+  - !com.agreemount.bean.document.state.State
+    id: sideState
+    label: sideState
+    values:
+      - !com.agreemount.bean.document.state.StateValue
+        id: customer
+        label: customer
+      - !com.agreemount.bean.document.state.StateValue
+        id: provider
+        label: provider
 
 
 

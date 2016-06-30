@@ -4,76 +4,231 @@
 queries:
 
   - !com.agreemount.bean.Query
-    label: My negotiations
-    constraint:
-      !com.agreemount.slaneg.constraint.query.definition.Operator
+    label: Public Offers
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
-                  role: owner
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
-          value: negotiation
-
-
-
-#######################
-# poniżej - do zrobienia
+          value: offer
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: offerPublished
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: OfferType
+          value: publicOffer
 
   - !com.agreemount.bean.Query
-    label: All leafs
+    label: Private Offers
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
         children:
-        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
-          role: owner
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: cos
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: docType
-          value: change
+          state: documentType
+          value: offer
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: offerPublished
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
 
   - !com.agreemount.bean.Query
-    label: to act somehow
+    label: My Public Offers
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
         children:
-        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
-          role: customer
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: cos
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: docType
-          value: change
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+          sth: sth
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: offerPublished
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: OfferType
+          value: publicOffer
+
+  - !com.agreemount.bean.Query
+    label: My Private Offers
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+          sth: sth
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: offerPublished
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+
+  - !com.agreemount.bean.Query
+    label: Hidden (non-published) offers
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: statusMain
+          value: offerHidden
+        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+          sth: sth
+
+######################################################
+
+  - !com.agreemount.bean.Query
+    label: My negotiations
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: request
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: mainState
           value: sent
 
-
   - !com.agreemount.bean.Query
-    label: not owner side
-    constraint:
+    label: My signed public SLAs
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
         children:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: ownerSide
-          value: false
-
-
-#######################33
-# For DEVEL only
+          state: documentType
+          value: sla
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: OfferType
+          value: publicOffer
 
   - !com.agreemount.bean.Query
-    label: My negotiations
-    constraint:
-      !com.agreemount.slaneg.constraint.query.definition.Operator
+    label: My signed private SLAs
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-        - !com.agreemount.slaneg.constraint.query.definition.HasRoleInRelatedBusinessEntityDef
-                  role: owner
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
-          value: change
+          value: sla
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+
+  - !com.agreemount.bean.Query
+    label: My drafts
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: request
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: draft
+
+
+#dodać kwerendę dla providera opieracjącą się o relację z ofertami (moje sla publiczne/prywatne)

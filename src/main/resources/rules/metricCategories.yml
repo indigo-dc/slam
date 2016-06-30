@@ -1,9 +1,23 @@
 metricCategories:
 
   - !com.agreemount.bean.metric.MetricCategory
-    id: change
-    label: mcChange
+    id: mcService1
+    label: mcService1
     children:
       - !com.agreemount.bean.metric.MetricCategory
-        id: changeDetails
-        label: mcChangeDetails
+        id: service1
+        label: service1
+  - !com.agreemount.bean.metric.MetricCategory
+    id: mcService2
+    label: mcService2
+    children:
+      - !com.agreemount.bean.metric.MetricCategory
+        id: service2
+        label: service2
+  - !com.agreemount.bean.metric.MetricCategory
+    id: mcService3
+    label: mcService3
+    children:
+      - !com.agreemount.bean.metric.MetricCategory
+        id: service3
+        label: service3

@@ -3,12 +3,39 @@ identities:
   - !com.agreemount.bean.identity.Identity
     login: login1
     roles: #nie chcemy zeby ta nibyakcja sie wyswietlala, dlatego taki dziwny warunek
-      - manager
+      - provider
       - operator
     teamMembers:
       - !com.agreemount.bean.identity.TeamMember
         role: rola
         team: nazwaTeamu
+
+  - !com.agreemount.bean.identity.Identity
+    login: manager
+    roles: #nie chcemy zeby ta nibyakcja sie wyswietlala, dlatego taki dziwny warunek
+      - manager
+    teamMembers:
+      - !com.agreemount.bean.identity.TeamMember
+        role: rola
+        team: nazwaTeamu
+
+  - !com.agreemount.bean.identity.Identity
+    login: Provider1
+    roles: #nie chcemy zeby ta nibyakcja sie wyswietlala, dlatego taki dziwny warunek
+      - provider
+    teamMembers:
+      - !com.agreemount.bean.identity.TeamMember
+        role: rola
+        team: provider1
+
+  - !com.agreemount.bean.identity.Identity
+    login: Provider2
+    roles: #nie chcemy zeby ta nibyakcja sie wyswietlala, dlatego taki dziwny warunek
+      - provider
+    teamMembers:
+      - !com.agreemount.bean.identity.TeamMember
+        role: rola
+        team: provider2
 
 
 

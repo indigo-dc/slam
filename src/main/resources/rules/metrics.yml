@@ -14,16 +14,57 @@ metrics:
      id: content
      label: Content
      description: alternative text for the change
-     categoryId: changeDetails
+     categoryId: service1
 
   - !com.agreemount.bean.metric.LongStringMetric
     id: motivation
     label: Motivation
     description: reasons why this change makes sense (visible for other side)
-    categoryId: changeDetails
+    categoryId: service1
 
   - !com.agreemount.bean.metric.LongStringMetric
     id: comment
     label: Comment
     description: comment visible only for my side
-    categoryId: changeDetails
+    categoryId: service1
+
+
+    #################################################################3
+
+  - !com.agreemount.bean.metric.LongStringMetric
+     id: content2
+     label: Content2
+     description: alternative text for the change
+     categoryId: service2
+
+  - !com.agreemount.bean.metric.LongStringMetric
+    id: motivation2
+    label: Motivation2
+    description: reasons why this change makes sense (visible for other side)
+    categoryId: service2
+
+  - !com.agreemount.bean.metric.LongStringMetric
+    id: comment2
+    label: Comment2
+    description: comment visible only for my side
+    categoryId: service2
+
+#########################################################################
+
+  - !com.agreemount.bean.metric.LongStringMetric
+     id: content3
+     label: Content3
+     description: alternative text for the change
+     categoryId: service3
+
+  - !com.agreemount.bean.metric.LongStringMetric
+    id: motivation3
+    label: Motivation3
+    description: reasons why this change makes sense (visible for other side)
+    categoryId: service3
+
+  - !com.agreemount.bean.metric.LongStringMetric
+    id: comment3
+    label: Comment3
+    description: comment visible only for my side
+    categoryId: service3

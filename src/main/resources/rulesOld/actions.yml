@@ -1,0 +1,111 @@
+actions:
+
+
+#do ponizszj niby-akcji mozna dopisywac constrainty, ktore chce sie reuzytkowac
+  - !com.agreemount.slaneg.action.definition.ActionsAttributesContainer
+    id: notARealAction
+    constraint: #nie chcemy zeby ta nibyakcja sie wyswietlala, dlatego taki dziwny warunek
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: nieistniejacystatn
+          value: nieistnajacawartosc
+    constraints:
+      - &pewienConstraint !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+        role: manager
+#tutaj mozna dopisac kolejne wspoldzielone constrainty, po znaku myslnika jak powyzej
+
+
+#funkcja do tworzenia nowego dokumentu TOMEK - ta akcja tworzy nowy dokument
+  - !com.agreemount.slaneg.action.definition.CreateNewRoot
+    id: createNewRequest #NIE ZMIENIAC - po tej zmiennej wyszukuje akcję do tworzenia requesty
+    label: Stwórz wniosek SLA
+    alias: newRoot #NIE ZMIENIAC - po tym aliasie dostaje sie dokumentu i ustawiam mu team uzytkownika
+    basedOnDocumentStoredUnderAlias: documentDraftFromController #NIE ZMIENIAC
+    redirectToThisVersion: true
+    visible: false
+
+    actions:
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newRoot
+        metricId: content
+        value: to jest przykładowy content
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newRoot
+        metricId: motivation
+        value: robie to tylko dlatego
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newRoot
+        metricId: comment
+        value: na tym mi nie zależy
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newRoot
+        states:
+          documentType: negotiation
+          mainState: open
+      - !com.agreemount.slaneg.action.definition.CreateNewRoot
+        alias: changeContent
+        metricSource: ALIAS
+        copyMetricsFromAlias: newRoot
+        actions:
+          - !com.agreemount.slaneg.action.definition.ChangeState
+             documentAlias: changeContent
+             states:
+               documentType: change
+               changeState: draft
+          - !com.agreemount.slaneg.action.definition.CreateRelation
+             leftAlias: changeContent
+             relation: is_negotiation_of
+             rightAlias: newRoot
+
+#eakcja edycji i zapisu/wysłania
+
+  - !com.agreemount.slaneg.action.definition.MoveOn
+    id: editDraft
+    label: Edytuj dokument
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: negotiation
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: open
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.HasAnyOfMetrics
+          documentAlias: BASE
+          metrics:
+            !java.util.ArrayList
+              - content2
+    secondStepActions:
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: save
+      label: zapisz szkic
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      setTeamFromAlias: BASE
+      redirectToThisVersion: true
+      copyRelationsFromAlias: BASE
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: send
+      label: wyślij dokument
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      redirectToThisVersion: true
+      setTeamFromAlias: BASE
+      copyRelationsFromAlias: BASE
+      actions:
+        - !com.agreemount.slaneg.action.definition.ChangeState
+          documentAlias: newLeaf
+          states:
+            mainState: sent

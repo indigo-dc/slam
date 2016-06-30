@@ -1,0 +1,29 @@
+#tutuaj specyfikujemy metryki
+#dopisać do każdego opowiednie wartości dla atrybutów (sobota lub pon):
+#    private String id;
+#    private String label;
+#    private String unit;
+#    private boolean required = false;
+#    private List<String> availableForStateValues = new ArrayList<>();
+#    private String categoryId;
+#    private int position;
+
+metrics:
+
+  - !com.agreemount.bean.metric.LongStringMetric
+     id: content
+     label: Content
+     description: alternative text for the change
+     categoryId: changeDetails
+
+  - !com.agreemount.bean.metric.LongStringMetric
+    id: motivation
+    label: Motivation
+    description: reasons why this change makes sense (visible for other side)
+    categoryId: changeDetails
+
+  - !com.agreemount.bean.metric.LongStringMetric
+    id: comment
+    label: Comment
+    description: comment visible only for my side
+    categoryId: changeDetails
