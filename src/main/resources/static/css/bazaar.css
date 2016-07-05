@@ -2770,7 +2770,7 @@ ul#double{
 
 
 .loader, .loginWait {
-    background: url(../img/loading.gif) no-repeat center;
+    background: url(../images/loading.gif) no-repeat center;
     height: 32px;
     padding: 15px;
     border-radius: 2px;
