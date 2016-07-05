@@ -446,17 +446,17 @@ h4.resources {
     padding: 30px 0 0 0;
 }
 
-.requestedResources {
+.metrics {
     padding-bottom: 18px;
 }
 
-.requestedResources table {
+.metrics table {
     border: 0px;
 }
-.requestedResources table th, .requestedResources table td {
+.metrics table th, .metrics table td {
     border: 0px;
 }
-.requestedResources .icon-info-sign {
+.metrics .icon-info-sign {
     margin-top: 3px;
 }
 .remove-metric .icon-remove-circle, 
@@ -467,13 +467,13 @@ h4.resources {
 .metric-catrgory .icon-remove-circle:hover {
     opacity: 0.7;
 }
-form.requestedResources h6 {
+form.metrics h6 {
     font-size: 14px;
     margin-left: 9px;
     width: 98%;
     border-bottom: 1px solid #C8E5F7;
 }
-orm.requestedResources h6 span.remove-metric-category {
+orm.metrics h6 span.remove-metric-category {
     text-transform: capitalize;
     font-weight: normal;
     font-size: 14px;
@@ -515,7 +515,7 @@ table td.new-value.is-text {
     width: 160px;
     word-break: normal
 }
-form.requestedResources input {
+form.metrics input {
     margin-bottom: 0px;
     padding: 0px 3px;
     max-width: 150px;

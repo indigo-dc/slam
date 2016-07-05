@@ -34,7 +34,7 @@
         <dependency>
             <groupId>com.agreemount</groupId>
             <artifactId>engine</artifactId>
-            <version>1.0.46</version>
+            <version>1.0.47</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -93,11 +93,11 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-        <dependency>
-            <groupId>pl.cyfronet</groupId>
-            <artifactId>bazaar-uo-ext</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>pl.cyfronet</groupId>-->
+            <!--<artifactId>bazaar-uo-ext</artifactId>-->
+            <!--<version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

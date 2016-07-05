@@ -2,6 +2,8 @@ package pl.cyfronet.ltos.controller.bazaar;
 
 import java.util.List;
 
+import com.agreemount.slaneg.action.ActionContext;
+import com.agreemount.slaneg.action.ActionContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +17,6 @@ import org.springframework.context.annotation.PropertySources;
 import com.agreemount.Response;
 import com.agreemount.bean.Query;
 import com.agreemount.bean.identity.Identity;
-import com.agreemount.slaneg.db.QueryOperations;
 import com.agreemount.slaneg.fixtures.GenericYamlProvider;
 
 /**
@@ -29,14 +30,8 @@ import com.agreemount.slaneg.fixtures.GenericYamlProvider;
 public class BazaarConfig {
 
     @Autowired
-    private QueryOperations queryOperations;
-
-    @Autowired
     @Qualifier("queriesYamlProvider")
     private GenericYamlProvider<Query> queriesYamlProvider;
-
-    @Value("${rules.loadOnStartup}")
-    private boolean loadRulesOnStartup;
     
     @Value("${engine.dummyLogin}")
     private String dummyLogin;
@@ -51,15 +46,10 @@ public class BazaarConfig {
         return new GenericYamlProvider<>("identities");
     }
 
+
     @Bean
-    public Response prepareRules() {
-
-        if (loadRulesOnStartup) {
-            List<Query> queries = queriesYamlProvider.getItems();
-            queryOperations.storeQueries(queries);
-        }
-
-        return new Response();
+    public ActionContextFactory<ActionContext> getActionContextFactory() {
+        return new ActionContextFactory<>(ActionContext.class);
     }
 
 }

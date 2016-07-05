@@ -1,0 +1,9 @@
+queryCategories:
+
+  - !com.agreemount.bean.query.QueryCategory
+    id: default
+    label: Default query category
+
+  - !com.agreemount.bean.query.QueryCategory
+    id: qc1
+    label: QueryCategory 2

@@ -4,7 +4,9 @@
 queries:
 
   - !com.agreemount.bean.Query
+    id: myNegotiations
     label: My negotiations
+    queryCategoryId: default
     constraint:
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: OR
@@ -21,7 +23,9 @@ queries:
 # poniżej - do zrobienia
 
   - !com.agreemount.bean.Query
+    id: allLeafs
     label: All leafs
+    queryCategoryId: default
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -35,7 +39,9 @@ queries:
           value: change
 
   - !com.agreemount.bean.Query
+    id: toAct
     label: to act somehow
+    queryCategoryId: default
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -53,7 +59,9 @@ queries:
 
 
   - !com.agreemount.bean.Query
+    id: notOwnerSide
     label: not owner side
+    queryCategoryId: default
     constraint:
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -67,7 +75,9 @@ queries:
 # For DEVEL only
 
   - !com.agreemount.bean.Query
-    label: My negotiations
+    id: myNegotiationsDevel
+    label: My negotiations DEVEL
+    queryCategoryId: default
     constraint:
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: OR
