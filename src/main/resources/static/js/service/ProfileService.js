@@ -5,7 +5,7 @@ app.service("profileService", ['$http', '$q', 'identityService', function ($http
     return ({
         getUser: getUser,
         getIdentity: getIdentity, 
-        loadIdentity, loadIdentity
+        loadIdentity: loadIdentity
     });
     
     function getUser() {
@@ -27,7 +27,7 @@ app.service("profileService", ['$http', '$q', 'identityService', function ($http
         var request = $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             method: "get",
-            url: "identity/get"
+            url: "identityUserInfo/get"
         });
         return (request.then(handleSuccess, handleError));
     }

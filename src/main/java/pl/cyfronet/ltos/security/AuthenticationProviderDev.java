@@ -1,5 +1,7 @@
 package pl.cyfronet.ltos.security;
 
+import com.agreemount.bean.identity.Identity;
+import com.agreemount.bean.identity.provider.IdentityProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AuthenticationProviderDev implements AuthenticationProvider {
 
@@ -33,6 +36,9 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
 
     @Autowired
     UserOperations operations;
+
+    @Autowired
+    IdentityProvider identityProvider;
 
     @Override
     public Authentication authenticate(Authentication authentication)
@@ -59,22 +65,34 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
         if (name.equals("admin") && password.equals("admin")) {
             User user = operations.loadUserByUnityIdentity("admin");
             UserInfo info = UserInfo.fromUser(user);
+
+            List<Role> roles = new ArrayList<>();
+            Role role = operations.loadOrCreateRoleByName("admin");
+            roles.add(role);
+            role = operations.loadOrCreateRoleByName("provider");
+            roles.add(role);
+
             if (user == null) {
                 info = createAdminInfo();
-                List<Role> roles = new ArrayList<>();
-                Role role = operations.loadOrCreateRoleByName("admin");
-                roles.add(role);
-                role = operations.loadOrCreateRoleByName("provider");
-                roles.add(role);
                 user = operations.saveUser(info.toUserPrototype().country("Poland").roles(roles).build());
                 info.setId(user.getId());
+
             }
             builder.user(user);
             builder.principal(info);
             builder.authorities(Arrays.asList(
                     new SimpleGrantedAuthority("ROLE_ADMIN"), 
                     new SimpleGrantedAuthority("ROLE_USER")));
-            builder.isAuthenticated(true);            
+            builder.isAuthenticated(true);
+
+            Identity identity = new Identity();
+            identity.setLogin(name);
+            List<String> strings = roles.stream()
+                    .map(object -> (object != null ? object.getName() : null))
+                    .collect(Collectors.toList());
+            identity.setRoles(strings);
+            identityProvider.setIdentity(identity);
+
             return builder.build();
         }
         if (name.equals("user") && password.equals("user")) {
@@ -91,12 +109,22 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             builder.authorities(Arrays.asList(
                     new SimpleGrantedAuthority("ROLE_USER")));
             builder.isAuthenticated(true);
+            Identity identity = new Identity();
+            identity.setLogin(name);
+            List<String> strings = user.getRoles().stream()
+                    .map(object -> (object != null ? object.getName() : null))
+                    .collect(Collectors.toList());
+            identity.setRoles(strings);
+            identityProvider.setIdentity(identity);
+
             return builder.build();
         }
         if (name.equals("noreg")) {
             UserInfo info = createNoregInfo();
             builder.principal(info);
             builder.isAuthenticated(true);
+
+
             return builder.build();
         }
         return null;

@@ -1,9 +1,7 @@
 package pl.cyfronet.ltos.controller;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpSession;
-
+import com.agreemount.bean.identity.Identity;
+import com.agreemount.bean.identity.provider.IdentityProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
-
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.security.UserInfo;
+
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class LegacyMethods {
 
     @Autowired
     private UserRepository users;
+
+    @Autowired
+    private IdentityProvider identityProvider;
 
     @RequestMapping(value = "user/get", method = RequestMethod.GET)
     @Transactional
@@ -35,13 +38,22 @@ public class LegacyMethods {
     }
 
     @Transactional
-    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
-    public ResponseEntity<UserInfo> getIndentity() throws IOException {
+    @RequestMapping(value = "identityUserInfo/get", method = RequestMethod.GET)
+    public ResponseEntity<UserInfo> getIndentityOld() throws IOException {
         UserInfo user = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null) {
             return new ResponseEntity<UserInfo>(HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<UserInfo>(user, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
+    public ResponseEntity<Identity> getIndentity() throws IOException {
+        Identity user = identityProvider.getIdentity();
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)

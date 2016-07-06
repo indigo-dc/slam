@@ -7,7 +7,7 @@ app.service("profileService", ['$http', '$q', 'identityService', function ($http
     return ({
         getUser: getUser,
         getIdentity: getIdentity, 
-        loadIdentity, loadIdentity
+        loadIdentity: loadIdentity
     });
     
     function getUser() {
