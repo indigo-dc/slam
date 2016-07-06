@@ -93,11 +93,11 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>pl.cyfronet</groupId>
             <artifactId>bazaar-uo-ext</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>

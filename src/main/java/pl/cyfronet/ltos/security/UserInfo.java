@@ -1,15 +1,10 @@
 package pl.cyfronet.ltos.security;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.security.policy.Identity;
 
 @Data
 @Builder
@@ -45,7 +40,7 @@ public class UserInfo {
          * TODO fix role assignment below
          */
         for(Role role: user.getRoles()) {
-            if (role.getName().equals("operator") || role.getName().equals("admin")) {
+            if (role.getName().equals("provider") || role.getName().equals("admin")) {
                 builder.operator(true);
             }
         }
