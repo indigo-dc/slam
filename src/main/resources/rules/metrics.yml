@@ -10,61 +10,210 @@
 
 metrics:
 
-  - !com.agreemount.bean.metric.LongStringMetric
-     id: content
-     label: Content
-     description: alternative text for the change
-     categoryId: service1
+#computing
 
-  - !com.agreemount.bean.metric.LongStringMetric
-    id: motivation
-    label: Motivation
-    description: reasons why this change makes sense (visible for other side)
-    categoryId: service1
+  - !com.agreemount.bean.metric.DateMetric
+    id: startComp
+    label: Start
+    categoryId: computingTargets
+    required: true
+    description: When u wish your SLA to activate
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - sla
 
-  - !com.agreemount.bean.metric.LongStringMetric
-    id: comment
-    label: Comment
-    description: comment visible only for my side
-    categoryId: service1
+  - !com.agreemount.bean.metric.DateMetric
+    id: endComp
+    label: end
+    categoryId: computingTargets
+    required: true
+    description: When u wish your SLA to finish
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - sla
+        
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: totalGuaranteedComputing
+    label: total-guaranteed computing time
+    categoryId: computingTargets
+    required: true
+    description: The guaranteed quantity of computing time to be granted to the user group in total
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: h
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: totalLimitComputing
+    label: total-limit computing time
+    categoryId: computingTargets
+    required: true
+    description: The limit of computing time for the user group in total
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: h    
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: instanceGuaranteedComputing
+    label: instance-guaranteed computing time
+    categoryId: computingTargets
+    required: true
+    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: h     
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: instanceLimitComputing
+    label: instance-limit computing time
+    categoryId: computingTargets
+    required: true
+    description: The limit of a resource for each instance
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: h      
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: userGuaranteedComputing
+    label: user-guaranteed computing time
+    categoryId: computingTargets
+    required: true
+    description: The guaranteed quantity of a resource to be granted to each user
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: h      
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: userLimitComputing
+    label: user-limit computing time
+    categoryId: computingTargets
+    required: true
+    description: The limit of a resource for each user
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: h      
 
 
-    #################################################################3
 
-  - !com.agreemount.bean.metric.LongStringMetric
-     id: content2
-     label: Content2
-     description: alternative text for the change
-     categoryId: service2
+# storage
 
-  - !com.agreemount.bean.metric.LongStringMetric
-    id: motivation2
-    label: Motivation2
-    description: reasons why this change makes sense (visible for other side)
-    categoryId: service2
+  - !com.agreemount.bean.metric.DateMetric
+    id: startStorage
+    label: Start
+    categoryId: storageTargets
+    required: true
+    description: When u wish your SLA to activate
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - sla
 
-  - !com.agreemount.bean.metric.LongStringMetric
-    id: comment2
-    label: Comment2
-    description: comment visible only for my side
-    categoryId: service2
+  - !com.agreemount.bean.metric.DateMetric
+    id: endStorage
+    label: end
+    categoryId: storageTargets
+    required: true
+    description: When u wish your SLA to finish
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - sla
+        
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: totalGuaranteedStorage
+    label: total-guaranteed storage space
+    categoryId: storageTargets
+    required: true
+    description: The guaranteed quantity of storage to be granted to the user group in total
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: GB
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: totalLimitStorage
+    label: total-limit storage space
+    categoryId: storageTargets
+    required: true
+    description: The limit of storage for the user group in total
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: GB    
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: instanceGuaranteedStorage
+    label: instance-guaranteed storage space
+    categoryId: storageTargets
+    required: true
+    description: The guaranteed quantity of storage to be granted to each instance (virtual machine or Docker container)
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: GB     
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: instanceLimitStorage
+    label: instance-limit storage space
+    categoryId: storageTargets
+    required: true
+    description: The limit of a resource for each instance
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: GB      
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: userGuaranteedStorage
+    label: user-guaranteed storage space
+    categoryId: storageTargets
+    required: true
+    description: The guaranteed quantity of a resource to be granted to each user
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: GB      
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: userLimitStorage
+    label: user-limit storage space
+    categoryId: storageTargets
+    required: true
+    description: The limit of a resource for each user
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: GB      
 
-#########################################################################
 
-  - !com.agreemount.bean.metric.LongStringMetric
-     id: content3
-     label: Content3
-     description: alternative text for the change
-     categoryId: service3
-
-  - !com.agreemount.bean.metric.LongStringMetric
-    id: motivation3
-    label: Motivation3
-    description: reasons why this change makes sense (visible for other side)
-    categoryId: service3
-
-  - !com.agreemount.bean.metric.LongStringMetric
-    id: comment3
-    label: Comment3
-    description: comment visible only for my side
-    categoryId: service3

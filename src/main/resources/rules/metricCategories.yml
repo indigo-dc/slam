@@ -1,23 +1,29 @@
 metricCategories:
 
   - !com.agreemount.bean.metric.MetricCategory
-    id: mcService1
-    label: mcService1
+    id: mcComputing
+    label: mcComputing
     children:
       - !com.agreemount.bean.metric.MetricCategory
-        id: service1
-        label: service1
+        id: computingTargets
+        label: compute service targets
+      - !com.agreemount.bean.metric.MetricCategory
+        id: computingRestrictions
+        label: compute service restrictions
   - !com.agreemount.bean.metric.MetricCategory
-    id: mcService2
-    label: mcService2
+    id: mcStorage
+    label: mcStorage
     children:
       - !com.agreemount.bean.metric.MetricCategory
-        id: service2
-        label: service2
-  - !com.agreemount.bean.metric.MetricCategory
-    id: mcService3
-    label: mcService3
-    children:
+        id: storageTargets
+        label: storage service targets
       - !com.agreemount.bean.metric.MetricCategory
-        id: service3
-        label: service3
+        id: storageRestrictions
+        label: storage service restrictions
+#  - !com.agreemount.bean.metric.MetricCategory
+#    id: mcService3
+#    label: mcService3
+#    children:
+#      - !com.agreemount.bean.metric.MetricCategory
+#        id: service3
+#        label: service3

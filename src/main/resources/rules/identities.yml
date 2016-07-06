@@ -4,7 +4,7 @@ identities:
     login: login1
     roles: #nie chcemy zeby ta nibyakcja sie wyswietlala, dlatego taki dziwny warunek
       - provider
-      - operator
+      - manager
     teamMembers:
       - !com.agreemount.bean.identity.TeamMember
         role: rola

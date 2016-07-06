@@ -39,352 +39,6 @@ actions:
           mainState: offerHidden
           OfferType: publicOffer
 
-#akcja zmiany oferty na prywatną
-
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: changeToPrivateOffer
-    label: Change offer to private
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyRelationsFromAlias: BASE
-    copyMetricsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    setTeamFromAlias: BASE
-    redirectToThisVersion: true
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: offer
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: OfferType
-          value: publicOffer
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-    actions:
-      - !com.agreemount.slaneg.action.definition.ChangeState
-        documentAlias: newLeaf
-        states:
-          OfferType: privateOffer
-          #na razie nie usuwam relacji, jak dla mnie rpzydałoby sie je zostawić
-
-#akcja zmiany oferty na publiczną
-
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: changeToPublicOffer
-    label: Change offer to public
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyRelationsFromAlias: BASE
-    copyMetricsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    setTeamFromAlias: BASE
-    redirectToThisVersion: true
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: offer
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: OfferType
-          value: privateOffer
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-    actions:
-      - !com.agreemount.slaneg.action.definition.ChangeState
-        documentAlias: newLeaf
-        states:
-          OfferType: publicOffer
-          #na razie nie usuwam relacji, jak dla mnie rpzydałoby sie je zostawić
-
-#oznaczenie oferty jako serwis1
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: addSerwis1Metrics
-    label: Make it a service1 offer
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyRelationsFromAlias: BASE
-    copyMetricsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    setTeamFromAlias: BASE
-    redirectToThisVersion: true
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: offer
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: offerHidden
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.HasMetricsDef
-          type: ANY
-          documentAlias: BASE
-          negation: true
-          metrics:
-            - content
-#          mustNotBeEmpty: false
-
-          #hasAnyOfMetric
-    actions:
-      - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
-        metricId: content
-        #fajnie by było, gdyby była akcja usuwania wszystkich metryk
-
-#oznaczenie oferty jako serwis2
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: addSerwis2Metrics
-    label: Make it a service2 offer
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyRelationsFromAlias: BASE
-    copyMetricsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    setTeamFromAlias: BASE
-    redirectToThisVersion: true
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: offer
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: offerHidden
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.HasMetricsDef
-          type: ANY
-          documentAlias: BASE
-          negation: true
-          metrics:
-            - content2
-#          mustNotBeEmpty: false
-          #hasAnyOfMetric
-    actions:
-      - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
-        metricId: content2
-        #fajnie by było, gdyby była akcja usuwania wszystkich metryk
-
-#oznaczenie oferty jako serwis3
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: addSerwis3Metrics
-    label: Make it a service3 offer
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyRelationsFromAlias: BASE
-    copyMetricsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    setTeamFromAlias: BASE
-    redirectToThisVersion: true
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: offer
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: offerHidden
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.HasMetricsDef
-          type: ANY
-          documentAlias: BASE
-          negation: true
-          metrics:
-            - content3
-#          mustNotBeEmpty: false
-          #hasAnyOfMetric
-    actions:
-      - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
-        metricId: content3
-        #fajnie by było, gdyby była akcja usuwania wszystkich metryk
-
-
-#eakcja edycji i zapisu/wysłania
-
-  - !com.agreemount.slaneg.action.definition.MoveOn
-    id: editDraft
-    label: Edit request
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: request
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: draft
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: manager
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
-#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
-    secondStepActions:
-    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-      id: save
-      label: Save as draft
-      parentAlias: BASE
-      alias: newLeaf
-      metricSource: FORM
-      copyRelationsFromAlias: BASE
-      copyStatesFromAlias: BASE
-      setTeamFromAlias: BASE
-      redirectToThisVersion: true
-      copyRelationsFromAlias: BASE
-    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-      id: send
-      label: Send Request
-      parentAlias: BASE
-      alias: newLeaf
-      metricSource: FORM
-      copyRelationsFromAlias: BASE
-      copyStatesFromAlias: BASE
-      redirectToThisVersion: true
-      setTeamFromAlias: BASE
-      copyRelationsFromAlias: BASE
-      actions:
-        - !com.agreemount.slaneg.action.definition.ChangeState
-          documentAlias: newLeaf
-          states:
-            mainState: sent
-            sideState: provider
-
-#negocjacja użytkownika
-  - !com.agreemount.slaneg.action.definition.MoveOn
-    id: editNegotiation
-    label: Negotiate
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: request
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: customer
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: manager
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
-#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
-    secondStepActions:
-    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-      id: save
-      label: Save (and send later)
-      parentAlias: BASE
-      alias: newLeaf
-      metricSource: FORM
-      copyRelationsFromAlias: BASE
-      copyStatesFromAlias: BASE
-      setTeamFromAlias: BASE
-      redirectToThisVersion: true
-      copyRelationsFromAlias: BASE
-    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-      id: send
-      label: Send
-      parentAlias: BASE
-      alias: newLeaf
-      metricSource: FORM
-      copyRelationsFromAlias: BASE
-      copyStatesFromAlias: BASE
-      redirectToThisVersion: true
-      setTeamFromAlias: BASE
-      copyRelationsFromAlias: BASE
-      actions:
-        - !com.agreemount.slaneg.action.definition.ChangeState
-          documentAlias: newLeaf
-          states:
-            sideState: provider
-
-#Wysyłanie do providera
-
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: sendToProvider
-    label: Send to provider
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyMetricsFromAlias: BASE
-    copyRelationsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    redirectToThisVersion: true
-    setTeamFromAlias: BASE
-    copyRelationsFromAlias: BASE
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: request
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: customer
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: manager
-        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-          documentAlias: BASE
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
-#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
-    actions:
-      - !com.agreemount.slaneg.action.definition.ChangeState
-        documentAlias: newLeaf
-        states:
-          sideState: provider
-
-
-
-
-
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: publishOffer
@@ -473,6 +127,656 @@ actions:
           states:
             mainState: offerHidden
 
+#akcja zmiany oferty na prywatną
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: changeToPrivateOffer
+    label: Change offer to private
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: publicOffer
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          OfferType: privateOffer
+          #na razie nie usuwam relacji, jak dla mnie rpzydałoby sie je zostawić
+
+#akcja zmiany oferty na publiczną
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: changeToPublicOffer
+    label: Change offer to public
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          OfferType: publicOffer
+          #na razie nie usuwam relacji, jak dla mnie rpzydałoby sie je zostawić
+
+#oznaczenie oferty jako serwis1
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: addComputingMetrics
+    label: Make it a computing offer
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: offerHidden
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.HasMetricsDef
+          type: ANY
+          documentAlias: BASE
+          negation: true
+          metrics:
+            - totalGuaranteedComputing
+#          mustNotBeEmpty: false
+    actions:
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: totalGuaranteedComputing
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: totalLimitComputing
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: instanceGuaranteedComputing
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: instanceLimitComputing
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: userGuaranteedComputing
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: userLimitComputing                                        
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          serviceType: computing
+        #fajnie by było, gdyby była akcja usuwania wszystkich metryk
+
+#oznaczenie oferty jako storage
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: addStorageMetrics
+    label: Make it a storage offer
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: offerHidden
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.HasMetricsDef
+          type: ANY
+          documentAlias: BASE
+          negation: true
+          metrics:
+            - content2
+#          mustNotBeEmpty: false
+    actions:
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: totalGuaranteedStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: totalLimitStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: instanceGuaranteedStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: instanceLimitStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: userGuaranteedStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: userLimitStorage                                        
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          serviceType: storage
+        #fajnie by było, gdyby była akcja usuwania wszystkich metryk
+
+##oznaczenie oferty jako serwis3
+#  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+#    id: addSerwis3Metrics
+#    label: Make it a service3 offer
+#    parentAlias: BASE
+#    alias: newLeaf
+#    metricSource: ALIAS
+#    copyRelationsFromAlias: BASE
+#    copyMetricsFromAlias: BASE
+#    copyStatesFromAlias: BASE
+#    setTeamFromAlias: BASE
+#    redirectToThisVersion: true
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: documentType
+#          value: offer
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: mainState
+#          value: offerHidden
+#        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+#          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasMetricsDef
+#          type: ANY
+#          documentAlias: BASE
+#          negation: true
+#          metrics:
+#            - content3
+##          mustNotBeEmpty: false
+#    actions:
+#      - !com.agreemount.slaneg.action.definition.AddMetric
+#        documentAlias: newLeaf
+#        metricId: content3
+#        #fajnie by było, gdyby była akcja usuwania wszystkich metryk
+
+#negocjacja providera
+
+  - !com.agreemount.slaneg.action.definition.MoveOn
+    id: editNegotiationForProvider
+    label: Negotiate
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+    secondStepActions:
+#    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+#      id: saveForProvider
+#      label: Save (and send later)
+#      parentAlias: BASE
+#      alias: newLeaf
+#      metricSource: FORM
+#      copyRelationsFromAlias: BASE
+#      copyStatesFromAlias: BASE
+#      setTeamFromAlias: BASE
+#      redirectToThisVersion: true
+#      copyRelationsFromAlias: BASE
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: sendToCustomer
+      label: Send
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      redirectToThisVersion: true
+      setTeamFromAlias: BASE
+      copyRelationsFromAlias: BASE
+      actions:
+        - !com.agreemount.slaneg.action.definition.ChangeState
+          documentAlias: newLeaf
+          states:
+            sideState: customer
+
+#Wysyłanie do customera
+
+#  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+#    id: sendToCustomer
+#    label: Send to customer
+#    parentAlias: BASE
+#    alias: newLeaf
+#    metricSource: ALIAS
+#    copyMetricsFromAlias: BASE
+#    copyRelationsFromAlias: BASE
+#    copyStatesFromAlias: BASE
+#    redirectToThisVersion: true
+#    setTeamFromAlias: BASE
+#    copyRelationsFromAlias: BASE
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: documentType
+#          value: request
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: OfferType
+#          value: privateOffer
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: mainState
+#          value: sent
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: provider
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+#          documentAlias: BASE
+#    actions:
+#      - !com.agreemount.slaneg.action.definition.ChangeState
+#        documentAlias: newLeaf
+#        states:
+#          sideState: customer
+
+# zaakceptowanie
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: acceptRequest
+    label: Accept request
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyMetricsFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    redirectToThisVersion: true
+    setTeamFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          documentType: sla
+          mainState: signed
+          SlaActivityState: beforeStart
+
+#odrzucenie
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: rejectRequest
+    label: Reject request
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyMetricsFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    redirectToThisVersion: true
+    setTeamFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          mainState: rejected
+
+#-----------------------------------------------------------------------------------
+
+#akcja edycji i zapisu/wysłania
+
+  - !com.agreemount.slaneg.action.definition.MoveOn
+    id: editDraft
+    label: Edit request
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: draft
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
+    secondStepActions:
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: save
+      label: Save as draft
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      setTeamFromAlias: BASE
+      redirectToThisVersion: true
+      copyRelationsFromAlias: BASE
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: send
+      label: Send Request
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      redirectToThisVersion: true
+      setTeamFromAlias: BASE
+      copyRelationsFromAlias: BASE
+      actions:
+        - !com.agreemount.slaneg.action.definition.ChangeState
+          documentAlias: newLeaf
+          states:
+            mainState: sent
+            sideState: provider
+
+#negocjacja użytkownika
+  - !com.agreemount.slaneg.action.definition.MoveOn
+    id: editNegotiation
+    label: Negotiate
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: customer
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
+    secondStepActions:
+#    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+#      id: save
+#      label: Save (and send later)
+#      parentAlias: BASE
+#      alias: newLeaf
+#      metricSource: FORM
+#      copyRelationsFromAlias: BASE
+#      copyStatesFromAlias: BASE
+#      setTeamFromAlias: BASE
+#      redirectToThisVersion: true
+#      copyRelationsFromAlias: BASE
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: send
+      label: Send
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      redirectToThisVersion: true
+      setTeamFromAlias: BASE
+      copyRelationsFromAlias: BASE
+      actions:
+        - !com.agreemount.slaneg.action.definition.ChangeState
+          documentAlias: newLeaf
+          states:
+            sideState: provider
+
+##Wysyłanie do providera
+#
+#  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+#    id: sendToProvider
+#    label: Send to provider
+#    parentAlias: BASE
+#    alias: newLeaf
+#    metricSource: ALIAS
+#    copyMetricsFromAlias: BASE
+#    copyRelationsFromAlias: BASE
+#    copyStatesFromAlias: BASE
+#    redirectToThisVersion: true
+#    setTeamFromAlias: BASE
+#    copyRelationsFromAlias: BASE
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: documentType
+#          value: request
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: mainState
+#          value: sent
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: customer
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: manager
+#        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+#          documentAlias: BASE
+##        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+##          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          sideState: provider
+
+#akceptacja ropozycji providera
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: acceptProviderOffer
+    label: Buy resources
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyMetricsFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    redirectToThisVersion: true
+    setTeamFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: customer
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          documentType: sla
+          mainState: signed
+          SlaActivityState: beforeStart
+
+#odrzucenie propozycji providera
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: rejectProviderOffer
+    label: Reject Provider's offer
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyMetricsFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    copyStatesFromAlias: BASE
+    redirectToThisVersion: true
+    setTeamFromAlias: BASE
+    copyRelationsFromAlias: BASE
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: customer
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          mainState: rejected
+
+
+
+
+
+
+
 #tworzenie requestu przez użytkownika
 
 #  - !com.agreemount.slaneg.action.definition.CreateNewRoot
@@ -513,7 +817,7 @@ actions:
 ##        documentAlias: newLeaf
 
   - !com.agreemount.slaneg.action.definition.CreateNewRoot
-    id: createRequestFromPrivateOffer
+    id: createRequestFromPrivateOfferComputing
     label: create request from private offer
     alias: newLeaf
     metricSource: ALIAS
@@ -538,6 +842,9 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: OfferType
           value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: serviceType
+          value: computing
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
@@ -545,6 +852,59 @@ actions:
           documentType: request
           mainState: draft
           OfferType: privateOffer
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: startComp    
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: endComp               
+      - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
+        leftAlias: newLeaf
+        relation: is_connected_SLA_to_Offer
+        rightAlias: BASE
+
+  - !com.agreemount.slaneg.action.definition.CreateNewRoot
+    id: createRequestFromPrivateOfferStorage
+    label: create request from private offer
+    alias: newLeaf
+    metricSource: ALIAS
+    copyMetricsFromAlias: BASE
+    redirectToThisVersion: true
+    copyNameFromAlias: BASE
+    setTeamFromAlias: BASE #do zastapienia przez nadawanie teamu użytkownika, który klika
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager #definicja musi miec jakis argument, bo yaml sie wyklada
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: offerPublished
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: privateOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          documentType: request
+          mainState: draft
+          OfferType: privateOffer
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: startStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: endStorage
       - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
         leftAlias: newLeaf
         relation: is_connected_SLA_to_Offer
@@ -552,7 +912,7 @@ actions:
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewRoot
-    id: createRequestFromPublicOffer
+    id: createRequestFromPublicOfferComputing
     label: create request from public offer
     alias: newLeaf
     metricSource: ALIAS
@@ -575,35 +935,275 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: OfferType
           value: publicOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: serviceType
+          value: computing
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
         states:
-          documentType: sla
-          mainState: signed
+          documentType: request
+          mainState: draft
           OfferType: publicOffer
+          SlaActivityState: beforeStart
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: startComp    
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: endComp                
+      - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
+        leftAlias: newLeaf
+        relation: is_connected_SLA_to_Offer
+        rightAlias: BASE
+
+  - !com.agreemount.slaneg.action.definition.CreateNewRoot
+    id: createRequestFromPublicOfferStorage
+    label: create request from public offer
+    alias: newLeaf
+    metricSource: ALIAS
+    copyMetricsFromAlias: BASE
+    redirectToThisVersion: true
+    copyNameFromAlias: BASE
+    setTeamFromAlias: BASE #do zastapienia przez nadawanie teamu użytkownika, który klika
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager #definicja musi miec jakis argument, bo yaml sie wyklada
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: offer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: offerPublished
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: publicOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          documentType: request
+          mainState: draft
+          OfferType: publicOffer
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: startStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: endStorage
       - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
         leftAlias: newLeaf
         relation: is_connected_SLA_to_Offer
         rightAlias: BASE
 
 
+#do tej akcji przydałoby się ograniczenie edycji do wybranych metryk
+  - !com.agreemount.slaneg.action.definition.MoveOn
+    id: editPublicDraft
+    label: Choose dates for SLA
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: request
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: OfferType
+          value: publicOffer
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: draft
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleInRelatedBusinessEntityDef
+#          role: rola #do poprawy i odkomentowania jak będzie nadpisywanie teamu
+    secondStepActions:
+    - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+      id: buyPublic
+      label: Buy resources
+      parentAlias: BASE
+      alias: newLeaf
+      metricSource: FORM
+      copyRelationsFromAlias: BASE
+      copyStatesFromAlias: BASE
+      redirectToThisVersion: true
+      setTeamFromAlias: BASE
+      copyRelationsFromAlias: BASE
+      actions:
+        - !com.agreemount.slaneg.action.definition.ChangeState
+          documentAlias: newLeaf
+          states:
+            documentType: sla
+            mainState: signed
+            SlaActivityState: beforeStart
+
+#akcje cron
+
+  - !com.agreemount.slaneg.action.definition.CronAction
+    id: ActivateSlaComputing
+    label: ActivateSlaAction
+    constaintForSelectQuery: #wyszukujemy dokumenty, na ktorych chcemy odpalic akcje, skladnia jak w queries.yml
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: computing
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: SlaActivityState
+          value: beforeStart
+        - !com.agreemount.slaneg.constraint.query.definition.metric.CompareRequestedResourceDef #przykladowanie wyszukanie trwajacych granatow
+          metricId: startComp
+          comparison: LESSER #wartosc metryki end ma byc wieksza od aktualnej daty
+          requestedValue:
+            !com.agreemount.slaneg.constraint.query.definition.metric.CurrentDateValue
+            sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+    actions: #akcja, ktora chcemy wykonac na kazdym z dokumentow, rowniez mozna dodac bardziej zaawansowny constraint, jak dla innych akcji oraz podakcje
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: BASE
+        states:
+          SlaActivityState: active
+
+  - !com.agreemount.slaneg.action.definition.CronAction
+    id: ActivateSlaStorage
+    label: ActivateSlaAction
+    constaintForSelectQuery: #wyszukujemy dokumenty, na ktorych chcemy odpalic akcje, skladnia jak w queries.yml
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: SlaActivityState
+          value: beforeStart
+        - !com.agreemount.slaneg.constraint.query.definition.metric.CompareRequestedResourceDef #przykladowanie wyszukanie trwajacych granatow
+          metricId: startStorage
+          comparison: LESSER #wartosc metryki end ma byc wieksza od aktualnej daty
+          requestedValue:
+            !com.agreemount.slaneg.constraint.query.definition.metric.CurrentDateValue
+            sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+    actions: #akcja, ktora chcemy wykonac na kazdym z dokumentow, rowniez mozna dodac bardziej zaawansowny constraint, jak dla innych akcji oraz podakcje
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: BASE
+        states:
+          SlaActivityState: active
+
+  - !com.agreemount.slaneg.action.definition.CronAction
+    id: deActivateSlaComputing
+    label: deActivateSlaAction
+    constaintForSelectQuery: #wyszukujemy dokumenty, na ktorych chcemy odpalic akcje, skladnia jak w queries.yml
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: computing
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: SlaActivityState
+          value: active
+        - !com.agreemount.slaneg.constraint.query.definition.metric.CompareRequestedResourceDef #przykladowanie wyszukanie trwajacych granatow
+          metricId: endComp
+          comparison: LESSER #wartosc metryki end ma byc wieksza od aktualnej daty
+          requestedValue:
+            !com.agreemount.slaneg.constraint.query.definition.metric.CurrentDateValue
+            sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+    actions: #akcja, ktora chcemy wykonac na kazdym z dokumentow, rowniez mozna dodac bardziej zaawansowny constraint, jak dla innych akcji oraz podakcje
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: BASE
+        states:
+          SlaActivityState: closed
+
+  - !com.agreemount.slaneg.action.definition.CronAction
+    id: deActivateSlaStorage
+    label: deActivateSlaAction
+    constaintForSelectQuery: #wyszukujemy dokumenty, na ktorych chcemy odpalic akcje, skladnia jak w queries.yml
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: SlaActivityState
+          value: active
+        - !com.agreemount.slaneg.constraint.query.definition.metric.CompareRequestedResourceDef #przykladowanie wyszukanie trwajacych granatow
+          metricId: endStorage
+          comparison: LESSER #wartosc metryki end ma byc wieksza od aktualnej daty
+          requestedValue:
+            !com.agreemount.slaneg.constraint.query.definition.metric.CurrentDateValue
+            sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+    actions: #akcja, ktora chcemy wykonac na kazdym z dokumentow, rowniez mozna dodac bardziej zaawansowny constraint, jak dla innych akcji oraz podakcje
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: BASE
+        states:
+          SlaActivityState: closed
+
+
+
+
+
 #######################################
 
 
-#qkcje providera (prywatnego) - zatweirdzenie/odrzucenie i negocjacji (prosta) - TODO
-#dopisać tworzenie relacji z ofertą przy tworzeniu requestu - zrobione
-#jedyne role to customer i provider - zrobione
-#podział na publiczne i prywatne oferty (provider może miec i takie i takie) - akcja oznacz jako publiczną/prywatną - zrobione
-#oferta per typ serwisu i tak samo załatwiamy to akcjami - zzrobione
 
 #Potrzebne rzeczy:
 #nadpisywanie teamu
-#HasAnyOfMetrics
-#akcja do usuwania wszystkich metryk
+
+#ograniczenie edycji do wybranych metryk
+
+
+
+#na później:
 #usuwanie stanów
+
+#akcja do usuwania wszystkich metryk
+
 #kwerenda opierająca się na relacji dokumentu (ale to już jest chyba w nowym silniku). Potrzebne do kwerendy dla providera: sla dla moiich ofert (sla są w relacji z ofertami).
 # Ale to może tutaj nie zadziałać. Generalnie muszę najpierw znaleźć oferty providera (proste) a później zwiazane z nimi SLA i je wyświetlić w kwerendzie.
 #Chyyba , że wystarczy nam obsługa tego w "DocumentRelationsQuery"
