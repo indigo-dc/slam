@@ -1,0 +1,43 @@
+<!--<div ng-include="'app/view/menu-bazaar.html'"></div>-->
+<!-- <div ng-include="'app/view/menu-plgrid.html'"></div> -->
+
+
+<section class="content-section">
+    <header>
+        <h1 translate="testGrants.header"></h1>
+    </header>
+    <div style="clear:both;"></div>
+    <div class="loading" ng-show="isLoading"></div>
+    <div class="main-content" ng-show="!isLoading">
+
+        <p class="intro" translate="testGrants.description1"></p>
+        <p class="intro" translate="testGrants.description2"></p>
+
+        <div ng-show="documents.length > 0">
+            <div class="grant-box" ng-repeat="document in documents">
+                <div class="width60 float-left border-dashed">
+                    <h3>{{document.requestedResouces['GrantDescription']}}</h3>
+                    <ul>
+                        <li>
+                            <h7 translate="CPUGuaranteedComputingTimeMetric" />
+                            {{document.requestedResouces['CPUGuaranteedComputingTime']}} h
+                        </li>
+                        <li>
+                            <h7 translate="POSIXGuaranteedStorageMetric" />
+                            {{document.requestedResouces['POSIXGuaranteedStorage']}} GB
+                        </li>
+                    </ul>
+                </div>
+                <div class="button-cell">
+                    <button ng-repeat="action in actionsForDocuments[document.id]" ng-click="doAction(document.id, action.id)"
+                        translate="{{ action.label }}" class="green-button button float-right"></button>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+
+        <!-- if no items -->
+        <div ng-if="documents.length == 0" translate="testGrants.noGrantsMsg"></div>
+
+    </div>
+</section>
