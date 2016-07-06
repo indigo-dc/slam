@@ -1,14 +1,5 @@
 package pl.cyfronet.ltos.security;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +13,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.security.PortalUser.PortalUserBuilder;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AuthenticationProviderDev implements AuthenticationProvider {
 
@@ -62,8 +61,12 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
                 info = createAdminInfo();
+                List<Role> roles = new ArrayList<>();
                 Role role = operations.loadOrCreateRoleByName("admin");
-                user = operations.saveUser(info.toUserPrototype().country("Poland").roles(Arrays.asList(role)).build());
+                roles.add(role);
+                role = operations.loadOrCreateRoleByName("provider");
+                roles.add(role);
+                user = operations.saveUser(info.toUserPrototype().country("Poland").roles(roles).build());
                 info.setId(user.getId());
             }
             builder.user(user);
@@ -79,7 +82,8 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             UserInfo info = UserInfo.fromUser(user);
             if (user == null) {
                 info = createUserInfo();
-                user = operations.saveUser(info.toUserPrototype().country("Poland").build());
+                Role role = operations.loadOrCreateRoleByName("manager");
+                user = operations.saveUser(info.toUserPrototype().country("Poland").roles(Arrays.asList(role)).build());
                 info.setId(user.getId());
             }
             builder.user(user);
