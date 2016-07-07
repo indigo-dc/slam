@@ -59,7 +59,8 @@ queries:
 
 
   - !com.agreemount.bean.Query
-    label: My Public Offers
+    id: ProvidersCompOffers
+    label: My computing Offers
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -143,8 +144,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -167,8 +168,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -193,8 +194,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -218,8 +219,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -245,8 +246,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -272,8 +273,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -299,8 +300,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -353,8 +354,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -377,8 +378,8 @@ queries:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
-      !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-        role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND

@@ -15,7 +15,7 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'ProviderDetailsController',
             templateUrl: 'indygo/view/indygo/provider.html'
         })
-/*        .when('/document/:id', {
+        .when('/document/:id', {
             controller: 'DocumentController',
             templateUrl: 'indygo/view/document.html'
         })
@@ -34,7 +34,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         .when('/create-request', {
             controller: 'CreateRequestController',
             templateUrl: 'indygo/view/sla/create-request.html'
-        })*/
+        })
     ;
 }]);
 

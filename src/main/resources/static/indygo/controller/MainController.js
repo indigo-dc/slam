@@ -30,7 +30,7 @@ app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryServ
             });
         }
 
-        function returnQuery(query){
+        $scope.returnQuery = function (query) {
             for(var result in $scope.queries){
                 if(result.id==query){
                     return result;
@@ -40,7 +40,6 @@ app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryServ
 
         function serveResult(result) {
             $scope.queries = result['data'];
-            console.log($scope.queries);
         }
 
         GetLoggerUser.get().then(function(result) {
@@ -48,7 +47,6 @@ app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryServ
             if($scope.identity.operator == true){
                 $scope.hasProviderRole = true;
             }
-            console.log($scope.identity);
            /* $scope.hasProviderRole = $scope.identity['roles'].indexOf("provider") !== -1;*/
         });
 
