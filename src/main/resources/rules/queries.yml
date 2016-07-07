@@ -6,6 +6,7 @@ queries:
   - !com.agreemount.bean.Query
     id: computingOffers
     label: Computing Offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -33,6 +34,7 @@ queries:
   - !com.agreemount.bean.Query
     id: StorageOffers
     label: Storage Offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -61,6 +63,7 @@ queries:
   - !com.agreemount.bean.Query
     id: ProvidersCompOffers
     label: My computing Offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -88,6 +91,7 @@ queries:
   - !com.agreemount.bean.Query
     id: ProvidersStorageOffers
     label: My storage Offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -116,6 +120,7 @@ queries:
   - !com.agreemount.bean.Query
     id: hiddenOffers
     label: Hidden (non-published) offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -140,6 +145,7 @@ queries:
   - !com.agreemount.bean.Query
     id: NegotiationsProvider
     label: My negotiations
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -164,6 +170,7 @@ queries:
   - !com.agreemount.bean.Query
     id: RejectedOffersProvider
     label: Rejected offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -190,6 +197,7 @@ queries:
   - !com.agreemount.bean.Query
     id: InPreparation #jednakowoż zmieniłabym nazwę na My negotiations
     label: In preparation #jednakowoż zmieniłabym nazwę na My negotiations
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -215,6 +223,7 @@ queries:
   - !com.agreemount.bean.Query
     id: SignedSlaComp
     label: My signed computing SLAs
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -242,6 +251,7 @@ queries:
   - !com.agreemount.bean.Query
     id: ActiveCopmSla
     label: Active computing SLAs
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -269,6 +279,7 @@ queries:
   - !com.agreemount.bean.Query
     id: SignedSlaStorage
     label: My signed storage SLAs
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -296,6 +307,7 @@ queries:
   - !com.agreemount.bean.Query
     id: ActiveStorageSla
     label: Active storage SLAs
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -350,6 +362,7 @@ queries:
   - !com.agreemount.bean.Query
     id: MyDrafts
     label: My drafts
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -374,6 +387,7 @@ queries:
   - !com.agreemount.bean.Query
     id: rejectedOffers
     label: Rejected offers
+    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
