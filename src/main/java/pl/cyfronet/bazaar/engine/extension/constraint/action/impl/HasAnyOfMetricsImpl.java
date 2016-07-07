@@ -2,6 +2,7 @@ package pl.cyfronet.bazaar.engine.extension.constraint.action.impl;
 
 import com.agreemount.bean.document.Document;
 import com.agreemount.bean.identity.provider.IdentityProvider;
+import com.agreemount.slaneg.action.ActionContext;
 import com.agreemount.slaneg.constraint.action.impl.QualifierImpl;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Component
 @Scope("prototype")
-public class HasAnyOfMetricsImpl extends QualifierImpl<HasAnyOfMetrics> {
+public class HasAnyOfMetricsImpl extends QualifierImpl<HasAnyOfMetrics,ActionContext> {
 
     @Autowired
     private IdentityProvider identityProvider;
@@ -37,7 +38,7 @@ public class HasAnyOfMetricsImpl extends QualifierImpl<HasAnyOfMetrics> {
         Boolean result = false;
 
         for (String metricId : metrics) {
-            if (document.getRequestedResouces().containsKey(metricId)) {
+            if (document.getMetrics().containsKey(metricId)) {
                 result = true;
                 break;
             }

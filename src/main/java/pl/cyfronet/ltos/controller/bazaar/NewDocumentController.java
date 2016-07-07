@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.agreemount.EngineFacade;
+import com.agreemount.slaneg.action.ActionContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +42,12 @@ public class NewDocumentController {
 
     static Logger logger = LoggerFactory
             .getLogger(NewDocumentController.class);
-    
+
     @Autowired
-    private ActionLogic actionLogic;
+    private ActionContextFactory actionContextFactory;
+
+    @Autowired
+    private EngineFacade engineFacade;
 
     @Autowired
     private IdentityProvider identityProvider;
@@ -92,7 +97,9 @@ public class NewDocumentController {
          * check if user has this team...
          */
 
-        ActionContext actionContext = actionLogic.runAction(document, "documentDraftFromController", "createNewRequest");
+        ActionContext actionContext =  actionContextFactory.createInstance(document);
+        actionContext.addDocument("documentDraftFromController", document);
+        engineFacade.runAction(actionContext, "createNewRequest");
 
         document = actionContext.getDocument("newRoot");
         

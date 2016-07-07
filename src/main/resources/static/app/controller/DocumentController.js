@@ -204,8 +204,8 @@ app.controller('DocumentController', ['$scope', '$routeParams', '$route', 'Docum
             $scope.visibleActions = $scope.actions = result['data'].actions;
             $scope.queries = result['data'].queries;
 
-            for (metricId in $scope.document.requestedResouces) {
-                $scope.metricFormValues[metricId] = $scope.document.requestedResouces[metricId];
+            for (metricId in $scope.document.metrics) {
+                $scope.metricFormValues[metricId] = $scope.document.metrics[metricId];
             }
         }
 

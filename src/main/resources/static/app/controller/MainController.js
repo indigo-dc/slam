@@ -1,17 +1,17 @@
+
+
 var app = angular.module('configurationManager');
 
-app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryService', 'GetLoggerUser',
+app.controller('MainController', ['$scope', '$routeParams','$route', 'QueryService', 'GetLoggerUser',
     function ($scope, $routeParams, $route, QueryService, GetLoggerUser) {
-        $scope.isLoading = false;
-        $scope.documents;
+        $scope.isLoading = true;
         $scope.queries;
-        $scope.identity;
-        $scope.hasProviderRole;
 
-        $scope.init = function () {
+        $scope.init = function() {
+        };
 
-        }
-
+        setTimeout(function(){
+        }, 100);
         _loadRemoteData();
 
         // I load the remote data from the server.
@@ -20,7 +20,7 @@ app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryServ
 
             QueryService.getAvailableQueries()
             .then(function(result) {
-                serveResult(result.data);
+                serveResult(result);
             })
             .catch(function(error) {
                 console.log(error);
@@ -40,7 +40,6 @@ app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryServ
         GetLoggerUser.get().then(function(result) {
             $scope.identity = result;
 
-           /* $scope.hasProviderRole = $scope.identity['roles'].indexOf("provider") !== -1;*/
         });
 
     }]);

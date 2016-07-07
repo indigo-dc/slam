@@ -12,11 +12,22 @@ app.service("QueryService", ['$http', '$q', function ($http, $q) {
     // PUBLIC METHODS.
     // ---
 
-    // I get all of the friends in the remote collection.
     function getAvailableQueries() {
 
-        return $http.get("queries");
+        var queryCategoryId = "default";
+
+        var request = $http({
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            method : "get",
+            url : "query-category/queries",
+            params : {
+                queryCategoryId : queryCategoryId
+            }
+        });
+
+        return (request.then(handleSuccess, handleError));
     }
+
 
     function getQueryDocuments(queryId) {
 

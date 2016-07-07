@@ -1,4 +1,4 @@
-<!-- <div ng-include="'app/view/menu-plgrid.html'"></div> -->
+<!--<div ng-include="'js/view/header.html'"></div>-->
 
 
 <section class="content-section">
@@ -11,7 +11,7 @@
     <div style="clear:both;"></div>
     <div class="loading" ng-show="isLoading"></div>
     <div class="main-content">
-        <div ng-repeat="query in ::queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">
+        <div ng-repeat="query in queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">
             <div ng-include="'app/view/query.html'"></div>
         </div>
     </div>
