@@ -37,6 +37,8 @@ public class SecurityConfigDev extends SecurityConfig {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/rest/**")
+                .permitAll().anyRequest().authenticated()
                 .antMatchers("/bootstrap-3.3.4-dist/**", "/static/**",
                         "/resources/**", "/css/**",
                         "/images/**", "/js/**", "/lib/**", "/fonts/**")
