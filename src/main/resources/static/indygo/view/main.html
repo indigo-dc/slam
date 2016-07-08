@@ -4,31 +4,20 @@
 <section class="content-section">
     <header>
         <h1>Indygo SLAM</h1>
-        {{identity}}
         <a href="#/add-resource" class="button green-button float-right glyphicon glyphicon-plus"></a>
     </header>
     <div style="clear:both;"></div>
     <div class="loading" ng-show="isLoading"></div>
     <div class="main-content">
+        <div ng-include="'indygo/view/indygo/activeSlaQuery.html'" ng-controller="ActiveSlaQueryController"
+             ng-init="init('activeSlA','ActiveCopmSla')">
+        </div>
+        <div ng-include="'indygo/view/indygo/activeSlaQuery.html'" ng-controller="ActiveSlaQueryController"
+             ng-init="init('activeSlA','ActiveStorageSla')">
+        </div>
+
         <div ng-repeat="query in ::queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">
             <div ng-include="'indygo/view/query.html'"></div>
-        </div>
-<!--        <div ng-controller="QueryController" ng-init="init(returnQuery('ActiveCopmSla'))">
-            &lt;!&ndash;<h3>Active computing SLA</h3>&ndash;&gt;
-            <div ng-include="'indygo/view/query.html'">
-        </div>
-        <div ng-controller="QueryController" ng-init="init(returnQuery('ActiveStorageSla'))">
-            &lt;!&ndash;<h3>Active storage SLA</h3>&ndash;&gt;
-            <div ng-include="'indygo/view/query.html'">
-        </div>
-        <div ng-controller="QueryController" ng-init="init(returnQuery('MyDrafts'))">
-            &lt;!&ndash;<h3>Drafts</h3>&ndash;&gt;
-            <div ng-include="'indygo/view/query.html'">
-        </div>
-        <div ng-controller="QueryController" ng-init="init(returnQuery('InPreparation'))">
-            <&lt;!&ndash;h3>In preparation</h3>&ndash;&gt;
-            <div ng-include="'indygo/view/query.html'">
-        </div>-->
         </div>
     </div>
 </section>
