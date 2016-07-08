@@ -1,7 +1,9 @@
 package pl.cyfronet.ltos.security;
 
 import com.agreemount.bean.identity.Identity;
+import com.agreemount.bean.identity.TeamMember;
 import com.agreemount.bean.identity.provider.IdentityProvider;
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.cyfronet.ltos.bean.Role;
+import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.security.PortalUser.PortalUserBuilder;
 
@@ -26,6 +29,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,6 +64,24 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
         return null;
     }
 
+    @Transactional
+    public Identity getIdentity(User user) {
+        Identity identity = new Identity();
+        identity.setLogin(user.getId().toString());
+        List<String> roles = user.getRoles().stream().map(entry -> entry.getName()).collect(Collectors.toList());
+        List<Team> teams = user.getTeams();
+        List<TeamMember> teamMembers = new LinkedList<TeamMember>();
+        for (Team team : teams) {
+            for (Role role: team.getRoles()) {
+                TeamMember teamMember = new TeamMember(role.getName(), team.getName());
+                teamMembers.add(teamMember);
+            }
+        }
+        identity.setRoles(roles);
+        identity.setTeamMembers(teamMembers);
+        return identity;
+    }
+
     private PortalUser shouldAuthenticateAgainstThirdPartySystem(String name,
             String password, PortalUserBuilder builder) {
         if (name.equals("admin") && password.equals("admin")) {
@@ -85,13 +107,11 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                     new SimpleGrantedAuthority("ROLE_USER")));
             builder.isAuthenticated(true);
 
-            Identity identity = new Identity();
-            identity.setLogin(name);
-            List<String> strings = roles.stream()
-                    .map(object -> (object != null ? object.getName() : null))
-                    .collect(Collectors.toList());
-            identity.setRoles(strings);
+            Identity identity = getIdentity(user);
+            Preconditions.checkNotNull(identity, "Identity [%s] was not found", name);
             identityProvider.setIdentity(identity);
+
+            log.debug("LOGGING:  identity for  engine set = " +  identity );
 
             return builder.build();
         }
@@ -109,13 +129,12 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             builder.authorities(Arrays.asList(
                     new SimpleGrantedAuthority("ROLE_USER")));
             builder.isAuthenticated(true);
-            Identity identity = new Identity();
-            identity.setLogin(name);
-            List<String> strings = user.getRoles().stream()
-                    .map(object -> (object != null ? object.getName() : null))
-                    .collect(Collectors.toList());
-            identity.setRoles(strings);
+
+            Identity identity = getIdentity(user);
+            Preconditions.checkNotNull(identity, "Identity [%s] was not found", name);
             identityProvider.setIdentity(identity);
+
+            log.debug("LOGGING:  identity for  engine set = " +  identity );
 
             return builder.build();
         }

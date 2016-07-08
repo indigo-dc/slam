@@ -27,7 +27,7 @@ app.service("profileService", ['$http', '$q', 'identityService', function ($http
         var request = $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             method: "get",
-            url: "identityUserInfo/get"
+            url: "identity/get"
         });
         return (request.then(handleSuccess, handleError));
     }

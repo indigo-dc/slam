@@ -16,15 +16,15 @@
         <div ng-show="documents.length > 0">
             <div class="grant-box" ng-repeat="document in documents">
                 <div class="width60 float-left border-dashed">
-                    <h3>{{document.requestedResouces['GrantDescription']}}</h3>
+                    <h3>{{document.metrics['GrantDescription']}}</h3>
                     <ul>
                         <li>
                             <h7 translate="CPUGuaranteedComputingTimeMetric" />
-                            {{document.requestedResouces['CPUGuaranteedComputingTime']}} h
+                            {{document.metrics['CPUGuaranteedComputingTime']}} h
                         </li>
                         <li>
                             <h7 translate="POSIXGuaranteedStorageMetric" />
-                            {{document.requestedResouces['POSIXGuaranteedStorage']}} GB
+                            {{document.metrics['POSIXGuaranteedStorage']}} GB
                         </li>
                     </ul>
                 </div>

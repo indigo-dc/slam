@@ -2,14 +2,13 @@ var app = angular.module('configurationManager');
 
 app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryService', 'GetLoggerUser',
     function ($scope, $routeParams, $route, QueryService, GetLoggerUser) {
-        $scope.isLoading = false;
-        $scope.documents;
+        $scope.isLoading = true;
         $scope.queries;
-        $scope.identity;
-        $scope.hasProviderRole;
 
-        $scope.init = function () {
-        }
+
+        $scope.init = function() {
+            _loadRemoteData();
+        };
 
         _loadRemoteData();
 
@@ -17,9 +16,9 @@ app.controller('MainController', ['$scope', '$routeParams', '$route', 'QueryServ
         function _loadRemoteData() {
             $scope.isLoading = true;
 
-            QueryService.getAvailableQueries()
+            QueryService.getAvailableQueries("default")
             .then(function(result) {
-                serveResult(result.data);
+                serveResult(result);
             })
             .catch(function(error) {
                 console.log(error);

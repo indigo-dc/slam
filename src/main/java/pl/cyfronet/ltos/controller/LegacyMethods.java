@@ -1,6 +1,5 @@
 package pl.cyfronet.ltos.controller;
 
-import com.agreemount.bean.identity.Identity;
 import com.agreemount.bean.identity.provider.IdentityProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +37,7 @@ public class LegacyMethods {
     }
 
     @Transactional
-    @RequestMapping(value = "identityUserInfo/get", method = RequestMethod.GET)
+    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
     public ResponseEntity<UserInfo> getIndentityOld() throws IOException {
         UserInfo user = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null) {
@@ -47,14 +46,14 @@ public class LegacyMethods {
         return new ResponseEntity<UserInfo>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
-    public ResponseEntity<Identity> getIndentity() throws IOException {
-        Identity user = identityProvider.getIdentity();
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
+//    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
+//    public ResponseEntity<Identity> getIndentity() throws IOException {
+//        Identity user = identityProvider.getIdentity();
+//        if (user == null) {
+//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//        }
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)
     public RedirectView logout(HttpSession session) {

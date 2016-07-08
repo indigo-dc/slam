@@ -13,12 +13,22 @@ app.service("QueryService", ['$http', '$q', function ($http, $q) {
     // ---
 
     // I get all of the friends in the remote collection.
-    function getAvailableQueries() {
-        return $http.get("queries");
+    function getAvailableQueries(queryCategoryId) {
+        // var queryCategoryId = "default";
+
+        var request = $http({
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            method : "get",
+            url : "query-category/queries",
+            params : {
+                queryCategoryId : queryCategoryId
+            }
+        });
+
+        return (request.then(handleSuccess, handleError));
     }
 
     function getQueryDocuments(queryId) {
-
         var request = $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             method: "get",
@@ -39,7 +49,6 @@ app.service("QueryService", ['$http', '$q', function ($http, $q) {
     // I transform the error response, unwrapping the application dta from
     // the API response payload.
     function handleError(response) {
-
         // The API response from the server should be returned in a
         // nomralized format. However, if the request was not handled by the
         // server (or what not handles properly - ex. server error), then we
@@ -58,7 +67,6 @@ app.service("QueryService", ['$http', '$q', function ($http, $q) {
     // I transform the successful response, unwrapping the application data
     // from the API response payload.
     function handleSuccess(response) {
-
         return (response.data);
 
     }

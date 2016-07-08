@@ -74,7 +74,7 @@
 
 
             <div id="tabs-content">
-                <form name="requestedResourcesForm" ng-init="setFormScope(this)">
+                <form name="metricsForm" ng-init="setFormScope(this)">
                 <div ng-repeat="metricCategory in ::metricCategories" ng-show="metricCategory.id == visibleMetricCategoryId"
                  ng-if="isMainCategoryVisible(metricCategory.id)">
                     <!-- display metrics from this category-->
