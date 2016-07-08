@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.cyfronet.ltos.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by km on 08.07.16.
  */
@@ -20,14 +24,26 @@ public class RestController {
     UserRepository userRepository;
 
     @RequestMapping(value = "/preferences/{login}", method = RequestMethod.GET)
-    public UserRest getUsers(@PathVariable String login) {
+    public List<UserRest> getUsers(@PathVariable String login) {
+
+        List <UserRest> resultList = new ArrayList<>();
 
         UserRest result = new UserRest();
         result.setName("Ala ma kota name");
         result.setCountry("Nibolandia");
         result.setEmail("Ala@ma.kota");
         result.setFullname(result.getName()+"="+login);
+        result.setAtributes(Arrays.asList("one","second","omega"));
 
-        return result;
+        UserRest result2 = new UserRest();
+        result2.setName("Ala ma kota name2");
+        result2.setCountry("Nibolandia2");
+        result2.setEmail("Ala@ma.kota2");
+        result2.setFullname(result.getName()+"2="+login);
+        result2.setAtributes(Arrays.asList("one2","second2","omega2"));
+
+        resultList.add(result);
+        resultList.add(result2);
+        return resultList;
     }
 }
