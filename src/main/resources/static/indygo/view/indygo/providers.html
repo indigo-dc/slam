@@ -5,11 +5,17 @@
     <div style="clear:both;"></div>
     <div class="loading" ng-show="isLoading"></div>
     <div class="main-content">
-        <div><h3><a href="#/view-provider/1">Provider1 Details</a></h3></div>
-        <div><h3><a href="#/view-provider/2">Provider2 Details</a></h3></div>
-        <!--<div ng-repeat="query in ::queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">-->
-            <!--<div ng-include="'app/view/query.html'"></div>-->
-        <!--</div>-->
+        <div>
+            <label>Computing:
+                <input type="checkbox" ng-change="change()" ng-model="computing" ng-init="computing=true">
+            </label>
+            <label>Storage:
+                <input type="checkbox" ng-change="change()" ng-model="storage" ng-init="storage=true">
+            </label>
+        </div>
+        <div ng-repeat="query in ::queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">
+            <div ng-include="'indygo/view/indygo/providersQuery.html'"></div>
+        </div>
     </div>
 
 </section>
