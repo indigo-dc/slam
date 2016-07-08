@@ -857,7 +857,10 @@ actions:
         metricId: startComp    
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: endComp               
+        metricId: endComp
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: weightComputing
       - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
         leftAlias: newLeaf
         relation: is_connected_SLA_to_Offer
@@ -905,6 +908,9 @@ actions:
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
         metricId: endStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: weightStorage
       - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
         leftAlias: newLeaf
         relation: is_connected_SLA_to_Offer
@@ -953,7 +959,10 @@ actions:
         metricId: startComp    
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: endComp                
+        metricId: endComp
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: weightComputing
       - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
         leftAlias: newLeaf
         relation: is_connected_SLA_to_Offer
@@ -1001,6 +1010,9 @@ actions:
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
         metricId: endStorage
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: weightStorage
       - !com.agreemount.slaneg.action.definition.CreateRelation #relacja pomiedzy sla a rekomendacją
         leftAlias: newLeaf
         relation: is_connected_SLA_to_Offer
