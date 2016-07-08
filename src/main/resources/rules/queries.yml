@@ -6,7 +6,7 @@ queries:
   - !com.agreemount.bean.Query
     id: computingOffers
     label: Computing Offers
-    queryCategoryId: default
+    queryCategoryId: offers
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -34,7 +34,7 @@ queries:
   - !com.agreemount.bean.Query
     id: StorageOffers
     label: Storage Offers
-    queryCategoryId: default
+    queryCategoryId: offers
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -223,7 +223,7 @@ queries:
   - !com.agreemount.bean.Query
     id: SignedSlaComp
     label: My signed computing SLAs
-    queryCategoryId: default
+    queryCategoryId: signedSLAs
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -251,7 +251,7 @@ queries:
   - !com.agreemount.bean.Query
     id: ActiveCopmSla
     label: Active computing SLAs
-    queryCategoryId: default
+    queryCategoryId: activeSlA
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -279,7 +279,7 @@ queries:
   - !com.agreemount.bean.Query
     id: SignedSlaStorage
     label: My signed storage SLAs
-    queryCategoryId: default
+    queryCategoryId: signedSLAs
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -307,7 +307,7 @@ queries:
   - !com.agreemount.bean.Query
     id: ActiveStorageSla
     label: Active storage SLAs
-    queryCategoryId: default
+    queryCategoryId: activeSlA
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
@@ -387,13 +387,13 @@ queries:
   - !com.agreemount.bean.Query
     id: rejectedOffers
     label: Rejected offers
-    queryCategoryId: default
     visibilityConstraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: OR
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
+    queryCategoryId: default
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
