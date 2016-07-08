@@ -33,6 +33,21 @@ metrics:
       !java.util.ArrayList
         - request
         - sla
+
+  - !com.agreemount.bean.metric.FloatMetric
+    id: weightComputing
+    label: Weight
+    categoryId: computingTargets
+    required: true
+    description: weight
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        # - offer
+        - sla
+    minValue: 0.0
+    maxValue: 1.0
+    defaultValue: 0.5
         
   - !com.agreemount.bean.metric.IntegerMetric
     id: totalGuaranteedComputing
@@ -110,7 +125,11 @@ metrics:
         - request
         - offer
         - sla
-    unit: h      
+    unit: h
+
+
+
+
 
 
 
@@ -137,6 +156,21 @@ metrics:
       !java.util.ArrayList
         - request
         - sla
+
+  - !com.agreemount.bean.metric.FloatMetric
+    id: weightStorage
+    label: Weight
+    categoryId: storageTargets
+    required: true
+    description: weight
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        # - offer
+        - sla
+    minValue: 0.0
+    maxValue: 1.0
+    defaultValue: 0.5
         
   - !com.agreemount.bean.metric.IntegerMetric
     id: totalGuaranteedStorage
