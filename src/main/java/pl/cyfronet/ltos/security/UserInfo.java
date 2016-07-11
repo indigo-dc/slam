@@ -39,12 +39,14 @@ public class UserInfo {
         /*
          * TODO fix role assignment below
          */
-        for(Role role: user.getRoles()) {
-            if (role.getName().equals("provider") || role.getName().equals("admin")) {
-                builder.operator(true);
+        if(user!=null && user.getRoles()!=null){
+            for(Role role: user.getRoles()) {
+                if (role.getName().equals("provider") || role.getName().equals("admin")) {
+                    builder.operator(true);
+                }
             }
         }
-        return builder.build() ;
+        return builder.build();
     }
 
 }
