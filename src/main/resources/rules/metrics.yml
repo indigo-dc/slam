@@ -135,10 +135,10 @@ metrics:
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-totalGuaranteed
-    label: total-guaranteed computing time
+    label: total-guaranteed public ip
     categoryId: publicIPRestrictions
     required: true
-    description: The guaranteed quantity of computing time to be granted to the user group in total
+    description: The guaranteed quantity of public ip to be granted to the user group in total
     availableForStateValues:
       !java.util.ArrayList
         - request
@@ -148,10 +148,10 @@ metrics:
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-totalLimit
-    label: total-limit computing time
+    label: total-limit public ip
     categoryId: publicIPRestrictions
     required: true
-    description: The limit of computing time for the user group in total
+    description: The limit of public ip for the user group in total
     availableForStateValues:
       !java.util.ArrayList
         - request
@@ -161,7 +161,7 @@ metrics:
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-instanceGuaranteed
-    label: instance-guaranteed computing time
+    label: instance-guaranteed public ip
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
@@ -174,7 +174,7 @@ metrics:
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-instanceLimit
-    label: instance-limit computing time
+    label: instance-limit public ip
     categoryId: publicIPRestrictions
     required: true
     description: The limit of a resource for each instance
@@ -187,7 +187,7 @@ metrics:
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-userGuaranteed
-    label: user-guaranteed computing time
+    label: user-guaranteed public ip
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
@@ -200,7 +200,7 @@ metrics:
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-userLimit
-    label: user-limit computing time
+    label: user-limit public ip
     categoryId: publicIPRestrictions
     required: true
     description: The limit of a resource for each user
