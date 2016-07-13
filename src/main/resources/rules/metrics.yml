@@ -15,7 +15,7 @@ metrics:
   - !com.agreemount.bean.metric.DateMetric
     id: startComp
     label: Start
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: When u wish your SLA to activate
     availableForStateValues:
@@ -26,7 +26,7 @@ metrics:
   - !com.agreemount.bean.metric.DateMetric
     id: endComp
     label: end
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: When u wish your SLA to finish
     availableForStateValues:
@@ -37,7 +37,7 @@ metrics:
   - !com.agreemount.bean.metric.FloatMetric
     id: weightComputing
     label: Weight
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: weight
     availableForStateValues:
@@ -48,11 +48,13 @@ metrics:
     minValue: 0.0
     maxValue: 1.0
     defaultValue: 0.5
+    
+### target: computing time    
         
   - !com.agreemount.bean.metric.IntegerMetric
-    id: totalGuaranteedComputing
+    id: computingTime-totalGuaranteed
     label: total-guaranteed computing time
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of computing time to be granted to the user group in total
     availableForStateValues:
@@ -63,9 +65,9 @@ metrics:
     unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: totalLimitComputing
+    id: computingTime-totalLimit
     label: total-limit computing time
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: The limit of computing time for the user group in total
     availableForStateValues:
@@ -76,9 +78,9 @@ metrics:
     unit: h    
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: instanceGuaranteedComputing
+    id: computingTime-instanceGuaranteed
     label: instance-guaranteed computing time
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
     availableForStateValues:
@@ -89,9 +91,9 @@ metrics:
     unit: h     
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: instanceLimitComputing
+    id: computingTime-instanceLimit
     label: instance-limit computing time
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: The limit of a resource for each instance
     availableForStateValues:
@@ -102,9 +104,9 @@ metrics:
     unit: h      
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: userGuaranteedComputing
+    id: computingTime-userGuaranteed
     label: user-guaranteed computing time
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
     availableForStateValues:
@@ -115,9 +117,9 @@ metrics:
     unit: h      
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: userLimitComputing
+    id: computingTime-userLimit
     label: user-limit computing time
-    categoryId: computingTargets
+    categoryId: computingTimeRestrictions
     required: true
     description: The limit of a resource for each user
     availableForStateValues:
@@ -128,9 +130,86 @@ metrics:
     unit: h
 
 
+    
+### target: cpublic ip
 
-
-
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: publicIP-totalGuaranteed
+    label: total-guaranteed computing time
+    categoryId: publicIPRestrictions
+    required: true
+    description: The guaranteed quantity of computing time to be granted to the user group in total
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: none
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: publicIP-totalLimit
+    label: total-limit computing time
+    categoryId: publicIPRestrictions
+    required: true
+    description: The limit of computing time for the user group in total
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: none    
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: publicIP-instanceGuaranteed
+    label: instance-guaranteed computing time
+    categoryId: publicIPRestrictions
+    required: true
+    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: none     
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: publicIP-instanceLimit
+    label: instance-limit computing time
+    categoryId: publicIPRestrictions
+    required: true
+    description: The limit of a resource for each instance
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: none      
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: publicIP-userGuaranteed
+    label: user-guaranteed computing time
+    categoryId: publicIPRestrictions
+    required: true
+    description: The guaranteed quantity of a resource to be granted to each user
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: none
+    
+  - !com.agreemount.bean.metric.IntegerMetric
+    id: publicIP-userLimit
+    label: user-limit computing time
+    categoryId: publicIPRestrictions
+    required: true
+    description: The limit of a resource for each user
+    availableForStateValues:
+      !java.util.ArrayList
+        - request
+        - offer
+        - sla
+    unit: none
 
 
 # storage
@@ -138,7 +217,7 @@ metrics:
   - !com.agreemount.bean.metric.DateMetric
     id: startStorage
     label: Start
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: When u wish your SLA to activate
     availableForStateValues:
@@ -149,7 +228,7 @@ metrics:
   - !com.agreemount.bean.metric.DateMetric
     id: endStorage
     label: end
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: When u wish your SLA to finish
     availableForStateValues:
@@ -160,7 +239,7 @@ metrics:
   - !com.agreemount.bean.metric.FloatMetric
     id: weightStorage
     label: Weight
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: weight
     availableForStateValues:
@@ -173,9 +252,9 @@ metrics:
     defaultValue: 0.5
         
   - !com.agreemount.bean.metric.IntegerMetric
-    id: totalGuaranteedStorage
+    id: storage-totalGuaranteed
     label: total-guaranteed storage space
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: The guaranteed quantity of storage to be granted to the user group in total
     availableForStateValues:
@@ -186,9 +265,9 @@ metrics:
     unit: GB
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: totalLimitStorage
+    id: storage-totalLimit
     label: total-limit storage space
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: The limit of storage for the user group in total
     availableForStateValues:
@@ -199,9 +278,9 @@ metrics:
     unit: GB    
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: instanceGuaranteedStorage
+    id: storage-instanceGuaranteed
     label: instance-guaranteed storage space
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: The guaranteed quantity of storage to be granted to each instance (virtual machine or Docker container)
     availableForStateValues:
@@ -212,9 +291,9 @@ metrics:
     unit: GB     
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: instanceLimitStorage
+    id: storage-instanceLimit
     label: instance-limit storage space
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: The limit of a resource for each instance
     availableForStateValues:
@@ -225,9 +304,9 @@ metrics:
     unit: GB      
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: userGuaranteedStorage
+    id: storage-userGuaranteed
     label: user-guaranteed storage space
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
     availableForStateValues:
@@ -238,9 +317,9 @@ metrics:
     unit: GB      
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: userLimitStorage
+    id: storage-userLimit
     label: user-limit storage space
-    categoryId: storageTargets
+    categoryId: storageRestrictions
     required: true
     description: The limit of a resource for each user
     availableForStateValues:

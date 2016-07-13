@@ -77,8 +77,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: offer
-        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-          sth: sth
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -105,8 +105,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: offer
-        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-          sth: sth
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -139,8 +139,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: mainState
           value: offerHidden
-        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-          sth: sth
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
 
   - !com.agreemount.bean.Query
     id: NegotiationsProvider
@@ -159,8 +159,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: request
-        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-          sth: sth
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -184,8 +184,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: request
-        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-          sth: sth
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef

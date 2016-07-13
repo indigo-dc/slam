@@ -65,8 +65,8 @@ actions:
           value: offerHidden
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
           #tutaj dodać warunek HasAnyOfMetrics
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
@@ -89,8 +89,8 @@ actions:
           value: offer
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
 
           #tutaj dodać warunek HasAnyOfMetrics
     secondStepActions:
@@ -146,8 +146,8 @@ actions:
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: documentType
           value: offer
@@ -182,8 +182,8 @@ actions:
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: documentType
           value: offer
@@ -217,8 +217,8 @@ actions:
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: documentType
           value: offer
@@ -237,22 +237,40 @@ actions:
     actions:
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: totalGuaranteedComputing
+        metricId: computingTime-totalGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: totalLimitComputing
+        metricId: computingTime-totalLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: instanceGuaranteedComputing
+        metricId: computingTime-instanceGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: instanceLimitComputing
+        metricId: computingTime-instanceLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: userGuaranteedComputing
+        metricId: computingTime-userGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: userLimitComputing                                        
+        metricId: computingTime-userLimit       
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: publicIP-totalGuaranteed
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: publicIP-totalLimit
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: publicIP-instanceGuaranteed
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: publicIP-instanceLimit
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: publicIP-userGuaranteed
+      - !com.agreemount.slaneg.action.definition.AddMetric
+        documentAlias: newLeaf
+        metricId: publicIP-userLimit                                              
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
         states:
@@ -277,8 +295,8 @@ actions:
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider #definicja musi miec jakis argument, bo yaml sie wyklada
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: documentType
           value: offer
@@ -297,22 +315,22 @@ actions:
     actions:
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: totalGuaranteedStorage
+        metricId: storage-totalGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: totalLimitStorage
+        metricId: storage-totalLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: instanceGuaranteedStorage
+        metricId: storage-instanceGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: instanceLimitStorage
+        metricId: storage-instanceLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: userGuaranteedStorage
+        metricId: storage-userGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
-        metricId: userLimitStorage                                        
+        metricId: storage-userLimit
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
         states:
@@ -383,8 +401,8 @@ actions:
           value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
     secondStepActions:
@@ -490,8 +508,8 @@ actions:
           value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
     actions:
@@ -534,8 +552,8 @@ actions:
 #          value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
-        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-          documentAlias: BASE
+#        - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
     actions:
@@ -852,6 +870,7 @@ actions:
           documentType: request
           mainState: draft
           OfferType: privateOffer
+          serviceType: computing
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
         metricId: startComp    
@@ -902,6 +921,7 @@ actions:
           documentType: request
           mainState: draft
           OfferType: privateOffer
+          serviceType: storage
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
         metricId: startStorage
@@ -954,6 +974,7 @@ actions:
           mainState: draft
           OfferType: publicOffer
           SlaActivityState: beforeStart
+          serviceType: computing
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
         metricId: startComp    
@@ -1004,6 +1025,7 @@ actions:
           documentType: request
           mainState: draft
           OfferType: publicOffer
+          serviceType: storage
       - !com.agreemount.slaneg.action.definition.AddMetric
         documentAlias: newLeaf
         metricId: startStorage
