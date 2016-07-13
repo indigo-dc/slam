@@ -10,11 +10,12 @@ import pl.cyfronet.ltos.rest.bean.IndygoWrapper;
 import pl.cyfronet.ltos.rest.bean.preferences.Preference;
 import pl.cyfronet.ltos.rest.bean.preferences.Preferences;
 import pl.cyfronet.ltos.rest.bean.preferences.Priority;
+import pl.cyfronet.ltos.rest.bean.sla.Service;
 import pl.cyfronet.ltos.rest.bean.sla.Sla;
+import pl.cyfronet.ltos.rest.bean.sla.Target;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by km on 11.07.16.
@@ -46,21 +47,21 @@ public class IndygoConverter {
         for (Document sla : slas) {
             List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(sla.getId(), "is_connected_SLA_to_Offer", "");
             if (sla.getState("serviceType").equals("computing")) {
-                Priority priority = Priority.builder().
-                        sla_id(sla.getId()).
-                        service_id(relations.get(0)).
-                        weight(Double.parseDouble(sla.getMetrics().get("weightComputing").toString())).build();
-                computePriorities.add(priority);
+                addPriorities(computePriorities, sla, relations.get(0),"weightComputing");
             } else {
-                Priority priority = Priority.builder().
-                        sla_id(sla.getId()).
-                        service_id(relations.get(0)).
-                        weight(Double.parseDouble(sla.getMetrics().get("weightStorage").toString())).build();
-                storagePriorities.add(priority);
+                addPriorities(storagePriorities, sla, relations.get(0),"weightStorage");
             }
         }
         result.setPreferences(preparePreference(computePriorities, storagePriorities));
         return result;
+    }
+
+    private void addPriorities(List<Priority> priorities, Document sla, String serviceId ,String weight) {
+        Priority priority = Priority.builder().
+                sla_id(sla.getId()).
+                service_id(serviceId).
+                weight(Double.parseDouble(sla.getMetrics().get(weight).toString())).build();
+        priorities.add(priority);
     }
 
     private List<Preference> preparePreference(List<Priority> computePriorities, List<Priority> storagePriorities) {
@@ -83,8 +84,54 @@ public class IndygoConverter {
                 sla.setStart_date(doc.getMetrics().get("startStorage").toString());
                 sla.setEnd_date(doc.getMetrics().get("endStorage").toString());
             }
+            sla.setServices(prepareServices(doc, provider));
             result.add(sla);
         }
+        return result;
+    }
+
+    private List<Service> prepareServices(Document sla, Document offer) {
+        List<Service> result = Arrays.asList(Service.builder().type(sla.getState("serviceType")).
+                service_id(offer.getId()).targets(prepareTargets(sla)).build());
+
+        return result;
+    }
+
+    private List<Target> prepareTargets(Document sla) {
+        List<Target> result = new ArrayList<>();
+        addRestrictions(sla, result, "computingTime", prepareTarget("computingTime", "h", sla));
+        addRestrictions(sla, result, "publicIP", prepareTarget("publicIP", "none", sla));
+        addRestrictions(sla, result, "numCpus", prepareTarget("numCpus", "none", sla));
+        addRestrictions(sla, result, "memSize", prepareTarget("memSize", "MB", sla));
+        addRestrictions(sla, result, "diskSize", prepareTarget("diskSize", "MB", sla));
+        addRestrictions(sla, result, "uploadBandwith", prepareTarget("uploadBandwith", "Mbps", sla));
+        addRestrictions(sla, result, "downloadBandwith", prepareTarget("downloadBandwith", "Mbps", sla));
+        addRestrictions(sla, result, "uploadAggregated", prepareTarget("uploadAggregated", "MB", sla));
+        addRestrictions(sla, result, "downloadAggregated", prepareTarget("downloadAggregated", "MB", sla));
+        addRestrictions(sla, result, "costs", prepareTarget("costs", "EUR", sla));
+        addRestrictions(sla, result, "storage", prepareTarget("storage", "GB", sla));
+        return result;
+    }
+
+    private void addRestrictions(Document sla, List<Target> result, String type, Target gb) {
+        if (!sla.getMetrics().entrySet().stream().
+                filter(a -> a.getKey().startsWith(type)).
+                collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())).entrySet().isEmpty()) {
+            result.add(gb);
+        }
+    }
+
+    private Target prepareTarget(String type, String unit, Document sla) {
+        Target result = Target.builder().type(type).unit(unit).build();
+        Map <String,Object> restrictions = new HashMap<>();
+        for (Map.Entry<String, Object> entry : sla.getMetrics().entrySet().stream().
+                filter(a -> a.getKey().startsWith(type)).collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())).entrySet()) {
+            restrictions.put(entry.getKey().substring(type.length()+1),entry.getValue());
+        }
+        if(restrictions.isEmpty()) {
+            return null;
+        }
+        result.setRestrictions(restrictions);
         return result;
     }
 }
