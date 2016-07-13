@@ -5,15 +5,14 @@ import lombok.*;
 import java.util.List;
 
 /**
- * Created by km on 11.07.16.
+ * Created by km on 13.07.16.
  */
 @Data
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Preferences {
-    private String customer;
-    private List<Preference> preferences;
-    private String id;
+public class Preference {
+    private String service_type;
+    private List<Priority> priority;
 }

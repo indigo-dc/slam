@@ -26,20 +26,6 @@ public class RestController {
 
     @RequestMapping(value = "/preferences/{login}", method = RequestMethod.GET)
     public IndygoWrapper getUsers(@PathVariable String login) {
-
-/*        IndygoWrapper result = new IndygoWrapper();
-
-        Preferences preferences = Preferences.builder().
-                priority(Arrays.asList(Priority.builder().service_id("serviceId").sla_id("sleId").weight(0.5)
-                .build(),Priority.builder().service_id("serviceId2").sla_id("sleId2").weight(0.5)
-                        .build())).build();
-        Sla sla = Sla.builder().customer("indigo-dc")
-                .id("dsafdsfsdfsdf78897sdf")
-                .services(Arrays.asList(new Service("typ","serviceId",Arrays.asList(new Target("type","unit", ImmutableMap.<String, Object>builder().
-                        put("numer", new Integer(1)).put("waga", new Float(0.5)).put("opis", new String("ale ma kota")).build()))))).build();
-
-        result = IndygoWrapper.builder().sla(Arrays.asList(sla,sla)).preferences(preferences).build();*/
-
         return indygoRestLogic.getDataForLogin(login);
     }
 }
