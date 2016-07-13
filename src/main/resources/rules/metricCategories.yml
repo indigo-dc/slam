@@ -5,21 +5,21 @@ metricCategories:
     label: mcComputing
     children:
       - !com.agreemount.bean.metric.MetricCategory
-        id: computingTargets
-        label: compute service targets
+        id: computingTimeRestrictions
+        label: computing time restrictions
       - !com.agreemount.bean.metric.MetricCategory
-        id: computingRestrictions
-        label: compute service restrictions
+        id: publicIPRestrictions
+        label: public ip restrictions
   - !com.agreemount.bean.metric.MetricCategory
     id: mcStorage
     label: mcStorage
     children:
       - !com.agreemount.bean.metric.MetricCategory
-        id: storageTargets
-        label: storage service targets
-      - !com.agreemount.bean.metric.MetricCategory
         id: storageRestrictions
-        label: storage service restrictions
+        label: storage service targets
+#      - !com.agreemount.bean.metric.MetricCategory
+#        id: storageRestrictions
+#        label: storage service restrictions
 #  - !com.agreemount.bean.metric.MetricCategory
 #    id: mcService3
 #    label: mcService3
