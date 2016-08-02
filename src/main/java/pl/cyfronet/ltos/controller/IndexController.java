@@ -16,8 +16,8 @@ public class IndexController {
         return "bazaar";
     }
 
-    @RequestMapping("/indygo")
+    @RequestMapping("/indigo")
     public String indygo() {
-        return "indygo";
+        return "indigo";
     }
 }

@@ -65,6 +65,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				templateUrl : 'js/view/footer.html'
 			}
 		}
+	}).state('profile', {
+		url : "/profile",
+		views : {
+			"header" : {
+				controller : "MainController",
+				templateUrl : 'js/view/header.html'
+			},
+			"viewContent" : {
+				controller : "ProfileController",
+				templateUrl : 'js/view/profile.html'
+			},
+			"footer" : {
+				templateUrl : 'js/view/footer.html'
+			}
+		}
 	}).state('affiliations-management', {
 		url : "/affiliations-management",
 		views : {
