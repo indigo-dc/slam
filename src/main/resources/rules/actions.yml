@@ -19,7 +19,7 @@ actions:
 
 #funkcja do tworzenia nowego dokumentu TOMEK - ta akcja tworzy nowy dokument
   - !com.agreemount.slaneg.action.definition.CreateNewRoot
-    id: createNewRequest #NIE ZMIENIAC - po tej zmiennej wyszukuje akcję do tworzenia requesty
+    id: createNewPool #NIE ZMIENIAC - po tej zmiennej wyszukuje akcję do tworzenia requesty
     label: Create offer
     alias: newRoot #NIE ZMIENIAC - po tym aliasie dostaje sie dokumentu i ustawiam mu team uzytkownika
     basedOnDocumentStoredUnderAlias: documentDraftFromController #NIE ZMIENIAC
@@ -38,6 +38,7 @@ actions:
           documentType: offer
           mainState: offerHidden
           OfferType: publicOffer
+
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf

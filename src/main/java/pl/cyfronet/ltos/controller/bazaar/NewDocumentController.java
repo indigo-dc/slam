@@ -19,9 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.bean.legacy.CreateGrantData;
+import pl.cyfronet.ltos.bean.legacy.CreatePoolData;
 import pl.cyfronet.ltos.security.PortalUser;
 
 import java.util.stream.Collectors;
@@ -83,6 +85,40 @@ public class NewDocumentController {
         
         logger.debug("" + document);
         
+        Response<ActionResponse> response = new Response<>();
+        RedirectActionResponse redirectActionResponse = new RedirectActionResponse();
+        redirectActionResponse.setRedirectToDocument(document.getId());
+        response.setData(redirectActionResponse);
+
+        return response;
+    }
+
+    @RequestMapping(value = "pool/create", method = RequestMethod.PUT)
+    @ResponseBody
+    public Response<ActionResponse> getPoolDocument(final CreatePoolData createPoolData) {
+
+//        PortalUser pu = (PortalUser) SecurityContextHolder.getContext().getAuthentication();
+//        User user = pu.getUserBean();
+//
+//        String grantOwnerTeam = createGrantData.getTeam();
+//        checkTeam(user, grantOwnerTeam);
+
+        IndigoDocument document = new IndigoDocument();
+        document.setName(createPoolData.getGrantId());
+        document.setSite(createPoolData.getSite());
+
+        /*
+         * check if user has this team...
+         */
+
+        ActionContext actionContext =  actionContextFactory.createInstance(document);
+        actionContext.addDocument("documentDraftFromController", document);
+        engineFacade.runAction(actionContext, "createNewPool");
+
+        document = (IndigoDocument) actionContext.getDocument("newRoot");
+
+        logger.debug("" + document);
+
         Response<ActionResponse> response = new Response<>();
         RedirectActionResponse redirectActionResponse = new RedirectActionResponse();
         redirectActionResponse.setRedirectToDocument(document.getId());
