@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
+import pl.cyfronet.ltos.repository.TeamRepository;
 import pl.cyfronet.ltos.security.PortalUser.PortalUserBuilder;
 
 import javax.persistence.EntityManager;
@@ -43,6 +44,9 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
 
     @Autowired
     IdentityProvider identityProvider;
+
+    @Autowired
+    TeamRepository teamRepository;
 
     @Override
     public Authentication authenticate(Authentication authentication)
@@ -98,7 +102,12 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                 info = createAdminInfo();
                 user = operations.saveUser(info.toUserPrototype().country("Poland").roles(roles).build());
                 info.setId(user.getId());
-
+                Team team = new Team();
+                team.setName("Testowy");
+                team.setRoles(roles);
+                team.setMembers(Arrays.asList(user));
+                teamRepository.save(team);
+                user.setTeams(Arrays.asList(team));
             }
             builder.user(user);
             builder.principal(info);
@@ -123,6 +132,12 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                 Role role = operations.loadOrCreateRoleByName("manager");
                 user = operations.saveUser(info.toUserPrototype().country("Poland").roles(Arrays.asList(role)).build());
                 info.setId(user.getId());
+                Team team = new Team();
+                team.setName("Testowy");
+                team.setRoles(Arrays.asList(role));
+                team.setMembers(Arrays.asList(user));
+                teamRepository.save(team);
+                user.setTeams(Arrays.asList(team));
             }
             builder.user(user);
             builder.principal(info);
