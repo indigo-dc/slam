@@ -5,27 +5,35 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             controller: 'MainController',
-            templateUrl: 'app/view/main.html'
+            templateUrl: 'indigo/view/main.html'
+        })
+        .when('/add-resource', {
+            controller: 'ProvidersController',
+            templateUrl: 'indigo/view/indigo/providers.html'
+        })
+        .when('/view-provider/:id', {
+            controller: 'ProviderDetailsController',
+            templateUrl: 'indigo/view/indigo/provider.html'
         })
         .when('/document/:id', {
             controller: 'DocumentController',
-            templateUrl: 'app/view/document.html'
+            templateUrl: 'indigo/view/document.html'
         })
         .when('/test-slas', {
             controller: 'TestGrantController',
-            templateUrl: 'app/view/test-grants/list.html'
+            templateUrl: 'indigo/view/test-grants/list.html'
         })
         .when('/create-pool', {
             controller: 'CreatePoolController',
-            templateUrl: 'app/view/sla/create-pool.html'
+            templateUrl: 'indigo/view/sla/create-pool.html'
         })
         .when('/create-request', {
             controller: 'CreateRequestController',
-            templateUrl: 'app/view/sla/create-request.html'
+            templateUrl: 'indigo/view/sla/create-request.html'
         })
         .when('/create-request', {
             controller: 'CreateRequestController',
-            templateUrl: 'app/view/sla/create-request.html'
+            templateUrl: 'indigo/view/sla/create-request.html'
         })
     ;
 }]);

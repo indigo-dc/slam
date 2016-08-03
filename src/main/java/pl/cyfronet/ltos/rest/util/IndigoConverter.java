@@ -6,7 +6,7 @@ import com.agreemount.slaneg.db.RelationOperations;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.cyfronet.ltos.rest.bean.IndygoWrapper;
+import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
 import pl.cyfronet.ltos.rest.bean.preferences.Preference;
 import pl.cyfronet.ltos.rest.bean.preferences.Preferences;
 import pl.cyfronet.ltos.rest.bean.preferences.Priority;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 @Log4j
 @Component
-public class IndygoConverter {
+public class IndigoConverter {
 
     @Autowired
     private RelationOperations relationOperations;
@@ -30,8 +30,8 @@ public class IndygoConverter {
     @Autowired
     private DocumentOperations documentOperations;
 
-    public IndygoWrapper convertSlasListForRestApi(List<Document> slas, String login) {
-        IndygoWrapper result = IndygoWrapper.builder().
+    public IndigoWrapper convertSlasListForRestApi(List<Document> slas, String login) {
+        IndigoWrapper result = IndigoWrapper.builder().
                 preferences(preparePreferences(slas, login)).
                 sla(prepareSlaList(slas, login)).build();
         return result;

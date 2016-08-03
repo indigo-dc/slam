@@ -23,8 +23,8 @@ public class IndexControllerTest extends MockMvcSecurityTest {
     }
 
     @Test
-    public void testIndygo() throws Exception {
-        mockMvc.perform( get("/indygo").session(user()) ).andExpect(view().name("indygo"));
+    public void testindigo() throws Exception {
+        mockMvc.perform( get("/indigo").session(user()) ).andExpect(view().name("indigo"));
     }
 
 }

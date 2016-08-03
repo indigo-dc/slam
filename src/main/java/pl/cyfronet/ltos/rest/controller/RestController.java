@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.cyfronet.ltos.repository.UserRepository;
-import pl.cyfronet.ltos.rest.bean.IndygoWrapper;
-import pl.cyfronet.ltos.rest.logic.IndygoRestLogic;
+import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
+import pl.cyfronet.ltos.rest.logic.IndigoRestLogic;
 
 /**
  * Created by km on 08.07.16.
@@ -22,10 +22,10 @@ public class RestController {
     UserRepository userRepository;
 
     @Autowired
-    IndygoRestLogic indygoRestLogic;
+    IndigoRestLogic indigoRestLogic;
 
     @RequestMapping(value = "/preferences/{login}", method = RequestMethod.GET)
-    public IndygoWrapper getUsers(@PathVariable String login) {
-        return indygoRestLogic.getDataForLogin(login);
+    public IndigoWrapper getUsers(@PathVariable String login) {
+        return indigoRestLogic.getDataForLogin(login);
     }
 }

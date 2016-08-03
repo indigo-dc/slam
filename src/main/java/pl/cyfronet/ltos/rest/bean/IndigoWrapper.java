@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class IndygoWrapper {
+public class IndigoWrapper {
     private Preferences preferences;
     private List<Sla> sla;
 }

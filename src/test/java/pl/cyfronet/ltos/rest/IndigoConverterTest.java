@@ -9,8 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import pl.cyfronet.ltos.rest.bean.IndygoWrapper;
-import pl.cyfronet.ltos.rest.util.IndygoConverter;
+import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
+import pl.cyfronet.ltos.rest.util.IndigoConverter;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,10 +21,10 @@ import java.util.Map;
  * Created by piotr on 18.07.16.
  */
 
-public class IndygoConverterTest {
+public class IndigoConverterTest {
 
     @InjectMocks
-    private IndygoConverter indygoConverter;
+    private IndigoConverter indigoConverter;
 
     @Mock
     private RelationOperations relationOperations;
@@ -56,9 +56,9 @@ public class IndygoConverterTest {
         provider.setId("1234");
         Mockito.when( documentOperations.getDocument(relations.get(0)) ).thenReturn(provider);
 
-        IndygoWrapper indygoWrapper = indygoConverter.convertSlasListForRestApi(slas, "user");
-        Assert.assertNotNull(indygoWrapper);
-        Assert.assertEquals("user", indygoWrapper.getPreferences().getCustomer());
+        IndigoWrapper indigoWrapper = indigoConverter.convertSlasListForRestApi(slas, "user");
+        Assert.assertNotNull(indigoWrapper);
+        Assert.assertEquals("user", indigoWrapper.getPreferences().getCustomer());
     }
 
 }

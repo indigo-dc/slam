@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
-import pl.cyfronet.ltos.rest.bean.IndygoWrapper;
-import pl.cyfronet.ltos.rest.util.IndygoConverter;
+import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
+import pl.cyfronet.ltos.rest.util.IndigoConverter;
 
 import java.util.List;
 
@@ -17,16 +17,16 @@ import java.util.List;
  */
 @Component
 @Log4j
-public class IndygoRestLogic {
+public class IndigoRestLogic {
 
     @Autowired
     private DocumentOperations documentOperations;
 
     @Autowired
-    private IndygoConverter converter;
+    private IndigoConverter converter;
 
-    public IndygoWrapper getDataForLogin(String login) {
-        IndygoWrapper result = converter.convertSlasListForRestApi(getDocuments(login), login);
+    public IndigoWrapper getDataForLogin(String login) {
+        IndigoWrapper result = converter.convertSlasListForRestApi(getDocuments(login), login);
         return result;
     }
 
