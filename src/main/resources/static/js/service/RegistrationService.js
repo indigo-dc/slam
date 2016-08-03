@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.service("registrationService", function ($http, $q) {
     // Return public API.

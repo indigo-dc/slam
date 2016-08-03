@@ -3,7 +3,7 @@
   <nav>
       <ul>
           <li ng-class="{active: $location.path() == '/dashboard'}"><a href="#/dashboard">Dashboard</a></li>
-          <li ng-class="{active: $location.path() == '/indigo'}"><a href="/indigo">Indigo</a></li>
+          <li ng-class="{active: $location.path() != '/dashboard' && $location.path() != '/profile'}"><a href="#/indigo">Indigo</a></li>
           <li ng-class="{active: $location.path() == '/profile'}"><a href="#/profile">Profile</a></li>
           <li>{{identityName}}</li>
           <li>

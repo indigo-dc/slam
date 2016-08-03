@@ -1,6 +1,6 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
-app.controller('MainController', ['$scope', '$http','identityService','$location',
+app.controller('HeadController', ['$scope', '$http','identityService','$location',
     function ($scope, $http, identityService,$location) {
 		$scope.operator = identityService.getIdentity().operator;
         $scope.identityName = identityService.getIdentity().name;

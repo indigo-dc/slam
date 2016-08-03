@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.controller('DatePickerController', ['$scope',
     function ($scope) {

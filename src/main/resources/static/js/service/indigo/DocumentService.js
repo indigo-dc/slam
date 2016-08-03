@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.service("DocumentService", ['$http', '$q', function ($http, $q) {
 

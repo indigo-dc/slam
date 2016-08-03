@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.service("GetLoggerUser", ['$http', '$q',function ($http, $q) {
 

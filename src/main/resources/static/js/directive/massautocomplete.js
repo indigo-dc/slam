@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.directive('keyboardPoster', function($parse, $timeout){
     var DELAY_TIME_BEFORE_POSTING = 0;

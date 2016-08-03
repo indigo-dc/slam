@@ -1,7 +1,7 @@
 /**
  * Created by krzysiek on 13.05.15.
  */
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.service("dashboardService", function ($http, $q) {
 

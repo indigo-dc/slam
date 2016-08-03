@@ -1,10 +1,11 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
-app.service("SitesService", ['$http', '$q', function ($http, $q) {
+app.service("QueryService", ['$http', '$q', function ($http, $q) {
 
     // Return public API.
     return ({
-        getAdminSites: getAdminSites,
+        getAvailableQueries: getAvailableQueries,
+        getQueryDocuments: getQueryDocuments
     });
 
     // ---
@@ -12,14 +13,28 @@ app.service("SitesService", ['$http', '$q', function ($http, $q) {
     // ---
 
     // I get all of the friends in the remote collection.
-    function getAdminSites() {
+    function getAvailableQueries(queryCategoryId) {
+        // var queryCategoryId = "default";
 
+        var request = $http({
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            method : "get",
+            url : "query-category/queries",
+            params : {
+                queryCategoryId : queryCategoryId
+            }
+        });
+
+        return (request.then(handleSuccess, handleError));
+    }
+
+    function getQueryDocuments(queryId) {
         var request = $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             method: "get",
-            url: "sites",
+            url: "queries/documents",
             params: {
-                //key : "val"
+                queryId: queryId
             }
         });
 
@@ -34,7 +49,6 @@ app.service("SitesService", ['$http', '$q', function ($http, $q) {
     // I transform the error response, unwrapping the application dta from
     // the API response payload.
     function handleError(response) {
-
         // The API response from the server should be returned in a
         // nomralized format. However, if the request was not handled by the
         // server (or what not handles properly - ex. server error), then we
@@ -46,14 +60,13 @@ app.service("SitesService", ['$http', '$q', function ($http, $q) {
         }
 
         // Otherwise, use expected error message.
-        return ($q.reject(response.data.message));
+        return ($q.reject(response.data));
 
     }
 
     // I transform the successful response, unwrapping the application data
     // from the API response payload.
     function handleSuccess(response) {
-
         return (response.data);
 
     }

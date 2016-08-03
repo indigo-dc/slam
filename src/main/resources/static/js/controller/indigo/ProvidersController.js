@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.controller('ProvidersController', ['$scope', '$routeParams', '$route', 'QueryService', 'GetLoggerUser',
     function ($scope, $routeParams, $route, QueryService, GetLoggerUser) {

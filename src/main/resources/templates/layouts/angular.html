@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="nwww.thymeleaf.org" th:fragment="page" lang="en" ng-app="ltosApp">
+<html xmlns:th="nwww.thymeleaf.org" th:fragment="page" lang="en" ng-app="indigo">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -37,7 +37,7 @@
     <!-- Portal app -->
     
     <script th:src="@{/js/router.js}"></script>
-    <script th:src="@{/js/controller/MainController.js}"></script>
+    <script th:src="@{/js/controller/HeadController.js}"></script>
     <script th:src="@{/js/controller/LoginController.js}"></script>
     <script th:src="@{/js/controller/RegistrationController.js}"></script>
     <script th:src="@{/js/controller/DashboardController.js}"></script>
@@ -68,7 +68,7 @@
     <base th:href="${baseHost}"/>
   </head>
 
-  <body ng-app="ltosApp">
+  <body ng-app="indigo">
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->

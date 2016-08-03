@@ -1,7 +1,7 @@
 /**
  * Created by krzysiek on 26.04.15.
  */
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.service("countryService", function ($http, $q) {
     var countryList = ["Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",

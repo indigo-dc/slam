@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.controller('CreatePoolController', ['$scope', '$routeParams', '$route', 'DocumentService', 'SitesService',
     function ($scope, $routeParams, $route, DocumentService, SitesService) {

@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.service("instTypeService", function($http, $q) {
 	var instTypeList = [ "Hospital", "Industry", "International Organization",

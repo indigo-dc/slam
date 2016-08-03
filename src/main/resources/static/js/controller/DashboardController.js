@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('DashboardController', ['$scope', '$http', 'identityService', 'dashboardService',
     function ($scope, $http, identityService, dashboardService) {

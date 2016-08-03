@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 //TODO isNameUnique byloby troche celniejsza nazwa, prawda?
 app.directive('uniqueGrant', ['$http', function ($http) {
     return {

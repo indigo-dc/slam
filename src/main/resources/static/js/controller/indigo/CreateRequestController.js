@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.controller('CreateRequestController', ['$scope', '$http','$routeParams', '$route', 'DocumentService', 'DataForGrantCreationService', 'profileService', 'identityService', 'SpringDataRestAdapter',
     function ($scope, $http, $routeParams, $route, DocumentService, DataForGrantCreationService, profileService, identityService,  SpringDataRestAdapter) {

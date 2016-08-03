@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('AffiliationsListController', ['$scope', '$http', 'affiliationService', '$route','identityService', 'helperService', 'SpringDataRestAdapter',
     function ($scope, $http, affiliationService, $route, identityService, helperService, SpringDataRestAdapter) {

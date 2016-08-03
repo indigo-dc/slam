@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('AccountController', ['$scope', '$http','identityService',
     function ($scope, $http, identityService) {

@@ -1,9 +1,9 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
-app.controller('DocumentController', ['$scope', '$routeParams', '$route', 'DocumentService', 'MetricService', '$q',
-    function ($scope, $routeParams, $route, DocumentService, MetricService, $q) {
+app.controller('DocumentController', ['$scope', '$routeParams', '$route', 'DocumentService', 'MetricService', '$q', '$stateParams',
+    function ($scope, $routeParams, $route, DocumentService, MetricService, $q, $stateParams) {
         $scope.isLoading = false;
-        $scope.documentId = $routeParams.id;
+        $scope.documentId = $stateParams.id;
         $scope.document;
         $scope.branchOfScience;
         $scope.actions;

@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('ProfileController', ['$scope', '$http','profileService','countryService', 'identityService', 'helperService', 'SpringDataRestAdapter', '$route',
     function ($scope, $http, profileService, countryService, identityService, helperService, SpringDataRestAdapter, $route) {

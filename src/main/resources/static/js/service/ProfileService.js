@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.service("profileService", ['$http', '$q', 'identityService', function ($http, $q, identityService) {
 

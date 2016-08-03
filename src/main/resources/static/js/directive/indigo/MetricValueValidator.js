@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.directive('metricValueValidator', ['$translate', function ($translate) {
     return {

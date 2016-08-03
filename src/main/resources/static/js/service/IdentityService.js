@@ -1,7 +1,7 @@
 /**
  * Created by krzysiek on 30.04.15.
  */
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.service("identityService", ['$http', '$q', function ($http, $q) {
    

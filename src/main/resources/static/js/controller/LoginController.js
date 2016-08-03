@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('LoginController', ['$scope', '$http', '$templateCache','identityService', 'profileService','$route',
     function ($scope, $http, $templateCache, identityService, profileService, $route) {

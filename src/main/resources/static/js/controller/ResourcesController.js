@@ -1,7 +1,7 @@
 /**
  * Created by krzysiek on 04.05.15.
  */
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('ResourcesController', ['$scope', '$http', '$route','identityService', 'affiliationService',
     function ($scope, $http, $route, identityService, affiliationService) {

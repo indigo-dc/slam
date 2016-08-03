@@ -1,4 +1,4 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
 app.controller('TestGrantController', ['$scope', '$routeParams', '$route', 'QueryService', 'DocumentService', '$q',
     function ($scope, $routeParams, $route, QueryService, DocumentService, $q) {

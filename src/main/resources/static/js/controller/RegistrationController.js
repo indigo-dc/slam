@@ -1,4 +1,4 @@
-var app = angular.module('ltosApp');
+var app = angular.module('indigo');
 
 app.controller('RegistrationController', ['$scope', '$http', 'identityService', 'registrationService',
             'countryService', 'profileService', '$route',

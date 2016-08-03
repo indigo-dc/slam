@@ -1,27 +1,14 @@
-var app = angular.module('configurationManager');
+var app = angular.module('indigo');
 
-app.controller('ActiveSlaQueryController', ['$scope', '$routeParams', '$route', 'QueryService',
+app.controller('QueryController', ['$scope', '$routeParams', '$route', 'QueryService',
     function ($scope, $routeParams, $route, QueryService) {
         $scope.isLoading = false;
         $scope.query;
-        $scope.gueryId;
         $scope.documents = [];
 
-        $scope.init = function (query,gueryId) {
-            $scope.gueryId = gueryId;
-
-            QueryService.getAvailableQueries(query)
-                .then(function(result) {
-                    serveQuery(result);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                    alert('wystąpil błąd2...');
-                })
-                .finally(function() {
-                    _loadRemoteData();
-            });
-
+        $scope.init = function (query) {
+            $scope.query = query;
+            _loadRemoteData();
         }
 
         // I load the remote data from the server.
@@ -34,14 +21,6 @@ app.controller('ActiveSlaQueryController', ['$scope', '$routeParams', '$route', 
                     $scope.isLoading = false;
                 }
             );
-        }
-        function serveQuery(result) {
-            var queries = result['data'];
-            for(var query in queries){
-                if(queries[query].id==$scope.gueryId){
-                    $scope.query = queries[query];
-                }
-            }
         }
 
         function serveResult(result) {

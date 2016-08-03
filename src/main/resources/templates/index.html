@@ -1,3 +1,108 @@
-<div class="row" th:replace="layouts/angular :: page" th:fragment="content">
-    <div class="col-sm-10"></div>
+<!DOCTYPE html>
+<html ng-app="indigo"><!--ng-strict-di="true">-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <link rel="icon" href="/images/favicon.png"/>
+
+    <title>Solaris</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/ltos.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/bazaar.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/font-awesome.min.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-sanitize.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.0/angular-resource.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+    <script src="/lib/angular-spring-data-rest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-url/2.7.2/angular-translate-loader-url.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-translate-loader-static-files/2.7.2/angular-translate-loader-static-files.js"></script>
+    <script src="lib/angular-spring-data-rest.min.js"></script>
+    <script src="/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+    <!-- UI-Router -->
+    <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+
+    <script src="/js/router.js"></script>
+    <script src="/js/controller/LoginController.js"></script>
+    <script src="/js/controller/HeadController.js"></script>
+    <script src="/js/controller/RegistrationController.js"></script>
+    <script src="/js/controller/DashboardController.js"></script>
+    <script src="/js/controller/AccountController.js"></script>
+    <script src="/js/controller/AddAffiliationController.js"></script>
+    <script src="/js/controller/ProfileController.js"></script>
+    <script src="/js/controller/ScienceGatewaysController.js"></script>
+    <script src="/js/controller/AffiliationsListController.js"></script>
+    <script src="/js/controller/AffiliationViewController.js"></script>
+    <script src="/js/controller/AffiliationsManagementListController.js"></script>
+    <script src="/js/controller/ManageAffiliationController.js"></script>
+    <script src="/js/controller/ResourcesController.js"></script>
+
+    <script src="/js/service/RegistrationService.js"></script>
+    <script src="/js/service/ProfileService.js"></script>
+    <script src="/js/service/AffiliationService.js"></script>
+    <script src="/js/service/CountryService.js"></script>
+    <script src="/js/service/InstTypeService.js"></script>
+    <script src="/js/service/IdentityService.js"></script>
+    <script src="/js/service/InstitutionService.js"></script>
+    <script src="/js/service/DashboardService.js"></script>
+    <script src="/js/service/HelperService.js"></script>
+
+    <script src="/js/directive/massautocomplete.js"></script>
+
+
+    <script src="/js/directive/indigo/MetricValueValidator.js"></script>
+    <script src="/js/directive/indigo/UniqueGrant.js"></script>
+    <script src="/js/directive/indigo/GrantNameValidator.js"></script>
+    <script src="/js/directive/indigo/DatepickerLocaldate.js"></script>
+    <script src="/js/service/indigo/QueryService.js"></script>
+    <script src="/js/service/indigo/DocumentService.js"></script>
+    <script src="/js/service/indigo/SitesService.js"></script>
+    <script src="/js/service/indigo/DataForGrantCreationService.js"></script>
+    <script src="/js/service/indigo/MetricService.js"></script>
+    <script src="/js/service/indigo/GetLoggerUser.js"></script>
+    <script src="/js/controller/indigo/LeftSectionCtrl.js"></script>
+
+    <script src="/js/controller/indigo/ProvidersController.js"></script>
+    <script src="/js/controller/indigo/ProviderDetailsController.js"></script>
+    <script src="/js/controller/indigo/DatePickerController.js"></script>
+    <script src="/js/controller/indigo/ActiveSlaQueryController.js"></script>
+    <script src="/js/controller/indigo/QueryController.js"></script>
+    <script src="/js/controller/indigo/DocumentController.js"></script>
+    <script src="/js/controller/indigo/TestGrantController.js"></script>
+    <script src="/js/controller/indigo/MainController.js"></script>
+    <script src="/js/controller/indigo/CreatePoolController.js"></script>
+    <script src="/js/controller/indigo/CreateRequestController.js"></script>
+
+    <script type="text/javascript"> var idx = window.location.toString().indexOf("#_=_");
+    if (idx > 0) {
+        window.location = window.location.toString().substring(0, idx);
+    } </script>
+
+</head>
+
+<body ng-app="duo">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="container">
+    <header ui-view="header"></header>
+    <div class="content nobg" ui-view="registerView"></div>
+    <div class="content" ui-view="viewContent"></div>
+    <div style="clear:both;"></div>
+    <div ui-view="footer"></div>
 </div>
+</body>
+</html>
