@@ -4,7 +4,6 @@ import com.agreemount.EngineFacade;
 import com.agreemount.Response;
 import com.agreemount.bean.document.Document;
 import com.agreemount.bean.identity.Identity;
-import com.agreemount.bean.identity.provider.IdentityProvider;
 import com.agreemount.bean.response.ActionResponse;
 import com.agreemount.bean.response.RedirectActionResponse;
 import com.agreemount.slaneg.action.ActionContext;
@@ -42,33 +41,24 @@ public class NewDocumentController {
     private EngineFacade engineFacade;
 
     @Autowired
-    private IdentityProvider identityProvider;
-
-    
-    @Autowired
     @Qualifier("identitiesYamlProvider")
     private GenericYamlProvider<Identity> identitiesYamlProvider;
-
-    @Autowired
-    @Qualifier("dummyLogin")
-    private String login;
-
 
     public Identity getByLogin(String login) {
         return identitiesYamlProvider.getItems().stream()
                 .collect(Collectors.toMap(Identity::getLogin, (a) -> a)).get(login);
-    }      
-    
+    }
+
     @RequestMapping(value = "grant/create", method = RequestMethod.PUT)
     @ResponseBody
     public Response<ActionResponse> getDocument(final CreateGrantData createGrantData) {
-        
+
         PortalUser pu = (PortalUser) SecurityContextHolder.getContext().getAuthentication();
         User user = pu.getUserBean();
 
         String grantOwnerTeam = createGrantData.getTeam();
         checkTeam(user, grantOwnerTeam);
-      
+
         Document document = new Document();
         document.setName(createGrantData.getGrantId());
         document.setTeam(grantOwnerTeam);
@@ -77,14 +67,14 @@ public class NewDocumentController {
          * check if user has this team...
          */
 
-        ActionContext actionContext =  actionContextFactory.createInstance(document);
+        ActionContext actionContext = actionContextFactory.createInstance(document);
         actionContext.addDocument("documentDraftFromController", document);
         engineFacade.runAction(actionContext, "createNewRequest");
 
         document = actionContext.getDocument("newRoot");
-        
+
         logger.debug("" + document);
-        
+
         Response<ActionResponse> response = new Response<>();
         RedirectActionResponse redirectActionResponse = new RedirectActionResponse();
         redirectActionResponse.setRedirectToDocument(document.getId());
@@ -97,12 +87,6 @@ public class NewDocumentController {
     @ResponseBody
     public Response<ActionResponse> getPoolDocument(final CreatePoolData createPoolData) {
 
-//        PortalUser pu = (PortalUser) SecurityContextHolder.getContext().getAuthentication();
-//        User user = pu.getUserBean();
-//
-//        String grantOwnerTeam = createGrantData.getTeam();
-//        checkTeam(user, grantOwnerTeam);
-
         IndigoDocument document = new IndigoDocument();
         document.setName(createPoolData.getGrantId());
         document.setSite(createPoolData.getSite());
@@ -111,7 +95,7 @@ public class NewDocumentController {
          * check if user has this team...
          */
 
-        ActionContext actionContext =  actionContextFactory.createInstance(document);
+        ActionContext actionContext = actionContextFactory.createInstance(document);
         actionContext.addDocument("documentDraftFromController", document);
         engineFacade.runAction(actionContext, "createNewPool");
 
@@ -128,10 +112,10 @@ public class NewDocumentController {
     }
 
     private void checkTeam(User user, String grantTeam) {
-        for (Team userTeam: user.getTeams()) {
-           if (userTeam.getName().equals(grantTeam)) {
-               return;
-           }
+        for (Team userTeam : user.getTeams()) {
+            if (userTeam.getName().equals(grantTeam)) {
+                return;
+            }
         }
         // TODO throw proper exception to match http response
         throw new RuntimeException("Not allowed to choose team: " + grantTeam);
