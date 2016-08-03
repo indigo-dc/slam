@@ -1,9 +1,0 @@
-metricCategories:
-
-  - !com.agreemount.bean.metric.MetricCategory
-    id: change
-    label: mcChange
-    children:
-      - !com.agreemount.bean.metric.MetricCategory
-        id: changeDetails
-        label: mcChangeDetails
