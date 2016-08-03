@@ -18,11 +18,6 @@ public class IndexControllerTest extends MockMvcSecurityTest {
     }
 
     @Test
-    public void testBazaar() throws Exception {
-        mockMvc.perform( get("/bazaar").session(user()) ).andExpect(view().name("bazaar"));
-    }
-
-    @Test
     public void testindigo() throws Exception {
         mockMvc.perform( get("/indigo").session(user()) ).andExpect(view().name("indigo"));
     }
