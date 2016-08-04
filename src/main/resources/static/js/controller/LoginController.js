@@ -3,10 +3,10 @@ var app = angular.module('indigo');
 app.controller('LoginController', ['$scope', '$http', '$templateCache','identityService', 'profileService','$route',
     function ($scope, $http, $templateCache, identityService, profileService, $route) {
         profileService.loadIdentity().then(function() {
-    		if (identityService.identityRegistered()) {
+    		// if (identityService.identityRegistered()) {
             	window.location = "#/dashboard";
-            } else {
-            	window.location = "#/registration";
-            }
+        //     } else {
+        //     	window.location = "#/registration";
+        //     }
         });
     }]);
