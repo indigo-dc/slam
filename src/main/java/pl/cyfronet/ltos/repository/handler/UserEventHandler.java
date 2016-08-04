@@ -2,11 +2,15 @@ package pl.cyfronet.ltos.repository.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
-
+import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
+import pl.cyfronet.ltos.repository.RoleRepository;
+
+import java.util.Arrays;
 
 /**
  * @author bwilk
@@ -21,6 +25,9 @@ public class UserEventHandler {
 
     private Logger logger = LoggerFactory.getLogger(UserEventHandler.class);
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     @HandleBeforeSave
     public void handleUserSave(User p) {
         logger.info("USER being saved: " + p);
@@ -28,7 +35,9 @@ public class UserEventHandler {
 
     @HandleBeforeCreate
     public void handleUserCreate(User p) {
-        logger.info("USER being created: " + p);
+        Role role = roleRepository.findByName("manager");
+        p.setRoles(Arrays.asList(role));
+        logger.error("USER being created: " + p);
     }
 
 }

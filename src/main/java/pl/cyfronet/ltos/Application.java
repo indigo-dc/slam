@@ -14,7 +14,8 @@ import org.springframework.context.annotation.PropertySources;
 @SpringBootApplication
 @PropertySources({
         @PropertySource("classpath:bootstrap.properties"),
-        @PropertySource("classpath:hibernate.properties")
+        @PropertySource("classpath:hibernate.properties"),
+        @PropertySource("classpath:auth.properties")
         })
 public class Application {
 

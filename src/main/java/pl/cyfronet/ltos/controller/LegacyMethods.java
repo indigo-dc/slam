@@ -21,7 +21,7 @@ import java.io.IOException;
 public class LegacyMethods {
 
     @Autowired
-    private UserRepository users;
+    private UserRepository userRepository;
 
     @Autowired
     private IdentityProvider identityProvider;
@@ -41,9 +41,9 @@ public class LegacyMethods {
     public ResponseEntity<UserInfo> getIndentityOld() throws IOException {
         UserInfo user = (UserInfo) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (user == null) {
-            return new ResponseEntity<UserInfo>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<UserInfo>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 //    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
@@ -55,6 +55,7 @@ public class LegacyMethods {
 //        return new ResponseEntity<>(user, HttpStatus.OK);
 //    }
 
+
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)
     public RedirectView logout(HttpSession session) {
         session.invalidate();
@@ -63,5 +64,4 @@ public class LegacyMethods {
         redirectView.setUrl("/");
         return redirectView;
     }
-
 }

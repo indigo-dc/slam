@@ -1,10 +1,8 @@
 package pl.cyfronet.ltos.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-
 import pl.cyfronet.ltos.bean.User;
 
 /**
@@ -29,4 +27,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 //    @PostAuthorize("checkPolicyUser(returnObject, @activities.get('VIEW_USER'))")
 //    public User findOne(Long id);
 
+    User findByEmail(@Param("email") String email);
 }
