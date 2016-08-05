@@ -15,7 +15,6 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.UserRepository;
 
@@ -78,7 +77,6 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
         }
 
         PortalUser.PortalUserBuilder builder = PortalUser.builder();
-        PreAuthenticatedAuthenticationToken token = null;
         try {
             //TODO: poprawne odparsowanie i debugowanie
             ResponseEntity<UserInfo> userInfoResponseEntity = restTemplate.getForEntity(authorizeUrl + userInfoAction, UserInfo.class);
@@ -97,6 +95,7 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
             Identity identity = getIdentity(user);
             Preconditions.checkNotNull(identity, "Identity [%s] was not found", user.getEmail());
             identityProvider.setIdentity(identity);
+
             builder.principal(userInfo);
             logger.error("userinfo: "+userInfo.toString());
         } catch (UserDeniedAuthorizationException | InvalidRequestException ex) {

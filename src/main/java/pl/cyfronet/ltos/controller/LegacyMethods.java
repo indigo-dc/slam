@@ -1,6 +1,7 @@
 package pl.cyfronet.ltos.controller;
 
 import com.agreemount.bean.identity.provider.IdentityProvider;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
+@Log4j
 public class LegacyMethods {
 
     @Autowired
@@ -45,16 +47,6 @@ public class LegacyMethods {
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-
-//    @RequestMapping(value = "identity/get", method = RequestMethod.GET)
-//    public ResponseEntity<Identity> getIndentity() throws IOException {
-//        Identity user = identityProvider.getIdentity();
-//        if (user == null) {
-//            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//        }
-//        return new ResponseEntity<>(user, HttpStatus.OK);
-//    }
-
 
     @RequestMapping(value = "/auth/logout", method = RequestMethod.GET)
     public RedirectView logout(HttpSession session) {
