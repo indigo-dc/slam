@@ -18,7 +18,6 @@ public class HasAnyOfMetricsImplTest {
 
   @Test
   public void testWithoutMetrics() throws Exception {
-
       HasAnyOfMetricsImpl spy = Mockito.spy(new HasAnyOfMetricsImpl());
       Mockito.mock(QualifierImpl.class);
       HasAnyOfMetrics metrics = new HasAnyOfMetrics();        
@@ -32,21 +31,47 @@ public class HasAnyOfMetricsImplTest {
   
   @Test
   public void testWithMetrics() throws Exception {
-
       HasAnyOfMetricsImpl spy = Mockito.spy(new HasAnyOfMetricsImpl());
       Mockito.mock(QualifierImpl.class);
       HasAnyOfMetrics metrics = new HasAnyOfMetrics();        
       Document document = new Document();
       metrics.setMetrics(Arrays.asList("sampleMetric"));
-      //document.setMetrics(metrics2);
       HashMap<String, Object> documentMetrics = new HashMap<String, Object>();
       documentMetrics.put("sampleMetric", "sampleMetricValue");
       document.setMetrics(documentMetrics);
       ActionContext<Document> actionContext = new ActionContext<Document>(document);
-      // Prevent/stub logic in super.method()
       Mockito.doReturn(metrics).when((QualifierImpl)spy).getConstraintDefinition();
       Mockito.doReturn(actionContext).when((QualifierImpl)spy).getActionContext();
-      // When
+      spy.isAvailable();
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testWithoutAlias() throws Exception {
+      HasAnyOfMetricsImpl spy = Mockito.spy(new HasAnyOfMetricsImpl());
+      Mockito.mock(QualifierImpl.class);
+      HasAnyOfMetrics metrics = new HasAnyOfMetrics();        
+      Document document = new Document();
+      metrics.setDocumentAlias("");
+      HashMap<String, Object> documentMetrics = new HashMap<String, Object>();
+      documentMetrics.put("sampleMetric", "sampleMetricValue");
+      document.setMetrics(documentMetrics);
+      ActionContext<Document> actionContext = new ActionContext<Document>(document);
+      Mockito.doReturn(metrics).when((QualifierImpl)spy).getConstraintDefinition();
+      spy.isAvailable();
+  }
+  
+  @Test(expected = NullPointerException.class)
+  public void testWithNullDocument() throws Exception {
+      HasAnyOfMetricsImpl spy = Mockito.spy(new HasAnyOfMetricsImpl());
+      Mockito.mock(QualifierImpl.class);
+      HasAnyOfMetrics metrics = new HasAnyOfMetrics();        
+      Document document = new Document();
+      HashMap<String, Object> documentMetrics = new HashMap<String, Object>();
+      documentMetrics.put("sampleMetric", "sampleMetricValue");
+      document.setMetrics(documentMetrics);
+      ActionContext actionContextMock = Mockito.mock(ActionContext.class);
+      Mockito.doReturn(metrics).when((QualifierImpl)spy).getConstraintDefinition();
+      Mockito.doReturn(actionContextMock).when((QualifierImpl)spy).getActionContext();
       spy.isAvailable();
   }
 
