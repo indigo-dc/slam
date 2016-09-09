@@ -25,15 +25,15 @@ import pl.cyfronet.ltos.security.policy.Permissions;
 @Configuration
 @Profile("production")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends SecurityConfigBase {
     @Value("${unity.entryPointUnityUrl}")
-    private String entryPointUnityUrl;
+    protected String entryPointUnityUrl;
 
     @Value("${unity.entryPointAuthUrl}")
-    private String entryPointAuthUrl;
+    protected String entryPointAuthUrl;
 
     @Value("${unity.unauthorizedAction}")
-    private String unauthorizedAction;
+    protected String unauthorizedAction;
 
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
@@ -65,31 +65,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint())
         ;
     }
-    
-    @Bean
-    static PermissionEvaluator getPermissionEvaluator() {
-        return new DenyAllPermissionEvaluator();
-    }
-
-    @Bean
-    @Autowired
-    static MethodSecurityExpressionHandler getExpressionHandler(
-            PermissionEvaluator evaluator, Permissions permissions) {
-        SecurityExpressionHandler handler = new SecurityExpressionHandler();
-        handler.setPermissionEvaluator(evaluator);
-        handler.setFactory(permissions);
-        return handler;
-    }
-
-    @Bean(name = "activities")
-    static Activities getActivities() {
-        return new Activities();
-    }
-
-    static class Activities {
-        public Activity get(String name) {
-            return Activity.valueOf(name);
-        }
-    }
-
 }

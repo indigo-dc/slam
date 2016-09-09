@@ -17,8 +17,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 @Configuration
 @Profile("development")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfigDev extends SecurityConfig {
-    
+public class SecurityConfigDev extends SecurityConfigBase {
     static Logger log = LoggerFactory.getLogger(SecurityConfigDev.class);
     
     @Autowired
