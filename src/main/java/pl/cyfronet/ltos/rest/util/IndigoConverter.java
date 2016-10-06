@@ -71,20 +71,38 @@ public class IndigoConverter {
         return preferences;
     }
 
-    private List<Sla> prepareSlaList(List<Document> slas, String login) {
+    public List<Sla> prepareSlaList(List<Document> slas, String login) {
         List<Sla> result = new ArrayList<>();
         for (Document doc : slas) {
             List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(doc.getId(), "is_connected_SLA_to_Offer", "");
-            Document provider = documentOperations.getDocument(relations.get(0));
-            Sla sla = new Sla().builder().customer(login).id(doc.getId()).provider(provider.getName()).build();
-            if (doc.getState("serviceType").equals("computing")) {
-                sla.setStart_date(doc.getMetrics().get("startComp").toString());
-                sla.setEnd_date(doc.getMetrics().get("endComp").toString());
-            } else {
-                sla.setStart_date(doc.getMetrics().get("startStorage").toString());
-                sla.setEnd_date(doc.getMetrics().get("endStorage").toString());
+            Document provider = null;
+            Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId());
+
+            if (login != null)
+                slaBuilder.customer(login);
+
+            if (relations.size() > 0) {
+                provider = documentOperations.getDocument(relations.get(0));
+                slaBuilder.provider(provider.getName());
             }
-            sla.setServices(prepareServices(doc, provider));
+            Sla sla = slaBuilder.build();
+
+            if (doc.getState("serviceType") != null) {
+                if (doc.getState("serviceType").equals("computing")) {
+                    //TODO can this be so uncomplete?
+                    if (doc.getMetrics().containsKey("endComp") && doc.getMetrics().get("endComp") != null)
+                        sla.setEnd_date(doc.getMetrics().get("endComp").toString());
+                    if (doc.getMetrics().containsKey("startComp") && doc.getMetrics().get("startComp") != null)
+                        sla.setStart_date(doc.getMetrics().get("startComp").toString());
+                } else {
+                    if (doc.getMetrics().containsKey("startStorage") && doc.getMetrics().get("startStorage") != null)
+                        sla.setStart_date(doc.getMetrics().get("startStorage").toString());
+                    if (doc.getMetrics().containsKey("endStorage") && doc.getMetrics().get("endStorage") != null)
+                        sla.setEnd_date(doc.getMetrics().get("endStorage").toString());
+                }
+            }
+            if (provider != null)
+                sla.setServices(prepareServices(doc, provider));
             result.add(sla);
         }
         return result;
