@@ -10,16 +10,18 @@
     <div style="clear:both;"></div>
     <div class="loading" ng-show="isLoading"></div>
     <div class="main-content">
-        <div ng-include="'js/view/indigo/indigo/activeSlaQuery.html'" ng-controller="ActiveSlaQueryController"
-             ng-init="init('activeSlA','ActiveCopmSla')">
-        </div>
-        <div ng-include="'js/view/indigo/indigo/activeSlaQuery.html'" ng-controller="ActiveSlaQueryController"
-             ng-init="init('activeSlA','ActiveStorageSla')">
-        </div>
-
+        <!--<div ng-include="'js/view/indigo/indigo/activeSlaQuery.html'" ng-controller="ActiveSlaQueryController"-->
+             <!--ng-init="init('activeSlA','ActiveCopmSla')">-->
+        <!--</div>-->
+        <!--<div ng-include="'js/view/indigo/indigo/activeSlaQuery.html'" ng-controller="ActiveSlaQueryController"-->
+             <!--ng-init="init('activeSlA','ActiveStorageSla')">-->
+        <!--</div>-->
+<!---->
         <div ng-repeat="query in ::queries | orderBy: 'position'" ng-controller="QueryController" ng-init="init(query)">
             <div ng-include="'js/view/indigo/query.html'"></div>
         </div>
+
+
     </div>
 </section>
 
