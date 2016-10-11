@@ -5,17 +5,10 @@ queryCategories:
     label: Default query category
 
   - !com.agreemount.bean.query.QueryCategory
-    id: qc1
-    label: QueryCategory 2
+    id: providerDashboard
+    label: query for provider
+
 
   - !com.agreemount.bean.query.QueryCategory
-    id: signedSLAs
-    label: QueryCategory 2
-
-  - !com.agreemount.bean.query.QueryCategory
-    id: offers
-    label: QueryCategory 2
-
-  - !com.agreemount.bean.query.QueryCategory
-    id: activeSlA
-    label: QueryCategory 2
+    id: userDashboard
+    label: query for user

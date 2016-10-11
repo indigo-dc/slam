@@ -1,367 +1,8 @@
-#tutuaj specyfikujemy jakie listy mają się wyświetlić na stronie glownej
-#w pisanie constraintow do kwerend nie mozna uzywac has role, jest tylko has role in related business entity
-#najbezpieczniej robic po jednej kwerendzie
 queries:
-
-  - !com.agreemount.bean.Query
-    id: computingOffers
-    label: Computing Offers
-    queryCategoryId: offers
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: offer
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: offerPublished
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: computing
-
-  - !com.agreemount.bean.Query
-    id: StorageOffers
-    label: Storage Offers
-    queryCategoryId: offers
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: offer
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: offerPublished
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: storage
-
-
-  - !com.agreemount.bean.Query
-    id: ProvidersCompOffers
-    label: My computing Offers
-    queryCategoryId: default
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: provider
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: offer
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: offerPublished
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: computing
-
-  - !com.agreemount.bean.Query
-    id: ProvidersStorageOffers
-    label: My storage Offers
-    queryCategoryId: default
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: provider
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: offer
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: offerPublished
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: storage
-
-
-  - !com.agreemount.bean.Query
-    id: hiddenOffers
-    label: Hidden (non-published) offers
-    queryCategoryId: default
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: provider
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: offer
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: offerHidden
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-
-  - !com.agreemount.bean.Query
-    id: NegotiationsProvider
-    label: My negotiations
-    queryCategoryId: default
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: provider
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: request
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: sent
-
-  - !com.agreemount.bean.Query
-    id: RejectedOffersProvider
-    label: Rejected offers
-    queryCategoryId: default
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: provider
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: request
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: rejected
-
-######################################################
-
-  - !com.agreemount.bean.Query
-    id: InPreparation #jednakowoż zmieniłabym nazwę na My negotiations
-    label: In preparation #jednakowoż zmieniłabym nazwę na My negotiations
-    queryCategoryId: default
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: request
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: sent
-
 
   - !com.agreemount.bean.Query
     id: SignedSlaComp
     label: My signed computing SLAs
-    queryCategoryId: signedSLAs
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: signed
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: computing
-
-  - !com.agreemount.bean.Query
-    id: ActiveCopmSla
-    label: Active computing SLAs
-    queryCategoryId: activeSlA
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: SlaActivityState
-          value: active
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: computing
-
-  - !com.agreemount.bean.Query
-    id: SignedSlaStorage
-    label: My signed storage SLAs
-    queryCategoryId: signedSLAs
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: signed
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: storage
-
-  - !com.agreemount.bean.Query
-    id: ActiveStorageSla
-    label: Active storage SLAs
-    queryCategoryId: activeSlA
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: SlaActivityState
-          value: active
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: computing
-
-
-#  - !com.agreemount.bean.Query
-#    label: My signed private SLAs
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-#    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-#      !com.agreemount.slaneg.constraint.query.definition.Operator
-#        type: AND
-#        children:
-#        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-#          state: documentType
-#          value: sla
-##        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-##          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
-#        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-#          sth: ok
-#        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-#          state: mainState
-#          value: signed
-#        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-#          state: OfferType
-#          value: privateOffer
-
-  - !com.agreemount.bean.Query
-    id: MyDrafts
-    label: My drafts
     queryCategoryId: default
 #    visibilityConstraint:
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
@@ -375,9 +16,35 @@ queries:
         children:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
-          value: request
+          value: sla
 #        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
 #          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: computing
+
+  - !com.agreemount.bean.Query
+    id: workingSla
+    label: SLAs in progrees
+    queryCategoryId: userDashboard
+#    visibilityConstraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -385,15 +52,15 @@ queries:
           value: draft
 
   - !com.agreemount.bean.Query
-    id: rejectedOffers
-    label: Rejected offers
+    id: rejectedSla
+    label: Rejected SLAs
+    queryCategoryId: userDashboard
 #    visibilityConstraint:
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
 #        type: OR
 #        children:
 #        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
 #          role: manager
-    queryCategoryId: default
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
@@ -410,8 +77,24 @@ queries:
           value: rejected
 
 
-#dodać kwerendę dla providera opieracjącą się o relację z ofertami (moje sla publiczne/prywatne)
-#połączyć publiczne i prywatne
-#kwerendy per typ zasobóœ (ActiveSLAcomputing i ActiveSLAstorage)
-#dodać stan dla typu zasobu dla dokumentu (podczas tworzenia/edycji oferty
-#jedna kwerenda dla wszystkicj uplucznionych ofert
+  - !com.agreemount.bean.Query
+    id: AllSlasProvider
+    label: My documents
+    queryCategoryId: providerDashboard
+#    visibilityConstraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: provider
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok

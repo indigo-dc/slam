@@ -1,20 +1,14 @@
-#tutaj definiujemy stany w jakich moze znalezc się dokument
+
 states:
-#rozróżnia typ dokumentu, request po podpisaniu zmienia się w SLA (więc de facto widoki są dwa: offer i reqest/sla)
+
   - !com.agreemount.bean.document.state.State
     id: documentType
     label: documentType
     values:
       - !com.agreemount.bean.document.state.StateValue
-        id: offer
-        label: offer
-      - !com.agreemount.bean.document.state.StateValue
-        id: request
-        label: request
-      - !com.agreemount.bean.document.state.StateValue
         id: sla
         label: SLA
-#w jakim stanie negocjacji jest dany dokument
+
   - !com.agreemount.bean.document.state.State
     id: mainState
     label: statusMain
@@ -31,24 +25,7 @@ states:
       - !com.agreemount.bean.document.state.StateValue
         id: rejected
         label: rejected
-      - !com.agreemount.bean.document.state.StateValue
-        id: offerPublished
-        label: offerPublished
-      - !com.agreemount.bean.document.state.StateValue
-        id: offerHidden
-        label: offerHidden
-#rozróżnianie oferty publicznej i prywatnej
-  - !com.agreemount.bean.document.state.State
-    id: OfferType
-    label: offerType
-    values:
-      - !com.agreemount.bean.document.state.StateValue
-        id: publicOffer
-        label: publicOffer
-      - !com.agreemount.bean.document.state.StateValue
-        id: privateOffer
-        label: privateOffer
-#rozróżnianie u kogo znajduje się dokument (customer/provider)
+
   - !com.agreemount.bean.document.state.State
     id: sideState
     label: sideState
@@ -59,7 +36,7 @@ states:
       - !com.agreemount.bean.document.state.StateValue
         id: provider
         label: provider
-#typ serwisu, który zawiera oferta providera
+
   - !com.agreemount.bean.document.state.State
     id: serviceType
     label: serviceType
@@ -70,21 +47,4 @@ states:
       - !com.agreemount.bean.document.state.StateValue
         id: storage
         label: storage
-#aktywność sla
-  - !com.agreemount.bean.document.state.State
-    id: SlaActivityState
-    label: SlaActivityState
-    values:
-      - !com.agreemount.bean.document.state.StateValue
-        id: beforeStart
-        label: beforeStart
-      - !com.agreemount.bean.document.state.StateValue
-        id: active
-        label: active
-      - !com.agreemount.bean.document.state.StateValue
-        id: closed
-        label: closed
-
-
-
 

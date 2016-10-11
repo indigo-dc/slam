@@ -20,7 +20,6 @@ metrics:
     description: When u wish your SLA to activate
     availableForStateValues:
       !java.util.ArrayList
-        - request
         - sla
 
   - !com.agreemount.bean.metric.DateMetric
@@ -31,26 +30,25 @@ metrics:
     description: When u wish your SLA to finish
     availableForStateValues:
       !java.util.ArrayList
-        - request
         - sla
 
-  - !com.agreemount.bean.metric.FloatMetric
-    id: weightComputing
-    label: Weight
-    categoryId: computingTimeRestrictions
-    required: true
-    description: weight
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        # - offer
-        - sla
-    minValue: 0.0
-    maxValue: 1.0
-    defaultValue: 0.5
-    
-### target: computing time    
-        
+# TODO @michal USTALI CO Z TYM ROBIMY
+#  - !com.agreemount.bean.metric.FloatMetric
+#    id: weightComputing
+#    label: Weight
+#    categoryId: computingTimeRestrictions
+#    required: true
+#    description: weight
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        # - offer
+#        - sla
+#    minValue: 0.0
+#    maxValue: 1.0
+#    defaultValue: 0.5
+#
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: computingTime-totalGuaranteed
     label: total-guaranteed computing time
@@ -59,8 +57,6 @@ metrics:
     description: The guaranteed quantity of computing time to be granted to the user group in total
     availableForStateValues:
       !java.util.ArrayList
-        - request
-        - offer
         - sla
     unit: h
     
@@ -213,120 +209,120 @@ metrics:
 
 
 # storage
-
-  - !com.agreemount.bean.metric.DateMetric
-    id: startStorage
-    label: Start
-    categoryId: storageRestrictions
-    required: true
-    description: When u wish your SLA to activate
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - sla
-
-  - !com.agreemount.bean.metric.DateMetric
-    id: endStorage
-    label: end
-    categoryId: storageRestrictions
-    required: true
-    description: When u wish your SLA to finish
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - sla
-
-  - !com.agreemount.bean.metric.FloatMetric
-    id: weightStorage
-    label: Weight
-    categoryId: storageRestrictions
-    required: true
-    description: weight
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        # - offer
-        - sla
-    minValue: 0.0
-    maxValue: 1.0
-    defaultValue: 0.5
-        
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: storage-totalGuaranteed
-    label: total-guaranteed storage space
-    categoryId: storageRestrictions
-    required: true
-    description: The guaranteed quantity of storage to be granted to the user group in total
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: GB
-    
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: storage-totalLimit
-    label: total-limit storage space
-    categoryId: storageRestrictions
-    required: true
-    description: The limit of storage for the user group in total
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: GB    
-    
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: storage-instanceGuaranteed
-    label: instance-guaranteed storage space
-    categoryId: storageRestrictions
-    required: true
-    description: The guaranteed quantity of storage to be granted to each instance (virtual machine or Docker container)
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: GB     
-    
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: storage-instanceLimit
-    label: instance-limit storage space
-    categoryId: storageRestrictions
-    required: true
-    description: The limit of a resource for each instance
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: GB      
-    
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: storage-userGuaranteed
-    label: user-guaranteed storage space
-    categoryId: storageRestrictions
-    required: true
-    description: The guaranteed quantity of a resource to be granted to each user
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: GB      
-    
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: storage-userLimit
-    label: user-limit storage space
-    categoryId: storageRestrictions
-    required: true
-    description: The limit of a resource for each user
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: GB      
-
-
+#
+#  - !com.agreemount.bean.metric.DateMetric
+#    id: startStorage
+#    label: Start
+#    categoryId: storageRestrictions
+#    required: true
+#    description: When u wish your SLA to activate
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - sla
+#
+#  - !com.agreemount.bean.metric.DateMetric
+#    id: endStorage
+#    label: end
+#    categoryId: storageRestrictions
+#    required: true
+#    description: When u wish your SLA to finish
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - sla
+#
+#  - !com.agreemount.bean.metric.FloatMetric
+#    id: weightStorage
+#    label: Weight
+#    categoryId: storageRestrictions
+#    required: true
+#    description: weight
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        # - offer
+#        - sla
+#    minValue: 0.0
+#    maxValue: 1.0
+#    defaultValue: 0.5
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: storage-totalGuaranteed
+#    label: total-guaranteed storage space
+#    categoryId: storageRestrictions
+#    required: true
+#    description: The guaranteed quantity of storage to be granted to the user group in total
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - offer
+#        - sla
+#    unit: GB
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: storage-totalLimit
+#    label: total-limit storage space
+#    categoryId: storageRestrictions
+#    required: true
+#    description: The limit of storage for the user group in total
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - offer
+#        - sla
+#    unit: GB
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: storage-instanceGuaranteed
+#    label: instance-guaranteed storage space
+#    categoryId: storageRestrictions
+#    required: true
+#    description: The guaranteed quantity of storage to be granted to each instance (virtual machine or Docker container)
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - offer
+#        - sla
+#    unit: GB
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: storage-instanceLimit
+#    label: instance-limit storage space
+#    categoryId: storageRestrictions
+#    required: true
+#    description: The limit of a resource for each instance
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - offer
+#        - sla
+#    unit: GB
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: storage-userGuaranteed
+#    label: user-guaranteed storage space
+#    categoryId: storageRestrictions
+#    required: true
+#    description: The guaranteed quantity of a resource to be granted to each user
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - offer
+#        - sla
+#    unit: GB
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: storage-userLimit
+#    label: user-limit storage space
+#    categoryId: storageRestrictions
+#    required: true
+#    description: The limit of a resource for each user
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - request
+#        - offer
+#        - sla
+#    unit: GB
+#
+#
