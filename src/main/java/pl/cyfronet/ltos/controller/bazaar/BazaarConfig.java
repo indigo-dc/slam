@@ -24,8 +24,6 @@ import com.agreemount.slaneg.fixtures.GenericYamlProvider;
  */
 @Configuration
 @EnableAutoConfiguration
-@PropertySources({ @PropertySource("classpath:bazaar.properties"),
-        @PropertySource("classpath:mongo.properties") })
 @ComponentScan("com.agreemount")
 public class BazaarConfig {
 
