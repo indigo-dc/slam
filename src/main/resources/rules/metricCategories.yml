@@ -1,5 +1,6 @@
 metricCategories:
 
+#TODO check metrics with restriction model, preprare set for 2nd release
   - !com.agreemount.bean.metric.MetricCategory
     id: mcComputing
     label: mcComputing
@@ -10,13 +11,13 @@ metricCategories:
       - !com.agreemount.bean.metric.MetricCategory
         id: publicIPRestrictions
         label: public ip restrictions
-  - !com.agreemount.bean.metric.MetricCategory
-    id: mcStorage
-    label: mcStorage
-    children:
-      - !com.agreemount.bean.metric.MetricCategory
-        id: storageRestrictions
-        label: storage service targets
+#  - !com.agreemount.bean.metric.MetricCategory
+#    id: mcStorage
+#    label: mcStorage
+#    children:
+#      - !com.agreemount.bean.metric.MetricCategory
+#        id: storageRestrictions
+#        label: storage service targets
 #      - !com.agreemount.bean.metric.MetricCategory
 #        id: storageRestrictions
 #        label: storage service restrictions
