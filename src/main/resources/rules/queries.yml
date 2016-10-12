@@ -3,7 +3,7 @@ queries:
   - !com.agreemount.bean.Query
     id: SignedSlaComp
     label: My signed computing SLAs
-    queryCategoryId: default
+    queryCategoryId: userDashboard
 #    visibilityConstraint:
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
 #        type: OR

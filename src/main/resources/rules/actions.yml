@@ -23,40 +23,40 @@ actions:
           serviceType: computing
       #TODO adapt metrics set to status of indigo
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: computingTime-totalGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: computingTime-totalLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: computingTime-instanceGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: computingTime-instanceLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: computingTime-userGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: computingTime-userLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: publicIP-totalGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: publicIP-totalLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: publicIP-instanceGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: publicIP-instanceLimit
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: publicIP-userGuaranteed
       - !com.agreemount.slaneg.action.definition.AddMetric
-        documentAlias: newLeaf
+        documentAlias: newRoot
         metricId: publicIP-userLimit
 
 #negocjacja providera
