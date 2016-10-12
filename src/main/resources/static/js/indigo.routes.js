@@ -1,6 +1,7 @@
 angular.module('indigo')
 
     .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.otherwise({redirectTo: '/dashboard'});
 
         //$routeProvider.when('/registration', {templateUrl: 'js/view/registration.html', controller: 'RegistrationController', data: {
         //    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
@@ -247,9 +248,10 @@ angular.module('indigo')
         $translateProvider.preferredLanguage('pl');
         $translateProvider.useSanitizeValueStrategy('escape');
     }])
-    .controller('Ctrl', ['$translate', '$scope', function ($translate, $scope) {
-
-        $scope.changeLanguage = function (langKey) {
-            $translate.use(langKey);
-        };
-    }]);
+    .controller('MainCtrl', function ($scope, $route, $rootScope) {
+        $rootScope.$route = $route;
+        //$translate
+        //$scope.changeLanguage = function (langKey) {
+        //    $translate.use(langKey);
+        //};
+    });

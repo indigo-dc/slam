@@ -31,6 +31,7 @@ module.exports = {
             order: {
                 before: [
                     'src/main/resources/static/js/indigo.config.js',
+                    'src/main/resources/static/js/indigo.routes.js',
                     //'src/main/resources/static/js/components/header/header.service.js',
 
                     'src/main/resources/static/vendor/jquery/dist/jquery.min.js',
