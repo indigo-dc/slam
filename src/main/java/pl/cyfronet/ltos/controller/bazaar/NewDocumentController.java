@@ -22,7 +22,7 @@ import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.bean.legacy.CreateGrantData;
-import pl.cyfronet.ltos.bean.legacy.CreatePoolData;
+import pl.cyfronet.ltos.bean.SLAData;
 import pl.cyfronet.ltos.security.PortalUser;
 
 import java.util.stream.Collectors;
@@ -83,13 +83,14 @@ public class NewDocumentController {
         return response;
     }
 
-    @RequestMapping(value = "pool/create", method = RequestMethod.PUT)
+    @RequestMapping(value = "api/sla", method = RequestMethod.PUT)
     @ResponseBody
-    public Response<ActionResponse> getPoolDocument(final CreatePoolData createPoolData) {
+    public Response<ActionResponse> createSLA(final SLAData slaData) {
 
         IndigoDocument document = new IndigoDocument();
-        document.setName(createPoolData.getGrantId());
-        document.setSite(createPoolData.getSite());
+        document.setName(slaData.getId());
+        document.setSite(slaData.getSite());
+
 
         /*
          * check if user has this team...
@@ -97,11 +98,9 @@ public class NewDocumentController {
 
         ActionContext actionContext = actionContextFactory.createInstance(document);
         actionContext.addDocument("documentDraftFromController", document);
-        engineFacade.runAction(actionContext, "createNewPool");
+        engineFacade.runAction(actionContext, "createNewComputingRequest");
 
         document = (IndigoDocument) actionContext.getDocument("newRoot");
-
-        logger.debug("" + document);
 
         Response<ActionResponse> response = new Response<>();
         RedirectActionResponse redirectActionResponse = new RedirectActionResponse();

@@ -14,19 +14,19 @@ queries:
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
         children:
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: documentType
-          value: sla
+#        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+#          state: documentType
+#          value: sla
 #        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
 #          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: signed
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: serviceType
-          value: computing
+#        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+#          state: mainState
+#          value: signed
+#        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+#          state: serviceType
+#          value: computing
 
   - !com.agreemount.bean.Query
     id: workingSla

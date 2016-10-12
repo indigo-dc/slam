@@ -38,7 +38,7 @@ module.exports = {
                     'src/main/resources/static/vendor/bootstrap/dist/js/bootstrap.min.js',
                     'src/main/resources/static/vendor/angular/angular.min.js',
                     'src/main/resources/static/vendor/angular-route/angular-route.min.js',
-                    'src/main/resources/static/vendor/angular-sanitize/angular-sanitize.min.js',
+                    'src/main/resources//usr/bin/brunchstatic/vendor/angular-sanitize/angular-sanitize.min.js',
                     'src/main/resources/static/vendor/angular-resource/angular-resource.min.js',
                     'src/main/resources/static/vendor/angular-translate/angular-translate.min.js',
                     'src/main/resources/static/vendor/angular-translate-loader-url/angular-translate-loader-url.min.js',

@@ -1,4 +1,4 @@
-package pl.cyfronet.ltos.bean.legacy;
+package pl.cyfronet.ltos.bean;
 
 /**
  * Created by chomik on 27.01.16.
@@ -8,7 +8,7 @@ package pl.cyfronet.ltos.bean.legacy;
 @lombok.ToString
 @lombok.EqualsAndHashCode
 @lombok.NoArgsConstructor
-public class CreatePoolData {
-    private String grantId;
+public class SLAData {
+    private String id;
     private String site;
 }

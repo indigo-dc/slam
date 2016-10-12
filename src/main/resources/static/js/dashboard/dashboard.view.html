@@ -1,6 +1,6 @@
 <div ng-repeat="sla in slas">
     <h2>{{ sla.label }}</h2>
-    <ul>
-        <li></li>
+    <ul ng-repeat="document in sla.documents">
+        <li>{{document.name }} {{document.states.mainState}} {{document.site || 'BRAK'}}</li>
     </ul>
 </div>

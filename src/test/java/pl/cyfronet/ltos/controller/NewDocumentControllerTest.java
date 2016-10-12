@@ -60,15 +60,15 @@ import java.util.List;
 //        CreateGrantData grantData = new CreateGrantData();
 //        grantData.setTeam("test");
 //        grantData.setBranchOfScienceId("test");
-//        grantData.setGrantId("1");
+//        grantData.setId("1");
 //        grantData.setAffiliationId(1);
 //
 //        Document document = new Document();
-//        document.setName(grantData.getGrantId());
+//        document.setName(grantData.getId());
 //        document.setTeam(grantData.getTeam());
 //
 //        Document document2 = new Document();
-//        document2.setName(grantData.getGrantId());
+//        document2.setName(grantData.getId());
 //        document2.setTeam(grantData.getTeam());
 //        document2.setId("123");
 //
