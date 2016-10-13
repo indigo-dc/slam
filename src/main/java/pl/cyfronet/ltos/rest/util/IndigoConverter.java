@@ -1,10 +1,15 @@
 package pl.cyfronet.ltos.rest.util;
 
+import com.agreemount.EngineFacade;
 import com.agreemount.bean.document.Document;
+import com.agreemount.engine.facade.QueryFacade;
+import com.agreemount.slaneg.action.ActionContext;
+import com.agreemount.slaneg.action.ActionContextFactory;
 import com.agreemount.slaneg.db.DocumentOperations;
 import com.agreemount.slaneg.db.RelationOperations;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer;
 import org.springframework.stereotype.Component;
 import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
 import pl.cyfronet.ltos.rest.bean.preferences.Preference;
@@ -14,6 +19,7 @@ import pl.cyfronet.ltos.rest.bean.sla.Service;
 import pl.cyfronet.ltos.rest.bean.sla.Sla;
 import pl.cyfronet.ltos.rest.bean.sla.Target;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -45,7 +51,8 @@ public class IndigoConverter {
         List<Priority> computePriorities = new ArrayList<>();
         List<Priority> storagePriorities = new ArrayList<>();
         for (Document sla : slas) {
-            List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(sla.getId(), "is_connected_SLA_to_Offer", "");
+            //TODO replace with calling query
+            List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(Arrays.asList(sla.getId()), "is_connected_SLA_to_Offer", "");
             if (sla.getState("serviceType").equals("computing")) {
                 addPriorities(computePriorities, sla, relations.get(0),"weightComputing");
             } else {
@@ -74,7 +81,8 @@ public class IndigoConverter {
     public List<Sla> prepareSlaList(List<Document> slas, String login) {
         List<Sla> result = new ArrayList<>();
         for (Document doc : slas) {
-            List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(doc.getId(), "is_connected_SLA_to_Offer", "");
+            //TODO replace with calling query
+            List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(Arrays.asList(doc.getId()), "is_connected_SLA_to_Offer", "");
             Document provider = null;
             Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId());
 

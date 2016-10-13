@@ -18,9 +18,9 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: When u wish your SLA to activate
-    availableForStateValues:
-      !java.util.ArrayList
-        - sla
+#    availableForStateValues:
+#      !java.util.ArrayList
+#        - sla
 
   - !com.agreemount.bean.metric.DateMetric
     id: endComp
@@ -28,9 +28,6 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: When u wish your SLA to finish
-    availableForStateValues:
-      !java.util.ArrayList
-        - sla
 
 # TODO @michal USTALI CO Z TYM ROBIMY
 #  - !com.agreemount.bean.metric.FloatMetric
@@ -55,9 +52,6 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of computing time to be granted to the user group in total
-    availableForStateValues:
-      !java.util.ArrayList
-        - sla
     unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
@@ -66,12 +60,7 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: The limit of computing time for the user group in total
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: h    
+    unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: computingTime-instanceGuaranteed
@@ -79,12 +68,7 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: h     
+    unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: computingTime-instanceLimit
@@ -92,12 +76,7 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: The limit of a resource for each instance
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: h      
+    unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: computingTime-userGuaranteed
@@ -105,12 +84,7 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: h      
+    unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: computingTime-userLimit
@@ -118,11 +92,6 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     description: The limit of a resource for each user
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
     unit: h
 
 
@@ -135,11 +104,6 @@ metrics:
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of public ip to be granted to the user group in total
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
     unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
@@ -148,12 +112,7 @@ metrics:
     categoryId: publicIPRestrictions
     required: true
     description: The limit of public ip for the user group in total
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: none    
+    unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-instanceGuaranteed
@@ -161,12 +120,7 @@ metrics:
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: none     
+    unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-instanceLimit
@@ -174,12 +128,7 @@ metrics:
     categoryId: publicIPRestrictions
     required: true
     description: The limit of a resource for each instance
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
-    unit: none      
+    unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: publicIP-userGuaranteed
@@ -187,11 +136,6 @@ metrics:
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
     unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
@@ -200,11 +144,6 @@ metrics:
     categoryId: publicIPRestrictions
     required: true
     description: The limit of a resource for each user
-    availableForStateValues:
-      !java.util.ArrayList
-        - request
-        - offer
-        - sla
     unit: none
 
 

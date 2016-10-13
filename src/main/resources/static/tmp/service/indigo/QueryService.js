@@ -19,7 +19,7 @@ app.service("QueryService", ['$http', '$q', function ($http, $q) {
         var request = $http({
             headers : { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
             method : "get",
-            url : "query-category/queries",
+            url : "/query/available",
             params : {
                 queryCategoryId : queryCategoryId
             }
@@ -32,7 +32,7 @@ app.service("QueryService", ['$http', '$q', function ($http, $q) {
         var request = $http({
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             method: "get",
-            url: "queries/documents",
+            url: "query/documents",
             params: {
                 queryId: queryId
             }

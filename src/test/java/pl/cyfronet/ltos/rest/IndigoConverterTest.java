@@ -48,7 +48,7 @@ public class IndigoConverterTest {
         List<Document> slas = Arrays.asList(document);
 
         List<String> relations = Arrays.asList("4401ac5dc8cfbbb737b0a02575e6f4bc");
-        Mockito.when( relationOperations.getDocumentIdsWithRelationOnLeft("1", "is_connected_SLA_to_Offer", "") )
+        Mockito.when( relationOperations.getDocumentIdsWithRelationOnLeft(Arrays.asList("1"), "is_connected_SLA_to_Offer", "") )
                 .thenReturn(relations);
 
         Document provider = new Document();
