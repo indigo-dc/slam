@@ -8,7 +8,7 @@ import com.agreemount.bean.response.ActionResponse;
 import com.agreemount.bean.response.RedirectActionResponse;
 import com.agreemount.slaneg.action.ActionContext;
 import com.agreemount.slaneg.action.ActionContextFactory;
-import com.agreemount.slaneg.fixtures.GenericYamlProvider;
+import pl.cyfronet.bazaar.engine.rules.GenericYamlProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
