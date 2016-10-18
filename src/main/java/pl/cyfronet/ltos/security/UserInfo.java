@@ -31,7 +31,7 @@ public class UserInfo {
     @JsonCreator
     public UserInfo(@JsonProperty("email")String email,
                     @JsonProperty("name")String name,
-                    @JsonProperty("confirmedRegistration")Boolean confirmedRegistration,
+                    @JsonProperty("email_verified")Boolean confirmedRegistration,
                     @JsonProperty("persistent")String persistent
     ) {
         this.email = email;
