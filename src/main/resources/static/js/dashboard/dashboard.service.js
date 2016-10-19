@@ -5,6 +5,18 @@ angular.module('indigo.dashboard')
             query: {method: 'GET'}
         });
     })
+    .service('Sites', function ($resource, $q) {
+        var res = $resource('api/sites', {}, {query: {method: 'GET'}});
+
+        var sites = {};
+        res.query({}, function (data) {
+            data.rows.forEach(function (site) {
+                sites[site.id] = site;
+            });
+        });
+
+        return sites;
+    })
     .service('DocumentResource', function ($resource, EngineInterceptor) {
 
 

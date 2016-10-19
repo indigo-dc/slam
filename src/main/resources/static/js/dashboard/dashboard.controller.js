@@ -4,8 +4,9 @@ angular.module('indigo.dashboard', ['ngRoute']).config(function ($routeProvider)
         data: {
        //authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
     }});
-}).controller('dashboardCtrl', function ($scope, $location, $routeParams, DashboardResource, DocumentResource, SESSION) {
+}).controller('dashboardCtrl', function ($scope, $location, $routeParams, DashboardResource, DocumentResource, SESSION, Sites) {
     $scope.slas = [];
+    $scope.Sites = Sites;
 
     var type = 'userDashboard';
 

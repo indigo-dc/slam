@@ -2,7 +2,9 @@
 <div ng-repeat="sla in slas">
     <h2>{{ sla.label }}</h2>
     <div class="list-group">
-        <a href="" ng-click="editDocument(document.id)" ng-repeat="document in sla.documents" class="list-group-item ">{{document.name }} {{document.states.mainState}} {{document.site || 'BRAK'}}</a>
+        <a href="" ng-click="editDocument(document.id)" ng-repeat="document in sla.documents" class="list-group-item ">
+            {{document.name }} {{document.states.mainState}} {{Sites[document.site].value.sitename || 'BRAK'}}
+        </a>
     </div>
 </div>
 
