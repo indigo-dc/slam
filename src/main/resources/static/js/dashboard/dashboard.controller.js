@@ -4,13 +4,19 @@ angular.module('indigo.dashboard', ['ngRoute']).config(function ($routeProvider)
         data: {
        //authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
     }});
-}).controller('dashboardCtrl', function ($scope, $location, DashboardResource, DocumentResource, SESSION) {
+}).controller('dashboardCtrl', function ($scope, $location, $routeParams, DashboardResource, DocumentResource, SESSION) {
     $scope.slas = [];
 
     var type = 'userDashboard';
 
-    if(SESSION.roles.indexOf('ROLE_PROVIDER') != -1)
-        type = 'providerDashboard';
+    if($routeParams.type == undefined) {
+        if(SESSION.roles.indexOf('ROLE_PROVIDER') != -1)
+            type = 'providerDashboard';
+    } else {
+        type = $routeParams.type;
+    }
+
+
 
 
     DashboardResource.query({type: type}, function (data) {
