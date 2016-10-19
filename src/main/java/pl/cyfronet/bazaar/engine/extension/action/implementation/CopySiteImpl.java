@@ -19,10 +19,10 @@ import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 public class CopySiteImpl extends AbstractActionImpl<CopySite, IndigoDocument, ActionContext<IndigoDocument>> {
 
     public void run(ActionContext actionContext) {
-        IndigoDocument from = actionContext.getDocument(definition.getFromAlias());
+        IndigoDocument from = (IndigoDocument)actionContext.getDocument(definition.getFromAlias());
         Preconditions.checkNotNull(from, "document was not found, alias [%s]", definition.getFromAlias());
 
-        IndigoDocument to = actionContext.getDocument(definition.getToAlias());
+        IndigoDocument to = (IndigoDocument)actionContext.getDocument(definition.getToAlias());
         Preconditions.checkNotNull(to, "document was not found, alias [%s]", definition.getToAlias());
 
         to.setSite(from.getSite());
