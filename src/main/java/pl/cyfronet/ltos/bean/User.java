@@ -60,4 +60,12 @@ public class User {
     @ManyToMany
     private List<Role> roles;
 
+    public boolean hasRole(String role) {
+        for(Role _role : getRoles()) {
+            if (_role.getName().equals(role)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

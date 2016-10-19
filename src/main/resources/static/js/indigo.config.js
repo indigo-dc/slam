@@ -8,5 +8,6 @@ angular.module('indigo', ['ngRoute',
                           //application modules
                           'indigo.components.header',
                           'indigo.dashboard',
-                          'indigo.profile'
+                          'indigo.profile',
+                          'indigo.constants' //this module is dynamically generated in index.html
 ]);

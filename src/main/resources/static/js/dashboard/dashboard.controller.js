@@ -4,10 +4,14 @@ angular.module('indigo.dashboard', ['ngRoute']).config(function ($routeProvider)
         data: {
        //authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
     }});
-}).controller('dashboardCtrl', function ($scope, $location, $routeParams, DashboardResource, DocumentResource) {
+}).controller('dashboardCtrl', function ($scope, $location, DashboardResource, DocumentResource, SESSION) {
     $scope.slas = [];
-    var type = $routeParams.type || 'userDashboard';
-    //var type = 'userDashboard';
+
+    var type = 'userDashboard';
+
+    if(SESSION.roles.indexOf('ROLE_PROVIDER') != -1)
+        type = 'providerDashboard';
+
 
     DashboardResource.query({type: type}, function (data) {
         $scope.slas = data.data;
