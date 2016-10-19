@@ -36,6 +36,8 @@ public class User {
     private Long id;
     private String name;
     private String country;
+
+    private String organisationName;
     
     @Column(unique=true)
     private String email;

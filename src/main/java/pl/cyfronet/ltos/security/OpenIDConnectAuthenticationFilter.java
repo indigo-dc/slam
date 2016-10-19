@@ -79,15 +79,14 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
         PortalUser.PortalUserBuilder builder = PortalUser.builder();
         try {
             //TODO: poprawne odparsowanie i debugowanie
-            ResponseEntity<UserInfo> userInfoResponseEntity = restTemplate.getForEntity(authorizeUrl + userInfoAction, UserInfo.class);
+            UserInfo userInfo = restTemplate.getForObject(authorizeUrl + userInfoAction, UserInfo.class);
             builder.isAuthenticated(true);
-            UserInfo userInfo = userInfoResponseEntity.getBody();
             User user = userRepository.findByEmail(userInfo.getEmail());
             if (user != null) {
                 builder.user(user);
                 userInfo.setId(user.getId());
             } else {
-                user = User.builder().name(userInfo.getName()).email(userInfo.getEmail()).build();
+                user = User.builder().name(userInfo.getName()).email(userInfo.getEmail()).organisationName(userInfo.getOrganisation_name()).build();
                 userRepository.save(user);
                 builder.user(user);
                 userInfo.setId(user.getId());

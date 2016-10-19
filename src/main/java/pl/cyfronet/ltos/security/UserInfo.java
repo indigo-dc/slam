@@ -22,6 +22,8 @@ public class UserInfo {
 
     private Boolean confirmedRegistration;
 
+    private String organisation_name;
+
     private String unityPersistentIdentity;
     private boolean operator;
 
@@ -32,18 +34,21 @@ public class UserInfo {
     public UserInfo(@JsonProperty("email")String email,
                     @JsonProperty("name")String name,
                     @JsonProperty("email_verified")Boolean confirmedRegistration,
-                    @JsonProperty("persistent")String persistent
+                    @JsonProperty("persistent")String persistent,
+                    @JsonProperty("organisation_name")String organisationName
     ) {
         this.email = email;
         this.name = name;
         this.confirmedRegistration = confirmedRegistration;
         this.unityPersistentIdentity = persistent;
+        this.organisation_name = organisationName;
     }
 
     public User.UserBuilder toUserPrototype() {
         return User.builder()
                 .email(email)
                 .name(name)
+                .organisationName(organisation_name)
                 .confirmedRegistration(confirmedRegistration)
                 .unityPersistentIdentity(unityPersistentIdentity);
     }
@@ -56,6 +61,7 @@ public class UserInfo {
                 .id(user.getId())
                 .email(user.getEmail())
                 .name(user.getName())
+                .organisation_name(user.getOrganisationName())
                 .confirmedRegistration(user.getConfirmedRegistration())
                 .unityPersistentIdentity(user.getUnityPersistentIdentity());
         /*
