@@ -133,10 +133,13 @@ public class NewDocumentController {
     public void actionSLA(@PathVariable("id") String id, @RequestBody pl.cyfronet.ltos.rest.bean.sla.Document slaData,
                           PortalUser user, @RequestParam("action") String action) {
         IndigoDocument document = (IndigoDocument)engineFacade.getDocument(id);
-//      for now we will not check it, later this endpoint will be removed in favor of engine api
-//        if(user)
-//            throw new AccessDeniedException("User not authenticated");
+
+        IndigoDocument formDocument = new IndigoDocument();
+        formDocument.setMetrics(slaData.getMetrics());
+
         ActionContext actionContext = actionContextFactory.createInstance(document);
+
+        actionContext.addDocument("FORM",formDocument);
 
         engineFacade.runAction(actionContext, action);
     }
