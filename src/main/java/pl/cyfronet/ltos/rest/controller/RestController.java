@@ -1,7 +1,13 @@
 package pl.cyfronet.ltos.rest.controller;
 
+import com.agreemount.bean.document.Document;
+import com.agreemount.engine.facade.QueryFacade;
+import com.agreemount.slaneg.action.ActionContext;
+import com.agreemount.slaneg.action.ActionContextFactory;
+import com.agreemount.slaneg.db.DocumentOperations;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +16,7 @@ import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
 import pl.cyfronet.ltos.rest.bean.sla.Sla;
 import pl.cyfronet.ltos.rest.logic.IndigoRestLogic;
+import pl.cyfronet.ltos.security.PortalUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +36,24 @@ public class RestController {
     @Autowired
     IndigoRestLogic indigoRestLogic;
 
+    @Autowired
+    QueryFacade queryFacade;
+
+    @Autowired
+    ActionContextFactory actionContextFactory;
+
+
+    @Autowired
+    private DocumentOperations documentOperations;
+
     @RequestMapping(value = "/preferences/{login}", method = RequestMethod.GET)
-    public IndigoWrapper getUser(@PathVariable String login) {
-        return indigoRestLogic.getDataForLogin(login);
+    public List<Document> getUser(@PathVariable String login, PortalUser user) {
+//        String organisation = user.getUserBean().getOrganisationName();
+//        Query query = new Query();
+        List<Document> docs = queryFacade.getDocumentsForQuery("SignedSlaComp", actionContextFactory.createInstance());
+//                documentOperations.getDocumentsWithQuery(query);
+//        return indigoRestLogic.getDataForLogin(login);
+        return docs;
     }
 
     @RequestMapping(value = "/preferences", method = RequestMethod.GET)
