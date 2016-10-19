@@ -14,40 +14,50 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
     $scope.documentId = $route.current.params.document_id;
     $scope.state = 'form';
     $scope.metrics = [];
-    $scope.sla = {site: null, name: '', id: $scope.documentId};
+    $scope.sla = {site: null, name: '', id: $scope.documentId, metrics: {}};
     $scope.sites = [];
     $scope.actions = [];
 
     $scope.loadDocument = function () {
-    if($scope.documentId) {
-        DocumentResource.query_action({id: $scope.documentId}, function (data) {
-            $scope.actions = data;
-        }, function (response) {
+        if($scope.documentId) {
+            DocumentResource.get({id: $scope.documentId}, function (data) {
+                $scope.actions = data.actions;
+                $scope.sla = data.document;
 
-        });
+                $scope.sites.forEach(function (site) {
+                    if(site.id == $scope.sla.site){
+                        $scope.sla.site = site;
+                    }
+                });
 
-        DocumentResource.get({id: $scope.documentId}, function (data) {
+                //check whether document is editable
+                $scope.actions.forEach(function (action) {
+                    if(action.id == 'editDraft')
+                        //setting it in sla is for possible future compatibility
+                        $scope.sla.editable = true;
+                })
+            }, function (response) {
 
-        }, function (response) {
+            })
+        }
+    };
 
-        })
-    }
 
     $scope.sites = DocumentResource.sites({}, function (data) {
         $scope.sites = data.rows;
-        $scope.sla.site = data.rows[0].id
+        $scope.sla.site = data.rows[0];
+        $scope.loadMetrics();
     }, function (response) {
 
     });
-    };
 
     $scope.loadMetrics = function () {
         DocumentResource.metrics({}, function (data) {
             $scope.metrics = data;
-
-            $scope.metrics.forEach(function (metric) {
-                $scope.sla[metric.id] = null;
-            });
+            if(!$scope.documentId)
+                $scope.metrics.forEach(function (metric) {
+                    $scope.sla.metrics[metric.id] = null;
+                });
 
             $scope.loadDocument();
 
@@ -55,8 +65,6 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
 
         });
     };
-
-    $scope.loadMetrics();
 
     $scope.getMetricClasses = function (metric) {
         if(metric.unit && metric.unit != 'none') {
@@ -85,16 +93,10 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
         });
     };
     $scope.performAction = function (action, sla) {
-        if (action == 'delete') {
-            $scope.deleteRequest(sla);
-        } else if (action == 'update') {
-            $scope.sendRequest(sla);
-        } else {
-            DocumentResource.perform_action({action: action, id: sla.id}, function (data) {
-                $scope.state = 'success';
-            }, function (response) {
+        DocumentResource.perform_action({action: action, id: sla.id}, function (data) {
+            $scope.state = 'success';
+        }, function (response) {
 
-            });
-        }
+        });
     };
 });

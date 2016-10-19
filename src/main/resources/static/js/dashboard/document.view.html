@@ -6,7 +6,8 @@
             <label class="col-sm-2 control-label" for="site">Site</label>
             <div class="col-sm-6">
 
-                <select class="form-control" required="required" ng-options="site_name as site.value.sitename for site in sites track by site.id" ng-model="sla.site" id="site"></select>
+                <select ng-disable="!sla.editable" class="form-control" required="required"
+                        ng-options="site as site.value.sitename for site in sites track by site.id" ng-model="sla.site" id="site"></select>
 
                 <!--<select class="form-control" required="required" ng-model="sla.site" id="site">-->
                     <!--<option value="BARI">BARI</option>-->
@@ -23,7 +24,7 @@
             <label for="document_id" class="col-sm-2 control-label">Name (ID)</label>
             <div class="col-sm-6">
                 <div>
-                    <input type="text" class="form-control" id="document_id" placeholder="Name " ng-model="sla.name">
+                    <input ng-disable="!sla.editable" type="text" class="form-control" id="document_id" placeholder="Name " ng-model="sla.name">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -35,7 +36,7 @@
             <label for="{{metric.id}}" class="col-sm-2 control-label">{{metric.label}}</label>
             <div class="col-sm-6">
                 <div ng-class="getMetricClasses(metric)">
-                    <input type="{{metric.inputType}}" class="form-control" id="{{metric.id}}" placeholder="{{metric.label}}" ng-model="sla[metric.id]">
+                    <input type="{{metric.inputType}}" class="form-control" id="{{metric.id}}" placeholder="{{metric.label}}" ng-model="sla.metrics[metric.id]">
                     <!--required="{{metric.required}}"-->
                     <span class="input-group-addon" ng-if="metric.unit && metric.unit != 'none'">{{metric.unit}}</span>
                 </div>
@@ -48,8 +49,6 @@
         <div class="text-right">
             <button ng-if="!documentId" class="btn btn-primary" ng-click="sendRequest(sla)">Create</button>
             <button ng-repeat="action in actions" ng-if="documentId" style="margin-left: 5px" class="btn btn-default" ng-click="performAction(action.id, sla)">{{action.label}}</button>
-            <!--<button ng-if="documentId" class="btn btn-default" ng-click="deleteRequest(sla)">Delete</button>-->
-            <!--<button ng-if="documentId" class="btn btn-primary" ng-click="sendRequest(sla)">Update</button>-->
         </div>
 </div>
 <div ng-if="state == 'success'">

@@ -131,18 +131,13 @@ public class NewDocumentController {
     @RequestMapping(value = "api/sla_action/{id}", method = RequestMethod.POST)
     @ResponseBody
     public void actionSLA(@PathVariable("id") String id, PortalUser user, @RequestParam("action") String action) {
-        Document document = engineFacade.getDocument(id);
+        IndigoDocument document = (IndigoDocument)engineFacade.getDocument(id);
+//      for now we will not check it, later this endpoint will be removed in favor of engine api
 //        if(user)
 //            throw new AccessDeniedException("User not authenticated");
         ActionContext actionContext = actionContextFactory.createInstance(document);
 
-        if (action.equals("acceptRequest")) {
-            engineFacade.runAction(actionContext, "acceptRequest");
-        }
-        else if (action.equals("rejectRequest")) {
-            engineFacade.runAction(actionContext, "rejectRequest");
-        }
-//        document.
+        engineFacade.runAction(actionContext, action);
     }
 
     @RequestMapping(value = "api/sla/{id}", method = RequestMethod.DELETE)
@@ -187,12 +182,12 @@ public class NewDocumentController {
 
     @RequestMapping(value = "api/sla", method = RequestMethod.POST)
     @ResponseBody
-    public Response<ActionResponse> createSLA(@RequestBody HashMap<String, String> slaData, PortalUser user) {
+    public Response<ActionResponse> createSLA(@RequestBody pl.cyfronet.ltos.rest.bean.sla.Document slaData, PortalUser user) {
 
         IndigoDocument document = new IndigoDocument();
-        document.setName(slaData.get("site"));
-        document.setSite(slaData.get("name"));
-//        document.setAuthor(user.get());
+        document.setName(slaData.getName());
+        document.setSite(slaData.getSite());
+//        document.setAuthor(user.getId());
 
         ActionContext actionContext = actionContextFactory.createInstance(document);
         actionContext.addDocument("documentDraftFromController", document);
@@ -202,7 +197,7 @@ public class NewDocumentController {
 
         Map<String, Object> metrics = document.getMetrics();
 
-        for (Map.Entry<String, String > entry : slaData.entrySet()) {
+        for (Map.Entry<String, Object > entry : slaData.getMetrics().entrySet()) {
             if(metrics.containsKey(entry.getKey())){
                 metrics.replace(entry.getKey(), entry.getValue());
             }
@@ -217,6 +212,7 @@ public class NewDocumentController {
 
         return response;
     }
+
 
     @RequestMapping(value = "api/metrics", method = RequestMethod.GET)
     @ResponseBody
