@@ -93,7 +93,8 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
         });
     };
     $scope.performAction = function (action, sla) {
-        DocumentResource.perform_action({action: action, id: sla.id}, function (data) {
+        $scope.sla.action = action;
+        DocumentResource.perform_action(sla, function (data) {
             $scope.state = 'success';
         }, function (response) {
 

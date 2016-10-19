@@ -130,7 +130,8 @@ public class NewDocumentController {
 
     @RequestMapping(value = "api/sla_action/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public void actionSLA(@PathVariable("id") String id, PortalUser user, @RequestParam("action") String action) {
+    public void actionSLA(@PathVariable("id") String id, @RequestBody pl.cyfronet.ltos.rest.bean.sla.Document slaData,
+                          PortalUser user, @RequestParam("action") String action) {
         IndigoDocument document = (IndigoDocument)engineFacade.getDocument(id);
 //      for now we will not check it, later this endpoint will be removed in favor of engine api
 //        if(user)
