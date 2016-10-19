@@ -90,6 +90,10 @@ actions:
         documentAlias: newLeaf
         states:
           mainState: draft
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
+
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: sendDraft
@@ -125,6 +129,9 @@ actions:
         states:
           mainState: draft
           sideState: provider
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -164,6 +171,10 @@ actions:
         states:
           mainState: signed
           sideState: provider
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
+
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: acceptSlaProvider
@@ -203,6 +214,9 @@ actions:
         states:
           mainState: signed
           sideState: manager
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -242,6 +256,10 @@ actions:
         states:
           mainState: rejected
           sideState: provider
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
+
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: rejectSlaProvider
@@ -281,6 +299,9 @@ actions:
         states:
           mainState: rejected
           sideState: manager
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -320,6 +341,9 @@ actions:
         states:
           mainState: sent
           sideState: provider
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: sentSlaProvider
@@ -359,5 +383,7 @@ actions:
         states:
           mainState: sent
           sideState: manager
-
+      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+        fromAlias: BASE
+        toAlias: newLeaf
 
