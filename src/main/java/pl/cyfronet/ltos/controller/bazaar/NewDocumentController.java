@@ -130,7 +130,7 @@ public class NewDocumentController {
 
     @RequestMapping(value = "api/sla_action/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public void actionSLA(@PathVariable("id") String id, @RequestBody pl.cyfronet.ltos.rest.bean.sla.Document slaData,
+    public Response<ActionResponse>  actionSLA(@PathVariable("id") String id, @RequestBody pl.cyfronet.ltos.rest.bean.sla.Document slaData,
                           PortalUser user, @RequestParam("action") String action) {
         IndigoDocument document = (IndigoDocument)engineFacade.getDocument(id);
 
@@ -141,7 +141,15 @@ public class NewDocumentController {
 
         actionContext.addDocument("FORM",formDocument);
 
-        engineFacade.runAction(actionContext, action);
+        ActionContext actionContextResponse = engineFacade.runAction(actionContext, action);
+
+
+        Response<ActionResponse> response = new Response<>();
+        RedirectActionResponse redirectActionResponse = new RedirectActionResponse();
+        redirectActionResponse.setRedirectToDocument(actionContextResponse.getRedirectToAlias());
+        response.setData(redirectActionResponse);
+
+        return response;
     }
 
     @RequestMapping(value = "api/sla/{id}", method = RequestMethod.DELETE)
