@@ -4,20 +4,17 @@ import java.util.List;
 
 import com.agreemount.slaneg.action.ActionContext;
 import com.agreemount.slaneg.action.ActionContextFactory;
+import com.agreemount.slaneg.fixtures.FileRulesProvidersConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.annotation.*;
 
 import com.agreemount.Response;
 import com.agreemount.bean.Query;
 import com.agreemount.bean.identity.Identity;
-import com.agreemount.slaneg.fixtures.GenericYamlProvider;
+import pl.cyfronet.bazaar.engine.rules.GenericYamlProvider;
 
 /**
  * Created by Paweł Szepieniec pawel.szepieniec@gmail.com on 13.02.15.
@@ -26,7 +23,13 @@ import com.agreemount.slaneg.fixtures.GenericYamlProvider;
 @EnableAutoConfiguration
 @PropertySources({ @PropertySource("classpath:bazaar.properties"),
         @PropertySource("classpath:mongo.properties") })
-@ComponentScan("com.agreemount")
+@ComponentScan(
+        basePackages = {"pl.cyfronet.bazaar, com.agreemount"},
+        excludeFilters = {
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                        value = FileRulesProvidersConfiguration.class)
+        }
+)
 public class BazaarConfig {
 
     @Autowired

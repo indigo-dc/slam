@@ -1,34 +1,3 @@
-#tutuaj specyfikujemy jakie listy mają się wyświetlić w widoku dokumentu
-documentRelationsQueries:
 
-  - !com.agreemount.bean.Query
-    label: Signed SLAs for this offer
-    visibilityConstraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: documentType
-          value: offer
-    constraint:
-      !com.agreemount.slaneg.constraint.query.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.query.definition.HasRelationDef
-          direction: ON_RIGHT
-          relation: is_connected_SLA_to_Offer
-          alias: BASE
-        - !com.agreemount.slaneg.constraint.query.definition.Operator
-          type: OR
-          children:
-          - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-            state: documentType
-            value: request
-          - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-            state: documentType
-            value: sla
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: signed
-        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
-          sth: ok
+#this file should be removed in next version of agreemount engine
+documentRelationsQueries:

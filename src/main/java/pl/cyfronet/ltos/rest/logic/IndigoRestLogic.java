@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
+import pl.cyfronet.ltos.rest.bean.sla.Sla;
 import pl.cyfronet.ltos.rest.util.IndigoConverter;
 
 import java.util.List;
@@ -30,8 +31,22 @@ public class IndigoRestLogic {
         return result;
     }
 
+    public Sla getSLA(String id) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("id").is(id));
+        List<Document> result = documentOperations.getDocumentsWithQuery(query);
+        return converter.prepareSlaList(result, null).get(0);
+    }
+
+    public List<Sla> getSLAs(String customer, String provider, String date, String ids, String service_type) {
+        Query query = new Query();
+//        query.addCriteria(Criteria.where("id").is(id));
+        List<Document> result = documentOperations.getDocumentsWithQuery(query);
+        return converter.prepareSlaList(result, null);
+    }
+
     private List<Document> getDocuments(String login) {
-        Query query =new Query();
+        Query query = new Query();
         query.addCriteria(Criteria.where("author").is(login));
         List<Document> result = documentOperations.getDocumentsWithQuery(query);
         return result;

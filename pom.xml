@@ -30,11 +30,20 @@
 	</properties>
 
 	<dependencies>
-
+		<!--<dependency>-->
+			<!--<groupId>org.codehaus.jackson</groupId>-->
+			<!--<artifactId>jackson-core-lgpl</artifactId>-->
+			<!--<version>2.8.3</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.codehaus.jackson</groupId>-->
+			<!--<artifactId>jackson-mapper-lgpl</artifactId>-->
+			<!--<version>2.8.3</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>com.agreemount</groupId>
 			<artifactId>engine</artifactId>
-			<version>1.0.47</version>
+			<version>1.0.57</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -44,6 +53,12 @@
 			<version>9.4-1206-jdbc42</version> </dependency> -->
 		<!-- <dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
 			</dependency> -->
+
+		<dependency>
+			<groupId>com.mashape.unirest</groupId>
+			<artifactId>unirest-java</artifactId>
+			<version>1.4.9</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

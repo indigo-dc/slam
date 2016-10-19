@@ -15,7 +15,6 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.UserRepository;
 
@@ -78,18 +77,16 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
         }
 
         PortalUser.PortalUserBuilder builder = PortalUser.builder();
-        PreAuthenticatedAuthenticationToken token = null;
         try {
             //TODO: poprawne odparsowanie i debugowanie
-            ResponseEntity<UserInfo> userInfoResponseEntity = restTemplate.getForEntity(authorizeUrl + userInfoAction, UserInfo.class);
+            UserInfo userInfo = restTemplate.getForObject(authorizeUrl + userInfoAction, UserInfo.class);
             builder.isAuthenticated(true);
-            UserInfo userInfo = userInfoResponseEntity.getBody();
             User user = userRepository.findByEmail(userInfo.getEmail());
             if (user != null) {
                 builder.user(user);
                 userInfo.setId(user.getId());
             } else {
-                user = User.builder().name(userInfo.getName()).email(userInfo.getEmail()).build();
+                user = User.builder().name(userInfo.getName()).email(userInfo.getEmail()).organisationName(userInfo.getOrganisation_name()).build();
                 userRepository.save(user);
                 builder.user(user);
                 userInfo.setId(user.getId());
@@ -97,6 +94,7 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
             Identity identity = getIdentity(user);
             Preconditions.checkNotNull(identity, "Identity [%s] was not found", user.getEmail());
             identityProvider.setIdentity(identity);
+
             builder.principal(userInfo);
             logger.error("userinfo: "+userInfo.toString());
         } catch (UserDeniedAuthorizationException | InvalidRequestException ex) {

@@ -71,7 +71,9 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
     @Transactional
     public Identity getIdentity(User user) {
         Identity identity = new Identity();
-        identity.setLogin(user.getId().toString());
+        //TODO for now engine user will be in fact organisation of the user
+//        identity.setLogin(user.getId().toString());
+        identity.setLogin(user.getOrganisationName());
         List<String> roles = user.getRoles().stream().map(entry -> entry.getName()).collect(Collectors.toList());
         List<Team> teams = user.getTeams();
         List<TeamMember> teamMembers = new LinkedList<TeamMember>();
@@ -142,7 +144,8 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             builder.user(user);
             builder.principal(info);
             builder.authorities(Arrays.asList(
-                    new SimpleGrantedAuthority("ROLE_USER")));
+                    new SimpleGrantedAuthority("ROLE_USER"))
+            );
             builder.isAuthenticated(true);
 
             Identity identity = getIdentity(user);
@@ -169,6 +172,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             .unityPersistentIdentity("admin")
             .confirmedRegistration(true)
             .name("Adam Adminowski")
+            .organisation_name("test_organisation")
             .email("adam@adminowski.pl").build();
         return info;
     }
@@ -178,6 +182,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             .unityPersistentIdentity("user")
             .confirmedRegistration(true)
             .name("Ukasz Userowski")
+            .organisation_name("test_organisation")
             .email("ukasz@userowski.pl").build();
         return info;
     }
@@ -187,6 +192,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             .unityPersistentIdentity("user")
             .confirmedRegistration(true)
             .name("Norbert Niezarejestr")
+            .organisation_name("test_organisation")
             .email("norbert@niezarejestr.pl").build();
         return info;
     }
