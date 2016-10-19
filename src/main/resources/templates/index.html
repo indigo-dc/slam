@@ -13,14 +13,19 @@
 
     <link rel="stylesheet" type="text/css" media="all" href="/css/vendor.css"/>
     <link rel="stylesheet" type="text/css" media="all" href="/css/indigo-main.css"/>
-    <!--<link rel="stylesheet" type="text/css" media="all" href="/css/normalize.css"/>-->
-    <!--<link rel="stylesheet" type="text/css" media="all" href="/css/ltos.css"/>-->
-    <!--<link rel="stylesheet" type="text/css" media="all" href="/css/bazaar.css"/>-->
-    <!--<link rel="stylesheet" type="text/css" media="all" href="/css/font-awesome.css"/>-->
-    <!--<link rel="stylesheet" type="text/css" media="all" href="/css/font-awesome.min.css"/>-->
 
     <script src="/js/vendor.js"></script>
     <script src="/js/app.js"></script>
+
+    <script type="text/javascript" th:inline="javascript">
+        angular.module('indigo.constants', [])
+                .constant('SESSION', {
+                    credentials: [[${user.credentials}]],
+                    organisationName: [[${user.getUserBean().getOrganisationName()}]],
+                    email: [[${user.getUserBean().getEmail()}]],
+                    roles: [[${user_roles}]]
+                });
+    </script>
 </head>
 
 <body ng-controller="MainCtrl">

@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -114,8 +115,10 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             builder.user(user);
             builder.principal(info);
             builder.authorities(Arrays.asList(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"), 
-                    new SimpleGrantedAuthority("ROLE_USER")));
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_PROVIDER"),
+                    new SimpleGrantedAuthority("ROLE_USER"))
+            );
             builder.isAuthenticated(true);
 
             Identity identity = getIdentity(user);
@@ -144,8 +147,9 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             builder.user(user);
             builder.principal(info);
             builder.authorities(Arrays.asList(
-                    new SimpleGrantedAuthority("ROLE_USER"))
-            );
+                    new SimpleGrantedAuthority("ROLE_USER"),
+                    new SimpleGrantedAuthority("ROLE_MANAGER")
+            ));
             builder.isAuthenticated(true);
 
             Identity identity = getIdentity(user);
