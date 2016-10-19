@@ -11,8 +11,10 @@ import com.agreemount.bean.response.ActionResponse;
 import com.agreemount.bean.response.RedirectActionResponse;
 import com.agreemount.slaneg.action.ActionContext;
 import com.agreemount.slaneg.action.ActionContextFactory;
+import com.agreemount.slaneg.action.definition.Action;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import lombok.extern.log4j.Log4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 import pl.cyfronet.bazaar.engine.rules.GenericYamlProvider;
@@ -106,21 +108,21 @@ public class NewDocumentController {
 
     @RequestMapping(value = "api/sla_action/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public List<DocumentAction> getActionSLA(@PathVariable("id") String id, HttpServletRequest request) {
+    public List<Action> getActionSLA(@PathVariable("id") String id, HttpServletRequest request) {
         Document document = engineFacade.getDocument(id);
-        engineFacade.getActionsAvailableForDocument(document);
+        List<Action> ret = engineFacade.getActionsAvailableForDocument(document);
 //        if(user)
 //            throw new AccessDeniedException("User not authenticated");
 //        ActionContext actionContext = actionContextFactory.createInstance(document);
-        List<DocumentAction> ret = new ArrayList<>();
-        if(request.isUserInRole("ROLE_ADMIN")){
-            ret.add(new DocumentAction("reject", "Reject"));
-            ret.add(new DocumentAction("accept", "Accept"));
-        }
-        else if(document.getAuthor().equals(((PortalUser)request.getUserPrincipal()).getId())) {
-            ret.add(new DocumentAction("delete", "Delete"));
-            ret.add(new DocumentAction("update", "Update"));
-        }
+        //List<DocumentAction> ret = new ArrayList<>();
+//        if(request.isUserInRole("ROLE_ADMIN")){
+//            ret.add(new DocumentAction("reject", "Reject"));
+//            ret.add(new DocumentAction("accept", "Accept"));
+//        }
+//        else if(document.getAuthor().equals(((PortalUser)request.getUserPrincipal()).getId())) {
+//            ret.add(new DocumentAction("delete", "Delete"));
+//            ret.add(new DocumentAction("update", "Update"));
+//        }
 
 //        ret.add(new DocumentAction("delete", "Delete"));
         return ret;
