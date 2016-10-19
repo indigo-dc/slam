@@ -25,6 +25,9 @@ states:
       - !com.agreemount.bean.document.state.StateValue
         id: rejected
         label: rejected
+      - !com.agreemount.bean.document.state.StateValue
+        id: deleted
+        label: deleted
 
   - !com.agreemount.bean.document.state.State
     id: sideState

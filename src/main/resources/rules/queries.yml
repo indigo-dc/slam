@@ -4,12 +4,12 @@ queries:
     id: SignedSlaComp
     label: My signed computing SLAs
     queryCategoryId: userDashboard
-    visibilityConstraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: OR
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: manager
+#    visibilityConstraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: manager
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND
