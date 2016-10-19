@@ -153,7 +153,7 @@ public class NewDocumentController {
     @RequestMapping(value = "api/sla/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public Response<ActionResponse> editSLA(@PathVariable("id") String id, @RequestBody HashMap<String, String> slaData, PortalUser user) {
-        Document document = engineFacade.getDocument(id);
+        IndigoDocument document = (IndigoDocument)engineFacade.getDocument(id);
 
         if(!document.getAuthor().equals(user.getId()))
             throw new AccessDeniedException("User not authenticated");
@@ -187,7 +187,8 @@ public class NewDocumentController {
         IndigoDocument document = new IndigoDocument();
         document.setName(slaData.getName());
         document.setSite(slaData.getSite());
-//        document.setAuthor(user.getId());
+        document.setAuthor(user.getName());
+        document.setMetrics(slaData.getMetrics());
 
         ActionContext actionContext = actionContextFactory.createInstance(document);
         actionContext.addDocument("documentDraftFromController", document);
