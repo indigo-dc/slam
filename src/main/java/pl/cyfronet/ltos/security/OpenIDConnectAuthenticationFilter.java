@@ -87,6 +87,7 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
                 userInfo.setId(user.getId());
             } else {
                 user = User.builder().name(userInfo.getName()).email(userInfo.getEmail()).organisationName(userInfo.getOrganisation_name()).build();
+
                 userRepository.save(user);
                 builder.user(user);
                 userInfo.setId(user.getId());

@@ -1,6 +1,7 @@
 angular.module('indigo.dashboard')
     .service('DashboardResource', function ($resource) {
-        return $resource('/query/available?queryCategoryId=userDashboard', {}, {
+        //tyoe can be either userDashboard or providerDashboard
+        return $resource('/query/available?queryCategoryId=:type', {type: '@userDashboard'}, {
             query: {method: 'GET'}
         });
     })
