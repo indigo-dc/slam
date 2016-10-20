@@ -47,48 +47,48 @@ metrics:
 #
 
   - !com.agreemount.bean.metric.IntegerMetric
-    id: computingTime-totalGuaranteed
-    label: total-guaranteed computing time
+    id: computing_time-total-guaranteed
+    label: Total guaranteed computing time
     categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of computing time to be granted to the user group in total
     unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: computingTime-totalLimit
-    label: total-limit computing time
+    id: computing_time-total_limit
+    label: Total limit of computing time
     categoryId: computingTimeRestrictions
     required: true
     description: The limit of computing time for the user group in total
     unit: h
     
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: computingTime-instanceGuaranteed
-    label: instance-guaranteed computing time
-    categoryId: computingTimeRestrictions
-    required: true
-    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
-    unit: h
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: computing_time-instance_guaranteed
+#    label: Instance guaranteed computing time
+#    categoryId: computingTimeRestrictions
+#    required: true
+#    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
+#    unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: computingTime-instanceLimit
-    label: instance-limit computing time
+    id: computing_time-instance_limit
+    label: Instance limit of computing time
     categoryId: computingTimeRestrictions
     required: true
     description: The limit of a resource for each instance
     unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: computingTime-userGuaranteed
-    label: user-guaranteed computing time
+    id: computing_time-user_guaranteed
+    label: User guaranteed computing time
     categoryId: computingTimeRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
     unit: h
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: computingTime-userLimit
-    label: user-limit computing time
+    id: computing_time-user_limit
+    label: User limit of computing time
     categoryId: computingTimeRestrictions
     required: true
     description: The limit of a resource for each user
@@ -99,48 +99,48 @@ metrics:
 ### target: cpublic ip
 
   - !com.agreemount.bean.metric.IntegerMetric
-    id: publicIP-totalGuaranteed
-    label: total-guaranteed public ip
+    id: public_ip-total_guaranteed
+    label: Total guaranteed public IPs
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of public ip to be granted to the user group in total
     unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: publicIP-totalLimit
-    label: total-limit public ip
+    id: public_ip-total_limit
+    label: Total limit of public IPs
     categoryId: publicIPRestrictions
     required: true
-    description: The limit of public ip for the user group in total
+    description: The limit of public IPs for the user group in total
     unit: none
     
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: publicIP-instanceGuaranteed
-    label: instance-guaranteed public ip
-    categoryId: publicIPRestrictions
-    required: true
-    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
-    unit: none
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: public_ip-instance_guaranteed
+#    label: Instance guaranteed public IPs
+#    categoryId: publicIPRestrictions
+#    required: true
+#    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
+#    unit: none
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
+#    id: public-ip-instance_limit
+#    label: Instance limit of public IPs
+#    categoryId: publicIPRestrictions
+#    required: true
+#    description: The limit of a resource for each instance
+#    unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: publicIP-instanceLimit
-    label: instance-limit public ip
-    categoryId: publicIPRestrictions
-    required: true
-    description: The limit of a resource for each instance
-    unit: none
-    
-  - !com.agreemount.bean.metric.IntegerMetric
-    id: publicIP-userGuaranteed
-    label: user-guaranteed public ip
+    id: public_ip-user_guaranteed
+    label: User guaranteed public IPs
     categoryId: publicIPRestrictions
     required: true
     description: The guaranteed quantity of a resource to be granted to each user
     unit: none
     
   - !com.agreemount.bean.metric.IntegerMetric
-    id: publicIP-userLimit
-    label: user-limit public ip
+    id: public_ip-user_limit
+    label: User limit of public IPs
     categoryId: publicIPRestrictions
     required: true
     description: The limit of a resource for each user
