@@ -50,18 +50,23 @@ metrics:
     id: computing_time-total-guaranteed
     label: Total guaranteed computing time
     categoryId: computingTimeRestrictions
-    required: true
+    required: false
     description: The guaranteed quantity of computing time to be granted to the user group in total
     unit: h
+    minValue: 0
+    maxValue: 100000000
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-total_limit
     label: Total limit of computing time
     categoryId: computingTimeRestrictions
-    required: true
+    required: false
     description: The limit of computing time for the user group in total
     unit: h
-    
+    minValue: 0
+    maxValue: 100000000
+
+
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: computing_time-instance_guaranteed
 #    label: Instance guaranteed computing time
@@ -74,26 +79,33 @@ metrics:
     id: computing_time-instance_limit
     label: Instance limit of computing time
     categoryId: computingTimeRestrictions
-    required: true
+    required: false
     description: The limit of a resource for each instance
     unit: h
-    
+    minValue: 0
+    maxValue: 100000000
+
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-user_guaranteed
     label: User guaranteed computing time
     categoryId: computingTimeRestrictions
-    required: true
+    required: false
     description: The guaranteed quantity of a resource to be granted to each user
     unit: h
-    
+    minValue: 1
+    maxValue: 100000000
+
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-user_limit
     label: User limit of computing time
     categoryId: computingTimeRestrictions
-    required: true
+    required: false
     description: The limit of a resource for each user
     unit: h
-
+    minValue: 0
+    maxValue: 100000000
 
     
 ### target: cpublic ip
@@ -102,18 +114,24 @@ metrics:
     id: public_ip-total_guaranteed
     label: Total guaranteed public IPs
     categoryId: publicIPRestrictions
-    required: true
+    required: false
     description: The guaranteed quantity of public ip to be granted to the user group in total
     unit: none
-    
+    minValue: 0
+    maxValue: 100000000
+
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-total_limit
     label: Total limit of public IPs
     categoryId: publicIPRestrictions
-    required: true
+    required: false
     description: The limit of public IPs for the user group in total
     unit: none
-    
+    minValue: 1
+    maxValue: 255
+
+
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: public_ip-instance_guaranteed
 #    label: Instance guaranteed public IPs
@@ -134,17 +152,22 @@ metrics:
     id: public_ip-user_guaranteed
     label: User guaranteed public IPs
     categoryId: publicIPRestrictions
-    required: true
+    required: false
     description: The guaranteed quantity of a resource to be granted to each user
     unit: none
+    minValue: 1
+    maxValue: 255
+
     
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-user_limit
     label: User limit of public IPs
     categoryId: publicIPRestrictions
-    required: true
+    required: false
     description: The limit of a resource for each user
     unit: none
+    minValue: 1
+    maxValue: 255
 
 
 # storage
