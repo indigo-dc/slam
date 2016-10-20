@@ -47,9 +47,15 @@ queries:
           value: sla
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
-        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
-          state: mainState
-          value: draft
+        - !com.agreemount.slaneg.constraint.query.definition.Operator
+          type: OR
+          children:
+          - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+            state: mainState
+            value: draft
+          - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+            state: mainState
+            value: sent
 
   - !com.agreemount.bean.Query
     id: rejectedSla
@@ -79,7 +85,7 @@ queries:
 
   - !com.agreemount.bean.Query
     id: AllSlasProvider
-    label: My documents
+    label: Signed SLAs
     queryCategoryId: providerDashboard
 #    visibilityConstraint:
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
@@ -98,3 +104,34 @@ queries:
 #          sth: sth
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+
+  - !com.agreemount.bean.Query
+    id: inProgressSlasProvider
+    label: SLA in negotiations
+    queryCategoryId: providerDashboard
+#    visibilityConstraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: provider
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: sent
+
+
+

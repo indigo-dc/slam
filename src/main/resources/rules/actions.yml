@@ -101,7 +101,7 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
+    copyMetricsFromAlias: FORM
     copyRelationsFromAlias: BASE
     copyStatesFromAlias: BASE
     copyNameFromAlias: BASE
@@ -127,7 +127,7 @@ actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
         states:
-          mainState: draft
+          mainState: sent
           sideState: provider
       - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
         fromAlias: BASE
@@ -160,7 +160,7 @@ actions:
           value: sent
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
-          value: mananer
+          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -245,7 +245,7 @@ actions:
           value: sent
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
-          value: mananer
+          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -306,11 +306,11 @@ actions:
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: sentSlaManager
-    label: Sent SLA (M)
+    label: Negotiate SLA (M)
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
+    copyMetricsFromAlias: FORM
     copyRelationsFromAlias: BASE
     copyStatesFromAlias: BASE
     copyNameFromAlias: BASE
@@ -330,7 +330,7 @@ actions:
           value: sent
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
-          value: mananer
+          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -347,11 +347,11 @@ actions:
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: sentSlaProvider
-    label: Send SLA (P)
+    label: Negotiate SLA (P)
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
+    copyMetricsFromAlias: FORM
     copyRelationsFromAlias: BASE
     copyStatesFromAlias: BASE
     copyNameFromAlias: BASE
