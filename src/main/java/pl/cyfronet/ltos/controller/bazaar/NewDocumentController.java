@@ -15,6 +15,7 @@ import com.agreemount.slaneg.action.definition.Action;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 import pl.cyfronet.bazaar.engine.rules.GenericYamlProvider;
@@ -44,6 +45,9 @@ public class NewDocumentController {
 
     static Logger logger = LoggerFactory
             .getLogger(NewDocumentController.class);
+
+    @Value("${cmdb.url}")
+    private String cmdbUrl;
 
     @Autowired
     private ActionContextFactory actionContextFactory;
@@ -103,7 +107,7 @@ public class NewDocumentController {
     @RequestMapping(value = "api/sites", method = RequestMethod.GET)
     @ResponseBody
     public String getSites() throws UnirestException {
-        return Unirest.get("http://indigo.cloud.plgrid.pl/cmdb/service/list").asString().getBody();
+        return Unirest.get(cmdbUrl+"/cmdb/service/list").asString().getBody();
     }
 
     @RequestMapping(value = "api/sla_action/{id}", method = RequestMethod.GET)
