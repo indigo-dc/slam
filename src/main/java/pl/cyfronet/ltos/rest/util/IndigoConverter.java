@@ -125,29 +125,29 @@ public class IndigoConverter {
     }
 
     private List<Target> prepareTargets(Document sla) {
-        List<Target> result = new ArrayList<>();
-
         List<Metric> documentMetrics = metricFacade.fetchAvailableMetrics(sla.getId(), null);
 
+        Map<String, Target> restrictions = new HashMap<>();
+
         for(Metric metric : documentMetrics) {
+            //these are special cases, event thought they are stored in metrics, they should not be shown
+            //TODO maybe in the future make this kind of "specjal metrics" start with '_' or something
+            if(metric.getId().equals("startComp") || metric.getId().equals("endComp"))
+                continue;
+
             if(sla.getMetrics().containsKey(metric.getId())) {
-                Target.TargetBuilder targetBuilder = Target.builder().type(metric.getId()).unit(metric.getUnit());
 
-                Map<String, Object> restrictions = new HashMap<>();
-                restrictions.put("total_guaranteed", sla.getMetrics().get(metric.getId()));
-                //ok, those classes should be able to create restrictions as a map...
-                //TODO, make that happen in the engine
-                if(metric.getClass() == DateMetric.class) {
 
-                } else if (metric.getClass() == IntegerMetric.class) {
-
+                String key = metric.getId().split("-")[0];
+                String constraint = metric.getId().split("-")[1];
+                if(!restrictions.containsKey(key)) {
+                    restrictions.put(key, Target.builder().type(key).unit(metric.getUnit()).restrictions(new HashMap<>()).build());
                 }
 
-                targetBuilder.restrictions(restrictions);
-                result.add(targetBuilder.build());
+                restrictions.get(key).getRestrictions().put(constraint, sla.getMetrics().get(metric.getId()));
             }
         }
 
-        return result;
+        return new ArrayList<>(restrictions.values());
     }
 }

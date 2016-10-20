@@ -47,7 +47,7 @@ metrics:
 #
 
   - !com.agreemount.bean.metric.IntegerMetric
-    id: computing_time-total-guaranteed
+    id: computing_time-total_guaranteed
     label: Total guaranteed computing time
     categoryId: computingTimeRestrictions
     required: true
