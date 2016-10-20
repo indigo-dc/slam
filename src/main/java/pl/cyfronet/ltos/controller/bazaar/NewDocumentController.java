@@ -199,7 +199,7 @@ public class NewDocumentController {
         IndigoDocument document = new IndigoDocument();
         document.setName(slaData.getName());
         document.setSite(slaData.getSite());
-        document.setAuthor(user.getName());
+        document.setSiteName(slaData.getSiteName());
         document.setMetrics(slaData.getMetrics());
 
         ActionContext actionContext = actionContextFactory.createInstance(document);
@@ -207,16 +207,6 @@ public class NewDocumentController {
         engineFacade.runAction(actionContext, "createNewComputingRequest");
 
         document = (IndigoDocument) actionContext.getDocument("newRoot");
-
-        Map<String, Object> metrics = document.getMetrics();
-
-        for (Map.Entry<String, Object > entry : slaData.getMetrics().entrySet()) {
-            if(metrics.containsKey(entry.getKey())){
-                metrics.replace(entry.getKey(), entry.getValue());
-            }
-        }
-
-        document.setMetrics(metrics);
 
         Response<ActionResponse> response = new Response<>();
         RedirectActionResponse redirectActionResponse = new RedirectActionResponse();

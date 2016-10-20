@@ -1,6 +1,8 @@
 package pl.cyfronet.ltos.rest.logic;
 
 import com.agreemount.bean.document.Document;
+import com.agreemount.engine.facade.QueryFacade;
+import com.agreemount.slaneg.action.ActionContextFactory;
 import com.agreemount.slaneg.db.DocumentOperations;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,15 @@ public class IndigoRestLogic {
     @Autowired
     private IndigoConverter converter;
 
+    @Autowired
+    ActionContextFactory actionContextFactory;
+
+    @Autowired
+    QueryFacade queryFacade;
+
     public IndigoWrapper getDataForLogin(String login) {
-        IndigoWrapper result = converter.convertSlasListForRestApi(getDocuments(login), login);
-        return result;
+        List<Document> docs = queryFacade.getDocumentsForQuery("SignedSlaComp", actionContextFactory.createInstance());
+        return converter.convertSlasListForRestApi(docs, login);
     }
 
     public Sla getSLA(String id) {

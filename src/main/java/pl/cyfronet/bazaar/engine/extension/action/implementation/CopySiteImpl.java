@@ -36,6 +36,7 @@ public class CopySiteImpl extends AbstractActionImpl<CopySite, IndigoDocument, A
         indigoDocumentTo.setSlaUuid(to.getSlaUuid());
         indigoDocumentTo.setIsLeaf(to.getIsLeaf());
         indigoDocumentTo.setSite(from.getSite());
+        indigoDocumentTo.setSiteName(from.getSiteName());
 
         documentOperations.saveDocument(indigoDocumentTo);
 

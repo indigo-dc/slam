@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer;
 import org.springframework.stereotype.Component;
+import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
 import pl.cyfronet.ltos.rest.bean.preferences.Preference;
 import pl.cyfronet.ltos.rest.bean.preferences.Preferences;
@@ -51,23 +52,23 @@ public class IndigoConverter {
         List<Priority> computePriorities = new ArrayList<>();
         List<Priority> storagePriorities = new ArrayList<>();
         for (Document sla : slas) {
-            //TODO replace with calling query
-            List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(Arrays.asList(sla.getId()), "is_connected_SLA_to_Offer", "");
             if (sla.getState("serviceType").equals("computing")) {
-                addPriorities(computePriorities, sla, relations.get(0),"weightComputing");
+                addPriorities(computePriorities, sla, ((IndigoDocument)sla).getSite(), "weightComputing");
             } else {
-                addPriorities(storagePriorities, sla, relations.get(0),"weightStorage");
+                addPriorities(storagePriorities, sla, ((IndigoDocument)sla).getSite(), "weightStorage");
             }
         }
         result.setPreferences(preparePreference(computePriorities, storagePriorities));
         return result;
     }
 
-    private void addPriorities(List<Priority> priorities, Document sla, String serviceId ,String weight) {
+    private void addPriorities(List<Priority> priorities, Document sla, String serviceId, String weight) {
         Priority priority = Priority.builder().
                 sla_id(sla.getId()).
                 service_id(serviceId).
-                weight(Double.parseDouble(sla.getMetrics().get(weight).toString())).build();
+                //TODO - RESTORE IT
+//                weight(Double.parseDouble(sla.getMetrics().get(weight).toString())).build();
+                weight(0.5).build();
         priorities.add(priority);
     }
 

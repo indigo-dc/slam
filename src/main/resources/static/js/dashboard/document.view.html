@@ -7,7 +7,7 @@
             <div class="col-sm-6">
 
                 <select ng-disable="!sla.editable" class="form-control" required="required"
-                        ng-options="site as site.value.sitename for site in sites track by site.id" ng-model="sla.site" id="site"></select>
+                        ng-options="site as site.value.hostname + ' in ' + site.value.sitename for site in sites track by site.id" ng-model="sla.site" id="site"></select>
 
                 <!--<select class="form-control" required="required" ng-model="sla.site" id="site">-->
                     <!--<option value="BARI">BARI</option>-->

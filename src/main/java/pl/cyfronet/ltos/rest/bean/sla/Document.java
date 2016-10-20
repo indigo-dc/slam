@@ -23,5 +23,6 @@ public class Document {
     private HashMap<String, Object> metrics;
     private String name;
     private String site;
+    private String siteName;
 }
 

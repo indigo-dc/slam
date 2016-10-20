@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class IndigoDocument extends Document{
     private String site;
+    private String siteName;
 }

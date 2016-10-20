@@ -36,24 +36,15 @@ public class RestController {
     @Autowired
     IndigoRestLogic indigoRestLogic;
 
-    @Autowired
-    QueryFacade queryFacade;
 
-    @Autowired
-    ActionContextFactory actionContextFactory;
 
 
     @Autowired
     private DocumentOperations documentOperations;
 
     @RequestMapping(value = "/preferences/{login}", method = RequestMethod.GET)
-    public List<Document> getUser(@PathVariable String login, PortalUser user) {
-//        String organisation = user.getUserBean().getOrganisationName();
-//        Query query = new Query();
-        List<Document> docs = queryFacade.getDocumentsForQuery("SignedSlaComp", actionContextFactory.createInstance());
-//                documentOperations.getDocumentsWithQuery(query);
-//        return indigoRestLogic.getDataForLogin(login);
-        return docs;
+    public IndigoWrapper getUser(@PathVariable String login) {
+        return indigoRestLogic.getDataForLogin(login);
     }
 
     @RequestMapping(value = "/preferences", method = RequestMethod.GET)

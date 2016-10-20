@@ -40,9 +40,12 @@ angular.module('indigo.dashboard')
             return response;
         },
         request: function (data, headersGetter) {
+            var site = data.site;
             console.log('parsing request');
-            if(data.site && data.site.id)
-                data.site = data.site.id;
+            if(site && site.id) {
+                data.site = site.id;
+                data.siteName = site.value.provider_id;
+            }
 
             return angular.toJson(data)
         }
