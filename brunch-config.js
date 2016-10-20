@@ -1,5 +1,6 @@
 module.exports = {
     paths: {
+        //public: 'src/main/resources/static',
         public: 'target/classes/static',
         watched: ['src/main/resources/static/js', 'src/main/resources/static/vendor'],
     },
@@ -51,12 +52,12 @@ module.exports = {
         stylesheets: {joinTo: {'css/vendor.css': /^src\/main\/resources\/static\/vendor/}}
     },
     conventions: {
-        //ignored: /^src\/main\/resources\/static\/vendor/
+        ignored: ['src/main/resources/static/js/app.js', 'src/main/resources/static/js/vendor.js', 'src/main/resources/static/css/vendor.css']
     },
     plugins: {
-        babel: {presets: ['es2015']},
-        ng_annotate: {
-            pattern: /^src\/main\/resources\/static\/js/
-        }
+        //babel: {presets: ['es2015']},
+        //ng_annotate: {
+        //    pattern: /^src\/main\/resources\/static\/js/
+        //}
     }
 };

@@ -1,7 +1,7 @@
 <div ng-if="state == 'form'">
     <h2 style="margin-bottom: 20px">Request</h2>
 
-    <form class="form-horizontal">
+    <form name="form" class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="site">Site</label>
             <div class="col-sm-6">
@@ -24,7 +24,7 @@
             <label for="document_id" class="col-sm-2 control-label">Name (ID)</label>
             <div class="col-sm-6">
                 <div>
-                    <input ng-disable="!sla.editable" type="text" class="form-control" id="document_id" placeholder="Name " ng-model="sla.name">
+                    <input ng-disable="!sla.editable" type="text" class="form-control" id="document_id" placeholder="Name " ng-model="sla.name" required="required">
                 </div>
             </div>
             <div class="col-sm-4">
@@ -36,8 +36,8 @@
             <label for="{{metric.id}}" class="col-sm-2 control-label">{{metric.label}}</label>
             <div class="col-sm-6">
                 <div ng-class="getMetricClasses(metric)">
-                    <input type="{{metric.inputType}}" class="form-control" id="{{metric.id}}" placeholder="{{metric.label}}" ng-model="sla.metrics[metric.id]">
-                    <!--required="{{metric.required}}"-->
+                    <input type="{{metric.inputType}}" class="form-control" id="{{metric.id}}" placeholder="{{metric.label}}"
+                           ng-model="sla.metrics[metric.id]" ng-required="metric.required" ng-min="{{metric.minValue || 0}}" min="{{metric.minValue || 0}}" ng-max="{{metric.maxValue}}" max="{{metric.maxValue}}">
                     <span class="input-group-addon" ng-if="metric.unit && metric.unit != 'none'">{{metric.unit}}</span>
                 </div>
             </div>
@@ -47,8 +47,8 @@
         </div>
 
         <div class="text-right">
-            <button ng-if="!documentId" class="btn btn-primary" ng-click="sendRequest(sla)">Create</button>
-            <button ng-repeat="action in actions" ng-if="documentId" style="margin-left: 5px" class="btn btn-default" ng-click="performAction(action.id, sla)">{{action.label}}</button>
+            <button ng-if="!documentId" class="btn btn-primary" type="submit" ng-click="sendRequest(form, sla)">Create</button>
+            <button ng-repeat="action in actions" ng-if="documentId" type="submit" style="margin-left: 5px" class="btn btn-default" ng-click="performAction(form, action.id, sla)">{{action.label}}</button>
         </div>
 </div>
 <div ng-if="state == 'success'">

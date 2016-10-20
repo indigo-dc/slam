@@ -14,19 +14,33 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
     $scope.documentId = $route.current.params.document_id;
     $scope.state = 'form';
     $scope.metrics = [];
-    $scope.sla = {site: null, name: '', id: $scope.documentId, metrics: {}};
+    $scope.metrics_d = {};
+    $scope.sla = {site: null, name: '', id: $scope.documentId, metrics: {}, editable: false};
     $scope.sites = [];
     $scope.actions = [];
 
     $scope.loadDocument = function () {
+        var sla = null;
+
         if($scope.documentId) {
             DocumentResource.get({id: $scope.documentId}, function (data) {
                 $scope.actions = data.actions;
-                $scope.sla = data.document;
+                sla = data.document;
+
+                for (var metric in sla.metrics) {
+                    if (sla.metrics.hasOwnProperty(metric)) {
+                        if ($scope.metrics_d[metric].inputType == 'DATE' && sla.metrics[metric] != null) {
+                            sla.metrics[metric] = new Date(sla.metrics[metric]);
+                        }
+
+                    }
+                }
+
+                $scope.sla = sla;
 
                 $scope.sites.forEach(function (site) {
-                    if(site.id == $scope.sla.site){
-                        $scope.sla.site = site;
+                    if(site.id == sla.site){
+                        sla.site = site;
                     }
                 });
 
@@ -34,7 +48,7 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
                 $scope.actions.forEach(function (action) {
                     if(action.id == 'editDraft')
                         //setting it in sla is for possible future compatibility
-                        $scope.sla.editable = true;
+                        sla.editable = true;
                 })
             }, function (response) {
 
@@ -48,16 +62,20 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
         $scope.sla.site = data.rows[0];
         $scope.loadMetrics();
     }, function (response) {
-
+        $location.url('/error?message=sitesUnavailable');
     });
 
     $scope.loadMetrics = function () {
         DocumentResource.metrics({}, function (data) {
             $scope.metrics = data;
-            if(!$scope.documentId)
-                $scope.metrics.forEach(function (metric) {
+
+
+
+            $scope.metrics.forEach(function (metric) {
+                if(!$scope.documentId)
                     $scope.sla.metrics[metric.id] = null;
-                });
+                $scope.metrics_d[metric.id] = metric;
+            });
 
             $scope.loadDocument();
 
@@ -73,7 +91,9 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
         return '';
     };
 
-    $scope.sendRequest = function (sla) {
+    $scope.sendRequest = function (form, sla) {
+        if(!form.$valid)
+            return;
         var action = 'create';
         if(sla.id)
             action = 'update';
@@ -92,7 +112,9 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
 
         });
     };
-    $scope.performAction = function (action, sla) {
+    $scope.performAction = function (form, action, sla) {
+        if(!form.$valid)
+            return;
         $scope.sla.action = action;
         DocumentResource.perform_action(sla, function (data) {
             $scope.state = 'success';
