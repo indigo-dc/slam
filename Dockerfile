@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-ENV PROVIDER_EMAIL ''
+ENV PROVIDER_EMAIL=''
 ENV IAM_TOKEN_URL='https://iam-test.indigo-datacloud.eu/token'
 ENV IAM_URL='https://iam-test.indigo-datacloud.eu'
 ENV CMDB_URL 'http://indigo.cloud.plgrid.pl'
