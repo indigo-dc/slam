@@ -2,12 +2,18 @@ package pl.cyfronet.ltos.rest.util;
 
 import com.agreemount.EngineFacade;
 import com.agreemount.bean.document.Document;
+import com.agreemount.bean.metric.DateMetric;
+import com.agreemount.bean.metric.IntegerMetric;
+import com.agreemount.bean.metric.Metric;
+import com.agreemount.bean.request.MetricsAndStates;
+import com.agreemount.engine.facade.MetricFacade;
 import com.agreemount.engine.facade.QueryFacade;
 import com.agreemount.slaneg.action.ActionContext;
 import com.agreemount.slaneg.action.ActionContextFactory;
 import com.agreemount.slaneg.db.DocumentOperations;
 import com.agreemount.slaneg.db.RelationOperations;
 import lombok.extern.log4j.Log4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer;
 import org.springframework.stereotype.Component;
@@ -37,6 +43,9 @@ public class IndigoConverter {
     @Autowired
     private DocumentOperations documentOperations;
 
+    @Autowired
+    private MetricFacade metricFacade;
+
     public IndigoWrapper convertSlasListForRestApi(List<Document> slas, String login) {
         IndigoWrapper result = IndigoWrapper.builder().
                 preferences(preparePreferences(slas, login)).
@@ -47,8 +56,7 @@ public class IndigoConverter {
     private Preferences preparePreferences(List<Document> slas, String login) {
         Preferences result = new Preferences();
         result.setCustomer(login);
-        // TODO: id do zrobienia?
-        result.setId("TOBEDONE");
+        result.setId(DigestUtils.sha1Hex(login));
         List<Priority> computePriorities = new ArrayList<>();
         List<Priority> storagePriorities = new ArrayList<>();
         for (Document sla : slas) {
@@ -81,19 +89,14 @@ public class IndigoConverter {
 
     public List<Sla> prepareSlaList(List<Document> slas, String login) {
         List<Sla> result = new ArrayList<>();
-        for (Document doc : slas) {
-            //TODO replace with calling query
-            List<String> relations = relationOperations.getDocumentIdsWithRelationOnLeft(Arrays.asList(doc.getId()), "is_connected_SLA_to_Offer", "");
+        for (Document _doc : slas) {
+            IndigoDocument doc = (IndigoDocument)_doc;
             Document provider = null;
-            Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId());
+            Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId()).provider(doc.getSiteName());
 
             if (login != null)
                 slaBuilder.customer(login);
 
-            if (relations.size() > 0) {
-                provider = documentOperations.getDocument(relations.get(0));
-                slaBuilder.provider(provider.getName());
-            }
             Sla sla = slaBuilder.build();
 
             if (doc.getState("serviceType") != null) {
@@ -110,55 +113,41 @@ public class IndigoConverter {
                         sla.setEnd_date(doc.getMetrics().get("endStorage").toString());
                 }
             }
-            if (provider != null)
-                sla.setServices(prepareServices(doc, provider));
+            sla.setServices(prepareServices(doc));
             result.add(sla);
         }
         return result;
     }
 
-    private List<Service> prepareServices(Document sla, Document offer) {
-        List<Service> result = Arrays.asList(Service.builder().type(sla.getState("serviceType")).
-                service_id(offer.getId()).targets(prepareTargets(sla)).build());
-
-        return result;
+    private List<Service> prepareServices(IndigoDocument sla) {
+        return Arrays.asList(Service.builder().type(sla.getState("serviceType")).
+                service_id(sla.getSite()).targets(prepareTargets(sla)).build());
     }
 
     private List<Target> prepareTargets(Document sla) {
         List<Target> result = new ArrayList<>();
-        addRestrictions(sla, result, "computingTime", prepareTarget("computingTime", "h", sla));
-        addRestrictions(sla, result, "publicIP", prepareTarget("publicIP", "none", sla));
-        addRestrictions(sla, result, "numCpus", prepareTarget("numCpus", "none", sla));
-        addRestrictions(sla, result, "memSize", prepareTarget("memSize", "MB", sla));
-        addRestrictions(sla, result, "diskSize", prepareTarget("diskSize", "MB", sla));
-        addRestrictions(sla, result, "uploadBandwith", prepareTarget("uploadBandwith", "Mbps", sla));
-        addRestrictions(sla, result, "downloadBandwith", prepareTarget("downloadBandwith", "Mbps", sla));
-        addRestrictions(sla, result, "uploadAggregated", prepareTarget("uploadAggregated", "MB", sla));
-        addRestrictions(sla, result, "downloadAggregated", prepareTarget("downloadAggregated", "MB", sla));
-        addRestrictions(sla, result, "costs", prepareTarget("costs", "EUR", sla));
-        addRestrictions(sla, result, "storage", prepareTarget("storage", "GB", sla));
-        return result;
-    }
 
-    private void addRestrictions(Document sla, List<Target> result, String type, Target gb) {
-        if (!sla.getMetrics().entrySet().stream().
-                filter(a -> a.getKey().startsWith(type)).
-                collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())).entrySet().isEmpty()) {
-            result.add(gb);
-        }
-    }
+        List<Metric> documentMetrics = metricFacade.fetchAvailableMetrics(sla.getId(), null);
 
-    private Target prepareTarget(String type, String unit, Document sla) {
-        Target result = Target.builder().type(type).unit(unit).build();
-        Map <String,Object> restrictions = new HashMap<>();
-        for (Map.Entry<String, Object> entry : sla.getMetrics().entrySet().stream().
-                filter(a -> a.getKey().startsWith(type)).collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())).entrySet()) {
-            restrictions.put(entry.getKey().substring(type.length()+1),entry.getValue());
+        for(Metric metric : documentMetrics) {
+            if(sla.getMetrics().containsKey(metric.getId())) {
+                Target.TargetBuilder targetBuilder = Target.builder().type(metric.getId()).unit(metric.getUnit());
+
+                Map<String, Object> restrictions = new HashMap<>();
+                restrictions.put("total_guaranteed", sla.getMetrics().get(metric.getId()));
+                //ok, those classes should be able to create restrictions as a map...
+                //TODO, make that happen in the engine
+                if(metric.getClass() == DateMetric.class) {
+
+                } else if (metric.getClass() == IntegerMetric.class) {
+
+                }
+
+                targetBuilder.restrictions(restrictions);
+                result.add(targetBuilder.build());
+            }
         }
-        if(restrictions.isEmpty()) {
-            return null;
-        }
-        result.setRestrictions(restrictions);
+
         return result;
     }
 }

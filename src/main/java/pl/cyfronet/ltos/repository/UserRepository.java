@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import pl.cyfronet.ltos.bean.User;
+import java.util.List;
 
 /**
  * @author bwilk
@@ -28,4 +29,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 //    public User findOne(Long id);
 
     User findByEmail(@Param("email") String email);
+    List<User> findByOrganisationName(@Param("organisationName") String organisationName);
 }
