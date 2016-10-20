@@ -1,6 +1,6 @@
 module.exports = {
     paths: {
-        public: 'target/classes/static',
+        public: 'src/main/resources/static',
         watched: ['src/main/resources/static/js', 'src/main/resources/static/vendor'],
     },
     modules: {

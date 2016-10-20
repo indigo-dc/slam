@@ -1,6 +1,12 @@
+/src/main/resources/static/js/app.js
+/src/main/resources/static/js/vendor.js.map
+/src/main/resources/static/js/vendor.js
+/src/main/resources/static/js/app.js.map
 /src/main/resources/static/vendor
 !/.gitignore
 target/
 *.iml
 /.idea/
+/src/main/resources/static/css/vendor.css.map
+/src/main/resources/static/css/vendor.css
 /node_modules/
