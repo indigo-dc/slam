@@ -11,8 +11,9 @@ RUN apt-get install -y mysql-server
 RUN mkdir -p /opt/indigo-slam
 COPY target/*.jar /opt/indigo-slam/
 COPY docker/pki/synchroDuo.jks /opt/pki/
+COPY docker/indigo-slam.sh /opt/indigo-slam/
 
 EXPOSE 8443
 
-#ENTRYPOINT ["java -jar /opt/indigo-slam/*.jar -Dspring.cloud.config.username=developer -Dspring.cloud.config.password=developer -Dspring.profiles.active=development"]
-#CMD [""]
+ENTRYPOINT ["/opt/indigo-slam/indigo-slam.sh"]
+CMD [""]
