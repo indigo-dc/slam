@@ -1,0 +1,15 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+    - "8443:8443"
+    links:
+    - mysql
+    - mongo
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    image: mysql
+  mongo:
+    image: mongo
