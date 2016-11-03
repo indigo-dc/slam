@@ -1,26 +1,29 @@
 FROM ubuntu:16.04
 
-ENV PROVIDER_EMAIL=''
-ENV IAM_TOKEN_URL='https://iam-test.indigo-datacloud.eu/token'
-ENV IAM_URL='https://iam-test.indigo-datacloud.eu'
+ENV PROVIDER_EMAIL ''
+ENV IAM_TOKEN_URL 'https://iam-test.indigo-datacloud.eu/token'
+ENV IAM_URL 'https://iam-test.indigo-datacloud.eu'
 ENV CMDB_URL 'http://indigo.cloud.plgrid.pl'
+ENV MYSQL_ADDRESS 'mysql'
+ENV MYSQL_PORT '3306'
+ENV MYSQL_DB 'indigo_slam'
+ENV MYSQL_USER 'root'
+ENV MYSQL_PASSWORD 'root'
+ENV MONGO_ADDRESS 'mongo'
+ENV MONGO_PORT '27017'
+ENV MONGO_DB 'indigo_slam_engine'
+ENV MONGO_USER 'engine'
+ENV MONGO_PASSWORD ''
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get -y update
-RUN apt-get install -y openjdk-8-jre
-RUN apt-get install -y mongodb
-RUN echo "mysql-server mysql-server/root_password password root" |  debconf-set-selections
-RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
-RUN apt-get install -y mysql-server
+RUN apt-get install -y openjdk-8-jre-headless
 
 RUN mkdir -p /opt/indigo-slam
 COPY target/*.jar /opt/indigo-slam/
 COPY docker/pki/synchroDuo.jks /opt/pki/
 COPY docker/indigo-slam.sh /opt/indigo-slam/
-
-COPY docker/my.cnf /etc/mysql/my.cnf
-COPY docker/mongodb.conf /etc/mongodb.conf
 
 RUN ln -s /opt/indigo-slam/indigo-slam.sh /usr/bin/indigo-slam.sh
 
