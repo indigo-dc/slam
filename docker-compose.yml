@@ -7,9 +7,13 @@ services:
     links:
     - mysql
     - mongo
+    env_file:
+    - docker.env
   mysql:
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
     image: mysql
   mongo:
     image: mongo
+    ports:
+    - "27018:27017"

@@ -28,7 +28,7 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
                 sla = data.document;
 
                 for (var metric in sla.metrics) {
-                    if (sla.metrics.hasOwnProperty(metric)) {
+                    if (sla.metrics.hasOwnProperty(metric) && metric != 'weightComputing') {
                         if ($scope.metrics_d[metric].inputType == 'DATE' && sla.metrics[metric] != null) {
                             sla.metrics[metric] = new Date(sla.metrics[metric]);
                         }

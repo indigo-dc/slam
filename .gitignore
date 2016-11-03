@@ -10,3 +10,4 @@ target/
 /src/main/resources/static/css/vendor.css.map
 /src/main/resources/static/css/vendor.css
 /node_modules/
+/docker.env
