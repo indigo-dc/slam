@@ -1,4 +1,4 @@
-Welcome to the SLAM repository!
+Welcome to INDIGO SLA Manager (SLAM) repository!
 
 The aim of this SLA (Service Level Agreement) Manager is to:
 
@@ -9,3 +9,4 @@ The aim of this SLA (Service Level Agreement) Manager is to:
 Please check out the current documentation at gitbooks:
 
 https://indigo-dc.gitbooks.io/slam
+
