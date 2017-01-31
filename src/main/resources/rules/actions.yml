@@ -3,16 +3,29 @@ actions:
   - !com.agreemount.slaneg.action.definition.CreateNewRoot
     id: createNewComputingRequest
     label: New computing request
-    alias: newRoot #NIE ZMIENIAC - po tym aliasie dostaje sie dokumentu i ustawiam mu team uzytkownika
-    basedOnDocumentStoredUnderAlias: documentDraftFromController #NIE ZMIENIAC
+    alias: newRoot #dowolna nazwa
     redirectToThisVersion: true
+    setTeamFromAlias: TEMP
+    metricSource: ALIAS
+    copyMetricsFromAlias: TEMP
+    redirectToThisVersion: true
+    type: CREATE
     visible: false
-#    constraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: AND
-#        children:
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+          negation: true
 #        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
 #          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: documentType
+          value: sla
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newRoot
@@ -29,19 +42,26 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
-    copyRelationsFromAlias: BASE
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
     setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    copyMetricsFromAlias: BASE
     redirectToThisVersion: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
@@ -57,25 +77,30 @@ actions:
         states:
           mainState: deleted
 
-  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+
+
+  - !com.agreemount.slaneg.action.definition.CopyMetricValues
     id: saveDraft
     label: Save as draft
-    parentAlias: BASE
-    alias: newLeaf
-    metricSource: ALIAS
-    copyMetricsFromAlias: FORM
-    copyRelationsFromAlias: BASE
-    copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
-    setTeamFromAlias: BASE
+    documentAliasFrom: TEMP
+    documentAliasTo: BASE
+    visible: true
+    type: UPDATE
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
@@ -86,10 +111,6 @@ actions:
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:
-      - !com.agreemount.slaneg.action.definition.ChangeState
-        documentAlias: newLeaf
-        states:
-          mainState: draft
       - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
         fromAlias: BASE
         toAlias: newLeaf
@@ -101,19 +122,28 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: FORM
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
@@ -140,27 +170,36 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: manager
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -182,28 +221,36 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
-    copyRelationsFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: provider
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -225,27 +272,36 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: manager
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -267,28 +323,36 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: BASE
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
-    copyRelationsFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: provider
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -310,27 +374,36 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: FORM
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: manager
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -351,28 +424,36 @@ actions:
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
-    copyMetricsFromAlias: FORM
     copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
     copyStatesFromAlias: BASE
-    copyNameFromAlias: BASE
-    redirectToThisVersion: true
     setTeamFromAlias: BASE
-    copyRelationsFromAlias: BASE
+    redirectToThisVersion: true
+    visible: tru
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
         - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
           documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: sideState
-          value: provider
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef

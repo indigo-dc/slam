@@ -19,15 +19,15 @@ metrics:
     required: true
     position: 1
     description: hen u wish your SLA to activate
-    validateOnChange: true
+#    validateOnChange: true
     visualClass:
      !java.util.ArrayList
        - date
-    validators:
-      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
-          otherMetricId: endComp
-          operator: LESS_THAN_OR_EQUAL
-          label: Start should be before end
+#    validators:
+#      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
+#          otherMetricId: endComp
+#          operator: LESS_THAN_OR_EQUAL
+#          label: Start should be before end
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -43,16 +43,16 @@ metrics:
     categoryId: documentationSettings_date_row
     required: true
     position: 2
-    validateOnChange: true
+#    validateOnChange: true
     description: computingTimeRestrictions
     visualClass:
      !java.util.ArrayList
        - date
-    validators:
-      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
-          otherMetricId: startComp
-          operator: GREATER_THAN_OR_EQUAL
-          label: End should be greater than start
+#    validators:
+#      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
+#          otherMetricId: startComp
+#          operator: GREATER_THAN_OR_EQUAL
+#          label: End should be greater than start
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
