@@ -1,16 +1,64 @@
 metricCategories:
 
 #TODO check metrics with restriction model, preprare set for 2nd release
+
   - !com.agreemount.bean.metric.MetricCategory
     id: mcComputing
     label: mcComputing
+    availableForStateValues:
+      !java.util.ArrayList
+        - SLA
     children:
       - !com.agreemount.bean.metric.MetricCategory
         id: computingTimeRestrictions
-        label: computing time restrictions
+        label: mcComputingTimeRestrictions
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
       - !com.agreemount.bean.metric.MetricCategory
         id: publicIPRestrictions
-        label: public ip restrictions
+        label: mcPpublicIPRestrictions
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
+  - !com.agreemount.bean.metric.MetricCategory
+    id: mcStorage
+    label: mcStorage
+    availableForStateValues:
+      !java.util.ArrayList
+        - SLA
+    children:
+      - !com.agreemount.bean.metric.MetricCategory
+        id: storageTargets
+        label: mcStorageTargets
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
+      - !com.agreemount.bean.metric.MetricCategory
+        id: storageRestrictions
+        label: mcStorageRestrictions
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
+
+
+
+
+
+#  - !com.agreemount.bean.metric.MetricCategory
+#    id: mcComputing
+#    label: mcComputing
+#    children:
+#      - !com.agreemount.bean.metric.MetricCategory
+#        id: computingTimeRestrictions
+#        label: computing time restrictions
+#      - !com.agreemount.bean.metric.MetricCategory
+#        id: publicIPRestrictions
+#        label: public ip restrictions
 #  - !com.agreemount.bean.metric.MetricCategory
 #    id: mcStorage
 #    label: mcStorage
