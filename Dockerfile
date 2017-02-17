@@ -14,6 +14,10 @@ ENV MONGO_PORT '27017'
 ENV MONGO_DB 'indigo_slam_engine'
 ENV MONGO_USER 'engine'
 ENV MONGO_PASSWORD ''
+ENV CERT_ALIAS 'root'
+ENV CERT_FILE ''
+ENV KEYSTORE_PASSWORD 'helpdesk'
+ENV KEYSTORE '/opt/pki/synchroDuo.jks'
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -27,8 +31,8 @@ COPY docker/indigo-slam.sh /opt/indigo-slam/
 
 RUN ln -s /opt/indigo-slam/indigo-slam.sh /usr/bin/indigo-slam.sh
 
-VOLUME /var/lib/mysql
-VOLUME /var/lib/mongodb
+VOLUME /opt/certs
+VOLUME /opt/pki/custom
 
 EXPOSE 8443
 
