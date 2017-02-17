@@ -1,7 +1,10 @@
 #!/bin/bash
 JDBC_URL="jdbc:mysql://$MYSQL_ADDRESS:$MYSQL_PORT/$MYSQL_DB?createDatabaseIfNotExist=true&useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true"
 
-
+if [ -f $CERT_FILE ]; then
+    echo "Adding $CERT_FILE to keystore"
+    keytool -import -trustcacerts -alias $CERT_ALIAS -file $CERT_FILE -keystore /opt/pki/synchroDuo.jks
+fi
 
 java -Dserver.address=0.0.0.0 \
      -Dunity.server.token=$IAM_TOKEN_URL \

@@ -14,6 +14,8 @@ ENV MONGO_PORT '27017'
 ENV MONGO_DB 'indigo_slam_engine'
 ENV MONGO_USER 'engine'
 ENV MONGO_PASSWORD ''
+ENV CERT_ALIAS 'root'
+ENV CERT_FILE ''
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -29,6 +31,7 @@ RUN ln -s /opt/indigo-slam/indigo-slam.sh /usr/bin/indigo-slam.sh
 
 VOLUME /var/lib/mysql
 VOLUME /var/lib/mongodb
+VOLUME /opt/certs
 
 EXPOSE 8443
 
