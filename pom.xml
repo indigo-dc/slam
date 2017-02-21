@@ -272,7 +272,7 @@
 		<repository>
 			<id>agreemount-cyfro-releases</id>
 			<layout>default</layout>
-			<url>https://gforge.cyfronet.pl/nexus/content/repositories/agreemount-cyfro-releases</url>
+			<url>https://nexus.agreemount.com/content/repositories/releases/</url>
 		</repository>
 	</repositories>
 

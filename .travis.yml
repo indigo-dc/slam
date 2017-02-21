@@ -1,0 +1,36 @@
+language: java
+sudo: required
+jdk:
+- openjdk8
+services:
+- docker
+- mongodb
+- mysql
+
+install:
+- nvm install node
+- npm install -g bower
+- npm install -g brunch
+- npm install
+
+before_script:
+- mvn package -Dmaven.test.skip=true
+script:
+- echo "Here mvn test should be placed"
+
+after_success:
+# dont create docker on pull request
+- export REPO='indigodatacloud/slam'
+- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+- if [ "$TRAVIS_PULL_REQUEST" = "true" ]; exit 0; fi
+- export DOCKER_BUILD_BRANCH=${DOCKER_BUILD_BRANCH:-master}
+- if [ "$TRAVIS_BRANCH" = "$DOCKER_BUILD_BRANCH" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+  docker build -t $REPO:latest . ; docker push "$REPO:latest" ; exit 0 ; fi
+# this is tagged branch, unfortunately we have no way to determine if this is master
+- if [ -n "TRAVIS_TAG" ]; then
+  docker build -t "$REPO:$TRAVIS_TAG" . ; docker push "$REPO:$TRAVIS_TAG" ; exit 0 ; fi
+
+env:
+  global:
+  - secure: hwbMhBU9BNbbtziIbfaHXA8rAn/PD4CJrCEjNaVVX7CQ5SyEflYZTpNiVG53RR0AFqy69eU8OFpvDCkavBVbInToCIRR3lkWx9Xq3Dfi2YXfGCp+8dPBN1VOtmYntpUYK1RRp5U7atoOg6XDS8E3/B00HnmXotmtV5Yw1s1Ks3C4NBdOL8i1IuaWTO51fynkVGLl6OCq2nWp4dmVHfdJcXhdd6tnlqPAEWKfcZi7DrpHO6VqPbxueG75i91+y0cWZloLMS7EhhMhbLCmOhgRdmwRFqSLW5zLC/CTuJxwCVBeMLp5q1RrS2WbTiIsGmUouXmaYOmBYmmrhexBnTAvlLJXUwDOWzMeY8EWq2rWoGlRvZnwNaCPEzunP94X33cYM0Mwc/DjDsUAXEDjRtNdKbfI0fYkNsNr4Qa7IKBFSwSUCmLuLLcANSpvfvxVxW+TfWZaF3cFsKjxA6eRXI2fFmnETzvtuEFq/tXOdBiQ1fQF0CCokk7nzEPky8b7zichBqlN6yS2D2ip+KB/nYm9AWiJS7bt3C35JQQrgUzCzSwnSF+Rj5YpzdH2jK0fEg4EPqXBZTy30VqWUzS2J7ApMJeO7RCPAK9ssyCtb8+RP/T4ADAk8wpVOhCFjBzqqEe/jADe8OYE+dK3WugEvWVySxTcc1d+u5ndsqWhSUqjXqs=
+  - secure: FRILKDzSpvLm+B6tEY27Mm+G96ljYKEcc3OoCCVWAfq0507USwaSZYS+FiFwFK0W67Low5gUCzvF2jYwgpiPSoVqCAUFORGY1m/GW4uq3nqnAPM5T9us0K6czafDwq1IdK4QN9YOkZ5Ha3yWlOMEIzjWbucCdwdlvWvYYo1LTUYaI+w35s+t9tWPfWGzdLgBdqhukRceaEIlIhK+dzQIVcNtG9RB49AbwdEXqYqKOf+JKvCktwwornMBvWThXNYlEEhGPgDF8ku8y/OfaWyIMpldBQROsWJg6Y8g1sYga7g1rY912VcABSnGnHQCkYUFlCUTBr6gDkNP3fCmyiXSvnvwQWyXMxPkYDv7VJAD1GRqcMIbtIhUq/lTKWok8jKcMQte+ZcLvR+I4U/UfcEkZuXPg5rNKXmp2Jh1fy0wEyI6fwDDkl4SVEfvXSqLcYza8cvWIfH1USQwq7tTg2ESXSiMQ3gSK3iB4oH6oYncywUV2kSXLDwyV/WEKic80KgV2FAdPigwPv/2MUk6BgOt2HbA4KpeB95QhhlMVctNgeSt7B3cjuk0xA0fz93jcGLNF6dwcgXEZ0hOkUSZIsXGYX3GCEiB9LldxXnIPXYkBOtyX/RMl1GHnDsm9gg368gaHAVXYbOuKvs8QU99v4RyeDL0UCOTSUZFEbyVv1m3OzA=
