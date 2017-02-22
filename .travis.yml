@@ -27,7 +27,7 @@ after_success:
 - if [ "$TRAVIS_BRANCH" = "$DOCKER_BUILD_BRANCH" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
   docker build -t $REPO:latest . ; docker push "$REPO:latest" ; exit 0 ; fi
 # this is tagged branch, unfortunately we have no way to determine if this is master
-- if [ -n "TRAVIS_TAG" ]; then
+- if [ -n "$TRAVIS_TAG" ]; then
   docker build -t "$REPO:$TRAVIS_TAG" . ; docker push "$REPO:$TRAVIS_TAG" ; exit 0 ; fi
 
 env:
