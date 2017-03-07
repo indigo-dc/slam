@@ -3,12 +3,13 @@ JDBC_URL="jdbc:mysql://$MYSQL_ADDRESS:$MYSQL_PORT/$MYSQL_DB?createDatabaseIfNotE
 
 if [ -n "$CERT_FILE" ] && [ -f $CERT_FILE ]; then
     echo "Adding $CERT_FILE to keystore"
-    keytool -import -trustcacerts -alias $CERT_ALIAS -file $CERT_FILE -storepas $KEYSTORE_PASSWORD -keystore $KEYSTORE
+    keytool -import -trustcacerts -alias $CERT_ALIAS -file $CERT_FILE -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE
 fi
 
 java -Dserver.address=0.0.0.0 \
      -Dkeystore.file=$KEYSTORE \
      -Dkeystore.pass=$KEYSTORE_PASSWORD \
+     -Dkeystore.tomcat.alias=$KEYSTORE_ALIAS \
      -Dunity.server.token=$IAM_TOKEN_URL \
      -Dunity.server.base=$IAM_URL \
      -Dunity.server.clientId=$IAM_CLIENT_ID \
