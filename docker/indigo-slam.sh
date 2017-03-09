@@ -3,7 +3,7 @@ JDBC_URL="jdbc:mysql://$MYSQL_ADDRESS:$MYSQL_PORT/$MYSQL_DB?createDatabaseIfNotE
 
 if [ -n "$CERT_FILE" ] && [ -f $CERT_FILE ]; then
     echo "Adding $CERT_FILE to keystore"
-    keytool -import -trustcacerts -alias $CERT_ALIAS -file $CERT_FILE -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE
+    keytool -import -noprompt -trustcacerts -alias $CERT_ALIAS -file $CERT_FILE -storepass $KEYSTORE_PASSWORD -keystore $KEYSTORE
 fi
 
 java -Dserver.address=0.0.0.0 \
