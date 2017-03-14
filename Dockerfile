@@ -20,6 +20,7 @@ ENV CERT_ALIAS 'root'
 ENV CERT_FILE ''
 ENV KEYSTORE_PASSWORD 'helpdesk'
 ENV KEYSTORE '/opt/pki/synchroDuo.jks'
+ENV KEYSTORE_ALIAS 'synchro'
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
