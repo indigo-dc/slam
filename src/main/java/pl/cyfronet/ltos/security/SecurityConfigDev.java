@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
  * @author bwilk
@@ -17,7 +19,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 @Configuration
 @Profile("development")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfigDev extends SecurityConfigBase {
+@EnableWebSecurity
+public class SecurityConfigDev extends WebSecurityConfigurerAdapter {
+	
     static Logger log = LoggerFactory.getLogger(SecurityConfigDev.class);
     
     @Autowired

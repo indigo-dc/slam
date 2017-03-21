@@ -5,14 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.access.expression.DenyAllPermissionEvaluator;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 import pl.cyfronet.ltos.security.policy.Activity;
 import pl.cyfronet.ltos.security.policy.Permissions;
 
 /**
  * Created by mszostak on 09.09.16.
  */
-public class SecurityConfigBase extends WebSecurityConfigurerAdapter {
+public class SecurityBeans {
     @Bean
     static PermissionEvaluator getPermissionEvaluator() {
         return new DenyAllPermissionEvaluator();
@@ -29,8 +29,8 @@ public class SecurityConfigBase extends WebSecurityConfigurerAdapter {
     }
 
     @Bean(name = "activities")
-    static SecurityConfig.Activities getActivities() {
-        return new SecurityConfig.Activities();
+    static Activities getActivities() {
+        return new Activities();
     }
 
     static class Activities {
