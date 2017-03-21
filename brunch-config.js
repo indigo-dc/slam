@@ -18,6 +18,9 @@ module.exports = {
             },
             order: {
                 before: [
+                    'bower_components/jquery/dist/jquery.js',
+                    'bower_components/angular/angular.js',
+                    'bower_components/bootstrap/dist/bootstrap.js',
                     'src/main/resources/static/js/indigo.config.js',
                     'src/main/resources/static/js/indigo.routes.js'
                 ]
