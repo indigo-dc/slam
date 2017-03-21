@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.springframework</groupId>
-	<artifactId>gs-accessing-data-rest</artifactId>
-	<version>0.1.0</version>
+	<artifactId>indigo-slam</artifactId>
+	<version>1.0.0</version>
 
 	<profiles>
 		<profile>
