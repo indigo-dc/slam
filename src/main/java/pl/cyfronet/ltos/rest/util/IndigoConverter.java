@@ -48,7 +48,7 @@ public class IndigoConverter {
 
     public IndigoWrapper convertSlasListForRestApi(List<Document> slas, String login) {
         IndigoWrapper result = IndigoWrapper.builder().
-                preferences(preparePreferences(slas, login)).
+                preferences(Arrays.asList(preparePreferences(slas, login))).
                 sla(prepareSlaList(slas, login)).build();
         return result;
     }

@@ -15,6 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IndigoWrapper {
-    private Preferences preferences;
+    private List<Preferences> preferences;
     private List<Sla> sla;
 }
