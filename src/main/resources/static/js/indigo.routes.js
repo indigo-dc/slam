@@ -1,7 +1,7 @@
 angular.module('indigo')
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/dashboard'});
+        // $routeProvider.otherwise({redirectTo: '/dashboard'});
 
         //$routeProvider.when('/registration', {templateUrl: 'js/view/registration.html', controller: 'RegistrationController', data: {
         //    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
