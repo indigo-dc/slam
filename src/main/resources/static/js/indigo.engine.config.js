@@ -11,14 +11,16 @@ app.config(function ($engineProvider) {
             },
             "metrics": {}
         },
-        name: 'SLA',
+        name: 'sla',
         list: {
             columns: [
-                // {name: '@index', type: 'link', caption: 'ID'},
-                // {name: 'proposalName', caption: 'Title'},
-                // {name: 'createdAt', type: 'date', caption: 'created'},
-                // {name: 'beamlineChoice', caption: 'beamline'},
-                // {name: 'states.documentState', caption: 'status'},
+                {name: '@index', type: 'link', caption: 'ID'},
+                {name: 'name', caption: 'Name'},
+                {name: 'siteName', caption: 'site'},
+                {name: 'createdAt', type: 'date', caption: 'created'},
+                {name: 'states.mainState', caption: 'status'},
+                {name: 'metrics.startComp', caption: 'Start', type: 'date'},
+                {name: 'metrics.endComp', caption: 'End', type: 'date'},
                 // {name: 'discipline', caption: 'disciplne'},
                 // {name: 'proposalEvaluation', condition: "states.documentState == 'evaluated"}
             ],
@@ -38,29 +40,25 @@ app.config(function ($engineProvider) {
     };
     $engineProvider.document('sla', '/sla', '/sla/:id', ['SignedSlaComp'], slaSpec);
 
-    $engineProvider.dashboard({url: '/dashboard2', label: 'SLAs'},
-        [{
-            queryId: 'proposalMainProposer', label: 'Proposals', documentModelId: 'proposal', showCreateButton: true,
-            customButtons: [{label: 'Upload Proposal', callback: 'uploadProposalModal'}],
-            columns: [{name: 'id', type: 'link', caption: 'Proposal ID'},
-                {name: 'proposalName', caption: 'Title'},
-                {name: 'discipline', caption: 'Discipline'},
-                {name: 'beamlineChoice', caption: 'Beamline'},
-                {name: 'createdAt', type: 'date', caption: 'Created'},
-                {name: 'states.documentState', caption: 'Status'},]
-        },
+    $engineProvider.dashboard({url: '/dashboard', label: 'SLAs'},
+        [
             {
-                queryId: 'proposalCoProposer',
-                label: 'Proposals Co-Proposer',
-                documentModelId: 'proposal',
-                showCreateButton: false,
-                columns: [{name: 'id', type: 'link', caption: 'Proposal ID'},
-                    {name: 'proposalName', caption: 'Title'},
-                    {name: '$ext.author.name', caption: 'Main Proposer'},
-                    {name: 'discipline', caption: 'Discipline'},
-                    {name: 'beamlineChoice', caption: 'Beamline'},
-                    {name: 'createdAt', type: 'date', caption: 'Created'},
-                    {name: 'states.documentState', caption: 'Status'},]
+                queryId: 'SignedSlaComp',
+                label: 'My signed computing SLAs',
+                documentModelId: 'sla',
+                showCreateButton: true
+            },
+            {
+                queryId: 'workingSla',
+                label: 'SLAs in progrees',
+                documentModelId: 'sla',
+                showCreateButton: false
+            },
+            {
+                queryId: 'rejectedSla',
+                label: 'Rejected SLAs',
+                documentModelId: 'sla',
+                showCreateButton: false
             },
         ]);
 });
