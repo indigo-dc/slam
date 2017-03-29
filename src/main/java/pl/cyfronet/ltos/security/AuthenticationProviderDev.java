@@ -80,7 +80,9 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
         List<TeamMember> teamMembers = new LinkedList<TeamMember>();
         for (Team team : teams) {
             for (Role role: team.getRoles()) {
-                TeamMember teamMember = new TeamMember(role.getName(), team.getName());
+                TeamMember teamMember = new TeamMember();
+                teamMember.setRole(role.getName());
+                teamMember.setTeam(team.getName());
                 teamMembers.add(teamMember);
             }
         }

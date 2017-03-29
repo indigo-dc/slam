@@ -1,7 +1,10 @@
 package pl.cyfronet.ltos;
 
+import com.agreemount.bean.document.Document;
+import com.agreemount.slaneg.action.DocumentFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -25,4 +28,8 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    @Bean
+    public DocumentFactory<Document> getDocumentFactory() {
+        return new DocumentFactory<>(Document.class);
+    }
 }
