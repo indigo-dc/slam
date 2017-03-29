@@ -10,7 +10,7 @@ actions:
     copyMetricsFromAlias: TEMP
     redirectToThisVersion: true
     type: CREATE
-    visible: false
+#    visible: false
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
