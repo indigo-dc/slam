@@ -88,6 +88,24 @@ metrics:
 #            state: documentType
 #            value: sla
 
+  - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
+    id: siteSelect
+    label: Site
+    categoryId: computingTimeRestrictions
+    required: true
+    position: 0
+    description: Where SLA will be requested
+    visualClass:
+     !java.util.ArrayList
+       - select
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-total_guaranteed

@@ -245,7 +245,7 @@ angular.module('indigo')
             suffix: '.json'
         });
         // load 'en' table on startup
-        $translateProvider.preferredLanguage('pl');
+        $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('escape');
     }])
     .controller('MainCtrl', function ($scope, $route, $rootScope) {
