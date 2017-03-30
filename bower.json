@@ -20,17 +20,17 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.5.8",
-    "angular-route": "^1.5.8",
+    "angular": "1.5.8",
+    "angular-route": "1.5.8",
     "bootstrap": "^3.3.4",
-    "angular-sanitize": "~1.5.8",
-    "angular-resource": "^1.5.8",
+    "angular-sanitize": "1.5.8",
+    "angular-resource": "1.5.8",
     "angular-translate": "^2.7.2",
     "angular-translate-loader-url": "^2.7.2",
     "angular-translate-loader-static-files": "^2.7.2",
     "angular-spring-data-rest": "^0.4.4",
     "angular-bootstrap": "^2.2.0",
-    "angular-engine": "^0.6.59"
+    "angular-engine": "^0.6.77"
   },
   "resolutions": {
     "angular": "1.5.8",
