@@ -35,6 +35,8 @@ queries:
     position: 2
     queryCategoryId: userDashboard
     visibilityConstraint:
+      !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+          role: provider
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
 #        type: OR
 #        children:
@@ -91,12 +93,14 @@ queries:
     label: Signed SLAs
     position: 1
     queryCategoryId: providerDashboard
-#    visibilityConstraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: OR
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: provider
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+        - !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+          role: provider
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
         type: AND

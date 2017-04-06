@@ -89,11 +89,13 @@ metrics:
 #            value: sla
 
   - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
-    id: siteSelect
+    id: siteStorageSelect
     label: Site
     categoryId: computingTimeRestrictions
     required: true
     position: 0
+    siteType: storage
+    cmdbUrl: http://indigo.cloud.plgrid.pl
     description: Where SLA will be requested
     visualClass:
      !java.util.ArrayList

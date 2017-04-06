@@ -7,8 +7,11 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.annotation.Transient;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -16,24 +19,27 @@ import java.util.*;
 @lombok.Setter
 @lombok.ToString
 @lombok.EqualsAndHashCode(callSuper = false)
+@PropertySource("classpath:application.properties")
 public class SiteSelectMetric extends Metric<String> {
     public SiteSelectMetric() {
         super(InputType.SELECT);
     }
 
-//    @Value("${cmdb.url}")
-    private String cmdbUrl = "http://indigo.cloud.plgrid.pl";
+    public enum SiteType {compute, storage}
+
+    private SiteType siteType;
+    public String cmdbUrl;
 
     public List<MetricOption> getOptions() {
         JSONArray sites = null;
+        ArrayList<MetricOption> ret = new ArrayList<MetricOption>();
         try {
-            sites = Unirest.get(cmdbUrl + "/cmdb/service/list").asJson().getBody().getObject().getJSONArray("rows");
+            sites = Unirest.get(cmdbUrl + "/cmdb/service/filters/type/"+siteType).asJson().getBody().getObject().getJSONArray("rows");
         } catch (UnirestException e) {
             //@TODO@ - provide message to frontend
             e.printStackTrace();
+            return ret;
         }
-
-        ArrayList<MetricOption> ret = new ArrayList<MetricOption>();
 
         for(int i=0; i < sites.length(); ++i) {
             MetricOption opt = new MetricOption();
@@ -46,6 +52,7 @@ public class SiteSelectMetric extends Metric<String> {
 
             attrs.put("hostname",  hostname);
             attrs.put("sitename",  sitename);
+            attrs.put("label",  (sitename != null ? sitename : "?") + " : " + (hostname != null ? hostname : "?"));
             opt.setAttributes(attrs);
             opt.setValue(site.getString("id"));
             ret.add(opt);

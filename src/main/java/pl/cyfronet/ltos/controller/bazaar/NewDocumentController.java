@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.bean.legacy.CreateGrantData;

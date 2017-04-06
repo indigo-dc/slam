@@ -37,15 +37,6 @@ public class RestControllerTest extends MockMvcSecurityTest {
 //        Assert.assertTrue(content.contains("\"customer\":\"test\""));
     }
 
-    @Test
-    public void testGetSLAs() throws Exception {
-        MvcResult result = mockMvc.perform(get("/rest/slam/sla").session(user()))
-                .andExpect(status().isOk()).andReturn();
-
-        String content = result.getResponse().getContentAsString();
-    }
-
-
     @Autowired
     private ActionContextFactory actionContextFactory;
 
@@ -96,8 +87,8 @@ public class RestControllerTest extends MockMvcSecurityTest {
 //               .andExpect(status().isOk()).andReturn()
     }
 
-    @Test
-    public void testGetSLA() throws Exception {
+//    @Test
+//    public void testGetSLA() throws Exception {
         // add sla offer
 //        MvcResult result = null;
 //        addSLAEST();
@@ -108,6 +99,18 @@ public class RestControllerTest extends MockMvcSecurityTest {
 //                .andExpect(status().isOk()).andReturn();
 //
 //        String content = result.getResponse().getContentAsString();
+//    }
+
+    @Test
+    public void testPreferences() {
+
     }
 
+    @Test
+    public void testGetSLAs() throws Exception {
+        MvcResult result = mockMvc.perform(get("/rest/slam/sla").session(user()))
+                .andExpect(status().isOk()).andReturn();
+
+        String content = result.getResponse().getContentAsString();
+    }
 }
