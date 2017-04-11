@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 
 /**
  * @author bwilk
@@ -29,7 +30,7 @@ public class Application {
     }
 
     @Bean
-    public DocumentFactory<Document> getDocumentFactory() {
-        return new DocumentFactory<>(Document.class);
+    public DocumentFactory<IndigoDocument> getDocumentFactory() {
+        return new DocumentFactory<>(IndigoDocument.class);
     }
 }

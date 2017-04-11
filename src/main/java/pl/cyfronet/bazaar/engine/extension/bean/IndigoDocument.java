@@ -22,17 +22,21 @@ public class IndigoDocument extends Document{
     static final List<String> siteMetricIds = Arrays.asList("siteStorageSelect",
                                                             "siteComputeSelect");
 
-    @Autowired
-    private SitesService sitesService;
+//    @Autowired
+//    private SitesService sitesService;
 
     public String getSite(){
-        String s = sitesService.getSites();
+//        String s = sitesService.getSites();
 
         for (String metricId : siteMetricIds){
             if(getMetrics().containsKey(metricId))
                 return getMetrics().get(metricId).toString();
         }
         return null;
+    }
+
+    public String getSiteName(){
+        return getSite();
     }
 //    private String siteName;
 }

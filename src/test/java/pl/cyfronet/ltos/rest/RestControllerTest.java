@@ -63,9 +63,6 @@ public class RestControllerTest extends MockMvcSecurityTest {
         identityProvider.setIdentity(identity);
 
         IndigoDocument document = new IndigoDocument();
-        document.setName("TEST_NAME");
-        document.setSite("BARI");
-
 
         ActionContext actionContext = actionContextFactory.createInstance(document);
 

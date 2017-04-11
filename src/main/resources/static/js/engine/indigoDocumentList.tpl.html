@@ -1,0 +1,46 @@
+<h2 ng-if="$ctrl.listCaption" translate>{{ $ctrl.listCaption }}</h2>
+<div>
+    <div class="eng-loading-box" ng-show="!documents.$resolved">
+        <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </div>
+    <div ng-if="documents.$resolved || $ctrl.noParentDocument" ng-cloak>
+        <table class="table">
+            <tr>
+                <td class="weight-col"></td>
+                <td></td>
+                <th class="{{column.css_header || column.css}}" style="text-transform: uppercase;" ng-repeat="column in columns" translate>{{column.caption || column.name}}</th>
+                <th class="text-right"></th>
+            </tr>
+            <tr ng-repeat="document_entry in documents" ng-if="!documents.$error && !$ctrl.noParentDocument" ng-init="$row=$index">
+                <td class="same-weight"></td>
+                <td>{{document.$ext.weight}}</td>
+                <td ng-repeat="column in columns" class="{{column.css}} {{column.style}}" ng-include="getCellTemplate(document_entry.document, column)"></td>
+                <td class="text-right cog-dropdown">
+                    <div class="dropdown" ng-if="document_entry.actions.length > 0">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-cog" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="action in document_entry.actions"><a href="" ng-click="engineAction(action, document_entry.document)" translate>{{action.label}}</a></li>
+                            <li ng-if="!document_entry.actions"><span style="margin-left: 5px; margin-right: 5px;" translate>No actions available</span></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="alert alert-warning" role="alert" ng-if="documents.$error" translate>
+            {{documents.$errorMessage || 'An error occurred during document loading'}}
+        </div>
+        <div class="alert alert-warning" role="alert" ng-if="$ctrl.noParentDocument" translate>
+            {{$ctrl.noParentDocumentMessage || 'Parent document does not exist, save this document first'}}
+        </div>
+        <div class="alert alert-info" role="alert" ng-if="documents.$resolved && documents.length == 0 && !documents.$error" translate>
+            {{ $ctrl.noDocumentsMessage || 'There are no documents to display'}}
+        </div>
+    </div>
+</div>
+<a href="" ng-if="$ctrl._showCreateButton && canCreateDocument()" ng-click="onCreateDocument()" class="btn btn-primary">
+    <span ng-if="!$ctrl.options.list.createButtonLabel" translate>Create {{options.name}}</span>
+    <span ng-if="$ctrl.options.list.createButtonLabel">{{$ctrl.options.list.createButtonLabel | translate}}</span>
+</a>
+<a href="" ng-click="customButton.callback($ctrl.options)" class="btn btn-primary" ng-repeat="customButton in customButtons">
+    <span>{{customButton.label | translate}}</span>
+</a>

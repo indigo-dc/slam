@@ -55,6 +55,10 @@ public class User {
     @JsonIgnore
     @ManyToMany(mappedBy="members")
     private List<Team> teams;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="user")
+    private List<DocumentWeight> documents;
     
     @JsonIgnore
     @ManyToMany

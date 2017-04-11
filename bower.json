@@ -34,7 +34,8 @@
   },
   "resolutions": {
     "angular": "1.5.8",
-    "angular-resource": "1.5.8"
+    "angular-resource": "1.5.8",
+    "angular-translate": "~2.7.2"
   },
   "overrides": {
     "bootstrap": {

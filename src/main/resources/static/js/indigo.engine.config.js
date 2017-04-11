@@ -46,13 +46,15 @@ app.config(function ($engineProvider) {
                 queryId: 'SignedSlaComp',
                 label: 'My signed computing SLAs',
                 documentModelId: 'sla',
-                showCreateButton: true
+                showCreateButton: true,
             },
             {
                 queryId: 'workingSla',
                 label: 'SLAs in progrees',
                 documentModelId: 'sla',
-                showCreateButton: false
+                showCreateButton: false,
+                controller: 'indigoDocumentListCtrl',
+                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'rejectedSla',

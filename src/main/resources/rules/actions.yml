@@ -110,10 +110,10 @@ actions:
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
-    actions:
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#    actions:
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -159,9 +159,9 @@ actions:
         states:
           mainState: sent
           sideState: provider
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -210,9 +210,9 @@ actions:
         states:
           mainState: signed
           sideState: provider
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -261,9 +261,9 @@ actions:
         states:
           mainState: signed
           sideState: manager
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -312,9 +312,9 @@ actions:
         states:
           mainState: rejected
           sideState: provider
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -363,9 +363,9 @@ actions:
         states:
           mainState: rejected
           sideState: manager
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -414,9 +414,9 @@ actions:
         states:
           mainState: sent
           sideState: provider
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
     id: sentSlaProvider
@@ -464,7 +464,7 @@ actions:
         states:
           mainState: sent
           sideState: manager
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
-        fromAlias: BASE
-        toAlias: newLeaf
+#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
 
