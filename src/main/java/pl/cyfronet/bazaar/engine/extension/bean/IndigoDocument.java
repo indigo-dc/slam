@@ -3,40 +3,45 @@ package pl.cyfronet.bazaar.engine.extension.bean;
 import com.agreemount.bean.document.Document;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import pl.cyfronet.ltos.rest.util.SitesService;
+import pl.cyfronet.bazaar.engine.extension.component.DocumentService;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by km on 03.08.16.
  */
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class IndigoDocument extends Document{
     /** Extend this variable when adding new sla types */
     static final List<String> siteMetricIds = Arrays.asList("siteStorageSelect",
                                                             "siteComputeSelect");
 
-//    @Autowired
-//    private SitesService sitesService;
+    private DocumentService documentService;
+
+    public IndigoDocument(DocumentService documentService) {
+        this.documentService = documentService;
+    }
+
+    public Integer getWeight() {
+        return 0;
+    }
 
     public String getSite(){
-//        String s = sitesService.getSites();
-
+        String s = documentService.getSitesService().getSites();
         for (String metricId : siteMetricIds){
             if(getMetrics().containsKey(metricId))
                 return getMetrics().get(metricId).toString();
         }
-        return null;
+        return site;
     }
 
     public String getSiteName(){
-        return getSite();
+        if(siteName == null)
+            siteName = getSite();
+        return siteName;
     }
-//    private String siteName;
+    private String site = null;
+    private String siteName = null;
 }

@@ -48,28 +48,6 @@ public class RestControllerTest extends MockMvcSecurityTest {
 
 
 
-    private void addSLA() throws Exception {
-
-        Identity identity = new Identity();
-        identity.setLogin("admin");
-
-        ArrayList<String> roles = new ArrayList<String>() {{
-            add("manager");
-            add("admin");
-        }};
-
-        identity.setRoles(roles);
-
-        identityProvider.setIdentity(identity);
-
-        IndigoDocument document = new IndigoDocument();
-
-        ActionContext actionContext = actionContextFactory.createInstance(document);
-
-        actionContext.addDocument("documentDraftFromController", document);
-        engineFacade.runAction(actionContext, "createNewComputingRequest");
-    }
-
     private void addSLAEST() throws Exception {
 
 //        HashMap<String, String> urlVariables = new HashMap<String, String>();

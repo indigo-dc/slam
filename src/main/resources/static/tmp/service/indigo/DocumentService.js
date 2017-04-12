@@ -19,7 +19,7 @@ app.service("DocumentService", ['$http', '$q', function ($http, $q) {
     // I get all of the friends in the remote collection.
     function getDocument(documentId) {
 
-        return $http.get("document/getwithextradata",{
+        return $http.get("component/getwithextradata",{
             params: {
                 documentId: documentId
             }

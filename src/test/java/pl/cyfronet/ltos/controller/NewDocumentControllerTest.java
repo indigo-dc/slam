@@ -63,9 +63,9 @@ import java.util.List;
 //        grantData.setId("1");
 //        grantData.setAffiliationId(1);
 //
-//        Document document = new Document();
-//        document.setName(grantData.getId());
-//        document.setTeam(grantData.getTeam());
+//        Document component = new Document();
+//        component.setName(grantData.getId());
+//        component.setTeam(grantData.getTeam());
 //
 //        Document document2 = new Document();
 //        document2.setName(grantData.getId());
@@ -73,13 +73,13 @@ import java.util.List;
 //        document2.setId("123");
 //
 //        ActionContext context1 = new ActionContext();
-//        context1.addDocument("documentDraftFromController", document);
+//        context1.addDocument("documentDraftFromController", component);
 //
 //        ActionContext context2 = new ActionContext();
-//        context2.addDocument("documentDraftFromController", document);
+//        context2.addDocument("documentDraftFromController", component);
 //        context2.addDocument("newRoot", document2);
 //
-//        Mockito.when(contextFactory.createInstance(document)).thenReturn(context2);
+//        Mockito.when(contextFactory.createInstance(component)).thenReturn(context2);
 //        Mockito.when(engineFacade.runAction(context1, "createNewRequest")).thenReturn(new ActionContext());
 //
 //        Response<ActionResponse> response = controller.getDocument(grantData);

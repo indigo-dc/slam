@@ -34,11 +34,11 @@ angular.module('indigo.dashboard', ['ngRoute']).config(function ($routeProvider)
     });
 
     $scope.addDocument = function () {
-        $location.path('/document');
+        $location.path('/component');
     };
 
     $scope.editDocument = function (documentId) {
-        $location.path('/document/'+documentId);
+        $location.path('/component/'+documentId);
     };
 
     $scope.removeDocument = function (documentId) {

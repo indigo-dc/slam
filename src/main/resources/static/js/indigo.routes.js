@@ -146,8 +146,8 @@ angular.module('indigo')
         //            templateUrl: 'js/view/footer.html'
         //        }
         //    }
-        //}).state('document', {
-        //    url: '/document/:id',
+        //}).state('component', {
+        //    url: '/component/:id',
         //    views: {
         //        "header": {
         //            controller: "HeadController",
@@ -155,7 +155,7 @@ angular.module('indigo')
         //        },
         //        "viewContent": {
         //            controller: 'DocumentController',
-        //            templateUrl: 'js/view/indigo/document.html'
+        //            templateUrl: 'js/view/indigo/component.html'
         //        },
         //        "footer": {
         //            templateUrl: 'js/view/footer.html'
