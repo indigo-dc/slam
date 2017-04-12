@@ -1,8 +1,10 @@
 package pl.cyfronet.ltos.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -10,15 +12,17 @@ import java.util.List;
  *
  */
 @Entity
-//@Data
+@Data
 @IdClass(DocumentWeightPk.class)
 public class DocumentWeight {
 
     @Id
-    @OneToOne(targetEntity = User.class)
-    protected User user;
+    @ManyToOne
+    @JsonIgnore
+    private User user;
+
     @Id
-    protected String document;
+    private String document;
 
     private Integer weight;
 

@@ -9,12 +9,13 @@ import java.io.Serializable;
  */
 
 public class DocumentWeightPk implements Serializable {
-    protected User user;
+    protected Long user;
     protected String document;
 
-    public DocumentWeightPk() {}
+    public DocumentWeightPk() {
+    }
 
-    public DocumentWeightPk(User user, String document) {
+    public DocumentWeightPk(Long user, String document) {
         this.user = user;
         this.document = document;
     }
