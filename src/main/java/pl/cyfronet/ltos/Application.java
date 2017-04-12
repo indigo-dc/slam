@@ -31,9 +31,6 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Autowired
-    private IndigoDocumentFactory indigoDocumentFactory;
-
 //    @Bean
 //    public DocumentFactory<IndigoDocument> getDocumentFactory() {
 //        return indigoDocumentFactory;

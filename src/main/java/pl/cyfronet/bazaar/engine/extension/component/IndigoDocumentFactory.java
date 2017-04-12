@@ -10,8 +10,8 @@ import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 /**
  * Created by mszostak on 12.04.17.
  */
-//@Service(value = "DocumentFactory")
-@Component
+
+@Service(value = "DocumentFactory")
 public class IndigoDocumentFactory extends DocumentFactory<IndigoDocument> {
     public IndigoDocumentFactory() {
         super(IndigoDocument.class);
