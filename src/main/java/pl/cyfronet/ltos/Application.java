@@ -31,8 +31,8 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    @Bean
-//    public DocumentFactory<IndigoDocument> getDocumentFactory() {
-//        return indigoDocumentFactory;
-//    }
+    @Bean
+    public DocumentFactory<IndigoDocument> getDocumentFactory() {
+        return new IndigoDocumentFactory();
+    }
 }

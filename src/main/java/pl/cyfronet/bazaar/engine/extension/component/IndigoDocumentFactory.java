@@ -17,11 +17,11 @@ public class IndigoDocumentFactory extends DocumentFactory<IndigoDocument> {
         super(IndigoDocument.class);
     }
 
-    @Autowired
-    private DocumentService documentService;
+//    @Autowired
+//    private DocumentService documentService;
 
     @Override
     public IndigoDocument createInstance() {
-        return new IndigoDocument(documentService);
+        return new IndigoDocument();
     }
 }

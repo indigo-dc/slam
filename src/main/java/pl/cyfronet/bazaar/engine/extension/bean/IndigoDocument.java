@@ -20,8 +20,8 @@ public class IndigoDocument extends Document{
 
     private DocumentService documentService;
 
-    public IndigoDocument(DocumentService documentService) {
-        this.documentService = documentService;
+    public IndigoDocument() {
+        this.documentService = DocumentService.getInstance();
     }
 
     public Integer getWeight() {
