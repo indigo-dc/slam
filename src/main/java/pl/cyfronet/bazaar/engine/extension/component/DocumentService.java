@@ -9,22 +9,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import pl.cyfronet.bazaar.engine.extension.bean.SpringContext;
 import pl.cyfronet.ltos.controller.bazaar.BazaarConfig;
 import pl.cyfronet.ltos.repository.DocumentWeightRepository;
 
 
-//@Service
+@Service(value = "documentservice")
 public class DocumentService {
-    private static DocumentService instance = null;
-    public static DocumentService getInstance() {
-        if(instance == null) {
-            ApplicationContext context = new AnnotationConfigApplicationContext(BazaarConfig.class);
-            instance = (DocumentService) context.getBean("documentservice");
-        }
-
-        return instance;
-    }
-
     @Autowired
     DocumentWeightRepository documentWeightRepository;
 

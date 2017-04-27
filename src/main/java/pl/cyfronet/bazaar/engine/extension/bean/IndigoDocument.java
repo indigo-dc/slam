@@ -3,7 +3,10 @@ package pl.cyfronet.bazaar.engine.extension.bean;
 import com.agreemount.bean.document.Document;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pl.cyfronet.bazaar.engine.extension.component.DocumentService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import pl.cyfronet.ltos.bean.DocumentWeight;
+import pl.cyfronet.ltos.bean.DocumentWeightPk;
+import pl.cyfronet.ltos.security.PortalUser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,31 +18,33 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class IndigoDocument extends Document{
     /** Extend this variable when adding new sla types */
-    static final List<String> siteMetricIds = Arrays.asList("siteStorageSelect",
-                                                            "siteComputeSelect");
-
-    private DocumentService documentService;
+    static final List<String> SITE_METRIC_IDS = Arrays.asList("siteStorageSelect",
+                                                              "siteComputeSelect");
 
     public IndigoDocument() {
-        this.documentService = DocumentService.getInstance();
     }
 
     public Integer getWeight() {
-        return 0;
+        DocumentWeight documentWeight = SpringContext.getDocumentWeightRepository().findOne(new DocumentWeightPk(
+                ((PortalUser) SecurityContextHolder.getContext().getAuthentication()).getUserBean().getId(), getId()));
+        if (documentWeight == null)
+            return 0;
+        return documentWeight.getWeight();
     }
 
     public String getSite(){
-        String s = documentService.getSitesService().getSites();
-        for (String metricId : siteMetricIds){
-            if(getMetrics().containsKey(metricId))
-                return getMetrics().get(metricId).toString();
+        for (String metricId : SITE_METRIC_IDS){
+            if(getMetrics().containsKey(metricId)) {
+                site = getMetrics().get(metricId).toString();
+                break;
+            }
         }
         return site;
     }
 
     public String getSiteName(){
         if(siteName == null)
-            siteName = getSite();
+            siteName = SpringContext.getDocumentService().getSitesService().getSiteName(site);
         return siteName;
     }
     private String site = null;
