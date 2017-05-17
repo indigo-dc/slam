@@ -30,7 +30,7 @@
     "angular-translate-loader-static-files": "^2.7.2",
     "angular-spring-data-rest": "^0.4.4",
     "angular-bootstrap": "^2.2.0",
-    "angular-engine": "^0.6.77"
+    "angular-engine": "0.6.83"
   },
   "resolutions": {
     "angular": "1.5.8",

@@ -4,12 +4,12 @@
         <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
     </div>
     <div ng-if="documents.$resolved || $ctrl.noParentDocument" ng-cloak>
-        <table class="table">
+        <table class="proposal-list table">
             <tr>
-                <td class="weight-col"></td>
-                <td></td>
+                <th class="weight-col {{column.css_header}}"></th>
+                <th class="{{column.css_header}}"></th>
                 <th class="{{column.css_header || column.css}}" style="text-transform: uppercase;" ng-repeat="column in columns" translate>{{column.caption || column.name}}</th>
-                <th class="text-right"></th>
+                <th class="{{column.css_header}} text-right"></th>
             </tr>
             <tr ng-repeat="document_entry in documents" ng-if="!documents.$error && !$ctrl.noParentDocument" ng-init="$row=$index">
                 <td class="same-weight"></td>

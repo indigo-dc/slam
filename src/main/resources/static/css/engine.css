@@ -6,3 +6,8 @@
     background-color: #ffa11e;
     height: 100%;
 }
+
+.proposal-list {
+    width: 100%;
+    display: table !important;
+}
