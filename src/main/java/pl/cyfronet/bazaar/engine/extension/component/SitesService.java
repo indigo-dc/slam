@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import pl.cyfronet.bazaar.engine.extension.bean.Site;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by mszostak on 06.04.17.
@@ -22,23 +26,33 @@ public class SitesService {
     private String cmdbUrl;
 
 
+    private HashMap<String, Site> sites = null;
 
-//    private
+    public HashMap<String, Site> getSites() {
+        if(sites != null)
+            return sites;
 
-    public String getSites() {
+        sites = new HashMap<>();
+
         try {
             JSONArray sites = Unirest.get(cmdbUrl+"/cmdb/service/list").asJson().getBody().getObject().getJSONArray("rows");
             for(int i = 0; i < sites.length(); ++i ) {
-//                sites.getJSONObject(i)
+                JSONObject site = sites.getJSONObject(i);
+                this.sites.put(site.getString("id"),
+                               Site.builder().id(site.getString("id"))
+                               .name(site.getJSONObject("value").getString("sitename"))
+                               .build());
             }
+            return this.sites;
         } catch (UnirestException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     public String getSiteName(String siteId) {
-
-        return siteId;
+        if(siteId == null)
+            return null;
+        return getSites().get(siteId).getName();
     }
 }
