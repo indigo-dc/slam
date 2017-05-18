@@ -5,6 +5,8 @@ angular.module('indigo', ['ngRoute',
     'ngResource',
     'pascalprecht.translate',
     'spring-data-rest',
+    'ui.tree',
+    'ui.sortable',
     'engine',
     //application modules
     'indigo.components.header',

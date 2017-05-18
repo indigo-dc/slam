@@ -2,9 +2,14 @@
     width: 5px;
 }
 
+.weight {
+    cursor: ns-resize;
+}
+
 .same-weight {
     background-color: #ffa11e;
     height: 100%;
+    width: 5px;
 }
 
 .proposal-list {
