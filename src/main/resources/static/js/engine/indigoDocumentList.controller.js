@@ -63,8 +63,8 @@ angular.module('indigo').controller('indigoDocumentListCtrl', function ($scope, 
 
                 document.weight = tmp;
             }
-            else if(di != originalIndex){
-                document.weight = documents[di].document.weight + 1;
+            else if(documents.length > 1){
+                document.weight = documents[di+1].document.weight + 1;
             }
         }
         else if(di > 0){
