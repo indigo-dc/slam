@@ -19,7 +19,7 @@
 
             <tr ng-repeat="document_entry in documents" ng-if="!documents.$error && !$ctrl.noParentDocument"
                 ng-init="$row=$index">
-                <td class="weight {{ document_entry.document.noWeight == false ? 'same-weight' : ''}}"></td>
+                <td class="weight {{getDocumentWeightClass(documents, $index) }}"></td>
                 <td>{{document_entry.document.weight}}</td>
                 <td ng-repeat="column in columns" class="{{column.css}} {{column.style}}"
                     ng-include="getCellTemplate(document_entry.document, column)"></td>

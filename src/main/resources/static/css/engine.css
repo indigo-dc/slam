@@ -6,10 +6,33 @@
     cursor: ns-resize;
 }
 
+.sla-table {
+    border-collapse: separate !important;
+}
+
+.no-group {
+    border: none;
+}
+
 .same-weight {
-    background-color: #ffa11e;
-    height: 100%;
-    width: 5px;
+
+}
+
+.same-weight-top {
+    border-top: solid 7px #ffa11e !important;
+    border-left: solid 7px #ffa11e !important;
+    box-sizing: border-box;
+}
+
+.same-weight-middle {
+    border-left: solid 7px #ffa11e !important;
+    box-sizing: border-box;
+}
+
+.same-weight-bottom {
+    border-bottom: solid 7px #ffa11e !important;
+    border-left: solid 7px #ffa11e !important;
+    box-sizing: border-box;
 }
 
 .proposal-list {
