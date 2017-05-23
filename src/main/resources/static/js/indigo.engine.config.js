@@ -1,6 +1,6 @@
 var app = angular.module('indigo');
 
-app.config(function ($engineProvider) {
+app.config(function ($engineProvider, SESSION) {
     /**
      * SPECIFYING SLA
      */
@@ -42,7 +42,7 @@ app.config(function ($engineProvider) {
     };
     $engineProvider.document('sla', '/sla', '/sla/:id', ['SignedSlaComp'], slaSpec);
 
-    $engineProvider.dashboard({url: '/dashboard', label: 'SLAs'},
+    $engineProvider.dashboard({url: '/dashboard', label: 'SLAs', activetab: 'dashboard'},
         [
             {
                 queryId: 'SignedSlaComp',
@@ -63,6 +63,24 @@ app.config(function ($engineProvider) {
                 label: 'Rejected SLAs',
                 documentModelId: 'sla',
                 showCreateButton: false
-            },
+            }
         ]);
+
+    if (SESSION.roles.indexOf("ROLE_PROVIDER") != -1) {
+        $engineProvider.dashboard({url: '/provider', label: 'SLAs', activetab: 'provider'},
+            [
+                {
+                    queryId: 'AllSlasProvider',
+                    label: 'Signed SLAs',
+                    documentModelId: 'sla',
+                    showCreateButton: false
+                },
+                {
+                    queryId: 'inProgressSlasProvider',
+                    label: 'SLA in negotiations',
+                    documentModelId: 'sla',
+                    showCreateButton: false
+                },
+            ]);
+    }
 });

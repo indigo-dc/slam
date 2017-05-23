@@ -255,7 +255,6 @@ metrics:
     required: false
     position: 4
     description: The guaranteed quantity of public ip to be granted to the user group in total
-    unit: none
     minValue: 0
     maxValue: 100000000
     visualClass:
@@ -278,7 +277,6 @@ metrics:
     required: false
     position: 4
     description: The limit of public IPs for the user group in total
-    unit: none
     minValue: 1
     maxValue: 255
     visualClass:
@@ -344,7 +342,6 @@ metrics:
     required: false
     position: 4
     description: The guaranteed quantity of a resource to be granted to each user
-    unit: none
     minValue: 1
     maxValue: 255
     visualClass:
@@ -367,7 +364,6 @@ metrics:
     required: false
     position: 4
     description: The limit of a resource for each user
-    unit: none
     minValue: 1
     maxValue: 255
     visualClass:
