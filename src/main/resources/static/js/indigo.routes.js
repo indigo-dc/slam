@@ -248,10 +248,3 @@ angular.module('indigo')
         $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('escape');
     }])
-    .controller('MainCtrl', function ($scope, $route, $rootScope) {
-        $rootScope.$route = $route;
-        //$translate
-        //$scope.changeLanguage = function (langKey) {
-        //    $translate.use(langKey);
-        //};
-    });

@@ -33,7 +33,9 @@ app.config(function ($engineProvider) {
                     categories: 'mcComputing'
                 }
             ],
-            details: {},
+            details: {
+                'caption': 'SLA'
+            },
             showValidationButton: true,
             summary: true
         }
@@ -46,13 +48,13 @@ app.config(function ($engineProvider) {
                 queryId: 'SignedSlaComp',
                 label: 'My signed computing SLAs',
                 documentModelId: 'sla',
-                showCreateButton: true,
+                showCreateButton: false
             },
             {
                 queryId: 'workingSla',
                 label: 'SLAs in progrees',
                 documentModelId: 'sla',
-                showCreateButton: false,
+                showCreateButton: true,
                 controller: 'indigoDocumentListCtrl',
                 contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },

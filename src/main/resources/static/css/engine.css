@@ -43,3 +43,24 @@
     width: 100%;
     display: table !important;
 }
+
+.indigo-logo {
+    background-image: url('/img/indigo-logo.png');
+    height: 50px;
+    padding: 0px;
+    display: inline-block;
+    width: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+
+footer {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #646464;
+    text-align: center;
+}
+footer p {
+    font-size: 14px;
+}

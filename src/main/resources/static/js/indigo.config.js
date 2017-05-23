@@ -3,6 +3,8 @@
 angular.module('indigo', ['ngRoute',
     'ngSanitize',
     'ngResource',
+    'ngAnimate',
+    'toastr',
     'pascalprecht.translate',
     'spring-data-rest',
     'ui.tree',
@@ -14,3 +16,16 @@ angular.module('indigo', ['ngRoute',
     // 'indigo.profile',
     'indigo.constants' //this module is dynamically generated in index.html
 ]);
+
+angular.module('indigo').config(function (toastrConfig) {
+    angular.extend(toastrConfig, {
+        autoDismiss: true,
+        containerId: 'toast-container',
+        maxOpened: 0,
+        newestOnTop: true,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: false,
+        preventOpenDuplicates: false,
+        target: 'body'
+    });
+});
