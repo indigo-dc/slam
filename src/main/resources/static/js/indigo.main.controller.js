@@ -9,5 +9,13 @@ angular.module('indigo')
 
             toastr.success('Action completed');
         });
+        $rootScope.$on('engine.notification.action.error', function (event, document, action) {
+            if(action.isSave()) {
+                toastr.error('Error has occurred, document was not saved');
+                return;
+            }
+
+            toastr.error('Error has occurred');
+        });
 
     });
