@@ -22,18 +22,24 @@
   "dependencies": {
     "angular": "1.5.8",
     "angular-route": "1.5.8",
-    "bootstrap": "3.3.4",
+    "bootstrap": "^3.3.4",
     "angular-sanitize": "1.5.8",
     "angular-resource": "1.5.8",
-    "angular-translate": "2.7.2",
-    "angular-translate-loader-url": "2.7.2",
-    "angular-translate-loader-static-files": "2.7.2",
-    "angular-spring-data-rest": "0.4.4",
-    "angular-bootstrap": "2.2.0"
+    "angular-translate": "^2.7.2",
+    "angular-translate-loader-url": "^2.7.2",
+    "angular-translate-loader-static-files": "^2.7.2",
+    "angular-spring-data-rest": "^0.4.4",
+    "angular-bootstrap": "^2.2.0",
+    "angular-engine": "0.6.84",
+    "angular-ui-tree": "^2.22.5",
+    "angular-ui-sortable": "^0.17.1",
+    "angular-toastr": "^2.1.1",
+    "angular-animate": "1.5.8"
   },
   "resolutions": {
     "angular": "1.5.8",
-    "angular-resource": "1.5.8"
+    "angular-resource": "1.5.8",
+    "angular-translate": "~2.7.2"
   },
   "overrides": {
     "bootstrap": {

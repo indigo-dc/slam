@@ -37,7 +37,7 @@ app.controller('CreatePoolController', ['$scope', '$routeParams', '$route', 'Doc
             $scope.isCreating = true;
             DocumentService.createPool($scope.grantId, $scope.site).then(
                 function (result) {
-                    window.location = "#/document/" + result.data.redirectToDocument;
+                    window.location = "#/component/" + result.data.redirectToDocument;
                 }, function (error) {
                     $scope.isLoading = false;
                     alert("Wystąpił błąd podczas tworzenia nowej puli.");

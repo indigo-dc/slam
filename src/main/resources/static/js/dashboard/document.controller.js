@@ -1,10 +1,10 @@
 angular.module('indigo.dashboard').config(function ($routeProvider) {
-    $routeProvider.when('/document/:document_id', {templateUrl: 'js/dashboard/document.view.html', controller: 'documentCtrl',
+    $routeProvider.when('/component/:document_id', {templateUrl: 'js/dashboard/component.view.html', controller: 'documentCtrl',
         activetab: 'dashboard',
         data: {
             //authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
         }});
-    $routeProvider.when('/document', {templateUrl: 'js/dashboard/document.view.html', controller: 'documentCtrl',
+    $routeProvider.when('/component', {templateUrl: 'js/dashboard/component.view.html', controller: 'documentCtrl',
         activetab: 'dashboard',
         data: {
             //authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
@@ -44,7 +44,7 @@ angular.module('indigo.dashboard').config(function ($routeProvider) {
                     }
                 });
 
-                //check whether document is editable
+                //check whether component is editable
                 $scope.actions.forEach(function (action) {
                     if(action.id == 'editDraft')
                         //setting it in sla is for possible future compatibility

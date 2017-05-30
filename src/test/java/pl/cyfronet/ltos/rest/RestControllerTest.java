@@ -37,15 +37,6 @@ public class RestControllerTest extends MockMvcSecurityTest {
 //        Assert.assertTrue(content.contains("\"customer\":\"test\""));
     }
 
-    @Test
-    public void testGetSLAs() throws Exception {
-        MvcResult result = mockMvc.perform(get("/rest/slam/sla").session(user()))
-                .andExpect(status().isOk()).andReturn();
-
-        String content = result.getResponse().getContentAsString();
-    }
-
-
     @Autowired
     private ActionContextFactory actionContextFactory;
 
@@ -56,31 +47,6 @@ public class RestControllerTest extends MockMvcSecurityTest {
     public IdentityProvider identityProvider;
 
 
-
-    private void addSLA() throws Exception {
-
-        Identity identity = new Identity();
-        identity.setLogin("admin");
-
-        ArrayList<String> roles = new ArrayList<String>() {{
-            add("manager");
-            add("admin");
-        }};
-
-        identity.setRoles(roles);
-
-        identityProvider.setIdentity(identity);
-
-        IndigoDocument document = new IndigoDocument();
-        document.setName("TEST_NAME");
-        document.setSite("BARI");
-
-
-        ActionContext actionContext = actionContextFactory.createInstance(document);
-
-        actionContext.addDocument("documentDraftFromController", document);
-        engineFacade.runAction(actionContext, "createNewComputingRequest");
-    }
 
     private void addSLAEST() throws Exception {
 
@@ -96,8 +62,8 @@ public class RestControllerTest extends MockMvcSecurityTest {
 //               .andExpect(status().isOk()).andReturn()
     }
 
-    @Test
-    public void testGetSLA() throws Exception {
+//    @Test
+//    public void testGetSLA() throws Exception {
         // add sla offer
 //        MvcResult result = null;
 //        addSLAEST();
@@ -108,6 +74,18 @@ public class RestControllerTest extends MockMvcSecurityTest {
 //                .andExpect(status().isOk()).andReturn();
 //
 //        String content = result.getResponse().getContentAsString();
+//    }
+
+    @Test
+    public void testPreferences() {
+
     }
 
+    @Test
+    public void testGetSLAs() throws Exception {
+        MvcResult result = mockMvc.perform(get("/rest/slam/sla").session(user()))
+                .andExpect(status().isOk()).andReturn();
+
+        String content = result.getResponse().getContentAsString();
+    }
 }

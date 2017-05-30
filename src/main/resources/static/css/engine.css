@@ -1,0 +1,66 @@
+.weight-col {
+    width: 5px;
+}
+
+.weight {
+    cursor: ns-resize;
+}
+
+.sla-table {
+    border-collapse: separate !important;
+}
+
+.sla-table tbody tr {
+    cursor: ns-resize;
+}
+
+.no-group {
+    border: none;
+}
+
+.same-weight {
+
+}
+
+.same-weight-top {
+    border-top: solid 7px #ffa11e !important;
+    border-left: solid 7px #ffa11e !important;
+    box-sizing: border-box;
+}
+
+.same-weight-middle {
+    border-left: solid 7px #ffa11e !important;
+    box-sizing: border-box;
+}
+
+.same-weight-bottom {
+    border-bottom: solid 7px #ffa11e !important;
+    border-left: solid 7px #ffa11e !important;
+    box-sizing: border-box;
+}
+
+.proposal-list {
+    width: 100%;
+    display: table !important;
+}
+
+.indigo-logo {
+    background-image: url('/img/indigo-logo.png');
+    height: 50px;
+    padding: 0px;
+    display: inline-block;
+    width: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+
+footer {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #646464;
+    text-align: center;
+}
+footer p {
+    font-size: 14px;
+}

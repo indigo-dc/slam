@@ -22,7 +22,7 @@ angular.module('indigo.dashboard')
 
         return $resource('/query/documents?queryId=:query_id', {query_id: '@query_id', id: '@id', action: '@action'}, {
             query: {method: 'GET'},
-            get: {method: 'GET', url: '/document/getwithextradata?documentId=:id', interceptor: EngineInterceptor},
+            get: {method: 'GET', url: '/component/getwithextradata?documentId=:id', interceptor: EngineInterceptor},
             metrics: {method: 'GET', url: 'api/metrics?type=computing', isArray: true},
             query_action: {method: 'GET', url: 'api/sla_action/:id', isArray: true},
             perform_action: {method: 'POST', url: 'api/sla_action/:id', transformRequest: EngineInterceptor.request},

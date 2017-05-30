@@ -3,10 +3,10 @@ angular.module('indigo')
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/dashboard'});
 
-        //$routeProvider.when('/registration', {templateUrl: 'js/view/registration.html', controller: 'RegistrationController', data: {
+        // $routeProvider.when('/registration', {templateUrl: 'js/view/registration.html', controller: 'RegistrationController', data: {
         //    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-        //}});
-
+        // }});
+        //
         //$routeProvider.when('/dashboard', {templateUrl: 'js/view/dashboard.html', controller: 'DashboardController', data: {
         //    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
         //}});
@@ -146,8 +146,8 @@ angular.module('indigo')
         //            templateUrl: 'js/view/footer.html'
         //        }
         //    }
-        //}).state('document', {
-        //    url: '/document/:id',
+        //}).state('component', {
+        //    url: '/component/:id',
         //    views: {
         //        "header": {
         //            controller: "HeadController",
@@ -155,7 +155,7 @@ angular.module('indigo')
         //        },
         //        "viewContent": {
         //            controller: 'DocumentController',
-        //            templateUrl: 'js/view/indigo/document.html'
+        //            templateUrl: 'js/view/indigo/component.html'
         //        },
         //        "footer": {
         //            templateUrl: 'js/view/footer.html'
@@ -245,13 +245,6 @@ angular.module('indigo')
             suffix: '.json'
         });
         // load 'en' table on startup
-        $translateProvider.preferredLanguage('pl');
+        $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('escape');
     }])
-    .controller('MainCtrl', function ($scope, $route, $rootScope) {
-        $rootScope.$route = $route;
-        //$translate
-        //$scope.changeLanguage = function (langKey) {
-        //    $translate.use(langKey);
-        //};
-    });

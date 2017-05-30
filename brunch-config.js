@@ -29,6 +29,11 @@ module.exports = {
         stylesheets: {
             joinTo: {
                 'css/vendor.css': /^bower_components/
+            },
+            order: {
+                before: [
+                    'bower_components/bootstrap/dist/bootstrap.css'
+                ]
             }
         }
     },

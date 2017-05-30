@@ -24,7 +24,7 @@ public class IndexController {
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("user", user);
         mav.addObject("user_roles", roles);
+        mav.addObject("admin_sites", roles);
         return mav;
     }
-
 }

@@ -1,18 +1,16 @@
 package pl.cyfronet.ltos.rest.logic;
 
+import org.springframework.data.mongodb.core.query.Query;
 import com.agreemount.bean.document.Document;
 import com.agreemount.engine.facade.QueryFacade;
 import com.agreemount.slaneg.action.ActionContextFactory;
 import com.agreemount.slaneg.db.DocumentOperations;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
-import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
 import pl.cyfronet.ltos.rest.bean.sla.Sla;

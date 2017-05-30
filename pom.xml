@@ -5,7 +5,7 @@
 
 	<groupId>org.springframework</groupId>
 	<artifactId>indigo-slam</artifactId>
-	<version>1.1.1</version>
+	<version>1.2.0</version>
 
 	<profiles>
 		<profile>
@@ -68,7 +68,12 @@
 		<dependency>
 			<groupId>com.agreemount</groupId>
 			<artifactId>engine</artifactId>
-			<version>1.0.57</version>
+			<version>1.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esotericsoftware.yamlbeans</groupId>
+			<artifactId>yamlbeans</artifactId>
+			<version>1.09</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -109,6 +114,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-rest-core</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -194,7 +203,6 @@
 							<encoding>UTF-8</encoding>
 							<consoleOutput>true</consoleOutput>
 							<failsOnError>true</failsOnError>
-							<linkXRef>false</linkXRef>
 						</configuration>
 						<goals>
 							<goal>check</goal>
@@ -264,17 +272,23 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<repositories>
-		<repository>
-			<id>spring-releases</id>
-			<url>https://repo.spring.io/libs-release</url>
-		</repository>
-		<repository>
-			<id>agreemount-cyfro-releases</id>
-			<layout>default</layout>
-			<url>https://nexus.agreemount.com/content/repositories/releases/</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+        <!--<repository>-->
+            <!--<id>agreemount-cyfro-releases</id>-->
+            <!--<layout>default</layout>-->
+            <!--<url>https://gforge.cyfronet.pl/nexus/content/repositories/agreemount-cyfro-releases</url>-->
+        <!--</repository>-->
+        <repository>
+            <id>agreemount-cyfro-releases</id>
+            <layout>default</layout>
+            <url>https://nexus.agreemount.com/content/repositories/releases/</url>
+        </repository>
+
+    </repositories>
 
 	<pluginRepositories>
 		<pluginRepository>

@@ -14,277 +14,574 @@ metrics:
 
   - !com.agreemount.bean.metric.DateMetric
     id: startComp
-    label: Start
+    label: labStartComp
     categoryId: computingTimeRestrictions
     required: true
-    description: When u wish your SLA to activate
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - sla
+    position: 1
+    description: hen u wish your SLA to activate
+#    validateOnChange: true
+    visualClass:
+     !java.util.ArrayList
+       - date
+#    validators:
+#      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
+#          otherMetricId: endComp
+#          operator: LESS_THAN_OR_EQUAL
+#          label: Start should be before end
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
   - !com.agreemount.bean.metric.DateMetric
     id: endComp
-    label: end
-    categoryId: computingTimeRestrictions
+    label: labEndComp
+    categoryId: documentationSettings_date_row
     required: true
-    description: When u wish your SLA to finish
+    position: 2
+#    validateOnChange: true
+    description: computingTimeRestrictions
+    visualClass:
+     !java.util.ArrayList
+       - date
+#    validators:
+#      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
+#          otherMetricId: startComp
+#          operator: GREATER_THAN_OR_EQUAL
+#          label: End should be greater than start
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
+
 
 # TODO @michal USTALI CO Z TYM ROBIMY
+
 #  - !com.agreemount.bean.metric.FloatMetric
 #    id: weightComputing
-#    label: Weight
+#    label: labWeight
 #    categoryId: computingTimeRestrictions
 #    required: true
-#    description: weight
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        # - offer
-#        - sla
+#    position: 16
+#    description: Weight
 #    minValue: 0.0
 #    maxValue: 1.0
 #    defaultValue: 0.5
-#
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - twodigits
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
+
+  - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
+    id: siteStorageSelect
+    label: Site
+    categoryId: computingTimeRestrictions
+    required: true
+    position: 0
+    siteType: storage
+    cmdbUrl: http://indigo.cloud.plgrid.pl
+    description: Where SLA will be requested
+    visualClass:
+     !java.util.ArrayList
+       - select
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-total_guaranteed
-    label: Total guaranteed computing time
+    label: labComputing_time-total_guaranteed
     categoryId: computingTimeRestrictions
     required: false
+    position: 4
     description: The guaranteed quantity of computing time to be granted to the user group in total
     unit: h
     minValue: 0
     maxValue: 100000000
-    
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-total_limit
-    label: Total limit of computing time
+    label: labComputing_time-total_limit
     categoryId: computingTimeRestrictions
     required: false
+    position: 4
     description: The limit of computing time for the user group in total
     unit: h
     minValue: 0
     maxValue: 100000000
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
 
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: computing_time-instance_guaranteed
-#    label: Instance guaranteed computing time
+#    label: labComputing_time-instance_guaranteed
 #    categoryId: computingTimeRestrictions
 #    required: true
+#    position: 4
 #    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
 #    unit: h
-    
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-instance_limit
-    label: Instance limit of computing time
+    label: labComputing_time-instance_limit
     categoryId: computingTimeRestrictions
     required: false
+    position: 4
     description: The limit of a resource for each instance
     unit: h
     minValue: 0
     maxValue: 100000000
-
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-user_guaranteed
-    label: User guaranteed computing time
+    label: labComputing_time-user_guaranteed
     categoryId: computingTimeRestrictions
     required: false
+    position: 4
     description: The guaranteed quantity of a resource to be granted to each user
     unit: h
     minValue: 1
     maxValue: 100000000
-
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-user_limit
-    label: User limit of computing time
+    label: labComputing_time-user_limit
     categoryId: computingTimeRestrictions
     required: false
+    position: 4
     description: The limit of a resource for each user
     unit: h
     minValue: 0
     maxValue: 100000000
-
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
     
 ### target: cpublic ip
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-total_guaranteed
-    label: Total guaranteed public IPs
+    label: labPublic_ip-total_guaranteed
     categoryId: publicIPRestrictions
     required: false
+    position: 4
     description: The guaranteed quantity of public ip to be granted to the user group in total
-    unit: none
     minValue: 0
     maxValue: 100000000
-
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-total_limit
-    label: Total limit of public IPs
+    label: labPublic_ip-total_limit
     categoryId: publicIPRestrictions
     required: false
+    position: 4
     description: The limit of public IPs for the user group in total
-    unit: none
     minValue: 1
     maxValue: 255
-
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: public_ip-instance_guaranteed
-#    label: Instance guaranteed public IPs
+#    label: labPublic_ip-instance_guaranteed
 #    categoryId: publicIPRestrictions
 #    required: true
+#    position: 4
 #    description: The guaranteed quantity of computing type to be granted to each instance (virtual machine or Docker container)
 #    unit: none
-#
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
+
+
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: public-ip-instance_limit
-#    label: Instance limit of public IPs
+#    label: labPublic-ip-instance_limit
 #    categoryId: publicIPRestrictions
 #    required: true
+#    position: 4
 #    description: The limit of a resource for each instance
 #    unit: none
-    
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
+
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-user_guaranteed
-    label: User guaranteed public IPs
+    label: labPublic_ip-user_guaranteed
     categoryId: publicIPRestrictions
     required: false
+    position: 4
     description: The guaranteed quantity of a resource to be granted to each user
-    unit: none
     minValue: 1
     maxValue: 255
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
-    
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-user_limit
-    label: User limit of public IPs
+    label: labPublic_ip-user_limit
     categoryId: publicIPRestrictions
     required: false
+    position: 4
     description: The limit of a resource for each user
-    unit: none
     minValue: 1
     maxValue: 255
+    visualClass:
+     !java.util.ArrayList
+       - testVisualClass
+       - smallInteget
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
 
 
 # storage
-#
+
+##TODO: zapytac o #        - request
+                  #        - offer
+
 #  - !com.agreemount.bean.metric.DateMetric
 #    id: startStorage
-#    label: Start
+#    label: labStartStorage
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 1
 #    description: When u wish your SLA to activate
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - sla
+#    validateOnChange: true
+#    visualClass:
+#     !java.util.ArrayList
+#       - date
+#    validators:
+#      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
+#          otherMetricId: endStorage
+#          operator: LESS_THAN_OR_EQUAL
+#          label: Start should be before end
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.DateMetric
 #    id: endStorage
-#    label: end
+#    label: labEndStorage
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 2
+#    validateOnChange: true
 #    description: When u wish your SLA to finish
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - sla
+#    visualClass:
+#     !java.util.ArrayList
+#       - date
+#    validators:
+#      - !pl.cyfronet.duo.engine.validator.definition.CompareDef
+#          otherMetricId: startStorage
+#          operator: GREATER_THAN_OR_EQUAL
+#          label: End should be greater than start
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
-#  - !com.agreemount.bean.metric.FloatMetric
+#
+#  - !com.agreemount.bean.metric.IntegerMetric
 #    id: weightStorage
-#    label: Weight
+#    label: labWeightStorage
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: weight
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        # - offer
-#        - sla
 #    minValue: 0.0
 #    maxValue: 1.0
 #    defaultValue: 0.5
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: storage-totalGuaranteed
-#    label: total-guaranteed storage space
+#    label: labStorage-totalGuaranteed
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: The guaranteed quantity of storage to be granted to the user group in total
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - offer
-#        - sla
 #    unit: GB
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: storage-totalLimit
-#    label: total-limit storage space
+#    label: labStorage-totalLimit
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: The limit of storage for the user group in total
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - offer
-#        - sla
 #    unit: GB
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: storage-instanceGuaranteed
-#    label: instance-guaranteed storage space
+#    label: labStorage-instanceGuaranteed
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: The guaranteed quantity of storage to be granted to each instance (virtual machine or Docker container)
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - offer
-#        - sla
 #    unit: GB
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: storage-instanceLimit
-#    label: instance-limit storage space
+#    label: labStorage-instanceLimit
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: The limit of a resource for each instance
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - offer
-#        - sla
 #    unit: GB
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: storage-userGuaranteed
-#    label: user-guaranteed storage space
+#    label: labStorage-userGuaranteed
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: The guaranteed quantity of a resource to be granted to each user
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - offer
-#        - sla
 #    unit: GB
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: storage-userLimit
-#    label: user-limit storage space
+#    label: labStorage-userLimit
 #    categoryId: storageRestrictions
 #    required: true
+#    position: 4
 #    description: The limit of a resource for each user
-#    availableForStateValues:
-#      !java.util.ArrayList
-#        - request
-#        - offer
-#        - sla
 #    unit: GB
-#
-#
+#    visualClass:
+#     !java.util.ArrayList
+#       - testVisualClass
+#       - smallInteget
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
+

@@ -8,18 +8,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Indigo</a>
+            <a class="navbar-brand indigo-logo" href="/" title="Indigo"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: $route.current.activetab == 'dashboard'}"><a href="#/dashboard">Dashboard</a></li>
+                <li ng-if="$ctrl.is_provider" ng-class="{active: $ctrl.$route.current.activetab == 'provider'}"><a href="#/provider">Provider</a></li>
+                <li ng-class="{active: $ctrl.$route.current.activetab == 'dashboard'}"><a href="#/dashboard">Dashboard</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{active: $route.current.activetab == 'profile'}"><a href="#/profile">Profile</a></li>
-                <li>{{identityName}}</li>
+                <!--<li ng-class="{active: $route.current.activetab == 'profile'}"><a href="#/profile">Profile</a></li>-->
+                <!--<li>{{identityName}}</li>-->
                 <li>
                     <a href="/auth/logout"><i class="glyphicon glyphicon-log-out"></i></a>
                 </li>
