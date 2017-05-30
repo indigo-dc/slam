@@ -40,7 +40,7 @@ public class SitesService {
                 JSONObject site = sites.getJSONObject(i);
                 this.sites.put(site.getString("id"),
                                Site.builder().id(site.getString("id"))
-                               .name(site.getJSONObject("value").getString("sitename"))
+                               .name(site.getJSONObject("value").has("sitename") ? site.getJSONObject("value").getString("sitename") : "")
                                .build());
             }
             return this.sites;
