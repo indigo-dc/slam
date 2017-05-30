@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>com.agreemount</groupId>
 			<artifactId>engine</artifactId>
-			<version>1.1.4</version>
+			<version>1.1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>com.esotericsoftware.yamlbeans</groupId>
@@ -277,16 +277,16 @@
             <id>spring-releases</id>
             <url>https://repo.spring.io/libs-release</url>
         </repository>
-        <repository>
-            <id>agreemount-cyfro-releases</id>
-            <layout>default</layout>
-            <url>https://gforge.cyfronet.pl/nexus/content/repositories/agreemount-cyfro-releases</url>
-        </repository>
         <!--<repository>-->
             <!--<id>agreemount-cyfro-releases</id>-->
             <!--<layout>default</layout>-->
-            <!--<url>https://nexus.agreemount.com/content/repositories/releases/</url>-->
+            <!--<url>https://gforge.cyfronet.pl/nexus/content/repositories/agreemount-cyfro-releases</url>-->
         <!--</repository>-->
+        <repository>
+            <id>agreemount-cyfro-releases</id>
+            <layout>default</layout>
+            <url>https://nexus.agreemount.com/content/repositories/releases/</url>
+        </repository>
 
     </repositories>
 
