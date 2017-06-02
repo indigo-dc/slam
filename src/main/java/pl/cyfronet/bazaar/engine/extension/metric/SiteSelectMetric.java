@@ -1,19 +1,18 @@
 package pl.cyfronet.bazaar.engine.extension.metric;
 
-import com.agreemount.bean.metric.Metric;
-import com.agreemount.bean.metric.MetricOption;
-import com.agreemount.bean.metric.SelectMetric;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.annotation.Transient;
-import org.springframework.stereotype.Service;
 
-import java.util.*;
+import com.agreemount.bean.metric.Metric;
+import com.agreemount.bean.metric.MetricOption;
+
+import pl.cyfronet.ltos.repository.CmdbRepository;
 
 @lombok.Getter
 @lombok.Setter
@@ -30,12 +29,14 @@ public class SiteSelectMetric extends Metric<String> {
     private SiteType siteType;
     public String cmdbUrl;
 
+    public static CmdbRepository cmdbRepository;
+
     public List<MetricOption> getOptions() {
         JSONArray sites = null;
-        ArrayList<MetricOption> ret = new ArrayList<MetricOption>();
+        ArrayList<MetricOption> ret = new ArrayList<>();
         try {
-            sites = Unirest.get(cmdbUrl + "/cmdb/service/filters/type/"+siteType).asJson().getBody().getObject().getJSONArray("rows");
-        } catch (UnirestException e) {
+            sites = cmdbRepository.get("service", "type", siteType.toString()).getJSONArray("rows");
+        } catch (Exception e) {
             //@TODO@ - provide message to frontend
             e.printStackTrace();
             return ret;

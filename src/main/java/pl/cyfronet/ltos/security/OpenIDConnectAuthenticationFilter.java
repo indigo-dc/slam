@@ -1,11 +1,18 @@
 package pl.cyfronet.ltos.security;
 
-import com.agreemount.bean.identity.Identity;
-import com.agreemount.bean.identity.provider.IdentityProvider;
-import com.google.common.base.Preconditions;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,21 +23,14 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
+import com.agreemount.bean.identity.Identity;
+import com.agreemount.bean.identity.provider.IdentityProvider;
+import com.google.common.base.Preconditions;
+
 import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.UserRepository;
-import pl.cyfronet.ltos.repository.RoleRepository;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import pl.cyfronet.ltos.security.AuthenticationProviderDev.UserOperations;
 
 /**
