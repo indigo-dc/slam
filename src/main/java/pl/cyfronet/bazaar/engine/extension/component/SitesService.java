@@ -1,18 +1,16 @@
 package pl.cyfronet.bazaar.engine.extension.component;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import pl.cyfronet.bazaar.engine.extension.bean.Site;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import pl.cyfronet.bazaar.engine.extension.bean.Site;
+import pl.cyfronet.ltos.repository.CmdbRepository;
 
 /**
  * Created by mszostak on 06.04.17.
@@ -22,9 +20,8 @@ import java.util.HashMap;
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SitesService {
 
-    @Value("${cmdb.url}")
-    private String cmdbUrl;
-
+    @Autowired
+    private CmdbRepository cmdbRepository;
 
     private HashMap<String, Site> sites = null;
 
@@ -35,7 +32,7 @@ public class SitesService {
         sites = new HashMap<>();
 
         try {
-            JSONArray sites = Unirest.get(cmdbUrl+"/cmdb/service/list").asJson().getBody().getObject().getJSONArray("rows");
+            JSONArray sites = cmdbRepository.get("service").getJSONArray("rows");
             for(int i = 0; i < sites.length(); ++i ) {
                 JSONObject site = sites.getJSONObject(i);
                 this.sites.put(site.getString("id"),
@@ -44,10 +41,10 @@ public class SitesService {
                                .build());
             }
             return this.sites;
-        } catch (UnirestException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new HashMap<>();
     }
 
     public String getSiteName(String siteId) {

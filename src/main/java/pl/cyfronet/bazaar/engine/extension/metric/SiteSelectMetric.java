@@ -8,10 +8,11 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.security.oauth2.client.OAuth2RestOperations;
 
 import com.agreemount.bean.metric.Metric;
 import com.agreemount.bean.metric.MetricOption;
+
+import pl.cyfronet.ltos.repository.CmdbRepository;
 
 @lombok.Getter
 @lombok.Setter
@@ -28,15 +29,13 @@ public class SiteSelectMetric extends Metric<String> {
     private SiteType siteType;
     public String cmdbUrl;
 
-    // Ugly hack to inject rest template proxy
-    public static OAuth2RestOperations restTemplate;
+    public static CmdbRepository cmdbRepository;
 
     public List<MetricOption> getOptions() {
         JSONArray sites = null;
         ArrayList<MetricOption> ret = new ArrayList<>();
         try {
-            Map response = restTemplate.getForObject(cmdbUrl + "/cmdb/service/filters/type/"+siteType, Map.class);
-            sites = new JSONObject(response).getJSONArray("rows");
+            sites = cmdbRepository.get("service", "type", siteType.toString()).getJSONArray("rows");
         } catch (Exception e) {
             //@TODO@ - provide message to frontend
             e.printStackTrace();
