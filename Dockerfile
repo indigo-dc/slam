@@ -28,7 +28,7 @@ RUN apt-get -y update
 RUN apt-get install -y openjdk-8-jre-headless
 
 RUN mkdir -p /opt/indigo-slam
-COPY target/*.jar /opt/indigo-slam/
+COPY target/indigo-slam.jar /opt/indigo-slam/
 COPY docker/pki/synchroDuo.jks /opt/pki/
 COPY docker/indigo-slam.sh /opt/indigo-slam/
 

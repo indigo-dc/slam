@@ -173,6 +173,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>indigo-slam</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

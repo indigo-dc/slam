@@ -1,6 +1,6 @@
 #!/bin/bash
 JDBC_URL="jdbc:mysql://$MYSQL_ADDRESS:$MYSQL_PORT/$MYSQL_DB?createDatabaseIfNotExist=true&useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;autoReconnectForPools=true"
-export SLAM_BIN=indigo-slam-1.2.0.jar
+export SLAM_BIN=indigo-slam.jar
 
 if [ -n "$CERT_FILE" ] && [ -f $CERT_FILE ]; then
     echo "Adding $CERT_FILE to keystore"
