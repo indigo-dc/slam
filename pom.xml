@@ -164,7 +164,8 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.10</version>
 		</dependency>
-		<!--breaks things with engine, for some reasons spring throws null pointer exceptions on some components-->
+
+        <!--breaks things with engine, for some reasons spring throws null pointer exceptions on some components-->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
 			<!--<artifactId>spring-boot-devtools</artifactId>-->

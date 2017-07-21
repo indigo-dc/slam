@@ -1,6 +1,5 @@
 package pl.cyfronet.ltos.rest.controller;
 
-import com.agreemount.slaneg.db.DocumentOperations;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,12 +29,6 @@ public class RestController {
     @Autowired
     IndigoRestLogic indigoRestLogic;
 
-
-
-
-    @Autowired
-    private DocumentOperations documentOperations;
-
     @RequestMapping(value = "/preferences/{login}", method = RequestMethod.GET)
     public IndigoWrapper getUser(@PathVariable String login) {
         return indigoRestLogic.getDataForLogin(login);
@@ -49,6 +42,7 @@ public class RestController {
 
     @RequestMapping(value = "/sla/{id}", method = RequestMethod.GET)
     public Sla getSLA(@PathVariable String id) {
+
         return indigoRestLogic.getSLA(id);
     }
 
