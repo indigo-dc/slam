@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
@@ -22,46 +24,60 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 @Profile("production")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
+@EnableOAuth2Client
 public class SecurityConfig {
-	
+
     @Configuration
-	@Order(1)                                                        
+	@Order(1)
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-		protected void configure(HttpSecurity http) throws Exception {
-			http
-				.antMatcher("/rest/slam/**")                               
-				.authorizeRequests().anyRequest().permitAll();
+        @Bean
+        public OAuth2ClientContextFilter oAuth2ClientContextFilter() {
+            return new OAuth2ClientContextFilter();
+        }
+
+        @Bean
+        public RestAuthenticationFilter restAuthenticationFilter() {
+            return new RestAuthenticationFilter();
+        }
+		@Override
+        protected void configure(HttpSecurity http) throws Exception {
+		    http
+		        .antMatcher("/rest/slam/**")
+		        .authorizeRequests().anyRequest().authenticated()
+		        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		        .and().csrf().disable()
+                .addFilterAfter(restAuthenticationFilter(), AbstractPreAuthenticatedProcessingFilter.class);
 		}
 	}
-	
+
 	@Configuration
 	public static class UiWebSecurityConfigurerAdapter extends
 			WebSecurityConfigurerAdapter {
-		
+
 	    @Value("${unity.entryPointUnityUrl}")
 	    protected String entryPointUnityUrl;
-	
+
 	    @Value("${unity.entryPointAuthUrl}")
 	    protected String entryPointAuthUrl;
-	
+
 	    @Value("${unity.unauthorizedAction}")
 	    protected String unauthorizedAction;
-	
+
 	    @Bean
 	    public AuthenticationEntryPoint authenticationEntryPoint() {
 	        return new LoginUrlAuthenticationEntryPoint(entryPointAuthUrl);
 	    }
-	
+
 	    @Bean
 	    public OpenIDConnectAuthenticationFilter openIdConnectAuthenticationFilter() {
 	        return new OpenIDConnectAuthenticationFilter(entryPointUnityUrl);
 	    }
-	
+
 	    @Bean
 	    public OAuth2ClientContextFilter oAuth2ClientContextFilter() {
 	        return new OAuth2ClientContextFilter();
 	    }
-	
+
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http
