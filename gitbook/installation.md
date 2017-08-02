@@ -131,3 +131,8 @@ There are two ways to add certificate:
 
 
 
+### Upgrade procedure
+
+As long as not stated differently in the release, upgrade procedure 
+require only to replace SLAM WEB APP with the new version. 
+
