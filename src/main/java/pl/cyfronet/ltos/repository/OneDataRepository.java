@@ -76,13 +76,14 @@ public class OneDataRepository {
     }
 
     public List<Space> getUserSpaces() {
+        HttpEntity<String> entity = getEntity();
         return restTemplate.exchange(oneDataUrl + "/api/v3/onezone/user/spaces", HttpMethod.GET, getEntity(), SpacesResponse.class)
-                .getBody().spaces.stream().map(spaceId -> getSpaceDetails(spaceId)).collect(Collectors.toList());
+                .getBody().spaces.parallelStream().map(spaceId -> getSpaceDetails(spaceId, entity)).collect(Collectors.toList());
     }
 
-    private Space getSpaceDetails(String spaceId) {
+    private Space getSpaceDetails(String spaceId, HttpEntity<String> entity) {
         return restTemplate.exchange(oneDataUrl + "/api/v3/onezone/user/spaces/" + spaceId,
-                HttpMethod.GET, getEntity(), Space.class).getBody();
+                HttpMethod.GET, entity, Space.class).getBody();
     }
 
     private HttpEntity<String> getEntity() {
