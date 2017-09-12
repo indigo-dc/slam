@@ -51,7 +51,7 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
             throws AuthenticationException, IOException, ServletException {
         try {
             PortalUser portalUser = authenticationService.getPortalUser();
-            authenticationService.engineLogin(portalUser.getUserBean());
+            authenticationService.engineLogin(portalUser);
 
             return portalUser;
         } catch (UserDeniedAuthorizationException | InvalidRequestException ex) {

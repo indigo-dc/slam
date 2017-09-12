@@ -1,31 +1,26 @@
 package pl.cyfronet.ltos.security;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.agreemount.bean.identity.Identity;
+import com.agreemount.bean.identity.provider.IdentityProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Service;
-
-import com.agreemount.bean.identity.Identity;
-import com.agreemount.bean.identity.provider.IdentityProvider;
-
-import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.User;
+import pl.cyfronet.ltos.repository.CmdbRepository;
 import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.security.AuthenticationProviderDev.UserOperations;
 
+import javax.net.ssl.HttpsURLConnection;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
+@Slf4j
 public class AuthenticationService {
-	private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
+    private static String AUTHORITY_ROLE_PREFIX = "ROLE_";
 
     @Value("${unity.server.base}")
     private String authorizeUrl;
@@ -48,15 +43,21 @@ public class AuthenticationService {
     @Autowired
     IdentityProvider identityProvider;
 
-    //development variable, users whose email matches this will have provider role assigned
-    @Value("${provider.email:null}")
-    private String providerEmail;
+    @Autowired
+    private CmdbRepository cmdbRepository;
 
-    public void engineLogin(User user) {
+    @Autowired
+    private PortalUserFactory portalUserFactory;
+
+    public void engineLogin(PortalUser user) {
         Identity identity = new Identity();
-        identity.setLogin(user.getEmail());
-        identity.setRoles(user.getRoles().stream().map(entry -> entry.getName()).collect(Collectors.toList()));
-
+        identity.setLogin(user.getUserBean().getEmail());
+        identity.setRoles(new ArrayList<>(user.getUserBean().getRoles().stream()
+                .map(entry -> entry.getName())
+                .collect(Collectors.toList())));
+        if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PROVIDER"))) {
+            identity.getRoles().add("provider");
+        }
 
         identityProvider.setIdentity(identity);
     }
@@ -69,13 +70,16 @@ public class AuthenticationService {
         User user = getUser(userInfo);
         userInfo.setId(user.getId());
 
-        PortalUser.PortalUserBuilder builder = PortalUser.builder();
-        builder.isAuthenticated(true);
+        PortalUserImpl.Data.DataBuilder builder = PortalUserImpl.Data.builder();
+        builder.authenticated(true);
         builder.user(user);
-        builder.authorities(getRoles(user));
+        builder.authorities(user.getRoles().stream()
+                .map(role -> AUTHORITY_ROLE_PREFIX + role.getName().toUpperCase(Locale.US))
+                .map(name -> new SimpleGrantedAuthority(name))
+                .collect(Collectors.toList()));
         builder.principal(userInfo);
 
-        return builder.build();
+        return portalUserFactory.createPortalUser(builder.build());
     }
 
     private UserInfo getUserInfo() {
@@ -98,32 +102,6 @@ public class AuthenticationService {
 
             userRepository.save(user);
         }
-
-        Role providerRole = userOperations.loadOrCreateRoleByName("provider");
-        if (user.getEmail().equals(providerEmail) && !user.hasRole("provider")) {
-            if (!user.getRoles().contains(providerRole)) {
-                user.getRoles().add(providerRole);
-                userRepository.save(user);
-            }
-        } else { // remove if not in settings
-            ArrayList<Role> elementsToRemove = new ArrayList<>();
-            for (Role role : user.getRoles()) {
-                if (role.getName().equals(providerRole.getName())) {
-                    elementsToRemove.add(role);
-                }
-            }
-            if (elementsToRemove.size() > 0) {
-                user.getRoles().removeAll(elementsToRemove);
-                userRepository.save(user);
-            }
-        }
-
         return user;
-    }
-
-    private List<SimpleGrantedAuthority> getRoles(User user) {
-       return user.getRoles().stream()
-               .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName().toUpperCase()))
-               .collect(Collectors.toList());
     }
 }
