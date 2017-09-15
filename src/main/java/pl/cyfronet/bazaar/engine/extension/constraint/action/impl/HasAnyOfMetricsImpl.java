@@ -1,11 +1,9 @@
 package pl.cyfronet.bazaar.engine.extension.constraint.action.impl;
 
 import com.agreemount.bean.document.Document;
-import com.agreemount.bean.identity.provider.IdentityProvider;
 import com.agreemount.slaneg.action.ActionContext;
 import com.agreemount.slaneg.constraint.action.impl.QualifierImpl;
 import com.google.common.base.Preconditions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -20,9 +18,6 @@ import java.util.List;
 @Component
 @Scope("prototype")
 public class HasAnyOfMetricsImpl extends QualifierImpl<HasAnyOfMetrics,ActionContext> {
-
-    @Autowired
-    private IdentityProvider identityProvider;
 
     @Override
     public boolean isAvailable() {

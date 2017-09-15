@@ -31,20 +31,14 @@ public class CmdbOwnerService {
         this.refreshInterval = refreshInterval;
     }
 
-    public Set<String> getOwnedProviders(String email) {
+    public synchronized Set<String> getOwnedProviders(String email) {
         if (isCacheInvalid()) {
-            synchronized (this) {
-                // If entering critical section after waiting on lock, the cache may already have
-                // been refreshed. So check again.
-                if (isCacheInvalid()) {
-                    doRefresh();
-                }
-            }
+            doRefresh();
         }
         return ownerEmailToProviders.getOrDefault(email, Collections.EMPTY_SET);
     }
 
-    public void invalidateCache() {
+    public synchronized void invalidateCache() {
         lastRefresh = 0L;
     }
 

@@ -1,8 +1,6 @@
 package pl.cyfronet.ltos.controller;
 
-import com.agreemount.bean.identity.provider.IdentityProvider;
 import lombok.extern.log4j.Log4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.security.UserInfo;
 
 import javax.servlet.http.HttpSession;
@@ -21,12 +18,6 @@ import java.io.IOException;
 @Controller
 @Log4j
 public class LegacyMethods {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private IdentityProvider identityProvider;
 
     @RequestMapping(value = "user/get", method = RequestMethod.GET)
     @Transactional

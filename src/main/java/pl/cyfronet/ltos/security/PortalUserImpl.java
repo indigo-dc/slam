@@ -35,18 +35,16 @@ public class PortalUserImpl implements PortalUser {
 
     private final Data data;
 
-    private Set<? extends GrantedAuthority> authorities = null;
-
     @Autowired
     private CmdbOwnerService cmdbOwnerService;
-
-    //development variable, users whose email matches this will have provider role assigned
-    @Value("${provider.email:null}")
-    private Set<String> devProviderEmails;
 
     public PortalUserImpl(Data data) {
         this.data = data;
     }
+
+    /// development variable, users whose email matches this will have provider role assigned
+    @Value("${provider.emails:}")
+    private String devProviderEmails;
 
     @Override
     public String getName() {

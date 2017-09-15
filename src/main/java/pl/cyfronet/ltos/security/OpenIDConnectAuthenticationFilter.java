@@ -1,11 +1,5 @@
 package pl.cyfronet.ltos.security;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -17,7 +11,10 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
-import com.agreemount.bean.identity.provider.IdentityProvider;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by km on 04.08.16.
@@ -26,9 +23,6 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
 
     @Value("${unity.unauthorizedAction}")
     private String unauthorizedAction;
-
-    @Autowired
-    IdentityProvider identityProvider;
 
     @Autowired
     private AuthenticationService authenticationService;

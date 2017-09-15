@@ -9,12 +9,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Service;
 import pl.cyfronet.ltos.bean.User;
-import pl.cyfronet.ltos.repository.CmdbRepository;
 import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.security.AuthenticationProviderDev.UserOperations;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,10 +42,7 @@ public class AuthenticationService {
     private UserOperations userOperations;
 
     @Autowired
-    IdentityProvider identityProvider;
-
-    @Autowired
-    private CmdbRepository cmdbRepository;
+    private IdentityProvider identityProvider;
 
     @Autowired
     private PortalUserFactory portalUserFactory;
