@@ -10,8 +10,22 @@ metricCategories:
         - SLA
     children:
       - !com.agreemount.bean.metric.MetricCategory
+        id: slaScope
+        label: mcScope
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
+      - !com.agreemount.bean.metric.MetricCategory
         id: computingTimeRestrictions
         label: mcComputingTimeRestrictions
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
+      - !com.agreemount.bean.metric.MetricCategory
+        id: ComputingVolumeRestrictions
+        label: mcComputingVolumeRestrictions
         position: 1
         visualClass:
          !java.util.ArrayList
@@ -23,6 +37,7 @@ metricCategories:
         visualClass:
          !java.util.ArrayList
            - category
+
   - !com.agreemount.bean.metric.MetricCategory
     id: mcStorage
     label: mcStorage
@@ -30,6 +45,20 @@ metricCategories:
       !java.util.ArrayList
         - SLA
     children:
+      - !com.agreemount.bean.metric.MetricCategory
+        id: slaScope
+        label: mcScope
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
+      - !com.agreemount.bean.metric.MetricCategory
+        id: computingTimeRestrictions
+        label: mcComputingTimeRestrictions
+        position: 1
+        visualClass:
+         !java.util.ArrayList
+           - category
       - !com.agreemount.bean.metric.MetricCategory
         id: storageTargets
         label: mcStorageTargets
@@ -44,9 +73,6 @@ metricCategories:
         visualClass:
          !java.util.ArrayList
            - category
-
-
-
 
 
 #  - !com.agreemount.bean.metric.MetricCategory

@@ -70,7 +70,7 @@ app.config(function ($engineProvider, SESSION) {
             steps: [
                 {
                     name: 'GENERAL',
-                    categories: 'mcComputing'
+                    categories: 'mcStorage'
                 }
             ],
             details: {
