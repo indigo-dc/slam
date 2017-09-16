@@ -13,9 +13,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Paweł Szepieniec pawel.szepieniec@gmail.com on 01.03.15.
- */
+
 @Log4j
 public class GenericYamlProvider<E> implements RulesProvider<E> {
 
@@ -59,4 +57,7 @@ public class GenericYamlProvider<E> implements RulesProvider<E> {
         return items;
     }
 
+    public boolean isCached(){
+        return cacheYamls;
+    }
 }
