@@ -109,25 +109,25 @@ metrics:
             state: documentType
             value: sla
 
-  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
-    id: spaceSelect
-    label: Space
-    categoryId: computingTimeRestrictions
-    required: true
-    position: 1
-
-    description: Where SLA will be requested
-    visualClass:
-     !java.util.ArrayList
-       - select
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: documentType
-            value: sla
+#  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
+#    id: spaceSelect
+#    label: Space
+#    categoryId: computingTimeRestrictions
+#    required: true
+#    position: 1
+#
+#    description: Where SLA will be requested
+#    visualClass:
+#     !java.util.ArrayList
+#       - select
+#    constraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: AND
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#            documentAlias: TEMP
+#            state: documentType
+#            value: sla
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-total_guaranteed
@@ -151,6 +151,11 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
+
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-total_limit
@@ -174,6 +179,10 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
 
 
 #  - !com.agreemount.bean.metric.IntegerMetric
@@ -219,6 +228,11 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
+
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-user_guaranteed
@@ -242,6 +256,11 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
+
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: computing_time-user_limit
@@ -265,7 +284,11 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
-    
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
+
 ### target: cpublic ip
 
   - !com.agreemount.bean.metric.IntegerMetric
@@ -289,6 +312,10 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-total_limit
@@ -311,6 +338,11 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
+
 
 #  - !com.agreemount.bean.metric.IntegerMetric
 #    id: public_ip-instance_guaranteed
@@ -376,6 +408,10 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
 
   - !com.agreemount.bean.metric.IntegerMetric
     id: public_ip-user_limit
@@ -398,6 +434,10 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
 
 
 # storage

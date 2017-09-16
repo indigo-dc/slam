@@ -2,7 +2,7 @@ actions:
 
   - !com.agreemount.slaneg.action.definition.CreateNewRoot
     id: createNewComputingRequest
-    label: New computing request
+    label: Save computing SLA as draft
     alias: newRoot #dowolna nazwa
     redirectToThisVersion: true
     setTeamFromAlias: TEMP
@@ -26,6 +26,10 @@ actions:
           documentAlias: TEMP
           state: documentType
           value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: serviceType
+          value: computing
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newRoot
@@ -33,6 +37,46 @@ actions:
           documentType: sla
           mainState: draft
           serviceType: computing
+          sideState: customer
+
+
+  - !com.agreemount.slaneg.action.definition.CreateNewRoot
+    id: createNewStorageRequest
+    label: Save Storage SLA as draft
+    alias: newRoot #dowolna nazwa
+    redirectToThisVersion: true
+    setTeamFromAlias: TEMP
+    metricSource: ALIAS
+    copyMetricsFromAlias: TEMP
+    redirectToThisVersion: true
+    type: CREATE
+#    visible: false
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+          negation: true
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: serviceType
+          value: storage
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newRoot
+        states:
+          documentType: sla
+          mainState: draft
+          serviceType: storage
           sideState: customer
 
 
