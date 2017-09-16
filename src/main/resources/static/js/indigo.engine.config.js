@@ -87,19 +87,19 @@ app.config(function ($engineProvider, SESSION) {
         [
             {
                 queryId: 'SignedSlaComp',
-                label: 'My signed computing SLAs',
+                label: 'Binding Computing SLAs',
                 documentModelId: 'sla',
                 showCreateButton: false
             },
             {
                 queryId: 'SignedSlaStorage',
-                label: 'My signed storage SLAs',
+                label: 'Binding Storage SLAs',
                 documentModelId: 'sla',
                 showCreateButton: false
             },
             {
                 queryId: 'workingSla',
-                label: 'Computing SLAs in progrees',
+                label: 'Computing SLA Drafts',
                 documentModelId: 'sla',
                 showCreateButton: true,
                 controller: 'indigoDocumentListCtrl',
@@ -107,7 +107,7 @@ app.config(function ($engineProvider, SESSION) {
             },
             {
                 queryId: 'workingSlaS',
-                label: 'Storage SLAs in progrees',
+                label: 'Storage SLA Drafts',
                 documentModelId: 'slaS',
                 showCreateButton: true,
                 controller: 'indigoDocumentListCtrl',
@@ -126,13 +126,13 @@ app.config(function ($engineProvider, SESSION) {
             [
                 {
                     queryId: 'AllSlasProvider',
-                    label: 'Signed SLAs',
+                    label: 'Binding SLAs',
                     documentModelId: 'sla',
                     showCreateButton: false
                 },
                 {
                     queryId: 'inProgressSlasProvider',
-                    label: 'SLA in negotiations',
+                    label: 'SLA in Negotiations',
                     documentModelId: 'sla',
                     showCreateButton: false
                 },

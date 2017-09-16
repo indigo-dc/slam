@@ -2,7 +2,7 @@ queries:
 
   - !com.agreemount.bean.Query
     id: SignedSlaComp
-    label: My signed computing SLAs
+    label: Binding computing SLAs
     position: 1
     queryCategoryId: userDashboard
 #    visibilityConstraint:
@@ -31,7 +31,7 @@ queries:
 
   - !com.agreemount.bean.Query
     id: SignedSlaStorage
-    label: My signed storage SLAs
+    label: Binding storage SLAs
     position: 2
     queryCategoryId: userDashboard
 #    visibilityConstraint:
