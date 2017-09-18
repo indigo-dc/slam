@@ -422,29 +422,28 @@ metrics:
 
 # storage
 
-#  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
-#    id: spaceSelect
-#    label: Space
-#    categoryId: computingTimeRestrictions
-#    required: true
-#    position: 1
-#
-#    description: ONEDATA Space:
-#    visualClass:
-#     !java.util.ArrayList
-#       - select
-#    constraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: AND
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#            documentAlias: TEMP
-#            state: documentType
-#            value: sla
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#            documentAlias: TEMP
-#            state: serviceType
-#            value: storage
+  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
+    id: spaceSelect
+    label: Space
+    categoryId: computingTimeRestrictions
+    required: true
+    position: 1
+    description: "ONEDATA Space:"
+    visualClass:
+     !java.util.ArrayList
+       - select
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: storage
 
 
 #  - !com.agreemount.bean.metric.DateMetric
