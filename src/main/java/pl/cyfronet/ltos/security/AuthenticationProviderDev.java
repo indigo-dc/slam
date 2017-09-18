@@ -4,10 +4,8 @@ import com.agreemount.bean.identity.Identity;
 import com.agreemount.bean.identity.TeamMember;
 import com.agreemount.bean.identity.provider.IdentityProvider;
 import com.google.common.base.Preconditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +20,6 @@ import pl.cyfronet.ltos.bean.Role;
 import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.TeamRepository;
-import pl.cyfronet.ltos.security.PortalUser.PortalUserBuilder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,19 +32,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class AuthenticationProviderDev implements AuthenticationProvider {
 
-    static Logger log = LoggerFactory
-            .getLogger(AuthenticationProviderDev.class);
+    @Autowired
+    private UserOperations operations;
 
     @Autowired
-    UserOperations operations;
+    private IdentityProvider identityProvider;
 
     @Autowired
-    IdentityProvider identityProvider;
+    private TeamRepository teamRepository;
 
     @Autowired
-    TeamRepository teamRepository;
+    private PortalUserFactory portalUserFactory;
 
     @Override
     public Authentication authenticate(Authentication authentication)
@@ -60,7 +58,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                     + authentication.getAuthorities().toString());
             log.debug("LOGGING: details = " + operations);
             log.debug("LOGGING:  creation = " +  operations );
-            PortalUserBuilder builder = PortalUser.builder();
+            PortalUserImpl.Data.DataBuilder builder = PortalUserImpl.Data.builder();
             builder.credentials(authentication.getCredentials());
             return shouldAuthenticateAgainstThirdPartySystem(name, password, builder);
         } else if (authentication.getClass().isAssignableFrom(TestingAuthenticationToken.class)) {
@@ -91,8 +89,10 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
         return identity;
     }
 
-    private PortalUser shouldAuthenticateAgainstThirdPartySystem(String name,
-            String password, PortalUserBuilder builder) {
+    private PortalUser shouldAuthenticateAgainstThirdPartySystem(
+            String name,
+            String password,
+            PortalUserImpl.Data.DataBuilder builder) {
         if (name.equals("admin") && password.equals("admin")) {
             User user = operations.loadUserByUnityIdentity("admin");
             UserInfo info = UserInfo.fromUser(user);
@@ -116,12 +116,10 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             }
             builder.user(user);
             builder.principal(info);
-            builder.authorities(Arrays.asList(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_PROVIDER"),
-                    new SimpleGrantedAuthority("ROLE_USER"))
-            );
-            builder.isAuthenticated(true);
+            builder.authority(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            builder.authority(new SimpleGrantedAuthority("ROLE_PROVIDER"));
+            builder.authority(new SimpleGrantedAuthority("ROLE_USER"));
+            builder.authenticated(true);
 
             Identity identity = getIdentity(user);
             Preconditions.checkNotNull(identity, "Identity [%s] was not found", name);
@@ -129,7 +127,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
 
             log.debug("LOGGING:  identity for  engine set = " +  identity );
 
-            return builder.build();
+            return portalUserFactory.createPortalUser(builder.build());
         }
         if (name.equals("user") && password.equals("user")) {
             User user = operations.loadUserByUnityIdentity("user");
@@ -152,7 +150,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
                     new SimpleGrantedAuthority("ROLE_USER"),
                     new SimpleGrantedAuthority("ROLE_MANAGER")
             ));
-            builder.isAuthenticated(true);
+            builder.authenticated(true);
 
             Identity identity = getIdentity(user);
             Preconditions.checkNotNull(identity, "Identity [%s] was not found", name);
@@ -160,19 +158,18 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
 
             log.debug("LOGGING:  identity for  engine set = " +  identity );
 
-            return builder.build();
+            return portalUserFactory.createPortalUser(builder.build());
         }
         if (name.equals("noreg")) {
             UserInfo info = createNoregInfo();
             builder.principal(info);
-            builder.isAuthenticated(true);
+            builder.authenticated(true);
 
-
-            return builder.build();
+            return portalUserFactory.createPortalUser(builder.build());
         }
         return null;
     }
-    
+
     private UserInfo createAdminInfo() {
         UserInfo info = UserInfo.builder()
             .unityPersistentIdentity("admin")
@@ -182,7 +179,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             .email("adam@adminowski.pl").build();
         return info;
     }
-    
+
     private UserInfo createUserInfo() {
         UserInfo info = UserInfo.builder()
             .unityPersistentIdentity("user")
@@ -192,7 +189,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             .email("ukasz@userowski.pl").build();
         return info;
     }
-    
+
     private UserInfo createNoregInfo() {
         UserInfo info = UserInfo.builder()
             .unityPersistentIdentity("user")
@@ -221,7 +218,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             em.flush();
             return user;
         }
-        
+
         @Transactional
         public Role saveRole(Role role) {
             em.persist(role);
@@ -230,7 +227,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
         }
 
         /*
-         * Consider new version of spring data rest - such 
+         * Consider new version of spring data rest - such
          * searches are probably implemented by repositories
          */
         @Transactional
@@ -247,7 +244,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             }
             return principal;
         }
-        
+
         @Transactional
         public Role loadOrCreateRoleByName(String roleName)
                 throws UsernameNotFoundException {
@@ -267,7 +264,7 @@ public class AuthenticationProviderDev implements AuthenticationProvider {
             }
             return theRole;
         }
-        
+
     }
 
 }

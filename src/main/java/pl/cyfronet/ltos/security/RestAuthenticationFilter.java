@@ -1,12 +1,5 @@
 package pl.cyfronet.ltos.security;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +9,12 @@ import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.provider.authentication.BearerTokenExtractor;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class RestAuthenticationFilter extends OncePerRequestFilter {
 
@@ -46,7 +45,7 @@ public class RestAuthenticationFilter extends OncePerRequestFilter {
 
                 PortalUser portalUser = authenticationService.getPortalUser();
 
-                authenticationService.engineLogin(portalUser.getUserBean());
+                authenticationService.engineLogin(portalUser);
                 SecurityContextHolder.getContext().setAuthentication(portalUser);
             }
         } catch(Exception e) {
