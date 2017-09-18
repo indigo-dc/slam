@@ -523,32 +523,32 @@ metrics:
             state: serviceType
             value: storage
 
-#  - !com.agreemount.bean.metric.SelectMetric
-#    id: storage-class
-#    label: Storage QoS Class
-#    categoryId: storageTargets
-#    required: true
-#    position: 5
-#    description: one of the class defined by a provider
-#    options:
-#    - !com.agreemount.bean.metric.MetricOption
-#      value: Class A
-#    - !com.agreemount.bean.metric.MetricOption
-#      value: Class B
-#    - !com.agreemount.bean.metric.MetricOption
-#      value: Class C
-#    constraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: AND
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#            documentAlias: TEMP
-#            state: documentType
-#            value: sla
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#            documentAlias: TEMP
-#            state: serviceType
-#            value: storage
+  - !com.agreemount.bean.metric.SelectMetric
+    id: storage-class
+    label: Storage QoS Class
+    categoryId: storageTargets
+    required: true
+    position: 5
+    description: one of the class defined by a provider
+    options:
+    - !com.agreemount.bean.metric.MetricOption
+      value: Class A
+    - !com.agreemount.bean.metric.MetricOption
+      value: Class B
+    - !com.agreemount.bean.metric.MetricOption
+      value: Class C
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: storage
 
 #
 #  - !com.agreemount.bean.metric.IntegerMetric
