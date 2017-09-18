@@ -2,7 +2,7 @@ queries:
 
   - !com.agreemount.bean.Query
     id: SignedSlaComp
-    label: My signed computing SLAs
+    label: Binding computing SLAs
     position: 1
     queryCategoryId: userDashboard
 #    visibilityConstraint:
@@ -30,9 +30,39 @@ queries:
           value: computing
 
   - !com.agreemount.bean.Query
+    id: SignedSlaStorage
+    label: Binding storage SLAs
+    position: 2
+    queryCategoryId: userDashboard
+#    visibilityConstraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: signed
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+
+
+  - !com.agreemount.bean.Query
     id: workingSla
     label: SLAs in progrees
-    position: 2
+    position: 3
     queryCategoryId: userDashboard
     visibilityConstraint:
 #      !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
@@ -49,6 +79,44 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: computing
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.Operator
+          type: OR
+          children:
+          - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+            state: mainState
+            value: draft
+          - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+            state: mainState
+            value: sent
+
+  - !com.agreemount.bean.Query
+    id: workingSlaS
+    label: Storage SLAs in progrees
+    position: 4
+    queryCategoryId: userDashboard
+    visibilityConstraint:
+#      !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+#          role: provider
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: manager
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: storage
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.Operator
@@ -65,7 +133,7 @@ queries:
     id: rejectedSla
     label: Rejected SLAs
     queryCategoryId: userDashboard
-    position: 3
+    position: 5
 #    visibilityConstraint:
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
 #        type: OR
