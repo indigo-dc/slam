@@ -16,14 +16,11 @@ app.config(function ($engineProvider, SESSION) {
         list: {
             columns: [
                 {name: '@index', type: 'link', caption: 'ID'},
-                {name: 'name', caption: 'Name'},
                 {name: 'siteName', caption: 'site'},
                 {name: 'createdAt', type: 'date', caption: 'created'},
                 {name: 'states.mainState', caption: 'status'},
                 {name: 'metrics.startComp', caption: 'Start', type: 'date'},
-                {name: 'metrics.endComp', caption: 'End', type: 'date'},
-                // {name: 'discipline', caption: 'disciplne'},
-                // {name: 'proposalEvaluation', condition: "states.documentState == 'evaluated"}
+                {name: 'metrics.endComp', caption: 'End', type: 'date'}
             ],
             caption: 'SLAs'
         },
@@ -55,14 +52,11 @@ app.config(function ($engineProvider, SESSION) {
         list: {
             columns: [
                 {name: '@index', type: 'link', caption: 'ID'},
-                {name: 'name', caption: 'Name'},
                 {name: 'siteName', caption: 'site'},
                 {name: 'createdAt', type: 'date', caption: 'created'},
                 {name: 'states.mainState', caption: 'status'},
                 {name: 'metrics.startComp', caption: 'Start', type: 'date'},
-                {name: 'metrics.endComp', caption: 'End', type: 'date'},
-                // {name: 'discipline', caption: 'disciplne'},
-                // {name: 'proposalEvaluation', condition: "states.documentState == 'evaluated"}
+                {name: 'metrics.endComp', caption: 'End', type: 'date'}
             ],
             caption: 'Storage SLAs'
         },
