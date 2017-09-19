@@ -171,7 +171,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -219,7 +219,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -270,7 +270,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -321,7 +321,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -372,7 +372,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -423,7 +423,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -473,7 +473,7 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    visible: tru
+    visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND

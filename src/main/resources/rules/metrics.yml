@@ -18,7 +18,7 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     position: 1
-    description: hen u wish your SLA to activate
+    description: when u wish your SLA to activate
 #    validateOnChange: true
     visualClass:
      !java.util.ArrayList
@@ -90,13 +90,13 @@ metrics:
 
   - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
     id: siteStorageSelect
-    label: Site
+    label: Provider and service
     categoryId: slaScope
     required: true
     position: 0
     siteType: compute
     cmdbUrl: http://indigo.cloud.plgrid.pl
-    description: Where SLA will be requested
+    description: the service that is subject of this SLA
     visualClass:
      !java.util.ArrayList
        - select
@@ -428,11 +428,11 @@ metrics:
 
   - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
     id: spaceSelect
-    label: Space
-    categoryId: computingTimeRestrictions
+    label: ONEDATA Space
+    categoryId: slaScope
     required: true
-    position: 1
-    description: "ONEDATA Space:"
+    position: 4
+    description: "select space that you want the provider to support"
     visualClass:
      !java.util.ArrayList
        - select
@@ -458,30 +458,6 @@ metrics:
     siteType: storage
     cmdbUrl: http://indigo.cloud.plgrid.pl
     description: Where SLA will be requested
-    visualClass:
-     !java.util.ArrayList
-       - select
-    constraint:
-      !com.agreemount.slaneg.constraint.action.definition.Operator
-        type: AND
-        children:
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: documentType
-            value: sla
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: serviceType
-            value: storage
-
-
-  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
-    id: spaceSelect
-    label: mcSpace
-    categoryId: computingTimeRestrictions
-    required: true
-    position: 1
-    description: "ONEDATA Space"
     visualClass:
      !java.util.ArrayList
        - select

@@ -1,5 +1,6 @@
 package pl.cyfronet.ltos.repository;
 
+import lombok.extern.log4j.Log4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Component
+@Log4j
 public class CmdbRepository {
     @Value("${cmdb.url}")
     private String cmdbUrl;
@@ -22,15 +24,21 @@ public class CmdbRepository {
     private OAuth2RestOperations restTemplate;
 
     public JSONObject get(String type, String fieldName, String fieldValue) {
+        String url = cmdbUrl + prefix + "/"+ type + "/filters/" + fieldName + "/" + fieldValue;
+        log.debug("Calling " + url);
         return new JSONObject(restTemplate
-                .getForObject(cmdbUrl + prefix + "/"+ type + "/filters/" + fieldName + "/" + fieldValue, Map.class));
+                .getForObject(url, Map.class));
     }
 
     public JSONObject get(String type) {
-        return new JSONObject(restTemplate.getForObject(cmdbUrl + prefix + "/" + type + "/list", Map.class));
+        String url = cmdbUrl + prefix + "/"+ type + "/list";
+        log.debug("Calling " + url);
+        return new JSONObject(restTemplate.getForObject(url, Map.class));
     }
 
     public JSONObject getById(String type, String id) {
+        String url = cmdbUrl + prefix + "/"+ type + "/id/" + id;
+        log.debug("Calling " + url);
         return new JSONObject(restTemplate.getForObject(cmdbUrl + prefix + "/" + type + "/id/" + id, Map.class));
     }
 
