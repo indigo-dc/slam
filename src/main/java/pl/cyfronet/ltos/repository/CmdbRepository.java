@@ -23,15 +23,15 @@ public class CmdbRepository {
 
     public JSONObject get(String type, String fieldName, String fieldValue) {
         return new JSONObject(restTemplate
-                .getForObject(cmdbUrl + prefix + type + "/filters/" + fieldName + "/" + fieldValue, Map.class));
+                .getForObject(cmdbUrl + prefix + "/"+ type + "/filters/" + fieldName + "/" + fieldValue, Map.class));
     }
 
     public JSONObject get(String type) {
-        return new JSONObject(restTemplate.getForObject(cmdbUrl + prefix + type + "/list", Map.class));
+        return new JSONObject(restTemplate.getForObject(cmdbUrl + prefix + "/" + type + "/list", Map.class));
     }
 
     public JSONObject getById(String type, String id) {
-        return new JSONObject(restTemplate.getForObject(cmdbUrl + prefix + type + "/id/" + id, Map.class));
+        return new JSONObject(restTemplate.getForObject(cmdbUrl + prefix + "/" + type + "/id/" + id, Map.class));
     }
 
     @PostConstruct
