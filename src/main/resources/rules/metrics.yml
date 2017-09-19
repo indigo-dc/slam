@@ -94,7 +94,7 @@ metrics:
     categoryId: slaScope
     required: true
     position: 0
-    siteType: storage
+    siteType: compute
     cmdbUrl: http://indigo.cloud.plgrid.pl
     description: Where SLA will be requested
     visualClass:
@@ -108,6 +108,10 @@ metrics:
             documentAlias: TEMP
             state: documentType
             value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: computing
 
 
   - !com.agreemount.bean.metric.IntegerMetric
@@ -429,6 +433,55 @@ metrics:
     required: true
     position: 1
     description: "ONEDATA Space:"
+    visualClass:
+     !java.util.ArrayList
+       - select
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: storage
+
+  - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
+    id: siteStorageSelect
+    label: Site
+    categoryId: slaScope
+    required: true
+    position: 0
+    siteType: storage
+    cmdbUrl: http://indigo.cloud.plgrid.pl
+    description: Where SLA will be requested
+    visualClass:
+     !java.util.ArrayList
+       - select
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: documentType
+            value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+            documentAlias: TEMP
+            state: serviceType
+            value: storage
+
+
+  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
+    id: spaceSelect
+    label: mcSpace
+    categoryId: computingTimeRestrictions
+    required: true
+    position: 1
+    description: "ONEDATA Space"
     visualClass:
      !java.util.ArrayList
        - select
