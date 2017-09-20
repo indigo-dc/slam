@@ -16,6 +16,7 @@ java -Dserver.address=0.0.0.0 \
      -Dunity.server.clientId=$IAM_CLIENT_ID \
      -Dunity.server.clientSecret=$IAM_CLIENT_SECRET \
      -Dcmdb.url=$CMDB_URL \
+     -Donedata.url=$ONEDATA_URL \
      -Dprovider.emails=$PROVIDER_EMAIL \
      -Djdbc.url=$JDBC_URL \
      -Djdbc.username=$MYSQL_USER \
