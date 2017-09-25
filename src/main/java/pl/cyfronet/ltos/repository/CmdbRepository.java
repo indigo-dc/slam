@@ -31,7 +31,14 @@ public class CmdbRepository {
     }
 
     public JSONObject get(String type) {
+        return get(type, null);
+    }
+
+    public JSONObject get(String type, String params) {
         String url = cmdbUrl + prefix + "/"+ type + "/list";
+        if (params != null) {
+            url = url + "?"+params;
+        }
         log.debug("Calling " + url);
         return new JSONObject(restTemplate.getForObject(url, Map.class));
     }

@@ -3,6 +3,7 @@ package pl.cyfronet.ltos.security;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -51,22 +52,16 @@ public class CmdbOwnerService {
             try {
                 Map<String, Set<String>> map = new HashMap<>();
 
-                // expects a response in a shape of: { rows: [ { id: <id>, ... }, ... ] }
-                JSONArray providersJSONArray = cmdbRepository.get("provider").getJSONArray("rows");
-                List<String> providerIds = new ArrayList<>();
+                // expects a response in a shape of: { rows: [ { id: <id>, doc: { data: { owners: [ <email1>, <email2>, ... ], ... } }, ... }, ... ] }
+                JSONArray providersJSONArray = cmdbRepository.get("provider", "include_docs=true").getJSONArray("rows");
                 for (int i = 0; i < providersJSONArray.length(); i++) {
-                    providerIds.add(providersJSONArray.getJSONObject(i).getString("id"));
-                }
-
-                for (String providerId : providerIds) {
-                    // expects { data: { owners: [ <email1>, <email2>, ... ], ... } }
-                    // however, ignore entries with no owners field
-                    JSONArray ownersJSONArray = cmdbRepository.getById("provider", providerId)
-                            .getJSONObject("data")
-                            .optJSONArray("owners");
-                    if (ownersJSONArray != null && ownersJSONArray.length() > 0) {
-                        for (int i = 0; i < ownersJSONArray.length(); i++) {
-                            String email = ownersJSONArray.getString(i);
+                    JSONObject row = providersJSONArray.getJSONObject(i);
+                    String providerId = row.getString("id");
+                    JSONObject doc = row.getJSONObject("doc");
+                    JSONArray owners = doc.getJSONObject("data").optJSONArray("owners");
+                    if (owners != null && owners.length() > 0) {
+                        for (int j = 0; j < owners.length(); j++) {
+                            String email = owners.getString(j);
                             Set<String> providerIdsSet = map.getOrDefault(email, new HashSet<>());
                             providerIdsSet.add(providerId);
                             map.put(email, providerIdsSet);
