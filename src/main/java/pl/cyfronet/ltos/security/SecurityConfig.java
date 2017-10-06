@@ -30,6 +30,9 @@ public class SecurityConfig {
     @Configuration
 	@Order(1)
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+
+        private static String PATH = "/rest/slam/**";
+
         @Bean
         public OAuth2ClientContextFilter oAuth2ClientContextFilter() {
             return new OAuth2ClientContextFilter();
@@ -37,12 +40,13 @@ public class SecurityConfig {
 
         @Bean
         public RestAuthenticationFilter restAuthenticationFilter() {
-            return new RestAuthenticationFilter();
+            return new RestAuthenticationFilter(PATH);
         }
+
 		@Override
         protected void configure(HttpSecurity http) throws Exception {
 		    http
-		        .antMatcher("/rest/slam/**")
+		        .antMatcher(PATH)
 		        .authorizeRequests().anyRequest().authenticated()
 		        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		        .and().csrf().disable()
