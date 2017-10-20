@@ -1,7 +1,5 @@
 package pl.cyfronet.ltos.security;
 
-import com.agreemount.bean.identity.Identity;
-import com.agreemount.bean.identity.provider.IdentityProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +11,6 @@ import pl.cyfronet.ltos.repository.UserRepository;
 import pl.cyfronet.ltos.security.AuthenticationProviderDev.UserOperations;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -42,23 +39,7 @@ public class AuthenticationService {
     private UserOperations userOperations;
 
     @Autowired
-    private IdentityProvider identityProvider;
-
-    @Autowired
     private PortalUserFactory portalUserFactory;
-
-    public void engineLogin(PortalUser user) {
-        Identity identity = new Identity();
-        identity.setLogin(user.getUserBean().getEmail());
-        identity.setRoles(new ArrayList<>(user.getUserBean().getRoles().stream()
-                .map(entry -> entry.getName())
-                .collect(Collectors.toList())));
-        if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PROVIDER"))) {
-            identity.getRoles().add("provider");
-        }
-
-        identityProvider.setIdentity(identity);
-    }
 
     public PortalUser getPortalUser() {
         return getPortalUser(getUserInfo());

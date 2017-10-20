@@ -1,24 +1,21 @@
 package pl.cyfronet.ltos.security;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.provider.authentication.BearerTokenExtractor;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class RestAuthenticationFilter extends OncePerRequestFilter {
-
-	private static final Logger log = LoggerFactory.getLogger(RestAuthenticationFilter.class);
+@Log4j
+public class RestAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     @Autowired
     private OAuth2ClientContext context;
@@ -28,29 +25,27 @@ public class RestAuthenticationFilter extends OncePerRequestFilter {
 
     private BearerTokenExtractor extractor = new BearerTokenExtractor();
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    public RestAuthenticationFilter(String defaultFilterProcessesUrl) {
+        super(defaultFilterProcessesUrl);
 
-        tryToAuthorize(request);
-        filterChain.doFilter(request, response);
+        setAuthenticationManager(authentication -> authentication);
     }
 
-    private void tryToAuthorize(HttpServletRequest request) {
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         try {
             Authentication extract = extractor.extract(request);
             if (extract != null) {
                 String jwt = extract.getPrincipal().toString();
                 context.setAccessToken(new DefaultOAuth2AccessToken(jwt));
 
-                PortalUser portalUser = authenticationService.getPortalUser();
-
-                authenticationService.engineLogin(portalUser);
-                SecurityContextHolder.getContext().setAuthentication(portalUser);
+                return authenticationService.getPortalUser();
             }
         } catch(Exception e) {
             log.info("Unable to authenticate to rest API - wrong token", e);
         }
+
+        return null;
     }
 }
 

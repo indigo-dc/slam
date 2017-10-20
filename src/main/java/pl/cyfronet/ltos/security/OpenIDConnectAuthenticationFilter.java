@@ -27,7 +27,7 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
     @Autowired
     private AuthenticationService authenticationService;
 
-    protected OpenIDConnectAuthenticationFilter(String defaultFilterProcessesUrl) {
+    public OpenIDConnectAuthenticationFilter(String defaultFilterProcessesUrl) {
         super(defaultFilterProcessesUrl);
 
         SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
@@ -44,10 +44,7 @@ public class OpenIDConnectAuthenticationFilter extends AbstractAuthenticationPro
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException, IOException, ServletException {
         try {
-            PortalUser portalUser = authenticationService.getPortalUser();
-            authenticationService.engineLogin(portalUser);
-
-            return portalUser;
+            return authenticationService.getPortalUser();
         } catch (UserDeniedAuthorizationException | InvalidRequestException ex) {
             RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
             redirectStrategy.sendRedirect(request, response, unauthorizedAction);
