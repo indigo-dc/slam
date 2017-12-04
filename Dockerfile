@@ -3,6 +3,7 @@ FROM ubuntu:16.04
 ENV PROVIDER_EMAIL ''
 ENV IAM_TOKEN_URL 'https://iam-test.indigo-datacloud.eu/token'
 ENV IAM_URL 'https://iam-test.indigo-datacloud.eu'
+ENV IAM_AUTHORIZE_URL 'https://iam-test.indigo-datacloud.eu/authorize'
 ENV IAM_CLIENT_ID '53b937c5-fd53-4626-9400-8b21838d7de2'
 ENV IAM_CLIENT_SECRET 'fcqrPQYZtR-CETMdvxrNoQAKtDw-Qy8hb0ItHd4cX6IJpi6f7124YDYV8SAuL99KfkWMQchQalBP2fJAlhRB7Q'
 ENV CMDB_URL 'http://indigo.cloud.plgrid.pl'
