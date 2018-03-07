@@ -13,6 +13,7 @@ java -Dserver.address=0.0.0.0 \
      -Dkeystore.tomcat.alias=$KEYSTORE_ALIAS \
      -Dunity.server.token=$IAM_TOKEN_URL \
      -Dunity.server.base=$IAM_URL \
+     -Dunity.server.authorize=$IAM_AUTHORIZE_URL \
      -Dunity.server.clientId=$IAM_CLIENT_ID \
      -Dunity.server.clientSecret=$IAM_CLIENT_SECRET \
      -Dcmdb.url=$CMDB_URL \

@@ -71,7 +71,7 @@ You need to set CMDB\_URL variable in order to find point CMDB instance.
 
 INDIGO-IAM \([https://github.com/indigo-dc/iam\](https://github.com/indigo-dc/iam\)\) is a source of authentication and the only method to log in to the service. Authorisation is done based on e-mail attribute taken from INDIGO-IAM and configuration data from CMDB.
 
-You need to set IAM\_URL and IAM\__TOKEN\_URL_ variables in order to find point IAM instance.
+You need to set IAM\_URL, IAM\__TOKEN\_URL_ and IAM\__AUTHORIZE\_URL_ variables in order to find point IAM instance.
 
 ##### MYSQL
 
@@ -94,14 +94,16 @@ docker run --name slam-mongo -d mongo
 example of docker command:
 
 ```
-docker run -d -e PROVIDER_EMAIL='someonewithIAMaccount@domain.com' --link slammongo:mongo --link slammysql:mysql -e IAM_TOKEN_URL='https://iam-test.indigo-datacloud.eu/token' -e IAM_URL='https://iam-test.indigo-datacloud.eu' -e CMDB_URL='http://cmdb.hostname' -p 8443:8443 --name indigoslam indigodatacloud/slam:latest
+docker run -d -e PROVIDER_EMAIL='someonewithIAMaccount@domain.com' --link slammongo:mongo --link slammysql:mysql -e IAM_TOKEN_URL='https://iam-test.indigo-datacloud.eu/token'-e IAM_AUTHORIZE_URL='https://iam-test.indigo-datacloud.eu/authorize' -e IAM_URL='https://iam-test.indigo-datacloud.eu' -e CMDB_URL='http://cmdb.hostname' -p 8443:8443 --name indigoslam indigodatacloud/slam:latest
 ```
 
 ##### Enviroment variables
 
 * PROVIDER\_EMAIL is used to recognise the person that has a right to act as infrastructure provider \(for all providers\) and have possibility to see SLAs requests, negotiate and accept SLAs
 
-* IAM\__TOKEN_\__URL  -- _URL for IAM service tokens, usually IAM\_URL/token
+* IAM\_TOKEN\_URL  -- _URL for IAM service tokens, usually IAM\_URL/token
+
+* IAM\_AUTHORIZE\_URL  -- _URL for IAM authorization service, usually IAM\_URL/authorize
 
 * IAM\_URL -- main URL for IAM service 
 
@@ -129,7 +131,7 @@ There are two ways to add certificate:
   -e KEYSTORE=/opt/pki/customKeystore.jks -e KEYSTORE_PASSWORD=’keystore_password’ -v /path/to/customKeystore.jks:/opt/pki/customKeystore.jks
   ```
 
-
+    [Tutorial on how to create and use custom keystore](create-custom-keystore.md)
 
 ### Upgrade procedure
 
