@@ -7,10 +7,8 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-
-import org.springframework.transaction.annotation.Transactional;
-import pl.cyfronet.ltos.bean.*;
+import pl.cyfronet.ltos.bean.DocumentWeight;
+import pl.cyfronet.ltos.bean.User;
 import pl.cyfronet.ltos.repository.DocumentWeightRepository;
 import pl.cyfronet.ltos.repository.MockMvcSecurityTest;
 import pl.cyfronet.ltos.repository.UserRepository;
@@ -20,7 +18,8 @@ import pl.cyfronet.ltos.security.PortalUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by marta on 7/19/17.
@@ -66,7 +65,6 @@ public class EngineExtensionControllerTest  extends MockMvcSecurityTest {
 
 
     @Test
-    @Transactional
     public void setDocumentWeightsTest() throws Exception {
 
 
