@@ -20,9 +20,9 @@ ENV MONGO_USER 'engine'
 ENV MONGO_PASSWORD ''
 ENV CERT_ALIAS 'root'
 ENV CERT_FILE ''
-ENV KEYSTORE_PASSWORD 'helpdesk'
-ENV KEYSTORE '/opt/pki/synchroDuo.jks'
-ENV KEYSTORE_ALIAS 'synchro'
+ENV KEYSTORE_PASSWORD 'developer'
+ENV KEYSTORE '/opt/pki/portalDev.jks'
+ENV KEYSTORE_ALIAS 'portal'
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
@@ -31,7 +31,7 @@ RUN apt-get install -y openjdk-8-jre-headless
 
 RUN mkdir -p /opt/indigo-slam
 COPY target/indigo-slam.jar /opt/indigo-slam/
-COPY docker/pki/synchroDuo.jks /opt/pki/
+COPY docker/pki/portalDev.jks /opt/pki/
 COPY docker/indigo-slam.sh /opt/indigo-slam/
 
 RUN ln -s /opt/indigo-slam/indigo-slam.sh /usr/bin/indigo-slam.sh
