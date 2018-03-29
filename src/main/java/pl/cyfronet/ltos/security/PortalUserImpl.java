@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import pl.cyfronet.ltos.bean.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,8 +44,8 @@ public class PortalUserImpl implements PortalUser {
     }
 
     /// development variable, users whose email matches this will have provider role assigned
-    @Value("${provider.emails:}")
-    private String devProviderEmails;
+    @Value("#{'${provider.emails}'.split(';')}")
+    private List<String> devProviderEmails;
 
     @Override
     public String getName() {
