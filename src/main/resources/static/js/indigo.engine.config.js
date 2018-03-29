@@ -83,29 +83,29 @@ app.config(function ($engineProvider, SESSION) {
                 queryId: 'SignedSlaComp',
                 label: 'Binding Computing SLAs',
                 documentModelId: 'sla',
-                showCreateButton: false
+                showCreateButton: false,
+                controller: 'indigoDocumentListCtrl',
+                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'SignedSlaStorage',
                 label: 'Binding Storage SLAs',
                 documentModelId: 'sla',
-                showCreateButton: false
+                showCreateButton: false,
+                controller: 'indigoDocumentListCtrl',
+                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'workingSla',
                 label: 'Computing SLA Drafts',
                 documentModelId: 'sla',
-                showCreateButton: true,
-                controller: 'indigoDocumentListCtrl',
-                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
+                showCreateButton: true
             },
             {
                 queryId: 'workingSlaS',
                 label: 'Storage SLA Drafts',
                 documentModelId: 'slaS',
-                showCreateButton: true,
-                controller: 'indigoDocumentListCtrl',
-                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
+                showCreateButton: true
             },
             {
                 queryId: 'rejectedSla',
