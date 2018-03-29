@@ -93,7 +93,7 @@ app.config(function ($engineProvider, SESSION) {
             },
             {
                 queryId: 'workingSla',
-                label: 'Computing SLA Drafts',
+                label: 'Computing SLA Negotiations',
                 documentModelId: 'sla',
                 showCreateButton: true,
                 controller: 'indigoDocumentListCtrl',
@@ -101,7 +101,7 @@ app.config(function ($engineProvider, SESSION) {
             },
             {
                 queryId: 'workingSlaS',
-                label: 'Storage SLA Drafts',
+                label: 'Storage SLA Negotiations',
                 documentModelId: 'slaS',
                 showCreateButton: true,
                 controller: 'indigoDocumentListCtrl',
