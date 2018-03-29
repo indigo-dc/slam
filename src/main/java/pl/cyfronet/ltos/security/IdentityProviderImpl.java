@@ -5,6 +5,7 @@ import com.agreemount.bean.identity.TeamMember;
 import com.agreemount.bean.identity.provider.IdentityProvider;
 import lombok.Getter;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -45,6 +46,16 @@ public class IdentityProviderImpl implements IdentityProvider {
         if (portalUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PROVIDER"))) {
             roles.add("provider");
         }
+        List<String> administratedSites = new ArrayList<>();
+        for(GrantedAuthority role: portalUser.getAuthorities()){
+            if(role.getAuthority().startsWith("ROLE_PROVIDER_")){
+                administratedSites.add(role.getAuthority().substring(14));
+                if(!roles.contains("provider")){
+                    roles.add("provider");
+                }
+            }
+        }
+        identity.setAdministratedSites(administratedSites);
         identity.setRoles(unmodifiableList(roles));
         identity.setTeamMembers(unmodifiableList(
                 user.getTeams().stream()
