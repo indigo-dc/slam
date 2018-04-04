@@ -40,7 +40,7 @@ public class SecurityConfig {
 
         @Bean
         public RestAuthenticationFilter restAuthenticationFilter() {
-            return new RestAuthenticationFilter(PATH);
+            return new RestAuthenticationFilter();
         }
 
 		@Override
