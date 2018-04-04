@@ -32,7 +32,10 @@ app.config(function ($engineProvider, SESSION) {
                 }
             ],
             details: {
-                'caption': 'Computing SLA'
+                'caption': 'Computing SLA',
+                entries: [
+                    {name: 'metrics.teamId',  caption: 'organization'},
+                ],
             },
             showValidationButton: true,
             summary: true
@@ -68,7 +71,10 @@ app.config(function ($engineProvider, SESSION) {
                 }
             ],
             details: {
-                'caption': 'Storage SLA'
+                'caption': 'Storage SLA',
+                entries: [
+                    {name: 'metrics.teamId',  caption: 'organization'},
+                ],
             },
             showValidationButton: true,
             summary: true
