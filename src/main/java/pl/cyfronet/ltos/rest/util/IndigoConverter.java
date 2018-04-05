@@ -1,21 +1,13 @@
 package pl.cyfronet.ltos.rest.util;
 
-import com.agreemount.EngineFacade;
 import com.agreemount.bean.document.Document;
-import com.agreemount.bean.metric.DateMetric;
-import com.agreemount.bean.metric.IntegerMetric;
 import com.agreemount.bean.metric.Metric;
-import com.agreemount.bean.request.MetricsAndStates;
 import com.agreemount.engine.facade.MetricFacade;
-import com.agreemount.engine.facade.QueryFacade;
-import com.agreemount.slaneg.action.ActionContext;
-import com.agreemount.slaneg.action.ActionContextFactory;
 import com.agreemount.slaneg.db.DocumentOperations;
 import com.agreemount.slaneg.db.RelationOperations;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer;
 import org.springframework.stereotype.Component;
 import pl.cyfronet.bazaar.engine.extension.bean.IndigoDocument;
 import pl.cyfronet.ltos.rest.bean.IndigoWrapper;
@@ -26,9 +18,7 @@ import pl.cyfronet.ltos.rest.bean.sla.Service;
 import pl.cyfronet.ltos.rest.bean.sla.Sla;
 import pl.cyfronet.ltos.rest.bean.sla.Target;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Created by km on 11.07.16.
@@ -125,19 +115,13 @@ public class IndigoConverter {
     }
 
     private List<Target> prepareTargets(Document sla) {
-        List<Metric> documentMetrics = metricFacade.fetchAvailableMetrics(sla.getId(), null);
+        List<Metric> documentMetrics = metricFacade.fetchMetrics();
 
         Map<String, Target> restrictions = new HashMap<>();
 
         for(Metric metric : documentMetrics) {
-            //these are special cases, event thought they are stored in metrics, they should not be shown
-            //TODO maybe in the future make this kind of "specjal metrics" start with '_' or something
-            if(metric.getId().equals("startComp") || metric.getId().equals("endComp"))
-                continue;
 
-            if(sla.getMetrics().containsKey(metric.getId())) {
-
-
+            if(sla.getMetrics().containsKey(metric.getId()) && metric.getId().contains("-")) {
                 String key = metric.getId().split("-")[0];
                 String constraint = metric.getId().split("-")[1];
                 if(!restrictions.containsKey(key)) {
