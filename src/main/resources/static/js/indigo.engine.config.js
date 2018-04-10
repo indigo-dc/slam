@@ -32,7 +32,10 @@ app.config(function ($engineProvider, SESSION) {
                 }
             ],
             details: {
-                'caption': 'Computing SLA'
+                'caption': 'Computing SLA',
+                entries: [
+                    {name: 'metrics.teamId',  caption: 'organization'},
+                ],
             },
             showValidationButton: true,
             summary: true
@@ -68,13 +71,16 @@ app.config(function ($engineProvider, SESSION) {
                 }
             ],
             details: {
-                'caption': 'Storage SLA'
+                'caption': 'Storage SLA',
+                entries: [
+                    {name: 'metrics.teamId',  caption: 'organization'},
+                ],
             },
             showValidationButton: true,
             summary: true
         }
     };
-    $engineProvider.document('slaS', '/slaS', '/slaS/:id', ['SignedSlaComp'], slaSSpec);
+    $engineProvider.document('slaS', '/slaS', '/slaS/:id', ['SignedSlaStorage'], slaSSpec);
 
 
     $engineProvider.dashboard({url: '/dashboard', label: 'SLAs', activetab: 'dashboard'},
@@ -90,7 +96,7 @@ app.config(function ($engineProvider, SESSION) {
             {
                 queryId: 'SignedSlaStorage',
                 label: 'Binding Storage SLAs',
-                documentModelId: 'sla',
+                documentModelId: 'slaS',
                 showCreateButton: false,
                 controller: 'indigoDocumentListCtrl',
                 contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
@@ -99,19 +105,22 @@ app.config(function ($engineProvider, SESSION) {
                 queryId: 'workingSla',
                 label: 'Computing SLA Negotiations',
                 documentModelId: 'sla',
-                showCreateButton: true
+                showCreateButton: true,
+                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'workingSlaS',
                 label: 'Storage SLA Negotiations',
                 documentModelId: 'slaS',
-                showCreateButton: true
+                showCreateButton: true,
+                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'rejectedSla',
                 label: 'Rejected SLAs',
                 documentModelId: 'sla',
-                showCreateButton: false
+                showCreateButton: false,
+                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             }
         ]);
 
@@ -122,12 +131,15 @@ app.config(function ($engineProvider, SESSION) {
                     queryId: 'AllSlasProvider',
                     label: 'Binding SLAs',
                     documentModelId: 'sla',
+                    contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
+
                 },
                 {
                     queryId: 'inProgressSlasProvider',
                     label: 'SLA in Negotiations',
                     documentModelId: 'sla',
+                    contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
                 },
             ]);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Component;
+import pl.cyfronet.bazaar.engine.extension.constraint.action.impl.IsPublicServiceImpl;
 import pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric;
 
 import javax.annotation.PostConstruct;
@@ -52,5 +53,6 @@ public class CmdbRepository {
     @PostConstruct
     private void injectIntoEngine() {
         SiteSelectMetric.cmdbRepository = this;
+        IsPublicServiceImpl.cmdbRepository = this;
     }
 }
