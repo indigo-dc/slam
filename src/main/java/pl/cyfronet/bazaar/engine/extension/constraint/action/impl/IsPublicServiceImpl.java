@@ -27,7 +27,13 @@ public class IsPublicServiceImpl extends QualifierImpl<IsPublicService, ActionCo
         String id = (String) document.getMetrics().get(metricId);
         Preconditions.checkArgument(!StringUtils.isEmpty(metricId), "Metric [%s] is not set on this document", metricId);
 
-        boolean result = (boolean) cmdbRepository.getById("service", id).getJSONObject("data").get("is_public_service");
+        boolean result = false;
+        try {
+            result = (boolean) cmdbRepository.getById("service", id).getJSONObject("data").get("is_public_service");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result;
+        }
         Preconditions.checkNotNull(result, "Service [%s] doesn't have is_public_service parameter", id);
         return result ? true : false;
     }
