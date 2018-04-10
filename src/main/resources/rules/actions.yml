@@ -202,9 +202,23 @@ actions:
 ##          documentAlias: BASE
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
+        constraint:
+          !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsPublicService
+            negation: true
+            documentAlias: newLeaf
+            metricId: siteStorageSelect
         documentAlias: newLeaf
         states:
           mainState: sent
+          sideState: provider
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        constraint:
+          !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsPublicService
+            documentAlias: newLeaf
+            metricId: siteStorageSelect
+        documentAlias: newLeaf
+        states:
+          mainState: signed
           sideState: provider
 #      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
