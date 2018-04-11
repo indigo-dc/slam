@@ -128,13 +128,22 @@ app.config(function ($engineProvider, SESSION) {
         $engineProvider.dashboard({url: '/provider', label: 'SLAs', activetab: 'provider'},
             [
                 {
-                    queryId: 'AllSlasProvider',
-                    label: 'Binding SLAs',
+                    queryId: 'AllComputingSlasProvider',
+                    label: 'Binding Computing SLAs',
                     documentModelId: 'sla',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
 
                 },
+                {
+                    queryId: 'AllStorageSlasProvider',
+                    label: 'Binding Storage SLAs',
+                    documentModelId: 'sla',
+                    contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
+                    showCreateButton: false
+
+                },
+
                 {
                     queryId: 'inProgressComputingSlasProvider',
                     label: 'Computing SLA Negotiations',
