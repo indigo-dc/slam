@@ -50,6 +50,7 @@ angular.module('indigo').controller('indigoDocumentListCtrl', function ($scope, 
 
         var di = document.dropindex;
         if (separate) {
+            //console.log("separate");
             if (di > 0) {
                 var tmp = documents[di-1].document.weight;
 
@@ -64,18 +65,38 @@ angular.module('indigo').controller('indigoDocumentListCtrl', function ($scope, 
                 document.weight = tmp;
             }
             else if(documents.length > 1){
+                //console.log("separate top");
                 document.weight = documents[di+1].document.weight + 1;
             }
         }
-        else if(di > 0){
-            if(di == originalIndex && di > 0) {
-                document.weight = documents[di-1].document.weight
+        else if(di > 0) {
+            //console.log("glue");
+            if(di == originalIndex) {
+                 //console.log("item moved");
+                 document.weight = documents[di-1].document.weight;
             }
             else {
+                //console.log("item not moved");
                 document.weight = documents[di-1].document.weight;
             }
         }
+        else if(documents.length > 1) {
+            //console.log("glue top");
+            document.weight = documents[di+1].document.weight;
+        }
 
+        //normalize
+        var priority = 0;
+        for (i = documents.length - 1; i > 0; --i) {
+            if(documents[i-1].document.weight == documents[i].document.weight) {
+                documents[i].document.weight = priority;
+            }
+            else {
+                documents[i].document.weight = priority;
+                ++priority;
+            }
+        }
+        documents[i].document.weight = priority;
 
     };
 

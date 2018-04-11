@@ -10,7 +10,7 @@ angular.module('indigo')
         });
 
         $http.post(DOCUMENTS_WEIGHTS_URL, out).then(function (response) {
-            console.log('weights updated')
+            console.log('weights updated', out)
         })
     }
 });

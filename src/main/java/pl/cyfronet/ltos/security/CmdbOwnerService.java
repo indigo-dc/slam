@@ -56,14 +56,14 @@ public class CmdbOwnerService {
                 JSONArray providersJSONArray = cmdbRepository.get("provider", "include_docs=true").getJSONArray("rows");
                 for (int i = 0; i < providersJSONArray.length(); i++) {
                     JSONObject row = providersJSONArray.getJSONObject(i);
-                    String providerId = row.getString("id");
                     JSONObject doc = row.getJSONObject("doc");
                     JSONArray owners = doc.getJSONObject("data").optJSONArray("owners");
+                    String providerName = doc.getJSONObject("data").getString("name");
                     if (owners != null && owners.length() > 0) {
                         for (int j = 0; j < owners.length(); j++) {
                             String email = owners.getString(j);
                             Set<String> providerIdsSet = map.getOrDefault(email, new HashSet<>());
-                            providerIdsSet.add(providerId);
+                            providerIdsSet.add(providerName);
                             map.put(email, providerIdsSet);
                         }
                     }
