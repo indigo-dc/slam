@@ -115,7 +115,7 @@ app.config(function ($engineProvider, SESSION) {
             }
         ]);
 
-    if (SESSION.roles.indexOf("ROLE_PROVIDER") != -1) {
+    if (SESSION.roles.indexOf("ROLE_PROVIDER") != -1 || SESSION.roles.indexOf("ROLE_ADMIN") != -1) {
         $engineProvider.dashboard({url: '/provider', label: 'SLAs', activetab: 'provider'},
             [
                 {
@@ -130,6 +130,13 @@ app.config(function ($engineProvider, SESSION) {
                     documentModelId: 'sla',
                     showCreateButton: false
                 },
+            ]);
+    }
+
+    if (SESSION.roles.indexOf("ROLE_ADMIN") != -1) {
+        $engineProvider.dashboard({url: '/admin', label: 'Admin', activetab: 'admin'},
+            [
+
             ]);
     }
 });
