@@ -150,11 +150,34 @@ actions:
           documentAlias: TEMP
           state: documentType
           value: sla
-        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: mainState
-          value: draft
-        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.Operator
+          type: OR
+          children:
+          - !com.agreemount.slaneg.constraint.action.definition.Operator
+             type: AND
+             children:
+              - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                state: mainState
+                value: draft
+              - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                state: sideState
+                value: customer
+          - !com.agreemount.slaneg.constraint.action.definition.Operator
+             type: AND
+             children:
+              - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                state: sideState
+                value: provider
+              - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+                role: provider
+          - !com.agreemount.slaneg.constraint.action.definition.Operator
+             type: AND
+             children:
+              - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                state: sideState
+                value: manager
+              - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+                role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
 #    actions:
@@ -258,6 +281,9 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: manager
 #        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
 #          state: sideState
 #          value: manager
@@ -309,6 +335,10 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: sideState
+          value: provider
 #        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
 #          state: sideState
 #          value: provider
@@ -365,6 +395,9 @@ actions:
 #          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:
@@ -416,6 +449,9 @@ actions:
 #          value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: provider
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:
@@ -467,6 +503,9 @@ actions:
 #          value: manager
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:
@@ -517,6 +556,9 @@ actions:
 #          value: provider
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: provider
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:

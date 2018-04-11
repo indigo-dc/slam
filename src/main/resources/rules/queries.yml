@@ -18,8 +18,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+          siteMetricId: siteStorageSelect
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -47,8 +47,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth #do odkomentowania jak będzie właściwe przypisywanie teamu przy createNewRoot
+        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+          siteMetricId: siteStorageSelect
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -147,8 +147,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: request
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
+        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+          siteMetricId: siteStorageSelect
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -176,8 +176,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
+        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+          siteMetricId: siteStorageSelect
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
@@ -202,8 +202,8 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: sla
-#        - !com.agreemount.slaneg.constraint.query.definition.HasAnyRoleInRelatedBusinessEntityDef
-#          sth: sth
+        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+          siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
