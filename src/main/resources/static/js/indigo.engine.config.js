@@ -124,24 +124,61 @@ app.config(function ($engineProvider, SESSION) {
             }
         ]);
 
-    if (SESSION.roles.indexOf("ROLE_PROVIDER") != -1) {
+    if (SESSION.roles.indexOf("ROLE_PROVIDER") != -1 || SESSION.roles.indexOf("ROLE_ADMIN") != -1) {
         $engineProvider.dashboard({url: '/provider', label: 'SLAs', activetab: 'provider'},
             [
                 {
-                    queryId: 'AllSlasProvider',
-                    label: 'Binding SLAs',
+                    queryId: 'AllComputingSlasProvider',
+                    label: 'Binding Computing SLAs',
                     documentModelId: 'sla',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
 
                 },
                 {
-                    queryId: 'inProgressSlasProvider',
-                    label: 'SLA in Negotiations',
+                    queryId: 'AllStorageSlasProvider',
+                    label: 'Binding Storage SLAs',
+                    documentModelId: 'sla',
+                    contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
+                    showCreateButton: false
+
+                },
+
+                {
+                    queryId: 'inProgressComputingSlasProvider',
+                    label: 'Computing SLA Negotiations',
+                    documentModelId: 'sla',
+                    contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
+                    showCreateButton: false
+
+                },
+                {
+                    queryId: 'inProgressStorageSlasProvider',
+                    label: 'Storage SLA Negotiations',
+                    documentModelId: 'slaS',
+                    showCreateButton: false
+                },
+
+            ]);
+    }
+
+    if (SESSION.roles.indexOf("ROLE_ADMIN") != -1) {
+        $engineProvider.dashboard({url: '/admin', label: 'Admin', activetab: 'admin'},
+            [
+                {
+                    queryId: 'AllComputingSlasAdmin',
+                    label: 'Computing SLAs',
                     documentModelId: 'sla',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
                 },
+                {
+                    queryId: 'AllStorageSlasAdmin',
+                    label: 'Storage SLAs',
+                    documentModelId: 'slaS',
+                    showCreateButton: false
+                },
+
             ]);
     }
 });

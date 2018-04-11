@@ -8,6 +8,9 @@ queryCategories:
     id: providerDashboard
     label: query for provider
 
+  - !com.agreemount.bean.query.QueryCategory
+    id: adminDashboard
+    label: query for provider
 
   - !com.agreemount.bean.query.QueryCategory
     id: userDashboard
