@@ -137,14 +137,14 @@ app.config(function ($engineProvider, SESSION) {
                 },
                 {
                     queryId: 'inProgressComputingSlasProvider',
-                    label: 'Computing SLA in Negotiations',
+                    label: 'Computing SLA Negotiations',
                     documentModelId: 'sla',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
                 },
                 {
                     queryId: 'inProgressStorageSlasProvider',
-                    label: 'Storafe SLA in Negotiations',
+                    label: 'Storage SLA Negotiations',
                     documentModelId: 'slaS',
                     showCreateButton: false
                 },
@@ -157,13 +157,13 @@ app.config(function ($engineProvider, SESSION) {
             [
                 {
                     queryId: 'AllComputingSlasAdmin',
-                    label: 'Binding SLAs',
+                    label: 'Computing SLAs',
                     documentModelId: 'sla',
                     showCreateButton: false
                 },
                 {
                     queryId: 'AllStorageSlasAdmin',
-                    label: 'Storafe SLA in Negotiations',
+                    label: 'Storage SLAs',
                     documentModelId: 'slaS',
                     showCreateButton: false
                 },
