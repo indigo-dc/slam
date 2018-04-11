@@ -44,7 +44,7 @@ public class PortalUserImpl implements PortalUser {
     }
 
     /// development variable, users whose email matches this will have provider role assigned
-    @Value("#{'${admin.emails}'.split(';')}")
+    @Value("#{'${admin.emails:}'.split(';')}")
     private List<String> devAdminEmails;
 
     @Override
