@@ -456,7 +456,7 @@ metrics:
     required: true
     position: 0
     siteType: storage
-    cmdbUrl: http://indigo.cloud.plgrid.pl
+    cmdbUrl: https://onedata.org
     description: Where SLA will be requested
     visualClass:
      !java.util.ArrayList

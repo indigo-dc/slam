@@ -21,12 +21,12 @@
 
     <script type="text/javascript" th:inline="javascript">
         angular.module('indigo.constants', [])
-                .constant('SESSION', {
-                    credentials: [[${user.credentials}]],
-                    organisationName: [[${user.getUserBean().getOrganisationName()}]],
-                    email: [[${user.getUserBean().getEmail()}]],
-                    roles: [[${user_roles}]]
-                });
+            .constant('SESSION', {
+                credentials: [[${user.credentials}]],
+                organisationName: [[${user.getUserBean().getOrganisationName()}]],
+                email: [[${user.getUserBean().getEmail()}]],
+                roles: [[${user_roles}]]
+            });
     </script>
 </head>
 
@@ -48,6 +48,7 @@
             <p>
                 © By ACC Cyfronet AGH, 2017
             </p>
+            <p th:text="'Version: ' +${version}"></p>
         </div>
     </footer>
 </div>

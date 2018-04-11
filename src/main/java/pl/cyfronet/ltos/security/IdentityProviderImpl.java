@@ -14,6 +14,7 @@ import pl.cyfronet.ltos.bean.Team;
 import pl.cyfronet.ltos.bean.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,12 +61,11 @@ public class IdentityProviderImpl implements IdentityProvider {
         }
         identity.setAdministratedSites(administratedSites);
         identity.setRoles(unmodifiableList(roles));
-        identity.setTeamMembers(unmodifiableList(
-                user.getTeams().stream()
-                        .flatMap(team -> team.getRoles().stream()
-                                .map(role -> toTeamMember(team, role)))
-                        .collect(Collectors.toList())
-        ));
+
+        TeamMember member = new TeamMember();
+        member.setRole("member");
+        member.setTeam(portalUser.getUserBean().getOrganisationName());
+        identity.setTeamMembers(Arrays.asList(member));
         return identity;
     }
 
