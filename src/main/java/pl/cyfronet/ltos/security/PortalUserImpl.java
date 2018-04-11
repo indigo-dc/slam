@@ -62,7 +62,8 @@ public class PortalUserImpl implements PortalUser {
                     .map(role -> PROVIDER_AUTHORITY_ROLE_PREFIX + role)
                     .map(authName -> new SimpleGrantedAuthority(authName))
                     .collect(Collectors.toList()));
-        } else if (devAdminEmails.contains(data.user.getEmail())) {
+        }
+        if (devAdminEmails.contains(data.user.getEmail())) {
             authorities.add(new SimpleGrantedAuthority(AUTHORITY_ROLE_PREFIX + "ADMIN"));
         }
         return unmodifiableSet(authorities);
