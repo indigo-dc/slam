@@ -125,17 +125,36 @@ app.config(function ($engineProvider, SESSION) {
                     showCreateButton: false
                 },
                 {
-                    queryId: 'inProgressSlasProvider',
-                    label: 'SLA in Negotiations',
+                    queryId: 'inProgressComputingSlasProvider',
+                    label: 'Computing SLA in Negotiations',
                     documentModelId: 'sla',
                     showCreateButton: false
                 },
+                {
+                    queryId: 'inProgressStorageSlasProvider',
+                    label: 'Storafe SLA in Negotiations',
+                    documentModelId: 'slaS',
+                    showCreateButton: false
+                },
+
             ]);
     }
 
     if (SESSION.roles.indexOf("ROLE_ADMIN") != -1) {
         $engineProvider.dashboard({url: '/admin', label: 'Admin', activetab: 'admin'},
             [
+                {
+                    queryId: 'AllComputingSlasAdmin',
+                    label: 'Binding SLAs',
+                    documentModelId: 'sla',
+                    showCreateButton: false
+                },
+                {
+                    queryId: 'AllStorageSlasAdmin',
+                    label: 'Storafe SLA in Negotiations',
+                    documentModelId: 'slaS',
+                    showCreateButton: false
+                },
 
             ]);
     }

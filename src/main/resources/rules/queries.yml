@@ -185,8 +185,8 @@ queries:
           value: signed
 
   - !com.agreemount.bean.Query
-    id: inProgressSlasProvider
-    label: SLA in negotiations
+    id: inProgressComputingSlasProvider
+    label: Computing SLA in negotiations
     position: 2
     queryCategoryId: providerDashboard
 #    visibilityConstraint:
@@ -202,6 +202,9 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: computing
         - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
@@ -210,5 +213,87 @@ queries:
           state: mainState
           value: sent
 
+  - !com.agreemount.bean.Query
+    id: inProgressStorageSlasProvider
+    label: Storage SLA in negotiations
+    position: 2
+    queryCategoryId: providerDashboard
+#    visibilityConstraint:
+#      !com.agreemount.slaneg.constraint.action.definition.Operator
+#        type: OR
+#        children:
+#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+#          role: provider
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+          siteMetricId: siteName
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: sent
+
+  - !com.agreemount.bean.Query
+    id: AllComputingSlasAdmin
+    label: Computing SLA in negotiations
+    position: 2
+    queryCategoryId: adminDashboard
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: admin
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: computing
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: sent
+
+  - !com.agreemount.bean.Query
+    id: AllStorageSlasAdmin
+    label: Computing SLA in negotiations
+    position: 2
+    queryCategoryId: adminDashboard
+    visibilityConstraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: OR
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: admin
+    constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
+      !com.agreemount.slaneg.constraint.query.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: serviceType
+          value: storage
+        - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
+          sth: ok
+        - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
+          state: mainState
+          value: sent
 
 
