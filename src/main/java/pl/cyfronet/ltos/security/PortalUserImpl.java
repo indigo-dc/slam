@@ -44,8 +44,8 @@ public class PortalUserImpl implements PortalUser {
     }
 
     /// development variable, users whose email matches this will have provider role assigned
-    @Value("#{'${provider.emails}'.split(';')}")
-    private List<String> devProviderEmails;
+    @Value("#{'${admin.emails}'.split(';')}")
+    private List<String> devAdminEmails;
 
     @Override
     public String getName() {
@@ -62,8 +62,8 @@ public class PortalUserImpl implements PortalUser {
                     .map(role -> PROVIDER_AUTHORITY_ROLE_PREFIX + role)
                     .map(authName -> new SimpleGrantedAuthority(authName))
                     .collect(Collectors.toList()));
-        } else if (devProviderEmails.contains(data.user.getEmail())) {
-            authorities.add(new SimpleGrantedAuthority(AUTHORITY_ROLE_PREFIX + "PROVIDER"));
+        } else if (devAdminEmails.contains(data.user.getEmail())) {
+            authorities.add(new SimpleGrantedAuthority(AUTHORITY_ROLE_PREFIX + "ADMIN"));
         }
         return unmodifiableSet(authorities);
     }

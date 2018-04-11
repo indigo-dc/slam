@@ -46,6 +46,9 @@ public class IdentityProviderImpl implements IdentityProvider {
         if (portalUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PROVIDER"))) {
             roles.add("provider");
         }
+        if (portalUser.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            roles.add("admin");
+        }
         List<String> administratedSites = new ArrayList<>();
         for(GrantedAuthority role: portalUser.getAuthorities()){
             if(role.getAuthority().startsWith("ROLE_PROVIDER_")){

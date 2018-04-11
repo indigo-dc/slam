@@ -14,6 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li ng-if="$ctrl.is_admin" ng-class="{active: $ctrl.$route.current.activetab == 'admin'}"><a href="#/admin">Admin</a></li>
                 <li ng-if="$ctrl.is_provider" ng-class="{active: $ctrl.$route.current.activetab == 'provider'}"><a href="#/provider">Provider</a></li>
                 <li ng-class="{active: $ctrl.$route.current.activetab == 'dashboard'}"><a href="#/dashboard">Dashboard</a></li>
             </ul>
