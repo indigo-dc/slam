@@ -106,21 +106,18 @@ app.config(function ($engineProvider, SESSION) {
                 label: 'Computing SLA Negotiations',
                 documentModelId: 'sla',
                 showCreateButton: true,
-                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'workingSlaS',
                 label: 'Storage SLA Negotiations',
                 documentModelId: 'slaS',
                 showCreateButton: true,
-                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             },
             {
                 queryId: 'rejectedSla',
                 label: 'Rejected SLAs',
                 documentModelId: 'sla',
                 showCreateButton: false,
-                contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html'
             }
         ]);
 
@@ -148,7 +145,6 @@ app.config(function ($engineProvider, SESSION) {
                     queryId: 'inProgressComputingSlasProvider',
                     label: 'Computing SLA Negotiations',
                     documentModelId: 'sla',
-                    contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
 
                 },
