@@ -32,9 +32,4 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    Document factory is declared as a service, so code below is not needed anymore
-//    @Bean
-//    public DocumentFactory<IndigoDocument> getDocumentFactory() {
-//        return new IndigoDocumentFactory();
-//    }
 }

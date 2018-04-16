@@ -1,4 +1,4 @@
-package pl.cyfronet.indigo.rest.controller;
+package pl.cyfronet.indigo.controller;
 
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

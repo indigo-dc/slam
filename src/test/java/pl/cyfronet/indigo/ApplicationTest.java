@@ -13,6 +13,6 @@ import org.springframework.context.annotation.PropertySources;
         @PropertySource("classpath:bazaar.test.properties"),
         @PropertySource("classpath:mongo.test.properties")
 })
-public class ApplicationTest{
-	
+public class ApplicationTest {
+
 }

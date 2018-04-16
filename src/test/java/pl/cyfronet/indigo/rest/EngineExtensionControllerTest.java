@@ -1,6 +1,5 @@
 package pl.cyfronet.indigo.rest;
 
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,10 +8,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import pl.cyfronet.indigo.bean.DocumentWeight;
 import pl.cyfronet.indigo.bean.User;
-import pl.cyfronet.indigo.repository.DocumentWeightRepository;
+import pl.cyfronet.indigo.controller.EngineExtensionController;
 import pl.cyfronet.indigo.repository.MockMvcSecurityTest;
 import pl.cyfronet.indigo.repository.UserRepository;
-import pl.cyfronet.indigo.rest.controller.EngineExtensionController;
 import pl.cyfronet.indigo.security.PortalUser;
 
 import java.util.ArrayList;
@@ -28,18 +26,11 @@ import static org.mockito.Mockito.when;
 
 public class EngineExtensionControllerTest  extends MockMvcSecurityTest {
 
-
     @InjectMocks
     private EngineExtensionController controller;
 
     @Mock
-    private DocumentWeightRepository documentWeightRepository;
-
-    @Mock
     private UserRepository userRepository;
-
-    @Mock
-    private SessionFactory hibernateSessionFactory;
 
     @Before
     public void setUp(){
