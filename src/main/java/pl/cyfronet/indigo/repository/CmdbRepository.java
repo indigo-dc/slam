@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Component;
-import pl.cyfronet.engine.extension.constraint.action.impl.IsPublicServiceImpl;
-import pl.cyfronet.engine.extension.metric.SiteSelectMetric;
+import pl.cyfronet.indigo.engine.extension.constraint.action.impl.IsPublicServiceImpl;
+import pl.cyfronet.indigo.engine.extension.metric.SiteSelectMetric;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;

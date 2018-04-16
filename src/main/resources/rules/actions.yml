@@ -181,7 +181,7 @@ actions:
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
 #    actions:
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -243,7 +243,7 @@ actions:
         states:
           mainState: signed
           sideState: provider
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -297,7 +297,7 @@ actions:
         states:
           mainState: signed
           sideState: provider
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -352,7 +352,7 @@ actions:
         states:
           mainState: signed
           sideState: manager
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -406,7 +406,7 @@ actions:
         states:
           mainState: rejected
           sideState: provider
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -460,7 +460,7 @@ actions:
         states:
           mainState: rejected
           sideState: manager
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -514,7 +514,7 @@ actions:
         states:
           mainState: sent
           sideState: provider
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -567,7 +567,7 @@ actions:
         states:
           mainState: sent
           sideState: manager
-#      - !pl.cyfronet.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 

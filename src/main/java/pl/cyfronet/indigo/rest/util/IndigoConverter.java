@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.cyfronet.engine.extension.bean.IndigoDocument;
+import pl.cyfronet.indigo.engine.extension.bean.IndigoDocument;
 import pl.cyfronet.indigo.rest.bean.IndigoWrapper;
 import pl.cyfronet.indigo.rest.bean.preferences.Preference;
 import pl.cyfronet.indigo.rest.bean.preferences.Preferences;

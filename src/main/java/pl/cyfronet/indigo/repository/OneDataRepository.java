@@ -27,7 +27,7 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import pl.cyfronet.engine.extension.metric.SpaceMetric;
+import pl.cyfronet.indigo.engine.extension.metric.SpaceMetric;
 import pl.cyfronet.indigo.repository.onedata.Space;
 
 @Component
