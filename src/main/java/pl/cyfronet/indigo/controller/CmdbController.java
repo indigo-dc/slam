@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class NewDocumentController {
+public class CmdbController {
 
     static Logger logger = LoggerFactory
-            .getLogger(NewDocumentController.class);
+            .getLogger(CmdbController.class);
 
     @Value("${cmdb.url}")
     private String cmdbUrl;
