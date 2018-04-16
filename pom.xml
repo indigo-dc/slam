@@ -242,13 +242,6 @@
         </plugins>
     </build>
 
-    <scm>
-        <connection>scm:git:ssh://git@git.plgrid.pl:7999/fiddev/duo-demo.git</connection>
-        <url>https://git.plgrid.pl/projects/fiddev</url>
-        <developerConnection>scm:git:ssh://git@git.plgrid.pl:7999/fiddev/duo-demo.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-
     <repositories>
         <repository>
             <id>spring-releases</id>
@@ -268,15 +261,4 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
-
-    <distributionManagement>
-        <repository>
-            <id>fiddev-releases</id>
-            <url>https://gforge.cyfronet.pl/nexus/content/repositories/fiddev-releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>fiddev-snapshots</id>
-            <url>https://gforge.cyfronet.pl/nexus/content/repositories/fiddev-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
