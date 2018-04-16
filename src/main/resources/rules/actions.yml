@@ -38,7 +38,7 @@ actions:
           mainState: draft
           serviceType: computing
           sideState: customer
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.SetOrganizationAsTeam
+      - !pl.cyfronet.engine.extension.action.definition.SetOrganizationAsTeam
         documentAlias: newRoot
 
 
@@ -80,7 +80,7 @@ actions:
           mainState: draft
           serviceType: storage
           sideState: customer
-      - !pl.cyfronet.bazaar.engine.extension.action.definition.SetOrganizationAsTeam
+      - !pl.cyfronet.engine.extension.action.definition.SetOrganizationAsTeam
         documentAlias: newRoot
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -181,7 +181,7 @@ actions:
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
 #    actions:
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -226,7 +226,7 @@ actions:
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         constraint:
-          !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsPublicService
+          !pl.cyfronet.engine.extension.constraint.action.definition.IsPublicService
             negation: true
             documentAlias: newLeaf
             metricId: siteStorageSelect
@@ -236,14 +236,14 @@ actions:
           sideState: provider
       - !com.agreemount.slaneg.action.definition.ChangeState
         constraint:
-          !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsPublicService
+          !pl.cyfronet.engine.extension.constraint.action.definition.IsPublicService
             documentAlias: newLeaf
             metricId: siteStorageSelect
         documentAlias: newLeaf
         states:
           mainState: signed
           sideState: provider
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -297,7 +297,7 @@ actions:
         states:
           mainState: signed
           sideState: provider
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -352,7 +352,7 @@ actions:
         states:
           mainState: signed
           sideState: manager
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -406,7 +406,7 @@ actions:
         states:
           mainState: rejected
           sideState: provider
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -460,7 +460,7 @@ actions:
         states:
           mainState: rejected
           sideState: manager
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -514,7 +514,7 @@ actions:
         states:
           mainState: sent
           sideState: provider
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
@@ -567,7 +567,7 @@ actions:
         states:
           mainState: sent
           sideState: manager
-#      - !pl.cyfronet.bazaar.engine.extension.action.definition.CopySite
+#      - !pl.cyfronet.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 

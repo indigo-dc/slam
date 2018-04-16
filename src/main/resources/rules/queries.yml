@@ -61,7 +61,7 @@ queries:
     position: 3
     queryCategoryId: userDashboard
     visibilityConstraint:
-#      !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+#      !pl.cyfronet.engine.extension.constraint.action.definition.IsSiteAdmin
 #          role: provider
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
 #        type: OR
@@ -96,7 +96,7 @@ queries:
     position: 4
     queryCategoryId: userDashboard
     visibilityConstraint:
-#      !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+#      !pl.cyfronet.engine.extension.constraint.action.definition.IsSiteAdmin
 #          role: provider
 #      !com.agreemount.slaneg.constraint.action.definition.Operator
 #        type: OR
@@ -143,7 +143,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: request
-        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -163,7 +163,7 @@ queries:
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
-#        - !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+#        - !pl.cyfronet.engine.extension.constraint.action.definition.IsSiteAdmin
 #          role: provider
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
@@ -175,7 +175,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: computing
-        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -194,7 +194,7 @@ queries:
         children:
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
-#        - !pl.cyfronet.bazaar.engine.extension.constraint.action.definition.IsSiteAdmin
+#        - !pl.cyfronet.engine.extension.constraint.action.definition.IsSiteAdmin
 #          role: provider
     constraint: #dla jakich dokumentow ma byc widoczna ta kwerenda
       !com.agreemount.slaneg.constraint.query.definition.Operator
@@ -206,7 +206,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: storage
-        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -235,7 +235,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: computing
-        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -264,7 +264,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: storage
-        - !pl.cyfronet.bazaar.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
