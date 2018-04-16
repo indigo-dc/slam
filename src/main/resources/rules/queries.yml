@@ -143,7 +143,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: documentType
           value: request
-        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.indigo.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -175,7 +175,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: computing
-        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.indigo.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -206,7 +206,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: storage
-        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.indigo.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -235,7 +235,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: computing
-        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.indigo.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok
@@ -264,7 +264,7 @@ queries:
         - !com.agreemount.slaneg.constraint.query.definition.StateEqualsDef
           state: serviceType
           value: storage
-        - !pl.cyfronet.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
+        - !pl.cyfronet.indigo.engine.extension.constraint.query.definition.IsAdministratorInRelatedSite
           siteMetricId: siteName
         - !com.agreemount.slaneg.constraint.query.definition.IsLeafADef
           sth: ok

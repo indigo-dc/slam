@@ -38,7 +38,7 @@ actions:
           mainState: draft
           serviceType: computing
           sideState: customer
-      - !pl.cyfronet.engine.extension.action.definition.SetOrganizationAsTeam
+      - !pl.cyfronet.indigo.engine.extension.action.definition.SetOrganizationAsTeam
         documentAlias: newRoot
 
 
@@ -80,7 +80,7 @@ actions:
           mainState: draft
           serviceType: storage
           sideState: customer
-      - !pl.cyfronet.engine.extension.action.definition.SetOrganizationAsTeam
+      - !pl.cyfronet.indigo.engine.extension.action.definition.SetOrganizationAsTeam
         documentAlias: newRoot
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
@@ -226,7 +226,7 @@ actions:
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         constraint:
-          !pl.cyfronet.engine.extension.constraint.action.definition.IsPublicService
+          !pl.cyfronet.indigo.engine.extension.constraint.action.definition.IsPublicService
             negation: true
             documentAlias: newLeaf
             metricId: siteStorageSelect
@@ -236,7 +236,7 @@ actions:
           sideState: provider
       - !com.agreemount.slaneg.action.definition.ChangeState
         constraint:
-          !pl.cyfronet.engine.extension.constraint.action.definition.IsPublicService
+          !pl.cyfronet.indigo.engine.extension.constraint.action.definition.IsPublicService
             documentAlias: newLeaf
             metricId: siteStorageSelect
         documentAlias: newLeaf

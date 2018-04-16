@@ -5,6 +5,8 @@ import com.agreemount.bean.document.state.State;
 import com.agreemount.bean.metric.Metric;
 import com.agreemount.bean.metric.MetricCategory;
 import com.agreemount.bean.query.QueryCategory;
+import com.agreemount.slaneg.action.ActionContext;
+import com.agreemount.slaneg.action.ActionContextFactory;
 import com.agreemount.slaneg.action.definition.Action;
 import com.agreemount.slaneg.constraint.action.definition.ActionConstraint;
 import com.agreemount.slaneg.message.Message;
@@ -59,5 +61,10 @@ public class YamlProvidersConfiguration {
     @Bean(name = "messagesYamlProvider")
     public GenericYamlProvider<Message> messageGenericYamlProvider() {
         return new GenericYamlProvider<>("messages");
+    }
+
+    @Bean
+    public ActionContextFactory<ActionContext> getActionContextFactory() {
+        return new ActionContextFactory<>(ActionContext.class);
     }
 }

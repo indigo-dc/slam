@@ -3,8 +3,6 @@ package pl.cyfronet.indigo.rest.util;
 import com.agreemount.bean.document.Document;
 import com.agreemount.bean.metric.Metric;
 import com.agreemount.engine.facade.MetricFacade;
-import com.agreemount.slaneg.db.DocumentOperations;
-import com.agreemount.slaneg.db.RelationOperations;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +24,6 @@ import java.util.*;
 @Log4j
 @Component
 public class IndigoConverter {
-
-    @Autowired
-    private RelationOperations relationOperations;
-
-    @Autowired
-    private DocumentOperations documentOperations;
 
     @Autowired
     private MetricFacade metricFacade;
