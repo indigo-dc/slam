@@ -30,7 +30,7 @@
     "angular-translate-loader-static-files": "^2.7.2",
     "angular-spring-data-rest": "^0.4.4",
     "angular-bootstrap": "^2.2.0",
-    "angular-engine": "0.8.12",
+    "angular-engine": "0.8.15",
     "angular-ui-tree": "^2.22.5",
     "angular-ui-sortable": "^0.17.1",
     "angular-toastr": "^2.1.1",

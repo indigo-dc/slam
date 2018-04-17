@@ -1,6 +1,15 @@
 var app = angular.module('indigo');
 
-app.config(function ($engineProvider, SESSION) {
+app.factory('errorHandler', function($location) {
+    return function (url, error) {
+        $location.path('/error');
+        $location.replace();
+    };
+});
+
+app.config(function ($engineProvider, SESSION, $injector) {
+    $engineProvider.setErrorHandler('errorHandler');
+
     /**
      * SPECIFYING SLA
      */

@@ -6,4 +6,5 @@ angular.module('indigo.common.error', ['ngRoute']).config(function ($routeProvid
         }});
 }).controller('errorCtrl', function ($scope, $routeParams, $location) {
     $scope.errorMessage = $routeParams.message;
+    $scope.backLink = $routeParams.back;
 });
