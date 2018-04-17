@@ -154,6 +154,17 @@ actions:
           - !com.agreemount.slaneg.constraint.action.definition.Operator
              type: AND
              children:
+              - &managerActions !com.agreemount.slaneg.constraint.action.definition.Operator
+                type: OR
+                children:
+                - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                  documentAlias: TEMP
+                  state: documentModelId
+                  value: sla
+                - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                  documentAlias: TEMP
+                  state: documentModelId
+                  value: slaS
               - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
                 state: mainState
                 value: draft
@@ -163,6 +174,17 @@ actions:
           - !com.agreemount.slaneg.constraint.action.definition.Operator
              type: AND
              children:
+              - &providerActions !com.agreemount.slaneg.constraint.action.definition.Operator
+                type: OR
+                children:
+                - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                  documentAlias: TEMP
+                  state: documentModelId
+                  value: adminSla
+                - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+                  documentAlias: TEMP
+                  state: documentModelId
+                  value: adminSlaS
               - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
                 state: sideState
                 value: provider
@@ -171,6 +193,7 @@ actions:
           - !com.agreemount.slaneg.constraint.action.definition.Operator
              type: AND
              children:
+              - *managerActions
               - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
                 state: sideState
                 value: manager
@@ -282,17 +305,7 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
           value: manager
-        - &managerActions !com.agreemount.slaneg.constraint.action.definition.Operator #Odkomentować, jak będzie zrobione przesyłanie stanu od Michała
-          type: OR
-          children:
-          - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: documentModelId
-            value: sla
-          - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: documentModelId
-            value: slaS
+        - *managerActions
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
@@ -345,17 +358,7 @@ actions:
           documentAlias: BASE
           state: sideState
           value: provider
-        - &providerActions !com.agreemount.slaneg.constraint.action.definition.Operator #Odkomentować, jak będzie zrobione przesyłanie stanu od Michała
-          type: OR
-          children:
-          - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: documentModelId
-            value: adminSla
-          - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-            documentAlias: TEMP
-            state: documentModelId
-            value: adminSlaS
+        - *providerActions
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
