@@ -88,7 +88,7 @@ metrics:
 #            state: documentType
 #            value: sla
 
-  - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
+  - !pl.cyfronet.indigo.engine.extension.metric.SiteSelectMetric
     id: siteStorageSelect
     label: Provider and service
     categoryId: slaScope
@@ -426,7 +426,7 @@ metrics:
 
 # storage
 
-  - !pl.cyfronet.bazaar.engine.extension.metric.SpaceMetric
+  - !pl.cyfronet.indigo.engine.extension.metric.SpaceMetric
     id: spaceSelect
     label: ONEDATA Space
     categoryId: slaScope
@@ -449,7 +449,7 @@ metrics:
             state: serviceType
             value: storage
 
-  - !pl.cyfronet.bazaar.engine.extension.metric.SiteSelectMetric
+  - !pl.cyfronet.indigo.engine.extension.metric.SiteSelectMetric
     id: siteStorageSelect
     label: Site
     categoryId: slaScope

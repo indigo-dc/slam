@@ -3,12 +3,9 @@
 import com.esotericsoftware.yamlbeans.YamlReader;
 import groovy.util.logging.Log4j;
 import org.junit.Test;
-import pl.cyfronet.bazaar.engine.rules.GenericYamlProvider;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 
 /**
  * Created by toszep on 2017-03-28.
