@@ -42,6 +42,7 @@ app.config(function ($engineProvider, SESSION) {
         }
     };
     $engineProvider.document('sla', '/sla', '/sla/:id', ['SignedSlaComp'], slaSpec);
+    $engineProvider.document('adminSla', '/asla', '/asla/:id', ['SignedSlaComp'], slaSpec);
 
     var slaSSpec = {
         documentJSON: {
@@ -81,6 +82,7 @@ app.config(function ($engineProvider, SESSION) {
         }
     };
     $engineProvider.document('slaS', '/slaS', '/slaS/:id', ['SignedSlaStorage'], slaSSpec);
+    $engineProvider.document('adminSlaS', '/aslaS', '/aslaS/:id', ['SignedSlaComp'], slaSSpec);
 
 
     $engineProvider.dashboard({url: '/dashboard', label: 'SLAs', activetab: 'dashboard'},
@@ -127,7 +129,7 @@ app.config(function ($engineProvider, SESSION) {
                 {
                     queryId: 'AllComputingSlasProvider',
                     label: 'Binding Computing SLAs',
-                    documentModelId: 'sla',
+                    documentModelId: 'adminSla',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
 
@@ -135,7 +137,7 @@ app.config(function ($engineProvider, SESSION) {
                 {
                     queryId: 'AllStorageSlasProvider',
                     label: 'Binding Storage SLAs',
-                    documentModelId: 'sla',
+                    documentModelId: 'adminSlaS',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
 
@@ -144,14 +146,14 @@ app.config(function ($engineProvider, SESSION) {
                 {
                     queryId: 'inProgressComputingSlasProvider',
                     label: 'Computing SLA Negotiations',
-                    documentModelId: 'sla',
+                    documentModelId: 'adminSla',
                     showCreateButton: false
 
                 },
                 {
                     queryId: 'inProgressStorageSlasProvider',
                     label: 'Storage SLA Negotiations',
-                    documentModelId: 'slaS',
+                    documentModelId: 'adminSlaS',
                     showCreateButton: false
                 },
 
@@ -164,14 +166,14 @@ app.config(function ($engineProvider, SESSION) {
                 {
                     queryId: 'AllComputingSlasAdmin',
                     label: 'Computing SLAs',
-                    documentModelId: 'sla',
+                    documentModelId: 'adminSla',
                     contentTemplateUrl: '/js/engine/indigoDocumentList.tpl.html',
                     showCreateButton: false
                 },
                 {
                     queryId: 'AllStorageSlasAdmin',
                     label: 'Storage SLAs',
-                    documentModelId: 'slaS',
+                    documentModelId: 'adminSlaS',
                     showCreateButton: false
                 },
 
