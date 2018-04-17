@@ -11,6 +11,7 @@ angular.module('indigo', ['ngRoute',
     'ui.sortable',
     'engine',
     //application modules
+    'indigo.common.error',
     'indigo.components.header',
     // 'indigo.dashboard',
     // 'indigo.profile',
