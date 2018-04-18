@@ -3,7 +3,7 @@ messages:
   - !com.agreemount.slaneg.message.Message
     id: slaSent #unique identifier
     type: success #type of message, string
-    body: SLA is successfully sent to the Provider
+    body: SLA is waiting for Provider's response.
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
@@ -16,3 +16,6 @@ messages:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes

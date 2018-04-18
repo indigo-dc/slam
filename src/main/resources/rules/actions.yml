@@ -37,6 +37,7 @@ actions:
           mainState: draft
           serviceType: computing
           sideState: customer
+          sendToAccept: no
       - !pl.cyfronet.indigo.engine.extension.action.definition.SetOrganizationAsTeam
         documentAlias: newRoot
 
@@ -78,6 +79,7 @@ actions:
           mainState: draft
           serviceType: storage
           sideState: customer
+          sendToAccept: no
       - !pl.cyfronet.indigo.engine.extension.action.definition.SetOrganizationAsTeam
         documentAlias: newRoot
 
@@ -149,6 +151,9 @@ actions:
           documentAlias: TEMP
           state: documentType
           value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: no
         - !com.agreemount.slaneg.constraint.action.definition.Operator
           type: OR
           children:
@@ -209,8 +214,139 @@ actions:
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: sendDraft
+    id: sendToProvider
     label: Send to provider
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    visible: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.Operator
+            type: OR
+            children:
+            - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+              state: mainState
+              value: draft
+            - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+              state: sideState
+              value: manager
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: no
+##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+##          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        constraint:
+          !pl.cyfronet.indigo.engine.extension.constraint.action.definition.IsPublicService
+            negation: true
+            documentAlias: newLeaf
+            metricId: siteStorageSelect
+        documentAlias: newLeaf
+        states:
+          mainState: sent
+          sideState: provider
+          sendToAccept: yes
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        constraint:
+          !pl.cyfronet.indigo.engine.extension.constraint.action.definition.IsPublicService
+            documentAlias: newLeaf
+            metricId: siteStorageSelect
+        documentAlias: newLeaf
+        states:
+          mainState: signed
+          sideState: provider
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: sendToManager
+    label: Send to Manager
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    redirectContext: /provider
+    visible: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+        - *providerActions
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: no
+##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+##          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          mainState: sent
+          sideState: manager
+          sendToAccept: yes
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
+
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: acceptSlaManager
+    label: Accept SLA
     parentAlias: BASE
     alias: newLeaf
     metricSource: ALIAS
@@ -240,83 +376,24 @@ actions:
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
-          value: draft
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: manager
+        - *managerActions
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: manager
-##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-##          documentAlias: BASE
+#       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+#          documentAlias: BASE
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
-        constraint:
-          !pl.cyfronet.indigo.engine.extension.constraint.action.definition.IsPublicService
-            negation: true
-            documentAlias: newLeaf
-            metricId: siteStorageSelect
-        documentAlias: newLeaf
-        states:
-          mainState: sent
-          sideState: provider
-      - !com.agreemount.slaneg.action.definition.ChangeState
-        constraint:
-          !pl.cyfronet.indigo.engine.extension.constraint.action.definition.IsPublicService
-            documentAlias: newLeaf
-            metricId: siteStorageSelect
         documentAlias: newLeaf
         states:
           mainState: signed
           sideState: provider
-#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
-#        fromAlias: BASE
-#        toAlias: newLeaf
-
-
-#  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-#    id: acceptSlaManager
-#    label: Accept SLA (M)
-#    parentAlias: BASE
-#    alias: newLeaf
-#    metricSource: ALIAS
-#    copyRelationsFromAlias: BASE
-#    copyMetricsFromAlias: TEMP
-#    copyStatesFromAlias: BASE
-#    setTeamFromAlias: BASE
-#    redirectToThisVersion: true
-#    visible: true
-#    constraint:
-#      !com.agreemount.slaneg.constraint.action.definition.Operator
-#        type: AND
-#        children:
-#        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
-#          documentAlias: BASE
-#        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
-#          documentAlias: TEMP
-#        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
-#          documentAlias: BASE
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#          documentAlias: BASE
-#          state: documentType
-#          value: sla
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#          documentAlias: TEMP
-#          state: documentType
-#          value: sla
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#          state: mainState
-#          value: sent
-#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-#          state: sideState
-#          value: manager
-#        - *managerActions
-#        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
-#          role: manager
-##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
-##          documentAlias: BASE
-#    actions:
-#      - !com.agreemount.slaneg.action.definition.ChangeState
-#        documentAlias: newLeaf
-#        states:
-#          mainState: signed
-#          sideState: provider
 #      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
@@ -360,6 +437,9 @@ actions:
           documentAlias: BASE
           state: sideState
           value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
         - *providerActions
         - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
           role: provider
@@ -418,6 +498,9 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
           value: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
         - *managerActions
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
@@ -476,6 +559,9 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
           value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:
@@ -490,7 +576,7 @@ actions:
 
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: sentSlaManager
+    id: NegotiateSlaManager
     label: Negotiate SLA
     parentAlias: BASE
     alias: newLeaf
@@ -530,6 +616,9 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
           value: manager
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
         - *managerActions
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
@@ -537,14 +626,13 @@ actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
         states:
-          mainState: sent
-          sideState: provider
+          sendToAccept: no
 #      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
 
   - !com.agreemount.slaneg.action.definition.CreateNewLeaf
-    id: sentSlaProvider
+    id: NegotiateComputingSlaProvider
     label: Negotiate SLA
     parentAlias: BASE
     alias: newLeaf
@@ -554,7 +642,68 @@ actions:
     copyStatesFromAlias: BASE
     setTeamFromAlias: BASE
     redirectToThisVersion: true
-    redirectContext: /provider
+    redirectContext: adminSla
+    visible: true
+    constraint:
+      !com.agreemount.slaneg.constraint.action.definition.Operator
+        type: AND
+        children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: TEMP
+        - !com.agreemount.slaneg.constraint.action.definition.IsLeafDef
+          documentAlias: BASE
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: serviceType
+          value: computing
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: TEMP
+          state: documentType
+          value: sla
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+#        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+#          state: sideState
+#          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.HasRoleDef
+          role: provider
+        - *providerActions
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sideState
+          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
+##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
+##          documentAlias: BASE
+    actions:
+      - !com.agreemount.slaneg.action.definition.ChangeState
+        documentAlias: newLeaf
+        states:
+          sendToAccept: no
+#      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
+#        fromAlias: BASE
+#        toAlias: newLeaf
+
+  - !com.agreemount.slaneg.action.definition.CreateNewLeaf
+    id: NegotiateStorageSlaProvider
+    label: Negotiate SLA
+    parentAlias: BASE
+    alias: newLeaf
+    metricSource: ALIAS
+    copyRelationsFromAlias: BASE
+    copyMetricsFromAlias: TEMP
+    copyStatesFromAlias: BASE
+    setTeamFromAlias: BASE
+    redirectToThisVersion: true
+    redirectContext: adminSlaS
     visible: true
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
@@ -575,6 +724,10 @@ actions:
           state: documentType
           value: sla
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          documentAlias: BASE
+          state: serviceType
+          value: storage
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: mainState
           value: sent
 #        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
@@ -586,15 +739,16 @@ actions:
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
           state: sideState
           value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes
 ##       - !com.agreemount.slaneg.constraint.action.definition.HasAnyRoleInRelatedBusinessEntityDef
 ##          documentAlias: BASE
     actions:
       - !com.agreemount.slaneg.action.definition.ChangeState
         documentAlias: newLeaf
         states:
-          mainState: sent
-          sideState: manager
+          sendToAccept: no
 #      - !pl.cyfronet.indigo.engine.extension.action.definition.CopySite
 #        fromAlias: BASE
 #        toAlias: newLeaf
-
