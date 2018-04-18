@@ -18,7 +18,7 @@ metrics:
     categoryId: computingTimeRestrictions
     required: true
     position: 1
-    description: when u wish your SLA to activate
+    description: When you wish your SLA to activate
 #    validateOnChange: true
     visualClass:
      !java.util.ArrayList
@@ -44,7 +44,7 @@ metrics:
     required: true
     position: 2
 #    validateOnChange: true
-    description: computingTimeRestrictions
+    description: When you wish your SLA to deactivate
     visualClass:
      !java.util.ArrayList
        - date
