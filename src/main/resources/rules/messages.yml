@@ -1,14 +1,21 @@
 messages:
 
   - !com.agreemount.slaneg.message.Message
-    id: sampleMsg #unique identifier
+    id: slaSent #unique identifier
     type: success #type of message, string
-    body: thisIsDraft
+    body: SLA is waiting for Provider's response.
     constraint:
       !com.agreemount.slaneg.constraint.action.definition.Operator
         type: AND
         children:
+        - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+          documentAlias: BASE
         - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-          state: asfsd
-          value: sample_value
-
+          state: sideState
+          value: provider
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: mainState
+          value: sent
+        - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+          state: sendToAccept
+          value: yes

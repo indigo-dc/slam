@@ -4,8 +4,13 @@ constraints:
     id: documentVisibilityConstraint #don`t change this id - it`s hardcoded!
     type: OR
     children:
-    - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
-      negation: true #bez sensu ale chce zeby zawsze wchodzilo
-      state: someState
-      value: someValue
+    - !com.agreemount.slaneg.constraint.action.definition.Operator
+      type: AND
+      children:
+      - !com.agreemount.slaneg.constraint.action.definition.AliasExistsDef
+        documentAlias: BASE
+      - !com.agreemount.slaneg.constraint.action.definition.StateEqualsDef
+        negation: true #bez sensu ale chce zeby zawsze wchodzilo
+        state: someState
+        value: someValue
 
