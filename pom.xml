@@ -59,7 +59,7 @@
         <dependency>
             <groupId>com.agreemount</groupId>
             <artifactId>engine</artifactId>
-            <version>1.4.14</version>
+            <version>1.5.2</version>
         </dependency>
         <dependency>
             <groupId>com.esotericsoftware.yamlbeans</groupId>
