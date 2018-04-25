@@ -13,6 +13,43 @@ app.config(function ($engineProvider, SESSION, $injector) {
     /**
      * SPECIFYING SLA
      */
+    var slaSpecProvider = {
+        documentJSON: {
+            "states": {
+                "documentType": "sla",
+                "serviceType": "computing"
+            },
+            "metrics": {}
+        },
+        name: 'Computing SLA',
+        list: {
+            columns: [
+                {name: '@index', type: 'link', caption: 'ID', id: 'states.sendToAccept === "yes" || states.sideState === "provider"  ? id : parentId'},
+                {name: 'siteName', caption: 'site'},
+                {name: 'createdAt', type: 'date', caption: 'created'},
+                {name: 'states.mainState', caption: 'status'},
+                {name: 'metrics.startComp', caption: 'Start', type: 'date'},
+                {name: 'metrics.endComp', caption: 'End', type: 'date'}
+            ],
+            caption: 'SLAs'
+        },
+        document: {
+            steps: [
+                {
+                    name: 'GENERAL',
+                    categories: 'mcComputing'
+                }
+            ],
+            details: {
+                'caption': 'Computing SLA',
+                entries: [
+                    {name: 'metrics.teamId',  caption: 'organization'},
+                ],
+            },
+            showValidationButton: true,
+            summary: true
+        }
+    };
     var slaSpec = {
         documentJSON: {
             "states": {
@@ -24,7 +61,7 @@ app.config(function ($engineProvider, SESSION, $injector) {
         name: 'Computing SLA',
         list: {
             columns: [
-                {name: '@index', type: 'link', caption: 'ID'},
+                {name: '@index', type: 'link', caption: 'ID', id: 'states.sideState === "customer" || states.sendToAccept === "yes" || states.sideState === "manager" ? id : parentId'},
                 {name: 'siteName', caption: 'site'},
                 {name: 'createdAt', type: 'date', caption: 'created'},
                 {name: 'states.mainState', caption: 'status'},
@@ -51,8 +88,45 @@ app.config(function ($engineProvider, SESSION, $injector) {
         }
     };
     $engineProvider.document('sla', '/sla', '/sla/:id', ['SignedSlaComp'], slaSpec);
-    $engineProvider.document('adminSla', '/asla', '/asla/:id', ['SignedSlaComp'], slaSpec);
+    $engineProvider.document('adminSla', '/asla', '/asla/:id', ['SignedSlaComp'], slaSpecProvider);
 
+    var slaSSpecProvider = {
+        documentJSON: {
+            "states": {
+                "documentType": "sla",
+                "serviceType": "storage"
+            },
+            "metrics": {}
+        },
+        name: 'Storage SLA',
+        list: {
+            columns: [
+                {name: '@index', type: 'link', caption: 'ID', id: 'states.sendToAccept === "yes" || states.sideState === "provider" ? id : parentId'},
+                {name: 'siteName', caption: 'site'},
+                {name: 'createdAt', type: 'date', caption: 'created'},
+                {name: 'states.mainState', caption: 'status'},
+                {name: 'metrics.startComp', caption: 'Start', type: 'date'},
+                {name: 'metrics.endComp', caption: 'End', type: 'date'}
+            ],
+            caption: 'Storage SLAs'
+        },
+        document: {
+            steps: [
+                {
+                    name: 'GENERAL',
+                    categories: 'mcStorage'
+                }
+            ],
+            details: {
+                'caption': 'Storage SLA',
+                entries: [
+                    {name: 'metrics.teamId',  caption: 'organization'},
+                ],
+            },
+            showValidationButton: true,
+            summary: true
+        }
+    };
     var slaSSpec = {
         documentJSON: {
             "states": {
@@ -64,7 +138,7 @@ app.config(function ($engineProvider, SESSION, $injector) {
         name: 'Storage SLA',
         list: {
             columns: [
-                {name: '@index', type: 'link', caption: 'ID'},
+                {name: '@index', type: 'link', caption: 'ID', id: 'states.sideState === "customer" || states.sendToAccept === "yes" || states.sideState === "manager" ? id : parentId'},
                 {name: 'siteName', caption: 'site'},
                 {name: 'createdAt', type: 'date', caption: 'created'},
                 {name: 'states.mainState', caption: 'status'},
@@ -91,7 +165,7 @@ app.config(function ($engineProvider, SESSION, $injector) {
         }
     };
     $engineProvider.document('slaS', '/slaS', '/slaS/:id', ['SignedSlaStorage'], slaSSpec);
-    $engineProvider.document('adminSlaS', '/aslaS', '/aslaS/:id', ['SignedSlaComp'], slaSSpec);
+    $engineProvider.document('adminSlaS', '/aslaS', '/aslaS/:id', ['SignedSlaComp'], slaSSpecProvider);
 
 
     $engineProvider.dashboard({url: '/dashboard', label: 'SLAs', activetab: 'dashboard'},
