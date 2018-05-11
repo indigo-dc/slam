@@ -48,7 +48,7 @@ Answer each question when prompted.
 1. Convert the certificate and private key to PKCS 12 (.p12)
 
   ````
-  openssl pkcs12 -export -in /etc/letsencrypt/live/$HOSTNAME/cert.pem -inkey /etc/letsencrypt/live/$HOSTNAME/privkey.pem -name $HOSTNAME -out $HOSTNAME.p12
+  openssl pkcs12 -export -in /etc/letsencrypt/live/$HOSTNAME/fullchain.pem -inkey /etc/letsencrypt/live/$HOSTNAME/privkey.pem -name $HOSTNAME -out $HOSTNAME.p12
   ````
   
 2. Import the certificate (.p12 file) to the keystore
