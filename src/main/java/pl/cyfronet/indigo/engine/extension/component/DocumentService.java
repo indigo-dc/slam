@@ -20,6 +20,10 @@ public class DocumentService {
     @Autowired
     SitesService sitesService;
 
+    @Getter
+    @Autowired
+    ProviderService providerService;
+
     public DocumentService() {
 
     }

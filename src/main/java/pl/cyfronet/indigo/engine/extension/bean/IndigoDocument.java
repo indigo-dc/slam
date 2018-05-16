@@ -47,6 +47,14 @@ public class IndigoDocument extends Document{
             siteName = SpringContext.getDocumentService().getSitesService().getSiteName(getSite());
         return siteName;
     }
+
+    public String getProviderId(){
+        if(providerId == null)
+            providerId = SpringContext.getDocumentService().getProviderService().getProviderId(getSite());
+        return providerId;
+    }
+
     private String site = null;
     private String siteName = null;
+    private String providerId = null;
 }

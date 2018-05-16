@@ -74,7 +74,7 @@ public class IndigoConverter {
         for (Document _doc : slas) {
             IndigoDocument doc = (IndigoDocument)_doc;
             Document provider = null;
-            Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId()).provider(doc.getSiteName());
+            Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId()).provider(doc.getProviderId());
 
             if (login != null)
                 slaBuilder.customer(login);
