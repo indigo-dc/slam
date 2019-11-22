@@ -35,6 +35,12 @@ public class ClientApplication {
     @Value("${unity.server.clientSecret}")
     private String clientSecret;
 
+    @Value("${auth.returnPoint.iam}")
+    private String preEstablishedRedirectUri;
+
+    @Value("${auth.setCurrentUri:true}")
+    private boolean useCurrentUri;
+
     @Value("#{'${unity.scopes}'.split(',')}")
     private List<String> scopesList;
 
@@ -49,7 +55,10 @@ public class ClientApplication {
         resource.setClientSecret(clientSecret);
         resource.setUserAuthorizationUri(authorize);
         resource.setAccessTokenUri(token);
-        resource.setUseCurrentUri(true);
+        resource.setUseCurrentUri(useCurrentUri);
+        if (!useCurrentUri) {
+            resource.setPreEstablishedRedirectUri(preEstablishedRedirectUri);
+        }
         resource.setScope(scopesList);
         return resource;
     }
