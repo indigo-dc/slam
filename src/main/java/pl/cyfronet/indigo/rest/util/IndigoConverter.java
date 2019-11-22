@@ -8,6 +8,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.cyfronet.indigo.engine.extension.bean.IndigoDocument;
+import pl.cyfronet.indigo.repository.DocumentWeightRepository;
 import pl.cyfronet.indigo.rest.bean.IndigoWrapper;
 import pl.cyfronet.indigo.rest.bean.preferences.Preference;
 import pl.cyfronet.indigo.rest.bean.preferences.Preferences;
@@ -28,6 +29,9 @@ public class IndigoConverter {
     @Autowired
     private MetricFacade metricFacade;
 
+    @Autowired
+    private DocumentWeightRepository documentWeightRepository;
+
     public IndigoWrapper convertSlasListForRestApi(List<Document> slas, String login) {
         IndigoWrapper result = IndigoWrapper.builder().
                 preferences(Arrays.asList(preparePreferences(slas, login))).
@@ -43,23 +47,45 @@ public class IndigoConverter {
         List<Priority> storagePriorities = new ArrayList<>();
         for (Document sla : slas) {
             if (sla.getState("serviceType").equals("computing")) {
-                addPriorities(computePriorities, sla, ((IndigoDocument)sla).getSite(), "weightComputing");
+                addPriorities(computePriorities, sla, ((IndigoDocument) sla).getSite(), "weightComputing");
             } else {
-                addPriorities(storagePriorities, sla, ((IndigoDocument)sla).getSite(), "weightStorage");
+                addPriorities(storagePriorities, sla, ((IndigoDocument) sla).getSite(), "weightStorage");
             }
         }
-        result.setPreferences(preparePreference(computePriorities, storagePriorities));
+        result.setPreferences(preparePreference(normalizePriorities(computePriorities), normalizePriorities(storagePriorities)));
         return result;
+    }
+
+    private List<Priority>  normalizePriorities(List<Priority> priorities) {
+        //k -> group number 1...n
+        //n -> number of groups
+        // 1 / (n -1) * k
+        Double one = new Double(1);
+        Double groupNumber = getGroupNumber(priorities);
+        priorities.forEach(priority -> {
+            priority.setWeight(one / (groupNumber - one) * priority.getWeight());
+        });
+        return priorities;
+    }
+
+    private Double getGroupNumber(List<Priority> priorities) {
+        Double result = new Double(0);
+        for (Priority priority: priorities) {
+            if(priority.getWeight()>result) result = priority.getWeight();
+        }
+        return ++result;
     }
 
     private void addPriorities(List<Priority> priorities, Document sla, String serviceId, String weight) {
         Priority priority = Priority.builder().
                 sla_id(sla.getId()).
                 service_id(serviceId).
-                //TODO - RESTORE IT
-//                weight(Double.parseDouble(sla.getMetrics().get(weight).toString())).build();
-                weight(0.5).build();
+                weight(getWeight(sla.getId())).build();
         priorities.add(priority);
+    }
+
+    private Double getWeight(String id) {
+        return new Double(documentWeightRepository.findByDocument(id).getWeight());
     }
 
     private List<Preference> preparePreference(List<Priority> computePriorities, List<Priority> storagePriorities) {
@@ -72,7 +98,7 @@ public class IndigoConverter {
     public List<Sla> prepareSlaList(List<Document> slas, String login) {
         List<Sla> result = new ArrayList<>();
         for (Document _doc : slas) {
-            IndigoDocument doc = (IndigoDocument)_doc;
+            IndigoDocument doc = (IndigoDocument) _doc;
             Document provider = null;
             Sla.SlaBuilder slaBuilder = Sla.builder().id(doc.getId()).provider(doc.getProviderId());
 
@@ -111,12 +137,12 @@ public class IndigoConverter {
 
         Map<String, Target> restrictions = new HashMap<>();
 
-        for(Metric metric : documentMetrics) {
+        for (Metric metric : documentMetrics) {
 
-            if(sla.getMetrics().containsKey(metric.getId()) && metric.getId().contains("-")) {
+            if (sla.getMetrics().containsKey(metric.getId()) && metric.getId().contains("-")) {
                 String key = metric.getId().split("-")[0];
                 String constraint = metric.getId().split("-")[1];
-                if(!restrictions.containsKey(key)) {
+                if (!restrictions.containsKey(key)) {
                     restrictions.put(key, Target.builder().type(key).unit(metric.getUnit()).restrictions(new HashMap<>()).build());
                 }
 
